@@ -1,0 +1,46 @@
+! urxvt
+urxvt.buffered: true
+urxvt.font: xft:Dejavu Sans Mono:pixelsize=11:antialias=true:hinting:true
+urxvt.boldFont: xft:Dejavu Sans Mono:bold:pixelsize=11:antialias=true:hinting:true
+urxvt.perl-ext-common: default
+urxvt.geometry: 85x35
+urxvt.scrollBar: false
+urxvt.scrollBar_right: true
+urxvt.transparent: true
+urxvt.tintColor: #ffffff
+urxvt.shading: 15
+
+! xft
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+
+! emacs
+! emacs.font: Dejavu Sans Mono 8
+emacs.font: Monospace 8
+emacs.geometry: 84x45
+emacs.toolBar: false
+emacs.menuBar: false
+emacs.verticalScrollBars: false
+
+*background: #141414
+*foreground: #ffffff
+
+*color0: #141414
+*color1: #ef3460
+*color2: #bdef34
+*color3: #efc334
+*color4: #34bdef
+*color5: #b300ff
+*color6: #3dd8ff
+*color7: #ffffff
+*color8: #8a8888
+*color9: #f25a7d
+*color10: #dcf692
+*color11: #f6df92
+*color12: #92aaf6
+*color13: #df92f6
+*color14: #5af2ce
+*color15: #ffffff

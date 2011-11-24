@@ -1,0 +1,10 @@
+style "default-style"
+{
+  GtkWindow::resize-grip-height = 0
+  GtkWindow::resize-grip-width = 0
+}
+
+class "GtkWidget" style "default-style"
+
+gtk-key-theme-name = "Emacs"
+gtk-can-change-accels = 1

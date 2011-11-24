@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Get the name of the directory holding this file
+DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
+
+cd $DIR
+array=()
+for i in *; do
+    # If ~/.$i is a symlink, remove it
+    if [ -h ~/.$i ]; then
+        rm ~/.$i
+    fi
+
+    # If file/dir exists, then ask for removal
+    if [ -e ~/.$i ]; then
+        echo "----"
+        echo "diff ~/.$i $DIR/$i:"
+        diff ~/.$i $DIR/$i
+        echo -ne "\nDo you want to remove ~/.$i? [Y/n]: "
+        read ans
+
+        case $ans in
+            "n")
+                ;;
+            "y" | *)
+                rm -rf ~/.$i
+                ;;
+        esac
+    fi
+
+    # If the file still exists
+    if [ -e ~/.$i ]; then
+        # Then add it to the error list
+        array+=($i)
+    else
+        # Otherwise create the symlink
+        ln -s $DIR/$i ~/.$i
+    fi
+done
+
+# Print names of files that were not symlinked
+if [ ${#array[*]} -gt 0 ]; then
+    echo -e "----"
+    echo "Not symlinked:"
+    for i in ${array[*]}; do
+        echo "  ~/.$i"
+    done
+fi
+
+# Remove the symlink pointing to this file
+rm ~/.$(basename $0)
