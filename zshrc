@@ -4,6 +4,9 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 setopt histignorealldups
 
+# Allow using # in the command line
+setopt interactivecomments
+
 # Use Emacs-style keys
 bindkey -e
 
@@ -25,8 +28,8 @@ zstyle ':completion:*' menu select
 local WORDCHARS=${WORDCHARS//\//}
 
 # Set prompt
-export PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[01;37m%}%~%{\e[0;34m%}%B]%b%{\e[0;34m%}%{\e[0m%}-%{\e[0;34m%}%B[%{\e[0m%}%{\e[01;32m%}%n@%m%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B└─[%b%{\e[01;32m%}$%{\e[0;34m%}%B]%{\e[0m%}%b '
+export PROMPT=$'%{\e[01;32m%}%B┌─%b%{\e[01;32m%}[%n@%m] %{\e[01;34m%}%~
+%{\e[01;32m%}%B└─%b%{\e[01;32m%}[$]%{\e[0m%} '
 export RPROMPT=$'%t'
 
 # Disable Ctrl+S to suspend terminal
