@@ -66,6 +66,10 @@
 ;; Discard trailing whitespace on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 
+;; Set the default browser to chromium
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium-browser")
+
 ;; Enable autopair mode plugin
 (require 'autopair)
 (autopair-global-mode t)
