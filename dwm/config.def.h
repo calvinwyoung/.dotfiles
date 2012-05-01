@@ -72,6 +72,7 @@ static const char *alsamixer[]  = { "urxvt", "-e", "alsamixer", NULL };
 static const char *quodlibet[]  = { "quodlibet", NULL };
 static const char *displayoff[]  = { "displayoff", NULL };
 static const char *shutdown[]  = { "sudo", "shutdown", "-h", "now", NULL };
+static const char *suspend[]  = { "sudo", "pm-suspend", NULL };
 static const char *wicdclient[]  = { "wicd-client", NULL };
 static const char *raisevolume[]  = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
 static const char *lowervolume[]  = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
@@ -93,6 +94,7 @@ static Key keys[] = {
     { MODKEY,                       XK_q,      spawn,          {.v = quodlibet } },
     { MODKEY,                       XK_n,      spawn,          {.v = wicdclient } },
     { MODKEY,                       XK_F12,    spawn,          {.v = displayoff } },
+    { MODKEY|ShiftMask,             XK_F12,    spawn,          {.v = suspend } },
     { MODKEY|ControlMask,           XK_F12,    spawn,          {.v = shutdown } },
 
     /* media */
