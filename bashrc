@@ -25,8 +25,8 @@ HISTCONTROL=ignoreboth
 HISTIGNORE=ls:ll:la:pwd:exit:df:clear
 
 # Set PATH to include user's bin dir if it exists
-if [ -d ~/bin ]; then
-    PATH=~/bin:"${PATH}"
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
 fi
 
 # Disable Ctrl+S to suspend terminal
