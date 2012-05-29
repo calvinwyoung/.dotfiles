@@ -7,6 +7,9 @@
 (global-set-key "\C-xp" 'bs-cycle-previous)
 (setq bs-default-configuration "files-and-scratch")
 
+;; Make Ctrl+v paste to integrate with clipboard manager
+(global-set-key "\C-v" 'cua-paste)
+
 ;; Custom kill chords
 (global-set-key "\C-w" 'backward-kill-word)
 
@@ -118,10 +121,11 @@ With argument ARG and region inactive, do this that many times."
     (let (count)
       (dotimes (count arg)
         (if (bolp)
-            (delete-backward-char 1)
-          (kill-region (max (save-excursion (backward-word)(point))
-                            (line-beginning-position))
-                       (point)))))))
+            (kill-backward-chars 1)
+          (kill-region (point)
+                       (max (save-excursion (backward-word)(point))
+                            (line-beginning-position))))))
+    ))
 
 (define-key (current-global-map) [remap backward-kill-word]
   'my-backward-kill-word)

@@ -76,24 +76,7 @@
 
 ;; Integrate emacs and X clipboards
 (setq x-select-enable-clipboard t)
-
-;; Enable copy/paste in daemon mode and terminal
-(unless window-system
-  ;; Callback for when user cuts
-  (defun xsel-cut-function (text &optional push)
-    ;; Insert text to temp-buffer, and "send" content to xsel stdin
-    (with-temp-buffer
-      (insert text)
-      (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--input")))
-  ;; Call back for when user pastes
-  (defun xsel-paste-function()
-    (let ((xsel-output (shell-command-to-string "xsel --output")))
-      (unless (string= (car kill-ring) xsel-output)
-	xsel-output )))
-  ;; Attach callbacks to hooks
-  (setq interprogram-cut-function 'xsel-cut-function)
-  (setq interprogram-paste-function 'xsel-paste-function)
-  )
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; Daemon mode settings
 (if 'server-mode
