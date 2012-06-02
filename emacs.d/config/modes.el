@@ -20,12 +20,19 @@
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/scss-mode")
+(autoload 'scss-mode "scss-mode"
+   "Major mode for editing SCSS files" t)
+(setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scsstt$" . scss-mode))
 
 ;;;;;;;;
 ;; MD
 ;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/markdown-mode")
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 ;;;;;;;;;;

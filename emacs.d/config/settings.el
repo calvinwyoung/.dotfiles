@@ -1,15 +1,19 @@
-;;;;;;;;;;;;;;;;;;;;
-;; GENERAL SETTINGS
-;;;;;;;;;;;;;;;;;;;;
-
 ;; Set window title
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
-;; Prevent splash screen
+;; Turn off the splash screen
 (setq inhibit-splash-screen t)
+
+;; Remove the menu bar and toolbar
+(menu-bar-mode 0)
+(tool-bar-mode 0)
 
 ;; Set fringe mode
 (fringe-mode '(0 . 1))
+
+;; Set color theme
+(load-file "~/.emacs.d/vendor/color-theme-wombat.el")
+(color-theme-wombat)
 
 ;; Prevent leftover backup turds
 (setq backup-inhibited t)
@@ -50,6 +54,11 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
+;; Enable autopair mode
+(add-to-list 'load-path "~/.emacs.d/vendor/autopair")
+(require 'autopair)
+(autopair-global-mode t)
+
 ;; Enable CUA mode
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
@@ -70,24 +79,12 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
 
-;; Enable autopair mode plugin
-(require 'autopair)
-(autopair-global-mode t)
-
 ;; Integrate emacs and X clipboards
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
-;; Daemon mode settings
+;; Stop emacs from prompting us before killing buffers in daemon mode
 (if 'server-mode
     (progn
-      (setq default-frame-alist '((vertical-scroll-bars)
-                                  (left-fringe . 0)
-                                  (right-fringe . 1)
-                                  ; (cursor-color . "#64a8d8")
-                                  (initial-major-mode . 'text-mode)
-                                  ))
-      (menu-bar-mode 0)
-      (tool-bar-mode 0)
       (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
       ))

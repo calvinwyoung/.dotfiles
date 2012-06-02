@@ -10,8 +10,10 @@
 ;; Make Ctrl+v paste to integrate with clipboard manager
 (global-set-key "\C-v" 'cua-paste)
 
-;; Custom kill chords
+;; Make Ctrl+W kill previous word with custom function
 (global-set-key "\C-w" 'backward-kill-word)
+(define-key (current-global-map) [remap backward-kill-word]
+  'my-backward-kill-word)
 
 ;; Execute extended command
 (global-set-key "\C-x\C-m" 'execute-extended-command)
@@ -28,6 +30,42 @@
 ;; Behave like vim's open line commands
 (global-set-key "\C-\M-o" 'open-previous-line)
 (global-set-key "\C-o" 'open-next-line)
+
+;; Map some copy chords
+(global-set-key "\C-xl" 'mark-line)
+(global-set-key "\C-cw" 'copy-word)
+(global-set-key "\C-cl" 'copy-line)
+
+;; Use custom comment function
+(global-set-key "\M-;" 'comment-dwim-line)
+
+;; Enable redo
+(load-file "~/.emacs.d/vendor/redo.el")
+(require 'redo)
+(global-set-key (kbd "C-M-/") 'redo)    ; for window-system
+(global-set-key (kbd "C-M-_") 'redo)    ; for termminal
+
+;; Emulate vim's "%" command to match parentheses
+(global-set-key [?\C-%] 'goto-match-paren)
+
+;; Define custom minor mode keys
+(defvar my-keys-map (make-keymap) "my-keys keymap.")
+
+(define-minor-mode my-keys
+  "A minor mode so that my key settings override annoying major modes."
+  t nil 'my-keys-map)
+
+;; Scroll screen up and down
+(define-key my-keys-map "\C-\M-p" (lambda() (interactive) (scroll-down 5)))
+(define-key my-keys-map "\C-\M-n" (lambda() (interactive) (scroll-up 5)))
+
+;; Move up and down by 5 lines with M-n and M-p
+(define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
+(define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
+
+;;;;;;;;;;;
+;; DEFUNS
+;;;;;;;;;;;
 
 ;; Behave like vim's o command
 (defun open-next-line (arg)
@@ -54,11 +92,6 @@ See also `newline-and-indent'."
 (defvar newline-and-indent t
   "Modify the behavior of the open-*-line functions to cause
 them to autoindent.")
-
-;; Map some copy chords
-(global-set-key "\C-xl" 'mark-line)
-(global-set-key "\C-cw" 'copy-word)
-(global-set-key "\C-cl" 'copy-line)
 
 ;; Mark line without selection
 (defun mark-line (&optional arg)
@@ -89,8 +122,6 @@ them to autoindent.")
          (end (line-end-position arg)))
      (copy-region-as-kill beg end)))
 
-;; Use custom comment function
-(global-set-key "\M-;" 'comment-dwim-line)
 
 ;; Change default behavior of comment-dwim
 (defun comment-dwim-line (&optional arg)
@@ -127,11 +158,7 @@ With argument ARG and region inactive, do this that many times."
                             (line-beginning-position))))))
     ))
 
-(define-key (current-global-map) [remap backward-kill-word]
-  'my-backward-kill-word)
-
 ;; Emulate vim's "%" command to match parentheses
-(global-set-key [?\C-%] 'goto-match-paren)
 (defun goto-match-paren (arg)
   "Go to the matching  if on (){}[], similar to vi style of % "
   (interactive "p")
@@ -142,18 +169,3 @@ With argument ARG and region inactive, do this that many times."
         ((looking-at "[\]\)\}]") (forward-char) (backward-sexp))
         ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
         (t nil)))
-
-;; Define custom minor mode keys
-(defvar my-keys-map (make-keymap) "my-keys keymap.")
-
-(define-minor-mode my-keys
-  "A minor mode so that my key settings override annoying major modes."
-  t nil 'my-keys-map)
-
-;; Scroll screen up and down
-(define-key my-keys-map "\C-\M-p" (lambda() (interactive) (scroll-down 5)))
-(define-key my-keys-map "\C-\M-n" (lambda() (interactive) (scroll-up 5)))
-
-;; Move up and down by 5 lines with M-n and M-p
-(define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
-(define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))

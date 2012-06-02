@@ -1,3 +1,15 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "emacs.d/vendor/scss-mode"]
+	path = emacs.d/vendor/scss-mode
+	url = git://github.com/antonj/scss-mode.git
+[submodule "emacs.d/vendor/markdown-mode"]
+	path = emacs.d/vendor/markdown-mode
+	url = git://github.com/defunkt/markdown-mode.git
+[submodule "emacs.d/vendor/autopair"]
+	path = emacs.d/vendor/autopair
+	url = https://code.google.com/p/autopair
+[submodule "emacs.d/vendor/auto-complete"]
+	path = emacs.d/vendor/auto-complete
+	url = git://github.com/m2ym/auto-complete.git
