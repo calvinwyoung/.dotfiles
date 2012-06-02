@@ -21,6 +21,9 @@ xrdb -merge .Xresources
 # set mouse speed and keyboard repeat rate
 xset m 3.5 1 r rate 250
 
+xset +fp ~/.fonts
+xset fp rehash
+
 # swap caps lock and ctrl
 setxkbmap -option ctrl:swapcaps
 

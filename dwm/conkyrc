@@ -5,8 +5,9 @@ total_run_times 0
 use_spacer none
 
 TEXT
-${exec echoe \\x05}down ${exec echoe \\x01}${downspeedf eth0}k/s ${exec echoe \\x05}up ${exec echoe \\x01}${upspeedf eth0}k/s |\
-${exec echoe \\x05}cpu ${exec echoe \\x01}${cpu cpu1}% / ${cpu cpu2}% |\
-${exec echoe \\x05}temp ${exec echoe \\x01}${platform coretemp.0 temp 1}${exec echoe \\xb0}C / ${platform coretemp.1 temp 1}${exec echoe \\xb0}C |\
-${exec echoe \\x05}mem ${exec echoe \\x01}$memperc% ($mem) |\
-${exec echoe \\x05}date ${exec echoe \\x01}${time %a %b %d %r}
+
+${exec echoe \\x05}${exec echoe \\uE061}${exec echoe \\x01}${downspeedf eth0}k/s ${exec echoe \\x05}${exec echoe \\uE060}${exec echoe \\x01}${upspeedf eth0}k/s |\
+${exec echoe \\x05}${exec echoe \\uE026}${exec echoe \\x01}${cpu cpu1}% / ${cpu cpu2}% |\
+${exec echoe \\x05}${exec echoe \\uE01c}${exec echoe \\x01}${platform coretemp.0 temp 1}${exec echoe \\xb0}C / ${platform coretemp.1 temp 1}${exec echoe \\xb0}C |\
+${exec echoe \\x05}${exec echoe \\uE020}${exec echoe \\x01}$memperc% ($mem) |\
+${exec echoe \\x05}${exec echoe \\uE015} ${exec echoe \\x01}${time %a %b %d %r}

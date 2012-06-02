@@ -10,7 +10,12 @@ static const char colors[NUMCOLORS][ColLast][8] = {
     { "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
     { "#141414", "#bdef34", "#141414" },  // status titles
 };
-static const char font[]            = "-*-dejavu sans mono-medium-r-*-*-10-*-*-*-*-*-*-*";
+static const char font[] =
+    "-misc-tamsynmod-medium-r-normal--12-*-*-*-*-*-*-*"
+    ","
+    "-*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-*"
+    ","
+    "*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
