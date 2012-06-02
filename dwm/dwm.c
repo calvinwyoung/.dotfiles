@@ -822,14 +822,16 @@ enternotify(XEvent *e) {
 
 	if((ev->mode != NotifyNormal || ev->detail == NotifyInferior) && ev->window != root)
 		return;
-	if((m = wintomon(ev->window)) && m != selmon) {
-		unfocus(selmon->sel, True);
-		selmon = m;
+	if (!focusonclick) {
+		if((m = wintomon(ev->window)) && m != selmon) {
+			unfocus(selmon->sel, False);
+			selmon = m;
+		}
+		if((c = wintoclient(ev->window)))
+			focus(c);
+		else
+			focus(NULL);
 	}
-	if((c = wintoclient(ev->window)))
-		focus(c);
-	else
-		focus(NULL);
 }
 
 void
