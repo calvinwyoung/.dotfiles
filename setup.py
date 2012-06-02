@@ -3,6 +3,7 @@
 
 import os
 import shutil
+import subprocess
 
 BLACKLIST = ["setup.py", "README.md"]
 
@@ -10,6 +11,10 @@ HOME_DIR = os.path.expanduser("~")
 DOTFILES_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def main():
+    # Make sure all submodules are initialized and updated
+    subprocess.call(["git", "submodule", "init"])
+    subprocess.call(["git", "submodule", "update"])
+
     for filename in os.listdir(DOTFILES_DIR):
         if filename.startswith("."):
             # Skip hidden files and directories
