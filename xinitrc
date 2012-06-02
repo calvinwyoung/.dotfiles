@@ -2,7 +2,7 @@
 urxvtd -q -o -f
 thunar --daemon &
 dropbox start &
-clipit &
+clipit -n &
 # wicd-client &
 trayer --transparent true --alpha 255 --edge bottom --align right --widthtype request &
 
