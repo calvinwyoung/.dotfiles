@@ -9,13 +9,13 @@ urxvt.transparent: true
 urxvt.tintColor: #ffffff
 urxvt.shading: 15
 
-urxvt.perl-lib: /home/calvin/.urxvt/perl
+urxvt.perl-lib: .urxvt/perl
 urxvt.perl-ext-common: default,clipboard,font
-urxvt.keysym.C-Left: \033[1;5D
-urxvt.keysym.C-Right: \033[1;5C
 urxvt.keysym.C-v: perl:clipboard:paste
 urxvt.keysym.C-M-Up: perl:font:increment
 urxvt.keysym.C-M-Down: perl:font:decrement
+urxvt.keysym.C-Left: \033[1;5D
+urxvt.keysym.C-Right: \033[1;5C
 
 ! xft
 Xft.dpi: 96
