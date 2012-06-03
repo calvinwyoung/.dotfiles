@@ -1,37 +1,42 @@
-! urxvt
-urxvt.buffered: true
-urxvt.font: xft:Dejavu Sans Mono:pixelsize=11:antialias=true:hinting:true
-urxvt.boldFont: xft:Dejavu Sans Mono:bold:pixelsize=11:antialias=true:hinting:true
-urxvt.geometry: 85x35
-urxvt.scrollBar: false
-urxvt.scrollBar_right: true
-urxvt.transparent: true
-urxvt.tintColor: #ffffff
-urxvt.shading: 15
+! Xterm
+xterm*geometry: 85x35
+xterm*faceName: Dejavu Sans Mono:pixelsize=11:antialias=true:hinting:true
+xterm*dynamicColors: true
+xterm*saveLines: 5000
+xterm*scrollBar: false
+! Enable asynchronous scrolling
+xterm*multiScroll: true
+! Allow xterm to scroll by more than one line at a time
+xterm*jumpScroll: true
+! Don't automatically scroll to the bottom of the buffer on new output
+xterm*scrollTtyOutput: false
+! Enable Alt + [key] shortcuts
+xterm*metaSendsEscape: true
 
-urxvt.perl-lib: .urxvt/perl
-urxvt.perl-ext-common: default,clipboard,font
-urxvt.keysym.C-v: perl:clipboard:paste
-urxvt.keysym.C-M-Up: perl:font:increment
-urxvt.keysym.C-M-Down: perl:font:decrement
-urxvt.keysym.C-Left: \033[1;5D
-urxvt.keysym.C-Right: \033[1;5C
+! Shift + up/down: scroll the buffer
+! Ctrl + v: paste from X clipboard
+! Shift + mouse select: copy to the X clipboard
+xterm*VT100.Translations: #override \
+    Shift <Key>Up: scroll-back(1) \n\
+    Shift <Key>Down: scroll-forw(1) \n\
+    Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
+    Shift <Btn1Up>: select-end(CLIPBOARD, CUT_BUFFER1)
 
-! xft
+! Xft
 Xft.dpi: 96
 Xft.rgba: rgb
 Xft.hinting: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
-! emacs
-! emacs.font: Dejavu Sans Mono 8
+! Emacs
 emacs.font: Monospace 8
 emacs.geometry: 84x45
 emacs.toolBar: false
 emacs.menuBar: false
 emacs.verticalScrollBars: false
 
+! Color theme
 *background: #141414
 *foreground: #ffffff
 

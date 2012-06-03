@@ -3,8 +3,6 @@
 
 ;; Easier buffer list
 (global-set-key "\C-x\C-b" 'bs-show)
-(global-set-key "\C-xn" 'bs-cycle-next)
-(global-set-key "\C-xp" 'bs-cycle-previous)
 (setq bs-default-configuration "files-and-scratch")
 
 ;; Make Ctrl+v paste to integrate with clipboard manager

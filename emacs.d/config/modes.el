@@ -66,12 +66,12 @@
 ;; Set default compile command
 (defun set-default-compile-command ()
   (unless (file-exists-p "Makefile")
-	       (set (make-local-variable 'compile-command)
-		    (let ((file (file-name-nondirectory buffer-file-name)))
-                      (format "%s %s %s"
-                              (or (getenv "CC") "g++")
-                              (or (getenv "CFLAGS") "-g")
-			      file)))))
+    (set (make-local-variable 'compile-command)
+         (let ((file (file-name-nondirectory buffer-file-name)))
+           (format "%s %s %s"
+                   (or (getenv "CC") "g++")
+                   (or (getenv "CFLAGS") "-g")
+                   file)))))
 
 ;; Set defalut compilation window height
 (setq compilation-window-height 10)

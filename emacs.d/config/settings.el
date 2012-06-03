@@ -84,7 +84,4 @@
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; Stop emacs from prompting us before killing buffers in daemon mode
-(if 'server-mode
-    (progn
-      (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
-      ))
+(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)

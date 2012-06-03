@@ -11,9 +11,6 @@ export SAVEHIST=1000
 setopt histignorealldups
 
 # Misc environment variables
-if [ $TERM='rxvt-unicode' ]; then
-    export TERM=xterm
-fi
 export EDITOR='emacsclient -t'
 if [ -d ~/bin ]; then
     export PATH=~/bin:"${PATH}"
