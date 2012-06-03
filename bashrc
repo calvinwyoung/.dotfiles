@@ -7,11 +7,6 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # Set terminal title
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 
-# Must change the TERM to a type that Ubuntu recognizes
-if [ $TERM == "rxvt-256color" ]; then
-    export TERM=rxvt-unicode
-fi
-
 # Integrate QT applications with GTK theme
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 

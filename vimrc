@@ -6,7 +6,7 @@ set number
 set mouse=a
 
 " make pretty
-if &term =~ "rxvt-unicode"
+if &term =~ "xterm"
     set t_Co=256
     colorscheme ir_black
 endif

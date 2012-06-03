@@ -1,5 +1,4 @@
 # start misc application
-urxvtd -q -o -f
 thunar --daemon &
 dropbox start &
 clipit -n &
