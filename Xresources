@@ -2,13 +2,20 @@
 urxvt.buffered: true
 urxvt.font: xft:Dejavu Sans Mono:pixelsize=11:antialias=true:hinting:true
 urxvt.boldFont: xft:Dejavu Sans Mono:bold:pixelsize=11:antialias=true:hinting:true
-urxvt.perl-ext-common: default
 urxvt.geometry: 85x35
 urxvt.scrollBar: false
 urxvt.scrollBar_right: true
 urxvt.transparent: true
 urxvt.tintColor: #ffffff
 urxvt.shading: 15
+
+urxvt.perl-lib: /home/calvin/.urxvt/perl
+urxvt.perl-ext-common: default,clipboard,font
+urxvt.keysym.C-Left: \033[1;5D
+urxvt.keysym.C-Right: \033[1;5C
+urxvt.keysym.C-v: perl:clipboard:paste
+urxvt.keysym.C-M-Up: perl:font:increment
+urxvt.keysym.C-M-Down: perl:font:decrement
 
 ! xft
 Xft.dpi: 96
