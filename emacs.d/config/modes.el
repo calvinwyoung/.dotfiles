@@ -1,32 +1,32 @@
-;;;;;;;;;
+;;;;;;;;;;;
 ;; Python
-;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/python-mode")
+;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/python-mode/")
 (autoload 'python-mode "python.el"
   "Major mode for editing Python files" t)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 
-;;;;;;;;;;;;
+;;;;;;;;;;;;;
 ;; CSS/SCSS
-;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/scss-mode")
+;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/scss-mode/")
 (autoload 'scss-mode "scss-mode.el"
   "Major mode for editing SCSS files" t)
 (setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scsstt$" . scss-mode))
 
-;;;;;;;;
-;; MD
-;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/markdown-mode")
+;;;;;;;;;;;;
+;; Markdown
+;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/markdown-mode/")
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
-;;;;;;;;;
-;; JS
-;;;;;;;;;
+;;;;;;;;;;;;;;;
+;; Javascript
+;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.jstt$" . js-mode))
 
 ;;;;;;;;;
@@ -43,6 +43,12 @@
 ;; Set html-mode as default for .jqt files
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
 
+;;;;;;;;
+;; Org
+;;;;;;;;
+;; Open all *.txt files in ~/Dropbox/notes in org mode
+(add-to-list 'auto-mode-alist '("^.*/Dropbox/notes/.*\\.txt$" . org-mode))
+
 ;;;;;;;;;;
 ;; JAVA
 ;;;;;;;;;;
@@ -57,10 +63,9 @@
 (defun java-mode-hook ()
   (local-set-key [C-f7] 'javac-current))
 
-;;;;;;;;;;
+;;;;;;;;;;;;
 ;; C / C++
-;;;;;;;;;;
-;; Enable c mode hook
+;;;;;;;;;;;;
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; Define C mode common hook
