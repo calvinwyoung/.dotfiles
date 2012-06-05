@@ -1,28 +1,17 @@
 ;;;;;;;;;
-;; HTML
+;; Python
 ;;;;;;;;;
-(add-hook 'html-mode-hook
-     (lambda ()
-       ;; Default indentation is usually 2 spaces, changing to 4.
-       (setq sgml-basic-offset 4)))
-
-;; Set html-mode as default for .htmltt files
-(add-to-list 'auto-mode-alist '("\\.htmltt$" . html-mode))
-
-;; Set html-mode as default for .jqt files
-(add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
-
-;;;;;;;;;
-;; JS
-;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.jstt$" . js-mode))
+(add-to-list 'load-path "~/.emacs.d/vendor/python-mode")
+(autoload 'python-mode "python.el"
+  "Major mode for editing Python files" t)
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/vendor/scss-mode")
-(autoload 'scss-mode "scss-mode"
-   "Major mode for editing SCSS files" t)
+(autoload 'scss-mode "scss-mode.el"
+  "Major mode for editing SCSS files" t)
 (setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scsstt$" . scss-mode))
@@ -31,9 +20,28 @@
 ;; MD
 ;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/vendor/markdown-mode")
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+;;;;;;;;;
+;; JS
+;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.jstt$" . js-mode))
+
+;;;;;;;;;
+;; HTML
+;;;;;;;;;
+(add-hook 'html-mode-hook
+          (lambda ()
+            ;; Default indentation is usually 2 spaces, changing to 4.
+            (setq sgml-basic-offset 4)))
+
+;; Set html-mode as default for .htmltt files
+(add-to-list 'auto-mode-alist '("\\.htmltt$" . html-mode))
+
+;; Set html-mode as default for .jqt files
+(add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
 
 ;;;;;;;;;;
 ;; JAVA

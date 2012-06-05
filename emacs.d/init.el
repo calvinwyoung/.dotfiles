@@ -3,4 +3,6 @@
 (load-library "settings")
 (load-library "modes")
 (load-library "keybindings")
+
 (load-library "auto-complete")
+(load-library "autopair")

@@ -54,11 +54,6 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
-;; Enable autopair mode
-(add-to-list 'load-path "~/.emacs.d/vendor/autopair")
-(require 'autopair)
-(autopair-global-mode t)
-
 ;; Enable CUA mode
 (cua-mode t)
 (setq cua-enable-cua-keys nil)

@@ -8,8 +8,6 @@ xterm*scrollBar: false
 xterm*multiScroll: true
 ! Allow xterm to scroll by more than one line at a time
 xterm*jumpScroll: true
-! Don't automatically scroll to the bottom of the buffer on new output
-xterm*scrollTtyOutput: false
 ! Enable Alt + [key] shortcuts
 xterm*metaSendsEscape: true
 
@@ -20,7 +18,7 @@ xterm*VT100.Translations: #override \
     Shift <Key>Up: scroll-back(1) \n\
     Shift <Key>Down: scroll-forw(1) \n\
     Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
-    Shift <Btn1Up>: select-end(CLIPBOARD, CUT_BUFFER1)
+    <Btn1Up>: select-end(CLIPBOARD, PRIMARY, CUT_BUFFER1)
 
 ! Xft
 Xft.dpi: 96

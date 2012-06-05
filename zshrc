@@ -1,7 +1,7 @@
 # Initialize oh-my-zsh
 ZSH=$HOME/.oh-my-zsh
 COMPLETION_WAITING_DOTS='true'
-plugins=(git command-not-found)
+plugins=(git python command-not-found)
 source $ZSH/oh-my-zsh.sh
 
 # History
