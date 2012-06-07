@@ -18,7 +18,7 @@ xterm*VT100.Translations: #override \
     Shift <Key>Up: scroll-back(1) \n\
     Shift <Key>Down: scroll-forw(1) \n\
     Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
-    <Btn1Up>: select-end(CLIPBOARD, PRIMARY, CUT_BUFFER1)
+    Shift <BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER1)
 
 ! Xft
 Xft.dpi: 96
