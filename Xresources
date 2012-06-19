@@ -1,5 +1,5 @@
 ! Xterm
-xterm*geometry: 85x35
+xterm*VT100.geometry: 85x35
 xterm*faceName: Dejavu Sans Mono:pixelsize=11:antialias=true:hinting:true
 xterm*dynamicColors: true
 xterm*saveLines: 5000
