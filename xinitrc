@@ -31,6 +31,9 @@ if [ -e $HOME/.Xmodmap ]; then
     xmodmap $HOME/.Xmodmap
 fi
 
-conky -c ~/.dwm/conkyrc | while read LINE; do xsetroot -name "$LINE"; done &
-exec ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
+# conky -c ~/.dwm/conkyrc | while read LINE; do xsetroot -name "$LINE"; done &
+~/.dwm/statusbar.py &
+while true; do
+    ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
+done
 # exec ck-launch-session dbus-launch openbox
