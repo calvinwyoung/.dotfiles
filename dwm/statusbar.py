@@ -7,6 +7,7 @@ import re
 import time
 import datetime
 import subprocess
+import sys
 
 # Define escape characters that change the font color in the statusbar
 GREEN = u"\x05"
@@ -29,9 +30,6 @@ class BaseWidget(object):
     def __unicode__(self):
         icon, status_text = self.get_components()
         return GREEN + icon + WHITE + status_text
-
-    def __str__(self):
-        return unicode(self).encode("utf-8")
 
 class ClockWidget(BaseWidget):
     """A basic clock widget that shows the current date and time."""
@@ -202,7 +200,11 @@ def main():
             else:
                 results.append(widget_str)
 
-        subprocess.Popen(["xsetroot", "-name", " |".join(results)])
+        # Flush the output buffer after each write so another process can read
+        # it line-by-line.
+        print " |".join(results).encode("utf-8")
+        sys.stdout.flush()
+
         time.sleep(1)
 
 if __name__ == "__main__":

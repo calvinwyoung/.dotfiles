@@ -32,7 +32,7 @@ if [ -e $HOME/.Xmodmap ]; then
 fi
 
 # conky -c ~/.dwm/conkyrc | while read LINE; do xsetroot -name "$LINE"; done &
-~/.dwm/statusbar.py &
+~/.dwm/statusbar.py | while read LINE; do xsetroot -name "$LINE"; done &
 while true; do
     ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
 done
