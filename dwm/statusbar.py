@@ -14,62 +14,33 @@ WHITE = u"\x01"
 
 class BaseWidget(object):
     """The base status bar widget."""
-    def get_icon(self):
-        """Override to return a custom icon for this widget."""
-        raise NotImplementedError
+    def get_components(self):
+        """Override to return the status bar components (icon and text).
 
-    def get_status_text(self):
-        """Override to return the status text for this widget."""
-        raise NotImplementedError
-
-    def prepare(self):
-        """Prepares the widget for the next iteration
-
-        This is where most of the widget logic should be containd. If the widget
-        needs to gather any data from system calls, then it should do so here
-        and save the parsed data as member variables. `get_icon()` and
-        `get_status_text()` should then read these member variables to construct
-        their output.
-
-        This method should return a boolean that determines whether the widget
-        will be included in the statusbar in the next iteration.
+        This method should return a tuple (icon, status_text) where `icon` is
+        the character code for the icon that should be shown, and `status_text`
+        is the text output for this widget.
 
         Returns:
-            bool: if True, then this widget will be included in the statusbar in
-                the next iteration.
+            (icon, status_text)
         """
-        return True
+        raise NotImplementedError
 
     def __unicode__(self):
-        return GREEN + self.get_icon() + WHITE + self.get_status_text()
+        icon, status_text = self.get_components()
+        return GREEN + icon + WHITE + status_text
 
     def __str__(self):
         return unicode(self).encode("utf-8")
 
 class ClockWidget(BaseWidget):
     """A basic clock widget that shows the current date and time."""
-    def get_icon(self):
-        return u"\uE015"
-
-    def get_status_text(self):
-        return datetime.datetime.now().strftime("%a %b %d %r")
+    def get_components(self):
+        return (u"\uE015", datetime.datetime.now().strftime("%a %b %d %r"))
 
 class MemUsageWidget(BaseWidget):
     """Displays memory usage information in megabytes and as a percent."""
-    def __init__(self):
-        super(MemUsageWidget, self).__init__()
-
-        self.mem_used_gb = None
-        self.mem_used_perc = None
-
-    def get_icon(self):
-        return u"\uE020"
-
-    def get_status_text(self):
-        return "%d%% (%.2fG)" % (self.mem_used_perc, self.mem_used_gb)
-
-    def prepare(self):
-        """Get memory usage by reading /proc/meminfo."""
+    def get_components(self):
         with open("/proc/meminfo") as f:
             # The first 4 lines of mem_info give us the info we want
             mem_total_kb = int(f.readline().split()[1])
@@ -78,45 +49,30 @@ class MemUsageWidget(BaseWidget):
             cached_kb = int(f.readline().split()[1])
 
         mem_used_kb = mem_total_kb - mem_free_kb - buffers_kb - cached_kb
+        mem_used_gb = mem_used_kb / (1024.0 ** 2)
+        mem_used_perc = 100 * mem_used_kb / mem_total_kb
 
-        self.mem_used_gb = mem_used_kb / (1024.0 ** 2)
-        self.mem_used_perc = 100 * mem_used_kb / mem_total_kb
-
-        return True
+        status_text = "%d%% (%.2fG)" % (mem_used_perc, mem_used_gb)
+        return (u"\uE020", status_text)
 
 class CPUTempWidget(BaseWidget):
     """Displays the temperatures of the CPU cores."""
     def __init__(self):
-        super(CPUTempWidget, self).__init__()
-
         self.coretemp_paths = glob.glob(
             "/sys/bus/platform/drivers/coretemp/coretemp.*")
 
-        self.temp_readings = []
-
-    def get_icon(self):
-        return u"\uE01c"
-
-    def get_status_text(self):
-        return " / ".join("%dC" % reading for reading in self.temp_readings)
-
-    def prepare(self):
-        """Get CPU temps by reading coretemp.*/temp1_input for each core."""
-        if len(self.coretemp_paths) == 0:
-            return False
-
-        self.temp_readings = []
+    def get_components(self):
+        temp_readings = []
         for path in self.coretemp_paths:
             with open(os.path.join(path, "temp1_input")) as f:
-                self.temp_readings.append(int(f.read()) / 1000)
+                temp_readings.append(int(f.read()) / 1000)
 
-        return True
+        status_text = " / ".join("%dC" % temp for temp in temp_readings)
+        return (u"\uE01c", status_text)
 
 class CPUUsageWidget(BaseWidget):
     """Displays the percent utilization per CPU core over the last interval."""
     def __init__(self):
-        super(CPUUsageWidget, self).__init__()
-
         # The used/total CPU time for the previous and current iteration. The
         # length of each list is equal to the number of CPU cores. These lists
         # are updated at the beginning of each interval to compute the percent
@@ -124,22 +80,11 @@ class CPUUsageWidget(BaseWidget):
         self.prev_used, self.prev_total = [], []
         self.cur_used, self.cur_total = [], []
 
-        # The computed percent utilization for each core. This is what gets
-        # printed out by `get_status_text()`.
-        self.percent_used = []
+        # Execute one iteration of `get_components()` immediately so we have
+        # both `prev_` and `cur_` values in the next iteration.
+        self.get_components()
 
-        # Execute one iteration of `prepare()` immediately so we have both
-        # `prev_` and `cur_` values in the next iteration.
-        self.prepare()
-
-    def get_icon(self):
-        return u"\uE026"
-
-    def get_status_text(self):
-        return " / ".join("%2d%%" % percent for percent in self.percent_used)
-
-    def prepare(self):
-        """Gets the current used/total CPU times by reading /proc/stat."""
+    def get_components(self):
         self.prev_used, self.prev_total = self.cur_used, self.cur_total
         self.cur_used, self.cur_total = [], []
         with open("/proc/stat") as f:
@@ -161,17 +106,16 @@ class CPUUsageWidget(BaseWidget):
         delta_used = [(c - p) for c, p in zip(self.cur_used, self.prev_used)]
         delta_total = [(c - p) for c, p in zip(self.cur_total, self.prev_total)]
 
-        self.percent_used = []
+        percent_used = []
         for used, total in zip(delta_used, delta_total):
-            self.percent_used.append(100 * used / total if total > 0 else 0)
+            percent_used.append(100 * used / total if total > 0 else 0)
 
-        return True
+        status_text = " / ".join("%2d%%" % percent for percent in percent_used)
+        return (u"\uE026", status_text)
 
 class NetSpeedWidget(BaseWidget):
     """Displays the current download and upload speed in kb/s."""
     def __init__(self):
-        super(NetSpeedWidget, self).__init__()
-
         # The number of downloaded and uploaded bytes at the beginning of the
         # previous and current iterations. These numbers are updated at the
         # beginning of each iteration to compute the download/upload speed
@@ -179,24 +123,11 @@ class NetSpeedWidget(BaseWidget):
         self.prev_down, self.prev_up = None, None
         self.cur_down, self.cur_up = None, None
 
-        # The computed download/upload speed. This is what gets printed out by
-        # `get_status_text()`
-        self.speed_down, self.speed_up = None, None
+        # Execute one iteration of `get_components()` immediately so we have
+        # both `prev_` and `cur_` values in the next iteration.
+        self.get_components()
 
-        # Execute one iteration of `prepare()` immediately so we have both
-        # `prev_` and `cur_` values in the next iteration.
-        self.prepare()
-
-    def get_icon(self):
-        return (u"\uE061", u"\uE060")
-
-    def get_status_text(self):
-        return (u"%4.1fk/s" % self.speed_down, "%4.1fk/s" % self.speed_up)
-
-    def prepare(self):
-        """Gets the total number of received and transferred bytes."""
-        self.prev_down, self.prev_up = self.cur_down, self.cur_up
-
+    def get_components(self):
         # Get the network interface currently associated with the default route
         net_iface = None
         with open("/proc/net/route") as f:
@@ -211,8 +142,7 @@ class NetSpeedWidget(BaseWidget):
                     net_iface = words[0]
                     break
 
-        if not net_iface:
-            return False
+        self.prev_down, self.prev_up = self.cur_down, self.cur_up
 
         with open("/sys/class/net/%s/statistics/rx_bytes" % net_iface) as f:
             self.cur_down = int(f.read())
@@ -220,56 +150,36 @@ class NetSpeedWidget(BaseWidget):
         with open("/sys/class/net/%s/statistics/tx_bytes" % net_iface) as f:
             self.cur_up = int(f.read())
 
-        if self.prev_down is None and self.prev_up is None:
-            self.speed_down, self.speed_up = 0, 0
+        if self.prev_down is None or self.prev_up is None:
+            speed_down, speed_up = 0, 0
         else:
-            self.speed_down = (self.cur_down - self.prev_down) / 1024.0
-            self.speed_up = (self.cur_up - self.prev_up) / 1024.0
+            speed_down = (self.cur_down - self.prev_down) / 1024.0
+            speed_up = (self.cur_up - self.prev_up) / 1024.0
 
-        return True
+        icons = (u"\uE061", u"\uE060")
+        status_texts = (u"%4.1fk/s" % speed_down, "%4.1fk/s" % speed_up)
+        return (icons, status_texts)
 
     def __unicode__(self):
         """Override to show both down and up icons next to their speeds."""
-        icon_down, icon_up = self.get_icon()
-        speed_down, speed_up = self.get_status_text()
+        icons, status_texts = self.get_components()
 
-        return u"%s%s%s%s %s%s%s%s" % (GREEN, icon_down, WHITE, speed_down,
-                                       GREEN, icon_up, WHITE, speed_up)
+        return u"%s%s%s%s %s%s%s%s" % (GREEN, icons[0], WHITE, status_texts[0],
+                                       GREEN, icons[1], WHITE, status_texts[1])
 
 class WirelessInfoWidget(BaseWidget):
-    """Displays the essid and signal strength of the current wireless network."""
-    def __init__(self):
-        super(WirelessInfoWidget, self).__init__()
+    """Displays the essid and signal strength of the wireless network."""
+    def get_components(self):
+        p = subprocess.Popen(["iwgetid"], stdout=subprocess.PIPE)
 
-        self.net_iface = None
-        self.essid = None
-        self.signal_strength = None
+        match = re.match("^(\w+)\s+ESSID:\"(.*)\"$", p.communicate()[0])
+        net_iface, essid = match.groups()
 
-    def get_icon(self):
-        return u"\uE048"
+        with open("/sys/class/net/%s/wireless/link" % net_iface) as f:
+            signal_strength = int(f.read())
 
-    def get_status_text(self):
-        return "%s %d%%" % (self.essid, self.signal_strength)
-
-    def prepare(self):
-        """Get wireless connection info from iwgetid and sysfs."""
-        try:
-            p = subprocess.Popen(["iwgetid"], stdout=subprocess.PIPE)
-        except OSError:
-            return False
-
-        match = re.match("^(\w+)\s+ESSID:\"(.*)\"$", p.stdout.read())
-        if not match:
-            return False
-
-        self.net_iface, self.essid = match.groups()
-        with open("/sys/class/net/%s/wireless/link" % self.net_iface) as f:
-            try:
-                self.signal_strength = int(f.read())
-            except IOError:
-                return False
-
-        return True
+        status_text = "%s %d%%" % (essid, signal_strength)
+        return (u"\uE048", status_text)
 
 def main():
     """Main loop."""
@@ -283,8 +193,16 @@ def main():
     ]
 
     while True:
-        status_text = " |".join([unicode(w) for w in widgets if w.prepare()])
-        subprocess.Popen(["xsetroot", "-name", status_text])
+        results = []
+        for widget in widgets:
+            try:
+                widget_str = unicode(widget)
+            except Exception, e:
+                pass
+            else:
+                results.append(widget_str)
+
+        subprocess.Popen(["xsetroot", "-name", " |".join(results)])
         time.sleep(1)
 
 if __name__ == "__main__":
