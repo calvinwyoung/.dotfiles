@@ -60,12 +60,15 @@ class CPUTempWidget(BaseWidget):
             "/sys/bus/platform/drivers/coretemp/coretemp.*")
 
     def get_components(self):
-        temp_readings = []
+        if not self.coretemp_paths:
+            raise RuntimeError("No coretemp paths found.")
+
+        temps = []
         for path in self.coretemp_paths:
             with open(os.path.join(path, "temp1_input")) as f:
-                temp_readings.append(int(f.read()) / 1000)
+                temps.append(int(f.read()) / 1000)
 
-        status_text = " / ".join("%dC" % temp for temp in temp_readings)
+        status_text = " / ".join("%dC" % t for t in temps)
         return (u"\uE01c", status_text)
 
 class CPUUsageWidget(BaseWidget):
@@ -89,9 +92,7 @@ class CPUUsageWidget(BaseWidget):
             for line in f:
                 if not line.startswith("cpu"):
                     break
-                elif not re.match("cpu\d", line):
-                    continue
-                else:
+                elif re.match("cpu\d", line):
                     words = line.split()
                     user_time = int(words[1])
                     nice_time = int(words[2])
@@ -126,22 +127,18 @@ class NetSpeedWidget(BaseWidget):
         self.get_components()
 
     def get_components(self):
-        # Get the network interface currently associated with the default route
+        # Get the network interface currently associated with the default
+        # route. This is done by reading /proc/net/route, and finding the
+        # interface associated with the default gateway, which is represented as
+        # a string of eight 0s.
         net_iface = None
         with open("/proc/net/route") as f:
-            for line in f:
-                words = line.split()
-                try:
-                    destination = int(words[1], 16)
-                except ValueError:
-                    continue
-
-                if destination == 0:
-                    net_iface = words[0]
-                    break
+            match = re.search("^(\S+)\s+0{8}", f.read(), flags=re.MULTILINE)
+            net_iface = match.group(1)
 
         self.prev_down, self.prev_up = self.cur_down, self.cur_up
 
+        # Then read the received/transferred bytes on the network interface
         with open("/sys/class/net/%s/statistics/rx_bytes" % net_iface) as f:
             self.cur_down = int(f.read())
 
