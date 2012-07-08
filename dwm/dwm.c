@@ -395,7 +395,11 @@ attach(Client *c) {
 
 void
 attachaside(Client *c) {
-	Client *at = nexttiled(c->mon->clients);;
+        int i;
+        Client *at = nexttiled(c->mon->clients);
+        for(i = 0; i < c->mon->msplit - 1; i++)
+            at = nexttiled(at->next);
+
 	if(c->mon->sel == NULL || c->mon->sel->isfloating || !at) {
 		attach(c);
 		return;
