@@ -54,7 +54,7 @@ class MemUsageWidget(BaseWidget):
         return (u"\uE020", status_text)
 
 class CPUTempWidget(BaseWidget):
-    """Displays the temperatures of the CPU cores."""
+    """Displays the temperatures of all CPU cores."""
     def __init__(self):
         self.coretemp_paths = glob.glob(
             "/sys/bus/platform/drivers/coretemp/coretemp.*")
@@ -72,7 +72,7 @@ class CPUTempWidget(BaseWidget):
         return (u"\uE01c", status_text)
 
 class CPUUsageWidget(BaseWidget):
-    """Displays the percent utilization per CPU core over the last interval."""
+    """Displays the percent utilization of all CPU cores."""
     def __init__(self):
         # The used/total CPU time for the previous and current iteration. The
         # length of each list is equal to the number of CPU cores. These lists
@@ -94,13 +94,10 @@ class CPUUsageWidget(BaseWidget):
                     break
                 elif re.match("cpu\d", line):
                     words = line.split()
-                    user_time = int(words[1])
-                    nice_time = int(words[2])
-                    system_time = int(words[3])
-                    idle_time = int(words[4])
+                    user, nice, system, idle = (int(w) for w in words[1:5])
 
-                    self.cur_used.append(user_time + nice_time + system_time)
-                    self.cur_total.append(self.cur_used[-1] + idle_time)
+                    self.cur_used.append(user + nice + system)
+                    self.cur_total.append(user + nice + system + idle)
 
         delta_used = [(c - p) for c, p in zip(self.cur_used, self.prev_used)]
         delta_total = [(c - p) for c, p in zip(self.cur_total, self.prev_total)]
@@ -166,7 +163,6 @@ class WirelessInfoWidget(BaseWidget):
     """Displays the essid and signal strength of the wireless network."""
     def get_components(self):
         p = subprocess.Popen(["iwgetid"], stdout=subprocess.PIPE)
-
         match = re.match("^(\w+)\s+ESSID:\"(.*)\"$", p.communicate()[0])
         net_iface, essid = match.groups()
 
@@ -197,9 +193,10 @@ def main():
             else:
                 results.append(widget_str)
 
-        # Flush the output buffer after each write so another process can read
-        # it line-by-line.
         print " |".join(results).encode("utf-8")
+
+        # Flush the output buffer after each write so we can set up a pipemill
+        # to read the output as it's produced.
         sys.stdout.flush()
 
         time.sleep(1)

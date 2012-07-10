@@ -49,6 +49,14 @@
 ;; Open all *.txt files in ~/Dropbox/notes in org mode
 (add-to-list 'auto-mode-alist '("^.*/Dropbox/notes/.*\\.txt$" . org-mode))
 
+;;;;;;;;
+;; Lua
+;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/vendor/lua-mode/")
+(autoload 'lua-mode "lua-mode.el"
+  "Major mode for editing Lua files" t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+
 ;;;;;;;;;;
 ;; JAVA
 ;;;;;;;;;;

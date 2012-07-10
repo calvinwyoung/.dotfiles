@@ -16,3 +16,6 @@
 [submodule "emacs.d/vendor/python-mode"]
 	path = emacs.d/vendor/python-mode
 	url = git://github.com/fgallina/python.el.git
+[submodule "emacs.d/vendor/lua-mode"]
+	path = emacs.d/vendor/lua-mode
+	url = git://github.com/immerrr/lua-mode.git
