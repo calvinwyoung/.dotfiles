@@ -56,6 +56,7 @@
 (autoload 'lua-mode "lua-mode.el"
   "Major mode for editing Lua files" t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(setq lua-indent-level 4)
 
 ;;;;;;;;;;
 ;; JAVA
