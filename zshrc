@@ -19,6 +19,9 @@ fi
 # Allow using # in the command line
 setopt interactivecomments
 
+# Disable zsh auto-correcting because it kind of sucks
+unsetopt correct_all
+
 # Use Emacs-style keys
 bindkey -e
 bindkey '\C-x\C-e' edit-command-line

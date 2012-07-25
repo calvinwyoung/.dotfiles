@@ -3,7 +3,7 @@ thunar --daemon &
 dropbox start &
 clipit -n &
 # wicd-client &
-trayer --transparent true --alpha 255 --edge bottom --align right --widthtype request &
+# trayer --transparent true --alpha 255 --edge bottom --align right --widthtype request &
 
 # start emacs daemon if it's not already running
 if [ ! $(pidof emacs) ]
@@ -32,8 +32,9 @@ if [ -e $HOME/.Xmodmap ]; then
 fi
 
 # conky -c ~/.dwm/conkyrc | while read LINE; do xsetroot -name "$LINE"; done &
-~/.dwm/statusbar.py | while read LINE; do xsetroot -name "$LINE"; done &
-while true; do
-    ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
-done
+# ~/.dwm/statusbar.py | while read LINE; do xsetroot -name "$LINE"; done &
+# while true; do
+#     ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
+# done
 # exec ck-launch-session dbus-launch openbox
+exec ck-launch-session dbus-launch awesome
