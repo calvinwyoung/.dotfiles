@@ -98,16 +98,6 @@ clock_icon = widget({type = "imagebox"})
 clock_icon.image = image(config_dir .. "/icons/clock.png")
 clock_widget = awful.widget.textclock({align="right"}, "%a %b %d %r", 1)
 
--- Create CPU widget
-cpu_icon = widget({type = "imagebox"})
-cpu_icon.image = image(config_dir .. "/icons/cpu.png")
-
-cpu_widget = widget({type = "textbox"})
-vicious.register(cpu_widget, vicious.widgets.cpu,
-                 function(widget, args)
-                     return string.format("%2d%%", args[1])
-                 end, 1)
-
 -- Create a memory widget
 mem_icon = widget({type = "imagebox"})
 mem_icon.image = image(config_dir .. "/icons/mem.png")
@@ -116,6 +106,20 @@ mem_widget = widget({type = "textbox"})
 vicious.register(mem_widget, vicious.widgets.mem,
                  function (widget, args)
                      return string.format("%d%% (%.2fGB)", args[1], args[2] / 1024.0)
+                 end, 1)
+
+-- Create CPU widget
+cpu_icon = widget({type = "imagebox"})
+cpu_icon.image = image(config_dir .. "/icons/cpu.png")
+
+cpu_widget = widget({type = "textbox"})
+vicious.register(cpu_widget, vicious.widgets.cpu,
+                 function(widget, args)
+                     local core_usages = {}
+                     for i = 2, #args do
+                         table.insert(core_usages, string.format("%2d%%", args[i]))
+                     end
+                     return table.concat(core_usages, "/")
                  end, 1)
 
 -- Create network widgets
@@ -243,8 +247,8 @@ for s = 1, screen.count() do
         mylayoutbox[s], spacer,
         s == 1 and mysystray, spacer or nil,
         clock_widget, clock_icon, spacer,
-        cpu_widget, cpu_icon, spacer,
         mem_widget, mem_icon, spacer,
+        cpu_widget, cpu_icon, spacer,
         net_up_widget, net_up_icon, spacer,
         net_down_widget, net_down_icon, spacer,
         mytasklist[s],
