@@ -2,8 +2,7 @@
 thunar --daemon &
 dropbox start &
 clipit -n &
-# wicd-client &
-# trayer --transparent true --alpha 255 --edge bottom --align right --widthtype request &
+command -v wicd-client >/dev/null 2>&1 && { wicd-client --tray & }
 
 # start emacs daemon if it's not already running
 if [ ! $(pidof emacs) ]
@@ -36,5 +35,4 @@ fi
 # while true; do
 #     ck-launch-session dbus-launch ~/.dwm/dwm >/dev/null 2>&1
 # done
-# exec ck-launch-session dbus-launch openbox
 exec ck-launch-session dbus-launch awesome
