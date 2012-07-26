@@ -1,6 +1,5 @@
 # Start various application
 thunar --daemon &
-
 # These applications only get started if they're installed in the system.
 command -v dropbox >/dev/null 2>&1 && { dropbox start & }
 command -v clipit >/dev/null 2>&1 && { clipit -n & }
