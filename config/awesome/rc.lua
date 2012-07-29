@@ -10,10 +10,13 @@ require("vicious")
 
 -- Load custom modules
 require("custom.layouts.tile")
+require("custom.monkeypatches")
+local util = require("custom.util")
 
-config_dir = awful.util.getdir("config")
+-----------------
+-- Error handling
+-----------------
 
--- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -40,18 +43,23 @@ do
         in_error = false
     end)
 end
--- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
-beautiful.init(config_dir .. "/theme/theme.lua")
+-----------------------
+-- Variable definitions
+-----------------------
+
+-- Save the path to the config directory
+local config_dir = awful.util.getdir("config")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+terminal = "xterm"
 editor = "emacsclient -c"
 
 -- Set windows key as modkey
 modkey = "Mod4"
+
+-- Themes define colours, icons, and wallpapers
+beautiful.init(config_dir .. "/theme/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts = {
@@ -60,20 +68,21 @@ layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.max
 }
--- }}}
 
--- {{{ Tags
+-- Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag({"1", "2", "3", "4"}, s, layouts[1])
 end
--- }}}
 
--- {{{ Menu
--- Create a laucher widget and a main menu
-mymainmenu = awful.menu({
+--------
+-- Wibox
+--------
+
+-- Create a menu widget and launcher
+menu = awful.menu({
     items = {
         {"Restart Awesome", awesome.restart},
         {"Suspend", "sudo pm-suspend"},
@@ -83,15 +92,13 @@ mymainmenu = awful.menu({
     width = 120
 })
 
-mylauncher = awful.widget.launcher({
+launcher_widget = awful.widget.launcher({
     image=image(beautiful.awesome_icon),
-    menu=mymainmenu
+    menu=menu
 })
--- }}}
 
--- {{{ Wibox
 -- Create a systray
-mysystray = widget({type="systray"})
+systray_widget = widget({type="systray"})
 
 -- Create a textclock widget
 clock_icon = widget({type = "imagebox"})
@@ -239,13 +246,13 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            mylauncher,
+            launcher_widget,
             mytaglist[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s], spacer,
-        s == 1 and mysystray, spacer or nil,
+        s == 1 and systray_widget, spacer or nil,
         clock_widget, clock_icon, spacer,
         mem_widget, mem_icon, spacer,
         cpu_widget, cpu_icon, spacer,
@@ -256,33 +263,30 @@ for s = 1, screen.count() do
     }
 
 end
--- }}}
 
--- {{{ Mouse bindings
+--------------------------
+-- Mouse/Keyboard Bindings
+--------------------------
+
+-- Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({}, 4, awful.tag.viewnext),
     awful.button({}, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- Helper function to bind commands to execute programs
-local exec = function(cmd)
-    return function() awful.util.spawn(cmd) end
-end
-
--- {{{ Key bindings
+-- Key bindings
 globalkeys = awful.util.table.join(
     -- Execute programs
-    awful.key({ modkey,           }, "Return", exec(terminal)),
-    awful.key({ modkey,           }, "e", exec(editor)),
-    awful.key({ modkey,           }, "w", exec("chromium-browser")),
-    awful.key({ modkey, "Shift"   }, "w", exec("chromium-browser --incognito")),
-    awful.key({ modkey,           }, "`", exec("thunar")),
-    awful.key({ modkey,           }, "F12", exec("slock")),
-    awful.key({ modkey,           }, "a", exec("xterm -e alsamixer")),
-    awful.key({                   }, "XF86AudioMute", exec("amixer -q set Master toggle")),
-    awful.key({                   }, "XF86AudioRaiseVolume", exec("amixer -q set Master 5%+ unmute")),
-    awful.key({                   }, "XF86AudioLowerVolume", exec("amixer -q set Master 5%- unmute")),
+    awful.key({ modkey,           }, "Return", util.exec(terminal)),
+    awful.key({ modkey,           }, "e", util.exec(editor)),
+    awful.key({ modkey,           }, "w", util.exec("chromium-browser")),
+    awful.key({ modkey, "Shift"   }, "w", util.exec("chromium-browser --incognito")),
+    awful.key({ modkey,           }, "`", util.exec("thunar")),
+    awful.key({ modkey,           }, "F12", util.exec("slock")),
+    awful.key({ modkey,           }, "a", util.exec(terminal .. " -e alsamixer")),
+    awful.key({                   }, "XF86AudioMute", util.exec("amixer -q set Master toggle")),
+    awful.key({                   }, "XF86AudioRaiseVolume", util.exec("amixer -q set Master 5%+ unmute")),
+    awful.key({                   }, "XF86AudioLowerVolume", util.exec("amixer -q set Master 5%- unmute")),
 
     -- Standard navigation
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -357,6 +361,10 @@ clientkeys = awful.util.table.join(
         function(c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
+        end),
+    awful.key({ modkey, "Control" }, "m",
+        function(c)
+            c.maximized_vertical   = not c.maximized_vertical
         end)
 )
 
@@ -406,9 +414,11 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+--------
+-- Rules
+--------
+
 awful.rules.rules = {
     -- All clients will match this rule.
     {
@@ -432,21 +442,15 @@ awful.rules.rules = {
         properties = {floating = true}
     },
 }
--- }}}
 
--- {{{ Signals
+----------
+-- Signals
+----------
+
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function(c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
-
-    -- Enable sloppy focus
-    -- c:add_signal("mouse::enter", function(c)
-    --     if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-    --         and awful.client.focus.filter(c) then
-    --         client.focus = c
-    --     end
-    -- end)
 
     if not startup then
         -- Set the windows at the slave,
@@ -463,28 +467,3 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
-
--- Bound the number of master windows between 1 and the number of currently
--- visible clients.
-local old_incnmaster = awful.tag.incnmaster
-awful.tag.incnmaster = function(i)
-    local nmaster = awful.tag.getnmaster()
-    if i < 0 and nmaster > 1 then
-        old_incnmaster(i)
-    elseif i > 0 then
-        local num_clients = 0
-        for i, tag in ipairs(awful.tag.selectedlist()) do
-            num_clients = num_clients + #tag:clients()
-        end
-        if nmaster < num_clients then
-            old_incnmaster(i)
-        end
-    end
-end
-
--- Disable startup-notification (ie stopwatch cursor icon) globally
-local old_spawn = awful.util.spawn
-awful.util.spawn = function(s)
-  old_spawn(s, false)
-end
