@@ -105,6 +105,30 @@ clock_icon = widget({type = "imagebox"})
 clock_icon.image = image(config_dir .. "/icons/clock.png")
 clock_widget = awful.widget.textclock({align="right"}, "%a %b %d %r", 1)
 
+-- Create a volume widget
+volume_icon = widget({type = "imagebox"})
+volume_icon.image = image(config_dir .. "/icons/spkr_01.png")
+volume_widget = widget({ type = "textbox" })
+vicious.register(volume_widget, vicious.widgets.volume,
+                 function(widget, args)
+                     -- args is a table with two values; the first value is the
+                     -- volume level of the selected alsa channel, and the
+                     -- second is a character representing the mute state of
+                     -- that channel.
+                     if args[2] == "♫" then
+                         return string.format("%d%%", args[1])
+                     else
+                         return "0%"
+                     end
+                 end, 1, "Master")
+
+volume_widget:buttons(awful.util.table.join(
+    awful.button({ }, 1, util.exec(terminal .. " -e alsamixer")),
+    awful.button({ }, 2, util.exec("amixer -q set Master toggle")),
+    awful.button({ }, 4, util.exec("amixer -q set Master 5%+ unmute")),
+    awful.button({ }, 5, util.exec("amixer -q set Master 5%- unmute"))
+ ))
+
 -- Create a memory widget
 mem_icon = widget({type = "imagebox"})
 mem_icon.image = image(config_dir .. "/icons/mem.png")
@@ -254,6 +278,7 @@ for s = 1, screen.count() do
         mylayoutbox[s], spacer,
         s == 1 and systray_widget, spacer or nil,
         clock_widget, clock_icon, spacer,
+        volume_widget, volume_icon, spacer,
         mem_widget, mem_icon, spacer,
         cpu_widget, cpu_icon, spacer,
         net_up_widget, net_up_icon, spacer,
