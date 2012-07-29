@@ -51,6 +51,7 @@ end
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
 editor = "emacsclient -c"
+browser = "chromium-browser"
 
 -- Set windows key as modkey
 modkey = "Mod4"
@@ -304,14 +305,23 @@ globalkeys = awful.util.table.join(
     -- Execute programs
     awful.key({ modkey,           }, "Return", util.exec(terminal)),
     awful.key({ modkey,           }, "e", util.exec(editor)),
-    awful.key({ modkey,           }, "w", util.exec("chromium-browser")),
-    awful.key({ modkey, "Shift"   }, "w", util.exec("chromium-browser --incognito")),
+    awful.key({ modkey,           }, "w", util.exec(browser)),
+    awful.key({ modkey, "Shift"   }, "w", util.exec(browser .. " --incognito")),
     awful.key({ modkey,           }, "`", util.exec("thunar")),
     awful.key({ modkey,           }, "F12", util.exec("slock")),
     awful.key({ modkey,           }, "a", util.exec(terminal .. " -e alsamixer")),
     awful.key({                   }, "XF86AudioMute", util.exec("amixer -q set Master toggle")),
     awful.key({                   }, "XF86AudioRaiseVolume", util.exec("amixer -q set Master 5%+ unmute")),
     awful.key({                   }, "XF86AudioLowerVolume", util.exec("amixer -q set Master 5%- unmute")),
+    awful.key({ modkey            }, "d",
+              function()
+                  awful.prompt.run(
+                      {prompt = "Dict: "},
+                      mypromptbox[mouse.screen].widget,
+                      function(word)
+                          awful.util.spawn(browser .. " 'https://www.google.com/webhp\?#q=" .. word .. "&tbs=dfn:1'")
+                      end)
+              end),
 
     -- Standard navigation
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
