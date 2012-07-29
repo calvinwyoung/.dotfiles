@@ -116,11 +116,8 @@ vicious.register(volume_widget, vicious.widgets.volume,
                      -- volume level of the selected alsa channel, and the
                      -- second is a character representing the mute state of
                      -- that channel.
-                     if args[2] == "♫" then
-                         return string.format("%d%%", args[1])
-                     else
-                         return "0%"
-                     end
+                     local volume = args[2] == "♫" and args[1] or 0
+                     return string.format("%2d%%", volume)
                  end, 1, "Master")
 
 volume_widget:buttons(awful.util.table.join(
