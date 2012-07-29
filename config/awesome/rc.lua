@@ -109,23 +109,43 @@ clock_widget = awful.widget.textclock({align="right"}, "%a %b %d %r", 1)
 -- Create a volume widget
 volume_icon = widget({type = "imagebox"})
 volume_icon.image = image(config_dir .. "/icons/spkr_01.png")
-volume_widget = widget({ type = "textbox" })
-vicious.register(volume_widget, vicious.widgets.volume,
-                 function(widget, args)
-                     -- args is a table with two values; the first value is the
-                     -- volume level of the selected alsa channel, and the
-                     -- second is a character representing the mute state of
-                     -- that channel.
-                     local volume = args[2] == "♫" and args[1] or 0
-                     return string.format("%2d%%", volume)
-                 end, 1, "Master")
 
-volume_widget:buttons(awful.util.table.join(
+volume_widget = widget({type = "textbox"})
+vicious.register(
+    volume_widget,
+    vicious.widgets.volume,
+    function(widget, args)
+        -- args is a table with two values; the first value is the
+        -- volume level of the selected alsa channel, and the
+        -- second is a character representing the mute state of
+        -- that channel.
+        if args[2] == "♫" then
+            return string.format("%2d%%", args[1])
+        else
+            return "-- "
+        end
+    end, 2, "Master")
+
+volume_buttons = awful.util.table.join(
     awful.button({ }, 1, util.exec(terminal .. " -e alsamixer")),
-    awful.button({ }, 2, util.exec("amixer -q set Master toggle")),
-    awful.button({ }, 4, util.exec("amixer -q set Master 5%+ unmute")),
-    awful.button({ }, 5, util.exec("amixer -q set Master 5%- unmute"))
- ))
+    awful.button({ }, 3,
+                 function()
+                     awful.util.spawn("amixer -q set Master toggle")
+                     vicious.force({volume_widget})
+                 end),
+    awful.button({ }, 4,
+                 function()
+                     awful.util.spawn("amixer -q set Master 5%+ unmute")
+                     vicious.force({volume_widget})
+                 end),
+    awful.button({ }, 5,
+                 function()
+                     awful.util.spawn("amixer -q set Master 5%- unmute")
+                     vicious.force({volume_widget})
+                 end)
+)
+volume_widget:buttons(volume_buttons)
+volume_icon:buttons(volume_buttons)
 
 -- Create a memory widget
 mem_icon = widget({type = "imagebox"})
@@ -135,7 +155,7 @@ mem_widget = widget({type = "textbox"})
 vicious.register(mem_widget, vicious.widgets.mem,
                  function (widget, args)
                      return string.format("%d%% (%.2fGB)", args[1], args[2] / 1024.0)
-                 end, 1)
+                 end, 2)
 
 -- Create CPU widget
 cpu_icon = widget({type = "imagebox"})
@@ -149,7 +169,7 @@ vicious.register(cpu_widget, vicious.widgets.cpu,
                          table.insert(core_usages, string.format("%2d%%", args[i]))
                      end
                      return table.concat(core_usages, "/")
-                 end, 1)
+                 end, 2)
 
 -- Create network widgets
 -- The down/up widgets just exist to display data that's generated and set by a
@@ -307,9 +327,22 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "`", util.exec("thunar")),
     awful.key({ modkey,           }, "F12", util.exec("slock")),
     awful.key({ modkey,           }, "a", util.exec(terminal .. " -e alsamixer")),
-    awful.key({                   }, "XF86AudioMute", util.exec("amixer -q set Master toggle")),
-    awful.key({                   }, "XF86AudioRaiseVolume", util.exec("amixer -q set Master 5%+ unmute")),
-    awful.key({                   }, "XF86AudioLowerVolume", util.exec("amixer -q set Master 5%- unmute")),
+    awful.key({                   }, "XF86AudioMute",
+              function()
+                  awful.util.spawn("amixer -q set Master toggle")
+                  vicious.force({volume_widget})
+              end),
+    awful.key({                   }, "XF86AudioRaiseVolume",
+              function()
+                  awful.util.spawn("amixer -q set Master 5%+ unmute")
+                  vicious.force({volume_widget})
+              end),
+    awful.key({                   }, "XF86AudioLowerVolume",
+              function()
+                  awful.util.spawn("amixer -q set Master 5%- unmute")
+                  vicious.force({volume_widget})
+              end),
+
     awful.key({ modkey            }, "d",
               function()
                   awful.prompt.run(
