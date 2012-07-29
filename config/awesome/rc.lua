@@ -48,15 +48,15 @@ end
 -- Variable definitions
 -----------------------
 
--- Save the path to the config directory
-local config_dir = awful.util.getdir("config")
-
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
 editor = "emacsclient -c"
 
 -- Set windows key as modkey
 modkey = "Mod4"
+
+-- Save the path to the config directory
+config_dir = awful.util.getdir("config")
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config_dir .. "/theme/theme.lua")
