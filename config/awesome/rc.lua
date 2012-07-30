@@ -506,6 +506,11 @@ awful.rules.rules = {
         rule = {class = "Wicd-client.py"},
         properties = {floating = true}
     },
+    {
+        -- Make YouTube videos appear correctly in fullscreen mode
+        rule = {instance = "exe"},
+        properties = {floating = true}
+    },
 }
 
 ----------
