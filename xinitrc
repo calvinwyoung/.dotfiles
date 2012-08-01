@@ -1,6 +1,7 @@
-# Start various application
-thunar --daemon &
-# These applications only get started if they're installed in the system.
+#!/bin/bash
+
+# Start various application if they're installed on the system.
+command -v thunar >/dev/null 2>&1 && { thunar --daemon & }
 command -v dropbox >/dev/null 2>&1 && { dropbox start & }
 command -v clipit >/dev/null 2>&1 && { clipit -n & }
 command -v wicd-client >/dev/null 2>&1 && { wicd-client --tray & }

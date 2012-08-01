@@ -326,6 +326,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "w", util.exec(browser .. " --incognito")),
     awful.key({ modkey,           }, "`", util.exec("thunar")),
     awful.key({ modkey,           }, "F12", util.exec("slock")),
+    awful.key({                   }, "Print", util.exec("import " .. os.getenv("HOME") .. "/screenshot.jpg")),
     awful.key({ modkey,           }, "a", util.exec(terminal .. " -e alsamixer")),
     awful.key({                   }, "XF86AudioMute",
               function()
