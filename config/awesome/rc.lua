@@ -67,7 +67,6 @@ layouts = {
     custom.layouts.tile,
     custom.layouts.tile.left,
     awful.layout.suit.floating,
-    awful.layout.suit.max
 }
 
 -- Tags
