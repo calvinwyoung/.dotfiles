@@ -126,12 +126,12 @@ vicious.register(
     end, 2, "Master")
 
 volume_buttons = awful.util.table.join(
-    awful.button({ }, 1, util.exec(terminal .. " -e alsamixer")),
-    awful.button({ }, 3,
+    awful.button({ }, 1,
                  function()
                      awful.util.spawn("amixer -q set Master toggle")
                      vicious.force({volume_widget})
                  end),
+    awful.button({ }, 3, util.exec(terminal .. " -e alsamixer")),
     awful.button({ }, 4,
                  function()
                      awful.util.spawn("amixer -q set Master 5%+ unmute")
