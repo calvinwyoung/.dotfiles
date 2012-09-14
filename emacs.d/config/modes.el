@@ -15,6 +15,7 @@
 (setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scsstt$" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.scssmk$" . scss-mode))
 
 ;;;;;;;;;;;;
 ;; Markdown
@@ -28,6 +29,7 @@
 ;; Javascript
 ;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.jstt$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.jsmk$" . js-mode))
 
 ;;;;;;;;;
 ;; HTML
@@ -39,6 +41,7 @@
 
 ;; Set html-mode as default for .htmltt files
 (add-to-list 'auto-mode-alist '("\\.htmltt$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.htmlmk$" . html-mode))
 
 ;; Set html-mode as default for .jqt files
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
