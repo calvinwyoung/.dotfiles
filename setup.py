@@ -27,7 +27,7 @@ def create_symlink(source, link_name):
             return
 
         response = raw_input("Overwrite file %s? [Y/n] " % link_name)
-        if not response or response.lower() == "y":
+        if not response or response.lower().strip() == "y":
             if os.path.isfile(link_name):
                 os.remove(link_name)
             else:
@@ -65,10 +65,11 @@ def main():
     if not os.path.exists(config_dir):
         os.mkdir(config_dir, 0700)
 
-    # Now we install the symlinks for the "config" directory.
+    # Now we install symlinks for each subdirectory in the "config" directory.
     for filename in os.listdir(os.path.join(DOTFILES_DIR, "config")):
+        # Skip hidden files and directories. Note that we don't ignore
+        # blacklisted files/directories here.
         if filename.startswith("."):
-            # Skip hidden files and directories
             continue
 
         create_symlink(
