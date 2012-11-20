@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Initialize oh-my-zsh
 ZSH=$HOME/.oh-my-zsh
 COMPLETION_WAITING_DOTS='true'

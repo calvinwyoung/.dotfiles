@@ -60,6 +60,9 @@ nnoremap Y y$
 " braces autocomplet
 inoremap {<CR>  {<CR>}<Esc>O
 
+" disable creation of .netrwhist history file
+let g:netrw_dirhistmax=0
+
 " disable auto comment
 au FileType * setl fo-=cro
 
