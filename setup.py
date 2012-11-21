@@ -36,7 +36,6 @@ def create_symlink(source, link_name):
             print "Skipping %s..." % link_name
             return
 
-    # Finally, create a symlink pointing to this dotfile
     os.symlink(source, link_name)
     print "Installed file %s -> %s" % (link_name, source)
 
@@ -48,26 +47,23 @@ def main():
     # Install dotfiles in top-level directory, skipping the "config" directory.
     for filename in os.listdir(DOTFILES_DIR):
         if filename.startswith("."):
-            # Skip hidden files and directories
             continue
         elif filename in BLACKLIST + ["config"]:
-            # Skip blacklisted files and directories. Also skip the "config"
-            # directory, which we handle separately below.
             continue
 
-        create_symlink(os.path.join(DOTFILES_DIR, filename),
-                       os.path.join(HOME_DIR, ".%s" % filename))
+        create_symlink(
+            os.path.join(DOTFILES_DIR, filename),
+            os.path.join(HOME_DIR, ".%s" % filename))
 
     # The "config" directory is special. All files/directories in here should
-    # have a symlink created inside the ~/.config directory. First, we check if
-    # the ~/.config directory exists, and create it if necessary
+    # have a symlink created in the ~/.config directory. If ~/.config doesn't
+    # exist, then create it.
     config_dir = os.path.join(HOME_DIR, ".config")
     if not os.path.exists(config_dir):
         os.mkdir(config_dir, 0700)
 
-    # Now we install symlinks for each subdirectory in the "config" directory.
     for filename in os.listdir(os.path.join(DOTFILES_DIR, "config")):
-        # Skip hidden files and directories. Note that we don't ignore
+        # Skip hidden files and directories. Note that there's no need to skip
         # blacklisted files/directories here.
         if filename.startswith("."):
             continue
