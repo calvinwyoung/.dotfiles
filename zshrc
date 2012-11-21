@@ -3,7 +3,7 @@
 # Initialize oh-my-zsh
 ZSH=$HOME/.oh-my-zsh
 COMPLETION_WAITING_DOTS='true'
-plugins=(git python command-not-found dircycle)
+plugins=(git python command-not-found dircycle virtualenvwrapper)
 source $ZSH/oh-my-zsh.sh
 
 # History
