@@ -41,8 +41,7 @@ def create_symlink(source, link_name):
 
 def main():
     # Make sure all submodules are initialized and updated
-    subprocess.call(["git", "submodule", "init"])
-    subprocess.call(["git", "submodule", "update"])
+    subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
 
     # Install dotfiles in top-level directory, skipping the "config" directory.
     for filename in os.listdir(DOTFILES_DIR):

@@ -1,6 +1,10 @@
 (add-to-list 'load-path (concat vendor-dir "auto-complete/"))
+(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/popup"))
+(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/fuzzy"))
+(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/ert"))
 (add-to-list 'load-path (concat vendor-dir "auto-complete/dict"))
 (require 'auto-complete-config)
+
 (setq ac-use-comphist nil)
 (ac-config-default)
 (setq ac-auto-start nil)
