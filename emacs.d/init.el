@@ -12,6 +12,6 @@
 (load-library "modes")
 (load-library "keybindings")
 
-(load-library "auto-complete")
 (load-library "autopair")
 (load-library "yasnippet")
+(load-library "auto-complete")
