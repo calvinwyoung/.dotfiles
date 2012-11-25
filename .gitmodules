@@ -19,3 +19,6 @@
 [submodule "emacs.d/vendor/lua-mode"]
 	path = emacs.d/vendor/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
+[submodule "emacs.d/vendor/yasnippet"]
+	path = emacs.d/vendor/yasnippet
+	url = git://github.com/capitaomorte/yasnippet.git
