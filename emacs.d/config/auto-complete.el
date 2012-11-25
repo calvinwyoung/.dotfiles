@@ -14,9 +14,7 @@
 (set-face-foreground 'ac-candidate-face "#f6f3e8")
 (set-face-background 'ac-selection-face "#64a8d8")
 
-;; Emacs has two tab keys: "TAB" and "<tab>". YASnippet tries to bind to the
-;; <tab> key. We must manually bind this trigger key to <tab> and make sure this
-;; gets loaded after YASnippet so that this binding takes precedence.
-(ac-set-trigger-key "<tab>")
+;; Keybindings
+(ac-set-trigger-key "TAB")
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
