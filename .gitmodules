@@ -9,7 +9,7 @@
 	url = git://github.com/defunkt/markdown-mode.git
 [submodule "emacs.d/vendor/autopair"]
 	path = emacs.d/vendor/autopair
-	url = https://code.google.com/p/autopair
+	url = git://github.com/capitaomorte/autopair.git
 [submodule "emacs.d/vendor/auto-complete"]
 	path = emacs.d/vendor/auto-complete
 	url = git://github.com/m2ym/auto-complete.git
