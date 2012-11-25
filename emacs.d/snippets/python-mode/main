@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: def main(): pass if __name__ == "__main__": ...
 # key: main
-# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# expand-env: ((yas-indent-line 'nil))
 # --
 def main():
     ${0:pass}

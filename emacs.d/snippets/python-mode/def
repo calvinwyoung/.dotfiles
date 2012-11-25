@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: def
 # key: def
+# expand-env: ((yas-indent-line 'nil))
 # --
 def ${1:name}($2):
     """$3"""

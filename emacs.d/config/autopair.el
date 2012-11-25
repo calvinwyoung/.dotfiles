@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/vendor/autopair/")
+(add-to-list 'load-path (concat vendor-dir "autopair/"))
 (require 'autopair)
 
 ;; Enable autopair mode everywhere

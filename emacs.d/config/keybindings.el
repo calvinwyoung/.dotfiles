@@ -41,7 +41,7 @@
 (global-set-key "\C-cr" 'rename-file-and-buffer)
 
 ;; Enable redo
-(load-file "~/.emacs.d/vendor/redo.el")
+(load-file (concat vendor-dir "redo.el"))
 (require 'redo)
 (global-set-key (kbd "C-M-/") 'redo)    ; for window-system
 (global-set-key (kbd "C-M-_") 'redo)    ; for termminal

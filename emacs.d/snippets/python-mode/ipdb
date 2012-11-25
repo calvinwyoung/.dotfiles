@@ -1,0 +1,5 @@
+# name: ipdb
+# key: ipdb
+# expand-env: ((yas-indent-line 'nil))
+# --
+import ipdb; ipdb.set_trace()

@@ -12,7 +12,7 @@
 (fringe-mode '(0 . 1))
 
 ;; Set color theme
-(load-file "~/.emacs.d/vendor/color-theme-wombat.el")
+(load-file (concat vendor-dir "color-theme-wombat.el"))
 (color-theme-wombat)
 
 ;; Prevent leftover backup turds

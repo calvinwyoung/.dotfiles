@@ -1,7 +1,6 @@
-(add-to-list 'load-path "~/.emacs.d/vendor/auto-complete/")
+(add-to-list 'load-path (concat vendor-dir "auto-complete/"))
+(add-to-list 'load-path (concat vendor-dir "auto-complete/dict"))
 (require 'auto-complete-config)
-
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/dict/")
 (setq ac-use-comphist nil)
 (ac-config-default)
 

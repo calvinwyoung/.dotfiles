@@ -1,7 +1,7 @@
 ;;;;;;;;;;;
 ;; Python
 ;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/python-mode/")
+(add-to-list 'load-path (concat vendor-dir "python-mode/"))
 (autoload 'python-mode "python.el"
   "Major mode for editing Python files" t)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
@@ -9,7 +9,7 @@
 ;;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/scss-mode/")
+(add-to-list 'load-path (concat vendor-dir "scss-mode/"))
 (autoload 'scss-mode "scss-mode.el"
   "Major mode for editing SCSS files" t)
 (setq scss-compile-at-save nil)
@@ -20,7 +20,7 @@
 ;;;;;;;;;;;;
 ;; Markdown
 ;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/markdown-mode/")
+(add-to-list 'load-path (concat vendor-dir "markdown-mode/"))
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
@@ -55,7 +55,7 @@
 ;;;;;;;;
 ;; Lua
 ;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/lua-mode/")
+(add-to-list 'load-path (concat vendor-dir "lua-mode/"))
 (autoload 'lua-mode "lua-mode.el"
   "Major mode for editing Lua files" t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
