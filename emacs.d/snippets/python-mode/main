@@ -1,8 +1,10 @@
-# name: def main(): ... if __name__ == "__main__": ...
+# -*- mode: snippet -*-
+# name: def main(): pass if __name__ == "__main__": ...
 # key: main
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
 # --
 def main():
-    $0
+    ${0:pass}
 
 if __name__ == "__main__":
     main(sys.argv[1:])
