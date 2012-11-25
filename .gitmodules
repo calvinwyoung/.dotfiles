@@ -12,7 +12,7 @@
 	url = git://github.com/capitaomorte/autopair.git
 [submodule "emacs.d/vendor/auto-complete"]
 	path = emacs.d/vendor/auto-complete
-	url = git://github.com/m2ym/auto-complete.git
+	url = git://github.com/auto-complete/auto-complete.git
 [submodule "emacs.d/vendor/python-mode"]
 	path = emacs.d/vendor/python-mode
 	url = git://github.com/fgallina/python.el.git
