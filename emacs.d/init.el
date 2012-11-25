@@ -6,3 +6,4 @@
 
 (load-library "auto-complete")
 (load-library "autopair")
+(load-library "yasnippet")

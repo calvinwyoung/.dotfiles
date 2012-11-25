@@ -1,0 +1,8 @@
+# name: def main(): ... if __name__ == "__main__": ...
+# key: main
+# --
+def main():
+    $0
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

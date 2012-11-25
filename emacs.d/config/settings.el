@@ -70,6 +70,11 @@
 ;; Discard trailing whitespace on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 
+;; Omit hidden files in dired mode
+(require 'dired-x)
+(setq dired-omit-files "^\\...+$")
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
 ;; Set the default browser to chromium
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
