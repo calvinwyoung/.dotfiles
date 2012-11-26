@@ -11,13 +11,26 @@
 ;; Set fringe mode
 (fringe-mode '(0 . 1))
 
-;; Set color theme
-(load-file (concat vendor-dir "color-theme-wombat.el"))
-(color-theme-wombat)
-
 ;; Prevent leftover backup turds
 (setq backup-inhibited t)
 (setq auto-save-default nil)
+
+;; Use wombat color-theme in window mode only. Use the default color theme if in
+;; terminal mode.
+(load-file (concat vendor-dir "color-theme-wombat.el"))
+(defun set-frame-color-theme (frame)
+  "Sets the color theme for the given frame"
+  (select-frame frame)
+  (let ((color-theme-is-global nil))
+    (if (window-system frame)
+        (color-theme-wombat))))
+
+;; Add a hook to set the frame's color theme each time a new frame is created in
+;; daemon/client mode.
+(add-hook 'after-make-frame-functions 'set-frame-color-theme)
+
+;; Set the current frame's color theme if emacs was started normally.
+(set-frame-color-theme (selected-frame))
 
 ;; Stop asking me to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
