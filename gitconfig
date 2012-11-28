@@ -1,11 +1,11 @@
 [user]
-        name = Calvin Young
-        email = calvinwyoung@gmail.com
+    name = Calvin Young
+    email = calvinwyoung@gmail.com
 [color]
-        ui = auto
+    ui = auto
 [alias]
-        st = status
-        ci = commit
-        co = checkout
-        br = branch
-        glog = log --graph --decorate --pretty=oneline --abbrev-commit
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    glog = log --graph --decorate --pretty=oneline --abbrev-commit

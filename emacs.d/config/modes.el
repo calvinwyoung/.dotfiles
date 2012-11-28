@@ -61,6 +61,14 @@
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (setq lua-indent-level 4)
 
+;;;;;;;;
+;; Conf
+;;;;;;;;
+(add-hook 'conf-mode-hook
+          (lambda ()
+            ;; Must manually update tab stops to occur every 4 characters
+            (setq tab-stop-list (number-sequence 4 200 4))))
+
 ;;;;;;;;;;
 ;; JAVA
 ;;;;;;;;;;
