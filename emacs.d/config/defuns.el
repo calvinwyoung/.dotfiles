@@ -161,7 +161,7 @@ close buffer without prompt for save."
         (forward-line -1))
       (move-to-column column t)))))
 
-(defun move-text-horizontally (arg)
+(defun shift-text-horizontally (arg)
   "Shift a region of text args columns left or right."
   (if (use-region-p)
       (let ((mark (mark)))
@@ -187,14 +187,14 @@ lines up."
   (interactive "*p")
   (move-text-vertically (- arg)))
 
-(defun move-text-right (arg)
-  "Move region (transient-mark-mode active) or current line arg
+(defun shift-text-right (arg)
+  "Shift region (transient-mark-mode active) or current line arg
 columns right."
   (interactive "p")
-  (move-text-horizontally arg))
+  (shift-text-horizontally arg))
 
-(defun move-text-left (arg)
-  "Move region (transient-mark-mode active) or current line arg
+(defun shift-text-left (arg)
+  "Shift region (transient-mark-mode active) or current line arg
 columns left."
   (interactive "p")
-  (move-text-horizontally (- arg)))
+  (shift-text-horizontally (- arg)))
