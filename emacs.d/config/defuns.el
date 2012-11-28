@@ -123,3 +123,78 @@ With argument ARG and region inactive, do this that many times."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
+
+(defun delete-current-file ()
+  "Delete the file associated with the current buffer.
+Delete the current buffer too.  If no file is associated, just
+close buffer without prompt for save."
+  (interactive)
+  (let (current-file)
+    (setq current-file (buffer-file-name))
+    (when (yes-or-no-p (concat "Delete file?: " current-file " "))
+      (kill-buffer (current-buffer))
+      (when (not (equal current-file nil))
+        (delete-file current-file)))))
+
+;; Make it easier to move text in all direction.
+(defun move-text-vertically (arg)
+  "Move a region or line of text args lines up or down."
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-horizontally (arg)
+  "Shift a region of text args columns left or right."
+  (if (use-region-p)
+      (let ((mark (mark)))
+        (save-excursion
+          (indent-rigidly (region-beginning)
+                          (region-end)
+                          arg)
+          (push-mark mark t t)
+          (setq deactivate-mark nil)))
+    (indent-rigidly (line-beginning-position)
+                    (line-end-position)
+                    arg)))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line arg
+lines down."
+  (interactive "*p")
+  (move-text-vertically arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line arg
+lines up."
+  (interactive "*p")
+  (move-text-vertically (- arg)))
+
+(defun move-text-right (arg)
+  "Move region (transient-mark-mode active) or current line arg
+columns right."
+  (interactive "p")
+  (move-text-horizontally arg))
+
+(defun move-text-left (arg)
+  "Move region (transient-mark-mode active) or current line arg
+columns left."
+  (interactive "p")
+  (move-text-horizontally (- arg)))

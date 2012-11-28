@@ -17,12 +17,7 @@
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 
-;; Compile command
-(global-set-key [\C-f11] 'compile)
-(global-set-key [\S-f11] 'kill-compilation)
-(global-set-key [f11] 'next-error)
-
-;; Easier goto line
+;; Make it easier to execute goto line
 (global-set-key "\M-g" 'goto-line)
 
 ;; Behave like vim's open line commands
@@ -33,6 +28,12 @@
 (global-set-key "\C-xl" 'mark-line)
 (global-set-key "\C-cw" 'copy-word)
 (global-set-key "\C-cl" 'copy-line)
+
+;; Make it easier to move lines and regions
+(global-set-key (kbd "M-<up>") 'move-text-up)
+(global-set-key (kbd "M-<down>") 'move-text-down)
+(global-set-key (kbd "M-<left>") 'shift-text-left)
+(global-set-key (kbd "M-<right>") 'shift-text-right)
 
 ;; Use custom comment function
 (global-set-key "\M-;" 'comment-dwim-line)
@@ -45,6 +46,11 @@
 
 ;; Emulate vim's "%" command to match parentheses
 (global-set-key [?\C-%] 'goto-match-paren)
+
+;; Compile command
+(global-set-key [\C-f11] 'compile)
+(global-set-key [\S-f11] 'kill-compilation)
+(global-set-key [f11] 'next-error)
 
 ;; Define custom minor mode keys
 (defvar my-keys-map (make-keymap) "my-keys keymap.")
