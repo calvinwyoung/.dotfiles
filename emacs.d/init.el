@@ -6,7 +6,6 @@
   "Vendor-provided Emacs modules")
 
 (add-to-list 'load-path config-dir)
-(add-to-list 'load-path vendor-dir)
 
 ;; Load core configuration
 (load-library "settings")
