@@ -51,7 +51,7 @@ end
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
 editor = "emacsclient -c"
-browser = "chromium-browser"
+browser = "google-chrome"
 
 -- Set windows key as modkey
 modkey = "Mod4"
