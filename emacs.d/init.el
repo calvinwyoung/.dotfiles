@@ -12,9 +12,4 @@
 (load-library "defuns")
 (load-library "modes")
 (load-library "keybindings")
-
-;; Load plugins
-(load-library "autopair")
-(load-library "yasnippet")
-(load-library "auto-complete")
-(load-library "redo")
+(load-library "plugins")

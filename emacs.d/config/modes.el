@@ -1,14 +1,14 @@
-;;;;;;;;;;;
+;;;;;;;;;;
 ;; Python
-;;;;;;;;;;;
+;;;;;;;;;;
 (add-to-list 'load-path (concat vendor-dir "python-mode/"))
 (autoload 'python-mode "python.el"
   "Major mode for editing Python files" t)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 
-;;;;;;;;;;;;;
+;;;;;;;;;;;;
 ;; CSS/SCSS
-;;;;;;;;;;;;;
+;;;;;;;;;;;;
 (add-to-list 'load-path (concat vendor-dir "scss-mode/"))
 (autoload 'scss-mode "scss-mode.el"
   "Major mode for editing SCSS files" t)
@@ -25,15 +25,21 @@
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
-;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
 ;; Javascript
-;;;;;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.jstt$" . js-mode))
-(add-to-list 'auto-mode-alist '("\\.jsmk$" . js-mode))
+;;;;;;;;;;;;;;
+(add-to-list 'load-path (concat vendor-dir "js2-mode/"))
+;; Make sure to load the byte-compiled library or this will be balls slow.
+(autoload 'js2-mode "js2-mode.elc"
+  "Major mode for editing Javascript files" t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jstt$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsmk$" . js2-mode))
+(setq js2-enter-indents-newline t)
 
-;;;;;;;;;
+;;;;;;;;
 ;; HTML
-;;;;;;;;;
+;;;;;;;;
 (add-hook 'html-mode-hook
           (lambda ()
             ;; Default indentation is usually 2 spaces, changing to 4.
@@ -46,15 +52,15 @@
 ;; Set html-mode as default for .jqt files
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
 
-;;;;;;;;
+;;;;;;;
 ;; Org
-;;;;;;;;
+;;;;;;;
 ;; Open all *.txt files in ~/Dropbox/notes in org mode
 (add-to-list 'auto-mode-alist '("^.*/Dropbox/notes/.*\\.txt$" . org-mode))
 
-;;;;;;;;
+;;;;;;;
 ;; Lua
-;;;;;;;;
+;;;;;;;
 (add-to-list 'load-path (concat vendor-dir "lua-mode/"))
 (autoload 'lua-mode "lua-mode.el"
   "Major mode for editing Lua files" t)
@@ -69,9 +75,9 @@
             ;; Must manually update tab stops to occur every 4 characters
             (setq tab-stop-list (number-sequence 4 200 4))))
 
-;;;;;;;;;;
+;;;;;;;;
 ;; JAVA
-;;;;;;;;;;
+;;;;;;;;
 (add-hook 'java-mode-hook 'java-mode-hook)
 
 ;; Compile the current Java buffer
