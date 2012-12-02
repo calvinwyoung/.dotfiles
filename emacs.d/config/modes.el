@@ -6,6 +6,12 @@
   "Major mode for editing Python files" t)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 
+;; PEP 8/PEP 257 prefers preceding the triple quotes at the end of a multiline
+;; docstring with a blank line, I prefer using a docstring style that doesn't
+;; insert the extra blank line.
+;; (See http://www.python.org/dev/peps/pep-0008/#documentation-strings)
+(setq python-fill-docstring-style 'pep-257-nn)
+
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
