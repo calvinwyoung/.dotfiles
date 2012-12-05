@@ -22,3 +22,6 @@
 [submodule "emacs.d/vendor/yasnippet"]
 	path = emacs.d/vendor/yasnippet
 	url = git://github.com/capitaomorte/yasnippet.git
+[submodule "emacs.d/vendor/js2-mode"]
+	path = emacs.d/vendor/js2-mode
+	url = git://github.com/mooz/js2-mode.git
