@@ -1,3 +1,7 @@
+;; Map Mac "Command" key to "Meta"
+(if (eq system-type 'darwin)
+    (setq mac-command-modifier 'meta))
+
 ;; Enable auto indenting
 (global-set-key (kbd "RET") 'newline-and-indent)
 

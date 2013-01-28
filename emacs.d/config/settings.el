@@ -4,12 +4,16 @@
 ;; Turn off the splash screen
 (setq inhibit-splash-screen t)
 
-;; Remove the menu bar and toolbar
-(menu-bar-mode 0)
-(tool-bar-mode 0)
+;; If we're using GUI Emacs, then we want the menu bar, but no toolbar. If
+;; we're in terminal Emacs, we don't want either, but we only need to disable
+;; the menu bar because the toolbar is undefined.
+(if window-system
+    (tool-bar-mode 0)
+  (menu-bar-mode 0))
 
 ;; Hide the left fringe, and show a narrow right fringe
-(fringe-mode '(0 . 1))
+(if window-system
+    (fringe-mode '(0 . 1)))
 
 ;; Prevent leftover backup turds
 (setq backup-inhibited t)
@@ -17,17 +21,18 @@
 
 ;; Use wombat color-theme in window mode only. Use the default color theme if in
 ;; terminal mode
-(load-file (concat vendor-dir "color-theme-wombat.el"))
-(defun set-frame-color-theme (frame)
-  "Sets the color theme for the given frame"
-  (select-frame frame)
-  (let ((color-theme-is-global nil))
-    (if (window-system frame)
-        (color-theme-wombat))))
+;; (load-file (concat vendor-dir "color-theme-wombat.el"))
+;; (defun set-frame-color-theme (frame)
+;;   "Sets the color theme for the given frame"
+;;   (select-frame frame)
+;;   (let ((color-theme-is-global nil))
+;;     (if (window-system frame)
+;;         (color-theme-wombat))))
 ;; Set the current frame's color theme, then add a hook to set the frame's color
 ;; theme each time a new frame is created in daemon/client mode
-(set-frame-color-theme (selected-frame))
-(add-hook 'after-make-frame-functions 'set-frame-color-theme)
+;; (set-frame-color-theme (selected-frame))
+;; (add-hook 'after-make-frame-functions 'set-frame-color-theme)
+(load-theme 'wombat t)
 
 ;; Stop asking me to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -55,9 +60,21 @@
 ;; Delete trailing whitespaces on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 
-;; Enable mouse modes
-(xterm-mouse-mode t)
-(mouse-wheel-mode t)
+;; Enable mouse support in terminal mode
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  ;; Enable mouse wheel
+  (global-set-key [mouse-4] '(lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  ;; Mouse clicks should change focus when clicking in split panes
+  (defun track-mouse (e))
+  ;; Enable selection
+  (setq mouse-sel-mode t))
 
 ;; Show line numbers. Seriously, who codes without line numbers?
 (global-linum-mode t)
@@ -89,9 +106,12 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
-;; Integrate emacs and X clipboards
-(setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;; Integrate emacs and X clipboards on GNU/Linux systems. This works by default
+;; in Darwin systems.
+(if (eq system-type 'gnu/linux)
+    (progn
+      (setq x-select-enable-clipboard t)
+      (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)))
 
 ;; Stop emacs from prompting us before killing buffers in daemon mode
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
