@@ -6,10 +6,10 @@ set number
 set mouse=a
 
 " make pretty
-if &term =~ "xterm"
-    set t_Co=256
-    colorscheme ir_black
-endif
+" if &term =~ "xterm"
+"     set t_Co=256
+"     colorscheme ir_black
+" endif
 
 " indenting
 set tabstop=4
@@ -70,18 +70,3 @@ au FileType * setl fo-=cro
 " PLUGINS
 """""""""
 filetype plugin indent on
-
-" set supertab mode
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" toggle taglist
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_Right_Window = 1
-nmap <silent> <F4> :TlistToggle<CR>
-
-" toggle nerdtree
-let g:NERDTreeQuitOnOpen = 1
-nmap <silent> <F3> :NERDTreeToggle<CR>
-
-" toggle bufexplorer
-nmap <silent> <F5> :BufExplorer<CR>
