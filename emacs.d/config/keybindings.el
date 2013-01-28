@@ -34,6 +34,8 @@
 (global-set-key (kbd "M-<down>") 'move-text-down)
 (global-set-key (kbd "M-<left>") 'shift-text-left)
 (global-set-key (kbd "M-<right>") 'shift-text-right)
+(global-set-key (kbd "M-[") (lambda() (interactive) (shift-text-left 4)))
+(global-set-key (kbd "M-]") (lambda() (interactive) (shift-text-right 4)))
 
 ;; Use custom comment function
 (global-set-key "\M-;" 'comment-dwim-line)
