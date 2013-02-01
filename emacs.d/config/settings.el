@@ -4,34 +4,55 @@
 ;; Turn off the splash screen
 (setq inhibit-splash-screen t)
 
-;; If we're using GUI Emacs, then we want the menu bar, but no toolbar. If
-;; we're in terminal Emacs, we don't want either, but we only need to disable
-;; the menu bar because the toolbar is undefined.
-(if window-system
-    (tool-bar-mode 0)
-  (menu-bar-mode 0))
+(defun set-window-system-settings (frame)
+  "Sets the color theme for the given frame"
+  (select-frame frame)
+  (if (window-system frame)
+      ;; GUI emacs settings
+      (progn
+        ;; Set fringe mode (undefined in terminal mode)
+        (fringe-mode '(0 . 1))
+        ;; Never show the toolbar
+        (tool-bar-mode 0)
+        ;; Never show the menubar, unless we're on a Mac, in which case it's
+        ;; useful.
+        (if (not (eq system-type 'darwin))
+            (menu-bar-mode 0)
+          )
+        )
+    (progn
+      (menu-bar-mode 0)
 
-;; Hide the left fringe, and show a narrow right fringe
-(if window-system
-    (fringe-mode '(0 . 1)))
+      ;; Enable mouse support in terminal mode
+      ;; (require 'mouse)
+      (xterm-mouse-mode t)
+      (mouse-wheel-mode t)
+
+      ;; ;; Enable selection
+      ;; (setq mouse-sel-mode t)
+
+      ;; ;; Mouse clicks should change focus when clicking in split panes
+      ;; (defun track-mouse (e))
+
+      ;; ;; Enable mouse wheel
+      ;; (global-set-key [mouse-4] '(lambda () (interactive) (scroll-down 1)))
+      ;; (global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
+      )
+    )
+  )
+
+;; We need to use a more complex system for configuring settings that depend on
+;; the window system since we sometimes use emacs in server/client mode where
+;; clients can be created in either GUI or terminal modes. This implementation
+;; configures those settings each time a new frame is created.
+(set-window-system-settings (selected-frame))
+(add-hook 'after-make-frame-functions 'set-window-system-settings)
 
 ;; Prevent leftover backup turds
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
-;; Use wombat color-theme in window mode only. Use the default color theme if in
-;; terminal mode
-;; (load-file (concat vendor-dir "color-theme-wombat.el"))
-;; (defun set-frame-color-theme (frame)
-;;   "Sets the color theme for the given frame"
-;;   (select-frame frame)
-;;   (let ((color-theme-is-global nil))
-;;     (if (window-system frame)
-;;         (color-theme-wombat))))
-;; Set the current frame's color theme, then add a hook to set the frame's color
-;; theme each time a new frame is created in daemon/client mode
-;; (set-frame-color-theme (selected-frame))
-;; (add-hook 'after-make-frame-functions 'set-frame-color-theme)
+;; Use the default Emacs24 wombat color theme.
 (load-theme 'wombat t)
 
 ;; Stop asking me to type "yes" or "no"
@@ -59,22 +80,6 @@
 
 ;; Delete trailing whitespaces on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
-
-;; Enable mouse support in terminal mode
-(unless window-system
-  (require 'mouse)
-  (xterm-mouse-mode t)
-  ;; Enable mouse wheel
-  (global-set-key [mouse-4] '(lambda ()
-                              (interactive)
-                              (scroll-down 1)))
-  (global-set-key [mouse-5] '(lambda ()
-                              (interactive)
-                              (scroll-up 1)))
-  ;; Mouse clicks should change focus when clicking in split panes
-  (defun track-mouse (e))
-  ;; Enable selection
-  (setq mouse-sel-mode t))
 
 ;; Show line numbers. Seriously, who codes without line numbers?
 (global-linum-mode t)
