@@ -1,16 +1,25 @@
 #!/usr/bin/env python
-"""Setup script to install the dotfiles for the current user."""
+"""Setup script to install the dotfiles for the current user.
+
+For each file/subdirectory in the current directory, this script installs a
+symlink in the user's home directory named ".[filename]". If the filename
+contains a double-underscore (i.e., "__"), the part of the filename following
+the double-underscore will be interpreted as subdirectory. Therefore, for a file
+named "parent__child", this script will install a symlink at "~/.parent/child"
+that points to "parent__child".
+"""
 
 import os
 import shutil
 import subprocess
 
-BLACKLIST = ["setup.py", "README.md"]
+BLACKLIST = ["install.py", "README.md"]
 
 HOME_DIR = os.path.expanduser("~")
 DOTFILES_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def create_symlink(source, link_name):
+
+def create_symlink(link_name, source):
     """Creates a symbolic link named `link_name` pointing to `source`.
 
     This method also prompts the user before overwriting any existing files.
@@ -36,40 +45,34 @@ def create_symlink(source, link_name):
             print "Skipping %s..." % link_name
             return
 
+    # Ensure that the directory to which the symlink will be written exists.
+    elif not os.path.exists(os.path.dirname(link_name)):
+        os.makedirs(os.path.dirname(link_name))
+
+    # Finally, create the actual symlink.
     os.symlink(source, link_name)
     print "Installed file %s -> %s" % (link_name, source)
+
 
 def main():
     # Make sure all submodules are initialized and updated
     subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
 
-    # Install dotfiles in top-level directory, skipping the "config" directory.
+    # Iterate over all dotfiles and create symlinks to them in the home
+    # directory.
     for filename in os.listdir(DOTFILES_DIR):
         if filename.startswith("."):
             continue
-        elif filename in BLACKLIST + ["config"]:
+        elif filename in BLACKLIST:
             continue
 
-        create_symlink(
-            os.path.join(DOTFILES_DIR, filename),
-            os.path.join(HOME_DIR, ".%s" % filename))
-
-    # The "config" directory is special. All files/directories in here should
-    # have a symlink created in the ~/.config directory. If ~/.config doesn't
-    # exist, then create it.
-    config_dir = os.path.join(HOME_DIR, ".config")
-    if not os.path.exists(config_dir):
-        os.mkdir(config_dir, 0700)
-
-    for filename in os.listdir(os.path.join(DOTFILES_DIR, "config")):
-        # Skip hidden files and directories. Note that there's no need to skip
-        # blacklisted files/directories here.
-        if filename.startswith("."):
-            continue
+        filename_parts = filename.split("__")
+        symlink_name = ".%s" % os.path.join(*filename_parts)
 
         create_symlink(
-            os.path.join(os.path.join(DOTFILES_DIR, "config"), filename),
-            os.path.join(config_dir, "%s" % filename))
+            os.path.join(HOME_DIR, symlink_name),
+            os.path.join(DOTFILES_DIR, filename))
+
 
 if __name__ == "__main__":
     main()
