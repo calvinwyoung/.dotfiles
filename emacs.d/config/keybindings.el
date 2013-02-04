@@ -9,8 +9,9 @@
 (global-set-key "\C-x\C-b" 'bs-show)
 (setq bs-default-configuration "files-and-scratch")
 
-;; Make Ctrl+v paste to integrate with clipboard manager
+;; Bind both Ctrl+v and Meta+v to paste
 (global-set-key "\C-v" 'cua-paste)
+(global-set-key "\M-v" 'cua-paste)
 
 ;; Make Ctrl+W kill previous word with custom function
 (global-set-key "\C-w" 'backward-kill-word)
@@ -32,6 +33,9 @@
 (global-set-key "\C-xl" 'mark-line)
 (global-set-key "\C-cw" 'copy-word)
 (global-set-key "\C-cl" 'copy-line)
+
+;; Duplicate a line and comment it
+(global-set-key "\C-cy" 'duplicate-line-and-comment)
 
 ;; Make it easier to move lines and regions
 (global-set-key (kbd "M-<up>") 'move-text-up)
@@ -72,3 +76,9 @@
 ;; Move up and down by 5 lines with M-n and M-p
 (define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
 (define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
+
+;; Set windmove keybindings
+(global-set-key "\C-\M-h" 'windmove-left)
+(global-set-key "\C-\M-l" 'windmove-right)
+(global-set-key "\C-\M-k" 'windmove-up)
+(global-set-key "\C-\M-j" 'windmove-down)

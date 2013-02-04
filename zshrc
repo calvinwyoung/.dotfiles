@@ -36,7 +36,7 @@ stty -ixon
 # ------------------------
 # virtualenv prompt info
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo "%F{white}["`basename $VIRTUAL_ENV`"]%f "
+    [ $VIRTUAL_ENV ] && echo "%F{white}[$(basename $VIRTUAL_ENV)]%f "
 }
 
 # Git prompt variables

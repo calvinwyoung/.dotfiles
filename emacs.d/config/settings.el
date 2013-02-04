@@ -26,7 +26,7 @@
       ;; Enable mouse support in terminal mode
       ;; (require 'mouse)
       (xterm-mouse-mode t)
-      (mouse-wheel-mode t)
+      ;; (mouse-wheel-mode t)
 
       ;; ;; Enable selection
       ;; (setq mouse-sel-mode t)
@@ -98,6 +98,9 @@
 
 ;; Use ssh in tramp mode by default
 (setq tramp-default-method "ssh")
+
+;; Enable winner-mode for managing window configurations
+(winner-mode t)
 
 ;; Turn on visual line mode for text mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)

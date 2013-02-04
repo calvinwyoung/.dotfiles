@@ -88,7 +88,21 @@ the end of the line, then comment current line."
                                    (line-end-position))
     (comment-dwim arg)))
 
-;; Emulate vim's "%" command to match parentheses
+;; Duplicate a line, and comment the original.
+;; Based on: http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
+(defun duplicate-line-and-comment ()
+  "Duplicates the current line, and comments the original."
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (let ((str (buffer-substring (region-beginning) (region-end))))
+    (comment-region (region-beginning) (region-end))
+    (insert-string
+     (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (forward-line -1)))
+
+;; Emulate vim's "%" command to match parentheses.
 ;; Source: http://www.emacswiki.org/emacs/NavigatingParentheses#toc2
 (defun goto-match-paren (arg)
   "Go to the matching  if on (){}[], similar to vi style of % "
