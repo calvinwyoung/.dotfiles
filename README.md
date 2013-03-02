@@ -1,5 +1,6 @@
 # Dotfiles
-To install, simply execute the ``install.py`` script.
+To install, execute ``make osx`` or ``make linux`` based the system in which
+these dotfiles are being installed.
 
 This script adds a symlink from ``~/.[name]`` to each ``[name]`` in the
 ``.dotfiles`` directory.  If ``~/.[name]`` already exists then we prompt the

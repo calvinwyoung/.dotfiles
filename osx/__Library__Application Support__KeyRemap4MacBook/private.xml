@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<root>
+  <!-- Apple Keyboard Definition -->
+  <devicevendordef>
+    <vendorname>APPLE_COMPUTER</vendorname>
+    <vendorid>0x05ac</vendorid>
+  </devicevendordef>
+  <deviceproductdef>
+    <productname>INTERNAL_KEYBOARD_TRACKPAD</productname>
+    <productid>0x0252</productid>
+  </deviceproductdef>
+
+  <!-- Microsoft Keyboard Definition -->
+  <devicevendordef>
+    <vendorname>MICROSOFT</vendorname>
+    <vendorid>0x045e</vendorid>
+  </devicevendordef>
+  <deviceproductdef>
+    <productname>COMFORT_CURVE_KEYBOARD_2000</productname>
+    <productid>0x00dd</productid>
+  </deviceproductdef>
+
+  <!-- Logitech G9 Mouse Definition -->
+  <devicevendordef>
+    <vendorname>LOGITECH</vendorname>
+    <vendorid>0x046d</vendorid>
+  </devicevendordef>
+  <deviceproductdef>
+    <productname>LOGITECH_G9_MOUSE</productname>
+    <productid>0xc041</productid>
+  </deviceproductdef>
+
+  <!-- For Apple Keyboards -->
+  <item>
+    <name>Remap Hyper/Option (Apple Keyboard)</name>
+    <appendix>Map the F18 key to "Hyper" (e.g., Control + Option + Command) and F19 to Option.</appendix>
+    <appendix>This requires OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.</appendix>
+    <identifier>custom.apple_keyboard_remap_hyper_option</identifier>
+
+    <device_only>
+      DeviceVendor::APPLE_COMPUTER,
+      DeviceProduct::INTERNAL_KEYBOARD_TRACKPAD
+    </device_only>
+
+    <autogen>
+      --KeyToKey--
+      KeyCode::F18,
+
+      KeyCode::COMMAND_L,
+      ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::F19,
+
+      KeyCode::OPTION_L
+    </autogen>
+  </item>
+
+
+  <!-- For PC Keyboards -->
+  <item>
+    <name>Remap Hyper/Option (PC Keyboard)</name>
+    <appendix>Map the F18 key to Option and F19 to "Hyper" (e.g., Control + Option + Command).</appendix>
+    <appendix>This requires OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.</appendix>
+    <identifier>custom.pc_keyboard_remap_hyper_option</identifier>
+
+    <device_only>
+      DeviceVendor::MICROSOFT,
+      DeviceProduct::COMFORT_CURVE_KEYBOARD_2000
+    </device_only>
+
+    <autogen>
+      --KeyToKey--
+      KeyCode::F18,
+
+      KeyCode::OPTION_L
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::F19,
+
+      KeyCode::COMMAND_L,
+      ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+    </autogen>
+  </item>
+
+  <!-- Logitech G9 mouse config -->
+  <item>
+    <name>Logitech G9 Mouse Config</name>
+    <identifier>custom.mouse_button_support</identifier>
+    <appendix>Mouse Back Button to Command + [</appendix>
+    <appendix>ScrollRight to Command + ]</appendix>
+    <appendix>ScrollLeft to Middle Click</appendix>
+
+    <device_only>
+      DeviceVendor::LOGITECH,
+      DeviceProduct::LOGITECH_G9_MOUSE
+    </device_only>
+
+    <!-- Mouse back button to "Back" -->
+    <autogen>
+      __PointingButtonToKey__
+      PointingButton::BUTTON4, ModifierFlag::NONE,
+      KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L
+    </autogen>
+
+    <!-- Mouse scroll wheel right to "Forward" -->
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::RIGHT, ModifierFlag::NONE,
+      KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L
+    </autogen>
+
+    <!-- Mouse scroll wheel left to Middle Click -->
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::LEFT, ModifierFlag::NONE,
+      KeyCode::VK_MOUSEKEY_BUTTON_MIDDLE
+    </autogen>
+  </item>
+
+  <!-- Emulate Linux-style moving/resizing. To be used in combination with
+       Zooom2. This hack comes in two parts:
+
+    1. By default, OS X binds Option + LeftClick to hide all other windows. This
+    can't be changed, so we instead bind Option + LeftClick to emit Option +
+    RightClick, and since Zooom2 doesn't distinguish between LeftClick and
+    RightClick, we get the same behavior.
+
+    2. In order to allow RightClick resize instead of move, we bind Option +
+    RightClick to Option + *Shift* + RightClick.  We can then have Zooom2 pick
+    up on the additional shift key to trigger a resize.
+  -->
+  <item>
+    <name>Option + Click Support</name>
+    <identifier>custom.option_click_support</identifier>
+    <appendix>Option + Left Click to Option + Right Click</appendix>
+    <appendix>Option + Right Click to Option + Shift + Right Click</appendix>
+
+    <!-- Option + Left Click to Option + Right Click -->
+    <autogen>
+      __PointingButtonToPointingButton__
+      PointingButton::LEFT, VK_OPTION,
+      PointingButton::RIGHT, VK_OPTION
+    </autogen>
+
+    <!-- Option + Right Click to Option + Shift + Right Click -->
+    <autogen>
+      __PointingButtonToPointingButton__
+      PointingButton::RIGHT, VK_OPTION,
+      PointingButton::RIGHT, VK_OPTION | VK_SHIFT
+    </autogen>
+  </item>
+
+
+  <!-- Command + Arrows to Page Up/Page Down/Home/End -->
+  <item>
+    <name>Command + Arrows to Page Up/Page Down/Home/End</name>
+    <identifier>custom.command_arrows_to_page_up_page_down_home_end</identifier>
+    <appendix>Command + Up to Page Up</appendix>
+    <appendix>Command + Down to Page Down</appendix>
+    <appendix>Command + Left to Home</appendix>
+    <appendix>Command + Right to End</appendix>
+
+    <autogen>
+      --KeyToKey--
+      KeyCode::CURSOR_UP, ModifierFlag::COMMAND_L,
+      KeyCode::PAGEUP
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::CURSOR_DOWN, ModifierFlag::COMMAND_L,
+      KeyCode::PAGEDOWN
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L,
+      KeyCode::HOME
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L,
+      KeyCode::END
+    </autogen>
+  </item>
+
+  <!-- Simultaneously pressing Left Shift + Right Shift activates Caps Lock -->
+  <item>
+    <name>Simultaneous Key Presses [Shift_L+Shift_R] to Caps Lock</name>
+    <identifier>custom.simultaneouskeypresses_ss_to_capslock</identifier>
+    <autogen>
+      __SimultaneousKeyPresses__
+      KeyCode::SHIFT_L, KeyCode::SHIFT_R,
+      KeyCode::CAPSLOCK
+    </autogen>
+  </item>
+
+  <!-- Pause/Break to Eject -->
+  <item>
+    <name>Pause/Break Key to Eject</name>
+    <identifier>custom.pause_break_to_eject</identifier>
+    <autogen>
+      __KeyToConsumer__
+      KeyCode::PC_PAUSE,
+      ConsumerKeyCode::EJECT
+    </autogen>
+  </item>
+
+  <!-- Fn to Command -->
+  <item>
+      <name>Fn to Command</name>
+      <identifier>custom.fn_to_command</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::FN,
+        KeyCode::COMMAND_L
+      </autogen>
+    </item>
+</root>

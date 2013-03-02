@@ -1,27 +1,27 @@
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
+[submodule "common/oh-my-zsh"]
+	path = common/oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "emacs.d/vendor/scss-mode"]
-	path = emacs.d/vendor/scss-mode
+[submodule "common/emacs.d/vendor/scss-mode"]
+	path = common/emacs.d/vendor/scss-mode
 	url = git://github.com/antonj/scss-mode.git
-[submodule "emacs.d/vendor/markdown-mode"]
-	path = emacs.d/vendor/markdown-mode
+[submodule "common/emacs.d/vendor/markdown-mode"]
+	path = common/emacs.d/vendor/markdown-mode
 	url = git://github.com/defunkt/markdown-mode.git
-[submodule "emacs.d/vendor/autopair"]
-	path = emacs.d/vendor/autopair
+[submodule "common/emacs.d/vendor/autopair"]
+	path = common/emacs.d/vendor/autopair
 	url = git://github.com/capitaomorte/autopair.git
-[submodule "emacs.d/vendor/auto-complete"]
-	path = emacs.d/vendor/auto-complete
-	url = git://github.com/auto-complete/auto-complete.git
-[submodule "emacs.d/vendor/python-mode"]
-	path = emacs.d/vendor/python-mode
+[submodule "common/emacs.d/vendor/python-mode"]
+	path = common/emacs.d/vendor/python-mode
 	url = git://github.com/fgallina/python.el.git
-[submodule "emacs.d/vendor/lua-mode"]
-	path = emacs.d/vendor/lua-mode
+[submodule "common/emacs.d/vendor/lua-mode"]
+	path = common/emacs.d/vendor/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
-[submodule "emacs.d/vendor/yasnippet"]
-	path = emacs.d/vendor/yasnippet
+[submodule "common/emacs.d/vendor/yasnippet"]
+	path = common/emacs.d/vendor/yasnippet
 	url = git://github.com/capitaomorte/yasnippet.git
-[submodule "emacs.d/vendor/js2-mode"]
-	path = emacs.d/vendor/js2-mode
+[submodule "common/emacs.d/vendor/js2-mode"]
+	path = common/emacs.d/vendor/js2-mode
 	url = git://github.com/mooz/js2-mode.git
+[submodule "common/emacs.d/vendor/auto-complete"]
+	path = common/emacs.d/vendor/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git

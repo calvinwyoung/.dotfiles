@@ -9,17 +9,17 @@ named "parent__child", this script will install a symlink at "~/.parent/child"
 that points to "parent__child".
 """
 
+import argparse
 import os
 import shutil
 import subprocess
+import sys
 
-BLACKLIST = ["install.py", "README.md"]
 
 HOME_DIR = os.path.expanduser("~")
-DOTFILES_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def create_symlink(link_name, source):
+def create_symlink(link_name, source, simulate):
     """Creates a symbolic link named `link_name` pointing to `source`.
 
     This method also prompts the user before overwriting any existing files.
@@ -28,16 +28,20 @@ def create_symlink(link_name, source):
         source, str: the path to the symlink source
         link_name, str: the name of the symlink to be created
     """
+    print "Installing file %s -> %s" % (link_name, source)
+    if simulate:
+        return
+
     # If the symlink path already exists, then notify the user before
     # overwriting anything.
-    if os.path.exists(link_name):
+    if os.path.lexists(link_name):
         # If an identical symlink already exists, then we're free to skip it.
         if os.path.islink(link_name) and os.readlink(link_name) == source:
             return
 
         response = raw_input("Overwrite file %s? [Y/n] " % link_name)
         if not response or response.lower().strip() == "y":
-            if os.path.isfile(link_name):
+            if os.path.isfile(link_name) or os.path.islink(link_name):
                 os.remove(link_name)
             else:
                 shutil.rmtree(link_name)
@@ -51,28 +55,41 @@ def create_symlink(link_name, source):
 
     # Finally, create the actual symlink.
     os.symlink(source, link_name)
-    print "Installed file %s -> %s" % (link_name, source)
+    print "  Done."
 
+def main(directories, simulate=False):
+    """Creates dotfile symlinks for files in the given directories.
 
-def main():
-    # Make sure all submodules are initialized and updated
-    subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
+    Args:
+        directories, list[str]: list of directories containing dotfiles
+        simulate, bool: if True, the only performs a simulation of creating a
+            symlink without modifying the filesystem
+    """
+    for directory in directories:
+        dotfile_dir = os.path.abspath(directory)
+        for filename in os.listdir(dotfile_dir):
+            # Skip hidden files.
+            if filename.startswith("."):
+                continue
 
-    # Iterate over all dotfiles and create symlinks to them in the home
-    # directory.
-    for filename in os.listdir(DOTFILES_DIR):
-        if filename.startswith("."):
-            continue
-        elif filename in BLACKLIST:
-            continue
+            filename_parts = filename.split("__")
+            filename_parts[0] = ".%s" % filename_parts[0]
+            symlink_name = os.path.join(*filename_parts)
 
-        filename_parts = filename.split("__")
-        symlink_name = ".%s" % os.path.join(*filename_parts)
-
-        create_symlink(
-            os.path.join(HOME_DIR, symlink_name),
-            os.path.join(DOTFILES_DIR, filename))
+            create_symlink(
+                os.path.join(HOME_DIR, symlink_name),
+                os.path.join(dotfile_dir, filename),
+                simulate)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Create dotfile symlinks.")
+
+    parser.add_argument("directories", nargs="+",
+                        help="directories containing dotfiles")
+    parser.add_argument("-s", "--simulate", action="store_true",
+                        help=("performs a simulation of installing symlinks "
+                              "without modifying the file system"))
+
+    args = parser.parse_args()
+    sys.exit(main(args.directories, args.simulate))
