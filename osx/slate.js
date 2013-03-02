@@ -52,6 +52,7 @@ slate.bindAll({
         "wait": true,
         "path": "~/.scripts"
     }),
+
     "e:cmd;ctrl;alt": slate.op("shell", {
         "command": "/usr/bin/osascript -l AppleScript activate_emacs.scpt",
         "wait": true,

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>check-updates</key>
+	<false/>
+	<key>check-updates-interval</key>
+	<integer>7</integer>
+	<key>key-activated</key>
+	<true/>
+	<key>key-click</key>
+	<true/>
+	<key>key-drag</key>
+	<integer>1835008</integer>
+	<key>key-raise</key>
+	<integer>0</integer>
+	<key>key-resize</key>
+	<integer>1966080</integer>
+	<key>key-show-in-menu-z2</key>
+	<false/>
+	<key>mag-activated</key>
+	<false/>
+	<key>main-win-hidden</key>
+	<integer>1</integer>
+	<key>move-mouse-type</key>
+	<integer>0</integer>
+	<key>on-move-front</key>
+	<integer>1</integer>
+	<key>ptf</key>
+	<false/>
+	<key>ptfa</key>
+	<false/>
+	<key>ptft</key>
+	<integer>250</integer>
+	<key>quadrant_resize</key>
+	<false/>
+	<key>resize-mouse-type</key>
+	<integer>0</integer>
+	<key>sscmd</key>
+	<false/>
+</dict>
+</plist>

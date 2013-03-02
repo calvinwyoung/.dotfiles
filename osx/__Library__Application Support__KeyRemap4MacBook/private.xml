@@ -88,7 +88,7 @@
   <!-- Logitech G9 mouse config -->
   <item>
     <name>Logitech G9 Mouse Config</name>
-    <identifier>custom.mouse_button_support</identifier>
+    <identifier>custom.logitech_g9_mouse_config</identifier>
     <appendix>Mouse Back Button to Command + [</appendix>
     <appendix>ScrollRight to Command + ]</appendix>
     <appendix>ScrollLeft to Middle Click</appendix>
@@ -123,14 +123,14 @@
   <!-- Emulate Linux-style moving/resizing. To be used in combination with
        Zooom2. This hack comes in two parts:
 
-    1. By default, OS X binds Option + LeftClick to hide all other windows. This
-    can't be changed, so we instead bind Option + LeftClick to emit Option +
-    RightClick, and since Zooom2 doesn't distinguish between LeftClick and
-    RightClick, we get the same behavior.
+1. By default, OS X binds Option + LeftClick to hide all other windows. This
+can't be changed, so we instead bind Option + LeftClick to emit Option +
+RightClick, and since Zooom2 doesn't distinguish between LeftClick and
+RightClick, we get the same behavior.
 
-    2. In order to allow RightClick resize instead of move, we bind Option +
-    RightClick to Option + *Shift* + RightClick.  We can then have Zooom2 pick
-    up on the additional shift key to trigger a resize.
+2. In order to allow RightClick resize instead of move, we bind Option +
+RightClick to Option + *Shift* + RightClick.  We can then have Zooom2 pick
+up on the additional shift key to trigger a resize.
   -->
   <item>
     <name>Option + Click Support</name>
@@ -209,12 +209,12 @@
 
   <!-- Fn to Command -->
   <item>
-      <name>Fn to Command</name>
-      <identifier>custom.fn_to_command</identifier>
-      <autogen>
-        __KeyToKey__
-        KeyCode::FN,
-        KeyCode::COMMAND_L
-      </autogen>
-    </item>
+    <name>Fn to Command</name>
+    <identifier>custom.fn_to_command</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::FN,
+      KeyCode::COMMAND_L
+    </autogen>
+  </item>
 </root>

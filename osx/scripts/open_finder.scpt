@@ -1,4 +1,4 @@
 tell application "Finder"
+	make new Finder window to home
 	activate
-	make new Finder window
 end tell

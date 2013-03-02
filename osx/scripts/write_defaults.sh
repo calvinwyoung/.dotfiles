@@ -6,6 +6,9 @@ sudo defaults write com.apple.loginwindow LoginHook $HOME/.scripts/login_hook.sh
 # Make Mission Control animations faster
 defaults write com.apple.dock expose-animation-duration -float 0.15; killall Dock
 
+# Don't show hidden files by default
+defaults write com.apple.Finder AppleShowAllFiles NO
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
