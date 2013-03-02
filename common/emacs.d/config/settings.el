@@ -111,8 +111,10 @@
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
 ;; Set the default browser to chrome
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+(if (eq system-type 'gnu/linux)
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "google-chrome")
+  (setq browse-url-browser-function 'browse-url-default-macosx-browser))
 
 ;; Integrate emacs and X clipboards on GNU/Linux systems. This works by default
 ;; in Darwin systems.

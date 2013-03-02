@@ -1,7 +1,3 @@
-;; Map Mac "Command" key to "Meta"
-(if (eq system-type 'darwin)
-    (setq mac-command-modifier 'meta))
-
 ;; Enable auto indenting
 (global-set-key (kbd "RET") 'newline-and-indent)
 
@@ -32,10 +28,10 @@
 ;; Map some copy chords
 (global-set-key "\C-xl" 'mark-line)
 (global-set-key "\C-cw" 'copy-word)
-(global-set-key "\C-cl" 'copy-line)
 
-;; Duplicate a line and comment it
-(global-set-key "\C-cy" 'duplicate-line-and-comment)
+;; Duplicate line and optionally comment it
+(global-set-key "\C-cl" 'duplicate-line)
+(global-set-key "\C-c;" 'duplicate-line-and-comment)
 
 ;; Make it easier to move lines and regions
 (global-set-key (kbd "M-<up>") 'move-text-up)
@@ -49,7 +45,7 @@
 (global-set-key "\M-;" 'comment-dwim-line)
 
 ;; Enable custom rename file and buffer command
-(global-set-key "\C-cr" 'rename-file-and-buffer)
+(global-set-key "\C-xr" 'rename-file-and-buffer)
 
 ;; Make it easier to sudo edit files
 (global-set-key "\C-x\C-\M-f" 'sudo-find-file)

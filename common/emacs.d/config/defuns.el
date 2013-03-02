@@ -45,14 +45,6 @@ See also `newline-and-indent'."
                (point))))
     (copy-region-as-kill beg end)))
 
-;; Copy line without selection
-(defun copy-line (&optional arg)
-  "Save current line into Kill-Ring without mark the line "
-   (interactive "P")
-   (let ((beg (line-beginning-position))
-         (end (line-end-position arg)))
-     (copy-region-as-kill beg end)))
-
 ;; Vim-like custom backward-kill-word function
 (defun my-backward-kill-word (&optional arg)
   "Replacement for the backward-kill-word command
@@ -88,19 +80,25 @@ the end of the line, then comment current line."
                                    (line-end-position))
     (comment-dwim arg)))
 
-;; Duplicate a line, and comment the original.
+;; Duplicate a line, optionally commenting the original.
 ;; Based on: http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
-(defun duplicate-line-and-comment ()
+(defun duplicate-line (&optional comment)
   "Duplicates the current line, and comments the original."
   (interactive)
   (beginning-of-line)
   (push-mark)
   (end-of-line)
   (let ((str (buffer-substring (region-beginning) (region-end))))
-    (comment-region (region-beginning) (region-end))
+    (if comment
+        (comment-region (region-beginning) (region-end)))
     (insert-string
      (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
     (forward-line -1)))
+
+(defun duplicate-line-and-comment ()
+  "Duplicates the current line, and comments the original."
+  (interactive)
+  (duplicate-line t))
 
 ;; Emulate vim's "%" command to match parentheses.
 ;; Source: http://www.emacswiki.org/emacs/NavigatingParentheses#toc2
