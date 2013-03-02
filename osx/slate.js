@@ -50,22 +50,22 @@ slate.bindAll({
     "`:cmd;ctrl;alt": slate.op("shell", {
         "command": "/usr/bin/osascript -l AppleScript open_finder.scpt",
         "wait": true,
-        "path": "~/scripts"
+        "path": "~/.scripts"
     }),
     "e:cmd;ctrl;alt": slate.op("shell", {
         "command": "/usr/bin/osascript -l AppleScript activate_emacs.scpt",
         "wait": true,
-        "path": "~/scripts"
+        "path": "~/.scripts"
     }),
     "w:cmd;ctrl;alt": slate.op("shell", {
         "command": "/usr/bin/osascript -l AppleScript open_google_chrome.scpt",
         "wait": true,
-        "path": "~/scripts"
+        "path": "~/.scripts"
     }),
     "return:cmd;ctrl;alt": slate.op("shell", {
         "command": "/usr/bin/osascript -l AppleScript open_iterm.scpt",
         "wait": true,
-        "path": "~/scripts"
+        "path": "~/.scripts"
     })
 });
 
