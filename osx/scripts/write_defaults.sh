@@ -1,13 +1,27 @@
 #!/bin/bash
 
-# Set login hook
+# Set login hook.
 sudo defaults write com.apple.loginwindow LoginHook $HOME/.scripts/login_hook.sh
 
-# Make Mission Control animations faster
-defaults write com.apple.dock expose-animation-duration -float 0.15; killall Dock
+# Make Mission Control animations faster.
+defaults write com.apple.dock expose-animation-duration -float 0.05; killall Dock
 
-# Don't show hidden files by default
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Don't show hidden files by default.
 defaults write com.apple.Finder AppleShowAllFiles NO
+
+# Show the ~/Library folder.
+chflags nohidden ~/Library
+
+# Set keyboard shortcuts:
+#   - Disable "Hide Finder" keyboard shortcut so we can bind Command + H to toggle
+#     showing hidden files.
+#   - Set Command + L to open the "Go to Folder" dialog.
+defaults write com.apple.finder NSUserKeyEquivalents \
+    '{"Hide Finder"="\0"; "Show System Files"="@h"; "Go to Folder..."="@l";}'
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #

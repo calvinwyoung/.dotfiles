@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 HISTIGNORE=ls:ll:la:pwd:exit:df:clear
 
 # Set PATH to include user's bin dir if it exists
-if [ -d "$HOME/.bin" ] ; then
-    PATH="$HOME/.bin:$PATH"
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
 fi
 
 # Disable Ctrl+S to suspend terminal
@@ -49,6 +49,8 @@ $ '
 # Aliases
 # ------------------------
 alias ls=$([ `uname` == "Darwin" ] && echo "ls -G" || echo "ls --color=auto")
-alias la='ls -alh'
-alias grep='grep --color=auto'
-alias e='emacsclient -t'
+alias la="ls -alh"
+alias grep="grep --color=auto"
+alias e="emacsclient -t"
+alias pyclean="find . -name '*.pyc' -delete"
+alias vssh="cd ~/twicevm; vagrant ssh"
