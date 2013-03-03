@@ -44,31 +44,17 @@ slate.bindAll({
     // "tab:alt": slate.op("switch"),
 
     // Show window hints.
-    "space:cmd;ctrl;alt": slate.op("hint"),
-
-    // Shell commands
-    "`:cmd;ctrl;alt": slate.op("shell", {
-        "command": "/usr/bin/osascript -l AppleScript open_finder.scpt",
-        "wait": true,
-        "path": "~/.scripts"
-    }),
-
-    "e:cmd;ctrl;alt": slate.op("shell", {
-        "command": "/usr/bin/osascript -l AppleScript activate_emacs.scpt",
-        "wait": true,
-        "path": "~/.scripts"
-    }),
-    "w:cmd;ctrl;alt": slate.op("shell", {
-        "command": "/usr/bin/osascript -l AppleScript open_google_chrome.scpt",
-        "wait": true,
-        "path": "~/.scripts"
-    }),
-    "return:cmd;ctrl;alt": slate.op("shell", {
-        "command": "/usr/bin/osascript -l AppleScript open_iterm.scpt",
-        "wait": true,
-        "path": "~/.scripts"
-    })
+    "space:cmd;ctrl;alt": slate.op("hint")
 });
+
+/* ----------------------- */
+/* APPLESCRIPT KEYBINDINGS */
+/* ----------------------- */
+
+bind_applescript(hyper_key("`"), "open_finder.scpt");
+bind_applescript(hyper_key("e"), "open_emacs.scpt");
+bind_applescript(hyper_key("w"), "open_google_chrome.scpt");
+bind_applescript(hyper_key("return"), "open_iterm.scpt");
 
 /* ------------------ */
 /* LAYOUT KEYBINDINGS */
@@ -94,8 +80,14 @@ slate.bind("u:cmd;ctrl;alt", function(win) {
 
     var direction = null;
 
-    if (isApprox(winCoords.x1, screenCoords.x1) &&
-        isApprox(winCoords.y1, screenCoords.y1)) {
+    // If the window isn't the right size, then start it at the left of the
+    // screen.
+    if (!(isApprox(win.rect().width, win.screen().visibleRect().width * 2 / 3) &&
+          isApprox(win.rect().height, win.screen().visibleRect().height))) {
+        direction = "left";
+    }
+    else if (isApprox(winCoords.x1, screenCoords.x1) &&
+             isApprox(winCoords.y1, screenCoords.y1)) {
         direction = "right";
     } else {
         direction = "left";
@@ -116,14 +108,20 @@ slate.bind("i:cmd;ctrl;alt", function(win) {
     var winCoords = rectToCoords(win.rect());
 
     var targetX = null;
+    // If the window isn't the right size, then start it at the left of the
+    // screen.
+    if (!(isApprox(win.rect().width, win.screen().visibleRect().width / 3) &&
+          isApprox(win.rect().height, win.screen().visibleRect().height))) {
+        targetX = "screenOriginX";
+    }
     // If the window's at the far right of the screen, then move it to the left.
-    if (isApprox(winCoords.x2, screenCoords.x2) &&
-        isApprox(winCoords.y1, screenCoords.y1)) {
+    else if (isApprox(winCoords.x2, screenCoords.x2) &&
+             isApprox(winCoords.y1, screenCoords.y1)) {
         targetX = "screenOriginX";
     }
     // If the window's at the far left of the screen, move it to the center.
     else if (isApprox(winCoords.x1, screenCoords.x1) &&
-               isApprox(winCoords.y1, screenCoords.y1)) {
+             isApprox(winCoords.y1, screenCoords.y1)) {
         targetX = "screenOriginX + screenSizeX/3";
     }
     // Otherwise, move it to the far right.
@@ -149,9 +147,15 @@ slate.bind("o:cmd;ctrl;alt", function(win) {
 
     var direction = null;
 
+    // If the window isn't the right size, then start it at the top-right of the
+    // screen.
+    if (!(isApprox(win.rect().width, win.screen().visibleRect().width / 3) &&
+          isApprox(win.rect().height, win.screen().visibleRect().height / 2))) {
+        direction = "top-right";
+    }
     // If it's at the top-right corner, move it to the bottom-right.
-    if (isApprox(winCoords.x2, screenCoords.x2) &&
-        isApprox(winCoords.y1, screenCoords.y1)) {
+    else if (isApprox(winCoords.x2, screenCoords.x2) &&
+             isApprox(winCoords.y1, screenCoords.y1)) {
         direction = "bottom-right";
     }
     // If it's at the bottom-right corner, move it to the bottom-left.
@@ -186,8 +190,12 @@ slate.bind("p:cmd;ctrl;alt", function(win) {
 
     var direction = null;
 
-    if (isApprox(winCoords.x1, screenCoords.x1) &&
-        isApprox(winCoords.y1, screenCoords.y1)) {
+    if (!(isApprox(win.rect().width, win.screen().visibleRect().width / 2) &&
+          isApprox(win.rect().height, win.screen().visibleRect().height))) {
+        direction = "left";
+    }
+    else if (isApprox(winCoords.x1, screenCoords.x1) &&
+             isApprox(winCoords.y1, screenCoords.y1)) {
         direction = "right";
     } else {
         direction = "left";
@@ -204,6 +212,26 @@ slate.bind("p:cmd;ctrl;alt", function(win) {
 /* ---------------- */
 /* HELPER FUNCTIONS */
 /* ---------------- */
+
+/**
+ * Returns a keyboard shortcut string representing the given key pressed with
+ * the HYPER key.
+ */
+function hyper_key(key) {
+    return key + ":cmd;ctrl;alt";
+}
+
+/**
+ * Binds a keyboard shortcut to execute the specified applescript name. All
+ * scripts are assumed to be relative to the ~/.scripts directory.
+ */
+function bind_applescript(shortcut, script_name) {
+    slate.bind(shortcut, slate.op("shell", {
+        "command": "/usr/bin/osascript " + script_name,
+        "wait": true,
+        "path": "~/.scripts"
+    }));
+}
 
 /**
  * Converts a rect object to a coordinate objects.
