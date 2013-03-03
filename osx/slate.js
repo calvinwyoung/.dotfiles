@@ -184,7 +184,7 @@ slate.bind("o:cmd;ctrl;alt", function(win) {
 
 // Resize the window so it's 1/2 the width of the screen and throw it to the
 // left or right.
-slate.bind("p:cmd;ctrl;alt", function(win) {
+slate.bind("u:shift;cmd;ctrl;alt", function(win) {
     var screenCoords = rectToCoords(win.screen().visibleRect());
     var winCoords = rectToCoords(win.rect());
 
@@ -205,6 +205,50 @@ slate.bind("p:cmd;ctrl;alt", function(win) {
         slate.op("push", {
             "direction": direction,
             "style": "bar-resize:screenSizeX/2"
+        })
+    );
+});
+
+
+// Resize the window so it's 1/2 the width of the screen and 1/2 the height of
+// the screen, and move it between the four corners.
+slate.bind("o:shift;cmd;ctrl;alt", function(win) {
+    var screenCoords = rectToCoords(win.screen().visibleRect());
+    var winCoords = rectToCoords(win.rect());
+
+    var direction = null;
+
+    // If the window isn't the right size, then start it at the top-right of the
+    // screen.
+    if (!(isApprox(win.rect().width, win.screen().visibleRect().width / 2) &&
+          isApprox(win.rect().height, win.screen().visibleRect().height / 2))) {
+        direction = "top-right";
+    }
+    // If it's at the top-right corner, move it to the bottom-right.
+    else if (isApprox(winCoords.x2, screenCoords.x2) &&
+             isApprox(winCoords.y1, screenCoords.y1)) {
+        direction = "bottom-right";
+    }
+    // If it's at the bottom-right corner, move it to the bottom-left.
+    else if (isApprox(winCoords.x2, screenCoords.x2) &&
+             isApprox(winCoords.y2, screenCoords.y2)) {
+        direction = "bottom-left";
+    }
+    // If it's at the bottom-left corner, move it to the top-left.
+    else if (isApprox(winCoords.x1, screenCoords.x1) &&
+             isApprox(winCoords.y2, screenCoords.y2)) {
+        direction = "top-left";
+    }
+    // Otherwise, move the window to the top-right by default.
+    else {
+        direction = "top-right";
+    }
+
+    win.doOperation(
+        slate.op("corner", {
+            "direction": direction,
+            "width": "screenSizeX/2",
+            "height": "screenSizeY/2"
         })
     );
 });
@@ -267,15 +311,12 @@ function rectToCoords(rectObj) {
 }
 
 /**
- * Return true if the two value are within a certain percent of each other.
+ * Return true if the two value are within a certain range of each other.
+ *
+ * The default tolerance is set to 50 units. Here, a unit corresponds to a
+ * pixel.
  */
 function isApprox(value1, value2, tolerance) {
-    tolerance = tolerance || 0.03;
-    if (Math.max(value1, value2) === 0) {
-        return true;
-    } else if ((1 - Math.min(value1, value2) / Math.max(value1, value2)) < tolerance) {
-        return true;
-    } else {
-        return false;
-    }
+    tolerance = tolerance || 50;
+    return Math.max(value1, value2) - Math.min(value1, value2) < tolerance;
 };
