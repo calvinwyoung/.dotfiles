@@ -10,3 +10,6 @@ linux: common
 osx: common
 	python create_symlinks.py osx
 	sh ~/.scripts/write_defaults.sh
+
+install_linux_packages:
+	sudo xargs -a linux_packages.txt apt-get install
