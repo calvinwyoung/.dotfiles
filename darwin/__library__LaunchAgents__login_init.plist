@@ -5,7 +5,7 @@
     <key>RunAtLoad</key>
     <true />
     <key>Program</key>
-    <string>~/.scripts/login_init.sh</string>
+    <string>/Users/calvin/.scripts/login_init.sh</string>
 
     <!-- Prevent launchd from killing all child processes on completion -->
     <key>AbandonProcessGroup</key>

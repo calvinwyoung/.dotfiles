@@ -5,8 +5,6 @@
 # more than 5%. This script requires the ``cpulimit`` command, which can be
 # found here: https://github.com/opsengine/cpulimit
 
-echo "RUNNING!" >> /Users/calvin/foo
-
 while true; do
     clipmenu_pid=$(ps -A | grep -m1 ClipMenu | awk '{print $1}')
 
