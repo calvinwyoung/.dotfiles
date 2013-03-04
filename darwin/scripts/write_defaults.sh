@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Set login hook.
-sudo defaults write com.apple.loginwindow LoginHook $HOME/.scripts/login_hook.sh
-
 # Make Mission Control animations faster.
 defaults write com.apple.dock expose-animation-duration -float 0.05; killall Dock
 

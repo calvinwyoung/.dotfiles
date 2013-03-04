@@ -1,3 +1,4 @@
 tell application "Google Chrome"
-	make new window
+     make new window
+     activate
 end tell

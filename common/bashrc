@@ -16,7 +16,7 @@ HISTCONTROL=ignoreboth
 HISTIGNORE=ls:ll:la:pwd:exit:df:clear
 
 # Set PATH to include user's bin dir if it exists
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
 
