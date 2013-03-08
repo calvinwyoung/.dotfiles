@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo -e "Usage: `basename $0` '[text]' [time]"
+else
+    echo "DISPLAY=$DISPLAY zenity --info --text='$1'" | at $2 > /dev/null 2>&1
+fi
+

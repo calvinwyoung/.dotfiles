@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# get/set variables
+destination="/movies"
+dvd_device="/dev/sr0"
+dvd_title=$1
+dvd_size=$(df -B1 $dvd_device | tail -1 | awk '{print $3}')
+
+# Start the dvd-backup
+dvdbackup -M -i $dvd_device -o $destination -n "$dvd_title" &
+
+pid=$!
+trap "
+    [ -e /proc/$pid ] && kill $pid
+    eject $dvd_device
+" EXIT
+
+# check the size of the destination folder every 10 seconds
+# print the percentage to zenity
+while [ -e /proc/$pid ]; do
+    sleep 10
+    size=$(du -bs "$destination/$dvd_title" | awk '{print $1}')
+    echo $(( 100 * size / dvd_size ))
+done | zenity --progress --title="dvdrip" --auto-close --text="Ripping $dvd_title"

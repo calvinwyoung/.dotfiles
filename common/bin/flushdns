@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ `uname` == "Darwin" ]; then
+    sudo killall -HUP mDNSResponder
+else
+    sudo /etc/init.d/dns-clean start
+fi

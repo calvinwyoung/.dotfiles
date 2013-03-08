@@ -1,0 +1,7 @@
+#!/bin/bash
+# Emulate Linux's "rename" command. We need this here because it's not available
+# in OS X by default.
+# Usage: rename 's/\.bak$//' *.bak
+SUBSEXPR=$1
+shift
+for i in $@; do mv $i `echo "$i" | sed $SUBSEXPR`; done

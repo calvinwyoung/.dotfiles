@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+# Recursively delete all *.pyc files in this directory and all subdirectories.
+find . -name '*.pyc' -delete
