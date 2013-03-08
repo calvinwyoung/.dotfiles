@@ -1,8 +1,9 @@
-.PHONY: common
+.PHONY: common linux darwin install_linux_packages
 
 common:
-	git submodule update --init --recursive
 	python create_symlinks.py common
+	git submodule update --init --recursive
+	$(MAKE) -C common/emacs.d/vendor/js2-mode
 
 linux: common
 	python create_symlinks.py linux
