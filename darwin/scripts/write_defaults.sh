@@ -10,15 +10,19 @@ defaults write com.apple.dock expose-animation-duration -float 0.05; killall Doc
 # Don't show hidden files by default.
 defaults write com.apple.Finder AppleShowAllFiles NO
 
-# Show the ~/Library folder.
-chflags nohidden ~/Library
+# Hide standard folders.
+chflags hidden ~/Library
+chflags hidden ~/Documents
+chflags hidden ~/Movies
+chflags hidden ~/Pictures
+chflags hidden ~/Music
+chflags hidden ~/Public
 
 # Set keyboard shortcuts:
-#   - Disable "Hide Finder" keyboard shortcut so we can bind Command + H to toggle
-#     showing hidden files.
-#   - Set Command + L to open the "Go to Folder" dialog.
+#   - Command + Shift + . to toggle showing hidden files.
+#   - Command + L to open the "Go to Folder" dialog.
 defaults write com.apple.finder NSUserKeyEquivalents \
-    '{"Hide Finder"="\0"; "Show System Files"="@h"; "Go to Folder..."="@l";}'
+    '{"Show System Files"="@$."; "Go to Folder..."="@l";}'
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
