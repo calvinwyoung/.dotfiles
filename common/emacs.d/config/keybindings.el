@@ -28,9 +28,10 @@
 ;; Map some copy chords
 (global-set-key "\C-xl" 'mark-line)
 (global-set-key "\C-cw" 'copy-word)
+(global-set-key "\C-cl" 'copy-line)
 
 ;; Duplicate line and optionally comment it
-(global-set-key "\C-cl" 'duplicate-line)
+(global-set-key "\C-cy" 'duplicate-line)
 (global-set-key "\C-c;" 'duplicate-line-and-comment)
 
 ;; Make it easier to move lines and regions

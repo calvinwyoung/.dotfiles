@@ -45,6 +45,14 @@ See also `newline-and-indent'."
                (point))))
     (copy-region-as-kill beg end)))
 
+;; Copy line without selection
+(defun copy-line (&optional arg)
+  "Save current line into Kill-Ring without mark the line "
+   (interactive "P")
+   (let ((beg (line-beginning-position))
+         (end (line-beginning-position (+ 1 (if arg arg 1)))))
+     (copy-region-as-kill beg end)))
+
 ;; Vim-like custom backward-kill-word function
 (defun my-backward-kill-word (&optional arg)
   "Replacement for the backward-kill-word command
