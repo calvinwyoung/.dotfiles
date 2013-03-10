@@ -3,6 +3,9 @@
 # Make Mission Control animations faster.
 defaults write com.apple.dock expose-animation-duration -float 0.05; killall Dock
 
+# Disable "New Window" animations.
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
+
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
