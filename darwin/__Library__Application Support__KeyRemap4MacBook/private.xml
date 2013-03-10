@@ -217,4 +217,88 @@ up on the additional shift key to trigger a resize.
       KeyCode::COMMAND_L
     </autogen>
   </item>
+
+  <!-- Move window to space -->
+  <item>
+   <name>Move window to space</name>
+   <appendix>Moves window to spaces with Shift + Hyper + #.</appendix>
+   <appendix>NOTE: Requires binding F17 to "Move cursor to titlebar w/ Keyboard Maestro.</appendix>
+   <identifier>private.mission_control_hacks</identifier>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_50MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_50MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+  </item>
+
+  <!-- Finder: Use F2 to Rename files, and Return to open them. -->
+  <item>
+    <name>Finder: F2 to Rename + Return to Open</name>
+    <appendix>+ if you press Return while renaming (via F2) it accepts new name</appendix>
+    <appendix>  instead of opening.</appendix>
+    <identifier>custom.app_finder_switch_open_rename</identifier>
+    <only>FINDER</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F2,
+
+      KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+    <autogen>
+      <!-- Also make this work with the Brightness Up key. -->
+      __ConsumerToKey__
+      ConsumerKeyCode::BRIGHTNESS_UP,
+
+      KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::RETURN, ModifierFlag::NONE,
+
+      KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+
+      KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+      KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_R,
+
+      KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+      KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_L,
+
+      KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+      KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_R,
+
+      KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+      KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+  </item>
 </root>
