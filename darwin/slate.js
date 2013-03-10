@@ -34,14 +34,17 @@ slate.bindAll({
     "k:cmd;ctrl;alt": slate.op("focus", {"direction": "up"}),
     "h:cmd;ctrl;alt": slate.op("focus", {"direction": "left"}),
     "l:cmd;ctrl;alt": slate.op("focus", {"direction": "right"}),
-    "m:cmd;ctrl;alt": slate.op("focus", {"direction": "behind"}),
+    "n:cmd;ctrl;alt": slate.op("focus", {"direction": "behind"}),
 
     // Throw windows between screens.
-    ",:cmd;ctrl;alt": slate.op("throw", {"screen": "left"}),
-    ".:cmd;ctrl;alt": slate.op("throw", {"screen": "right"}),
+    ",:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "left"}),
+    ".:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "right"}),
 
     // Undo the last movement operation
     "/:cmd;ctrl;alt": slate.op("undo"),
+
+    // Undo the last movement operation
+    "r:shift;cmd;ctrl;alt": slate.op("relaunch"),
 
     // Show window hints.
     "space:cmd;ctrl;alt": slate.op("hint")
@@ -65,24 +68,18 @@ bindApplescript("w:shift;cmd;ctrl;alt", "open_google_chrome_incognito.scpt");
 /* ------------------ */
 
 // Maximize the window on the current screen.
-slate.bind("y:cmd;ctrl;alt", function(win) {
-    win.doOperation(
-        slate.op("move", {
-            "x": "screenOriginX",
-            "y": "screenOriginY",
-            "width": "screenSizeX",
-            "height": "screenSizeY"
-        })
-    );
-});
+slate.bind("m:cmd;ctrl;alt", slate.op("move", {
+    "x": "screenOriginX",
+    "y": "screenOriginY",
+    "width": "screenSizeX",
+    "height": "screenSizeY"
+}));
 
 // Resize the window so it's 2/3 the width of the screen and throw it to the
 // left or right.
-slate.bind("u:cmd;ctrl;alt", function(win) {
-    var screenRect = win.screen().visibleRect(),
-        screenCoords = rectToCoords(screenRect),
-        width = screenRect.width * 2 / 3,
-        height = screenRect.height,
+slate.bind("u:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+    var width = screenCoords.width * 2 / 3,
+        height = screenCoords.height,
         positions = [
             {
                 "x": screenCoords.x1,
@@ -94,16 +91,18 @@ slate.bind("u:cmd;ctrl;alt", function(win) {
             }
         ];
 
-    moveNext(win, width, height, positions);
-});
+    return {
+        "width": width,
+        "height": height,
+        "positions": positions
+    };
+}));
 
 // Resize the window so it's 1/3 the width of the screen and move it between the
 // 3 columns.
-slate.bind("i:cmd;ctrl;alt", function(win) {
-    var screenRect = win.screen().visibleRect(),
-        screenCoords = rectToCoords(screenRect),
-        width = screenRect.width / 3,
-        height = screenRect.height,
+slate.bind("i:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+    var width = screenCoords.width / 3,
+        height = screenCoords.height,
         positions = [
             {
                 "x": screenCoords.x1,
@@ -119,16 +118,18 @@ slate.bind("i:cmd;ctrl;alt", function(win) {
             }
         ];
 
-    moveNext(win, width, height, positions);
-});
+    return {
+        "width": width,
+        "height": height,
+        "positions": positions
+    };
+}));
 
 // Resize the window so it's 1/3 the width of the screen and 1/2 the height of
 // the screen, and move it between the four corners.
-slate.bind("o:cmd;ctrl;alt", function(win) {
-    var screenRect = win.screen().visibleRect(),
-        screenCoords = rectToCoords(screenRect),
-        width = screenRect.width / 3,
-        height = screenRect.height / 2,
+slate.bind("o:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+    var width = screenCoords.width / 3,
+        height = screenCoords.height / 2,
         positions = [
             {
                 "x": screenCoords.x1,
@@ -148,16 +149,18 @@ slate.bind("o:cmd;ctrl;alt", function(win) {
             }
         ];
 
-    moveNext(win, width, height, positions);
-});
+    return {
+        "width": width,
+        "height": height,
+        "positions": positions
+    };
+}));
 
 // Resize the window so it's 1/2 the width of the screen and throw it to the
 // left or right.
-slate.bind("u:shift;cmd;ctrl;alt", function(win) {
-    var screenRect = win.screen().visibleRect(),
-        screenCoords = rectToCoords(screenRect),
-        width = screenRect.width / 2,
-        height = screenRect.height,
+slate.bind("u:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+    var width = screenCoords.width / 2,
+        height = screenCoords.height,
         positions = [
             {
                 "x": screenCoords.x1,
@@ -169,17 +172,18 @@ slate.bind("u:shift;cmd;ctrl;alt", function(win) {
             }
         ];
 
-    moveNext(win, width, height, positions);
-});
-
+    return {
+        "width": width,
+        "height": height,
+        "positions": positions
+    };
+}));
 
 // Resize the window so it's 1/2 the width of the screen and 1/2 the height of
 // the screen, and move it between the four corners.
-slate.bind("o:shift;cmd;ctrl;alt", function(win) {
-    var screenRect = win.screen().visibleRect(),
-        screenCoords = rectToCoords(screenRect),
-        width = screenRect.width / 2,
-        height = screenRect.height / 2,
+slate.bind("o:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+    var width = screenCoords.width / 2,
+        height = screenCoords.height / 2,
         positions = [
             {
                 "x": screenCoords.x1,
@@ -199,8 +203,12 @@ slate.bind("o:shift;cmd;ctrl;alt", function(win) {
             }
         ];
 
-    moveNext(win, width, height, positions);
-});
+    return {
+        "width": width,
+        "height": height,
+        "positions": positions
+    };
+}));
 
 /* ---------------- */
 /* HELPER FUNCTIONS */
@@ -219,14 +227,52 @@ function bindApplescript(shortcut, script_name) {
 }
 
 /**
- * Move the given window to the next position based on the given target
- * dimensions and positions.
+ * Helper function to define a new placement cycle.
+ *
+ * A "placement cycle" is a sequential list of valid placements for windows. A
+ * "placement" consists of both a target width/height for the window as well as
+ * the coordinates for its target position. Windows can move sequentially
+ * through this list of placements, cycling back to the beginning once they
+ * reach the end of the list.
+ *
+ * This function takes a single function argument that's expected to return a
+ * dictionary describing the valid placements in the cycle.
+ *
+ * @param placementsLoader, func: a function that returns a dictionary describing
+ *     the valid placement in the cycle.
  */
-function moveNext(win, width, height, positions) {
-    var winCoords = rectToCoords(win.rect()),
-        nextPosIx = 0,
-        posCoords,
-        i;
+function cycleBuilder(placementsLoader) {
+    // The logic for moving windows to the next placement in the cycle must run
+    // in a free-form function. However, the "undo" event doesn't support
+    // movements from free-form functions that were bound directly to
+    // keystrokes. As a work-around, we can wrap the free-form function in a
+    // "chain" operation, and bind the keystroke to the "chain" operation
+    // instead.
+    return slate.operation("chain", {
+        "operations": [
+            function(win) {
+                var screenRect = win.screen().visibleRect(),
+                    screenCoords = rectToCoords(screenRect),
+                    winCoords = rectToCoords(win.rect()),
+                    placementDict = placementsLoader(screenCoords),
+                    nextPlacementParams = getNextPlacement(
+                        winCoords,
+                        placementDict.width,
+                        placementDict.height,
+                        placementDict.positions);
+
+                win.doOperation(slate.op("move", nextPlacementParams));
+            }
+        ]
+    });
+}
+
+/**
+ * Determines where a window should be placed next given its current
+ * coordinates.
+ */
+function getNextPlacement(winCoords, width, height, positions) {
+    var nextPosIx = 0, posCoords, i;
 
     for (i = 0; i < positions.length; i++) {
         posCoords = {
@@ -250,14 +296,12 @@ function moveNext(win, width, height, positions) {
         }
     }
 
-    win.doOperation(
-        slate.op("move", {
-            "x": positions[nextPosIx].x,
-            "y": positions[nextPosIx].y,
-            "width": width,
-            "height": height
-        })
-    );
+    return {
+        "x": positions[nextPosIx].x,
+        "y": positions[nextPosIx].y,
+        "width": width,
+        "height": height
+    };
 }
 
 /**
@@ -278,7 +322,9 @@ function moveNext(win, width, height, positions) {
  *         "x1": int,
  *         "y1": int,
  *         "x2": int,
- *         "y2": int
+ *         "y2": int,
+ *         "width": int,
+ *         "height": int,
  *     }
  *
  * where (x1, y1) is the coordinate of the top-left corner and (x2, y2) is the
@@ -289,7 +335,9 @@ function rectToCoords(rectObj) {
         "x1": rectObj.x,
         "y1": rectObj.y,
         "x2": rectObj.x + rectObj.width,
-        "y2": rectObj.y + rectObj.height
+        "y2": rectObj.y + rectObj.height,
+        "width": rectObj.width,
+        "height": rectObj.height
     };
 }
 
