@@ -36,9 +36,15 @@ slate.bindAll({
     "l:cmd;ctrl;alt": slate.op("focus", {"direction": "right"}),
     "n:cmd;ctrl;alt": slate.op("focus", {"direction": "behind"}),
 
+    // Push windows around
+    "j:shift;cmd;ctrl;alt": slate.op("push", {"direction": "down"}),
+    "k:shift;cmd;ctrl;alt": slate.op("push", {"direction": "up"}),
+    "h:shift;cmd;ctrl;alt": slate.op("push", {"direction": "left"}),
+    "l:shift;cmd;ctrl;alt": slate.op("push", {"direction": "right"}),
+
     // Throw windows between screens.
-    ",:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "left"}),
-    ".:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "right"}),
+    "[:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "left"}),
+    "]:shift;cmd;ctrl;alt": slate.op("throw", {"screen": "right"}),
 
     // Undo the last movement operation
     "/:cmd;ctrl;alt": slate.op("undo"),

@@ -47,6 +47,8 @@
                     "moveUp:");
     "~f"        = "moveWordForward:";               /* M-f          Move forward word */
     "~b"        = "moveWordBackward:";              /* M-b          Move backward word */
+    "~$f"       = "moveWordForwardAndModifySelection:";  /* M-S-f   Move forward word and expand selection */
+    "~$b"       = "moveWordBackwardAndModifySelection:"; /* M-S-b   Move backward word and expand selection */
     "~<"        = "moveToBeginningOfDocument:";     /* M-<          Move to beginning of document */
     "~>"        = "moveToEndOfDocument:";           /* M->          Move to end of document */
     "~v"        = "pageUp:";                        /* M-v          Page Up */
@@ -70,7 +72,6 @@
     "~h"        = ( "setMark:",                     /* M-h          Mark paragraph */
                     "moveToEndOfParagraph:",
                     "swapWithMark");
-
 
     /**
      * Additional awesome navigational goodies

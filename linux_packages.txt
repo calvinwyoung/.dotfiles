@@ -5,12 +5,6 @@ xserver-xorg
 build-essential
 hal
 
-# Required for 32-bit acroread
-libxml2:i386
-
-# For various media codecs
-ubuntu-restricted-extras
-
 # Shell utilities
 zsh
 htop
@@ -33,7 +27,6 @@ vim
 suckless-tools
 
 # Appearance / Fonts
-xfonts-terminus
 ttf-dejavu
 ttf-mscorefonts-installer
 elementary-icon-theme
@@ -46,14 +39,21 @@ thunar-volman
 thunar-archive-plugin
 
 awesome
-acroread
 clipit
 keepassx
-skype
 leafpad
-vlc
 mirage
 xdiskusage
 
-# for making bootable usb sticks
-unetbootin
+# For making bootable usb sticks
+# unetbootin
+
+# For 32-bit acroread
+# libxml2:i386
+# acroread
+
+# For VLC + media codecs
+# ubuntu-restricted-extras
+# vlc
+
+# skype

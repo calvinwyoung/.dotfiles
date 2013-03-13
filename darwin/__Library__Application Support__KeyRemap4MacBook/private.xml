@@ -163,6 +163,11 @@ up on the additional shift key to trigger a resize.
     <appendix>Command + Left to Home</appendix>
     <appendix>Command + Right to End</appendix>
 
+    <!-- Don't enable these shortcuts in Finder/iTerm, which already have
+         bindings for Command + Arrow keys. -->
+    <not>FINDER</not>
+    <not>TERMINAL</not>
+
     <autogen>
       --KeyToKey--
       KeyCode::CURSOR_UP, ModifierFlag::COMMAND_L,
@@ -185,72 +190,12 @@ up on the additional shift key to trigger a resize.
     </autogen>
   </item>
 
-  <!-- Simultaneously pressing Left Shift + Right Shift activates Caps Lock -->
-  <item>
-    <name>Simultaneous Key Presses [Shift_L+Shift_R] to Caps Lock</name>
-    <identifier>custom.simultaneouskeypresses_ss_to_capslock</identifier>
-    <autogen>
-      __SimultaneousKeyPresses__
-      KeyCode::SHIFT_L, KeyCode::SHIFT_R,
-      KeyCode::CAPSLOCK
-    </autogen>
-  </item>
-
-  <!-- Pause/Break to Eject -->
-  <item>
-    <name>Pause/Break Key to Eject</name>
-    <identifier>custom.pause_break_to_eject</identifier>
-    <autogen>
-      __KeyToConsumer__
-      KeyCode::PC_PAUSE,
-      ConsumerKeyCode::EJECT
-    </autogen>
-  </item>
-
-  <!-- Fn to Command -->
-  <item>
-    <name>Fn to Command</name>
-    <identifier>custom.fn_to_command</identifier>
-    <autogen>
-      __KeyToKey__
-      KeyCode::FN,
-      KeyCode::COMMAND_L
-    </autogen>
-  </item>
-
-  <!-- Move window to space -->
-  <item>
-   <name>Move window to space</name>
-   <appendix>Moves window to spaces with Shift + Hyper + #.</appendix>
-   <appendix>NOTE: Requires binding F17 to "Move cursor to titlebar w/ Keyboard Maestro.</appendix>
-   <identifier>private.mission_control_hacks</identifier>
-   <autogen>
-     __KeyToKey__
-     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
-
-     KeyCode::F17,
-     KeyCode::VK_WAIT_50MS,
-     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
-     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
-     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
-   </autogen>
-   <autogen>
-     __KeyToKey__
-     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
-
-     KeyCode::F17,
-     KeyCode::VK_WAIT_50MS,
-     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
-     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
-     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
-   </autogen>
-  </item>
-
   <!-- Finder: Use F2 to Rename files, and Return to open them. -->
   <item>
-    <name>Finder: F2 to Rename + Return to Open</name>
-    <appendix>+ if you press Return while renaming (via F2) it accepts new name</appendix>
-    <appendix>  instead of opening.</appendix>
+    <name>Finder: F2 to Rename, Return to Open</name>
+    <appendix>Binds F2 to "Rename" command</appendix>
+    <appendix>Binds Return to "Open" command</appendix>
+    <appendix>+ pressing Return while renaming (via F2) saves the new name instead of opening</appendix>
     <identifier>custom.app_finder_switch_open_rename</identifier>
     <only>FINDER</only>
     <autogen>
@@ -299,6 +244,119 @@ up on the additional shift key to trigger a resize.
 
       KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
       KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+    </autogen>
+  </item>
+
+  <!-- Move window to space -->
+  <item>
+   <name>Move window to space</name>
+   <appendix>Moves window to spaces with Shift + Hyper + #.</appendix>
+   <appendix>NOTE: Requires binding F17 to "Move cursor to titlebar w/ Keyboard Maestro.</appendix>
+   <identifier>private.mission_control_hacks</identifier>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_100MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_100MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_2, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_3, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_100MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_3, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+   <autogen>
+     __KeyToKey__
+     KeyCode::KEY_4, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+
+     KeyCode::F17,
+     KeyCode::VK_WAIT_100MS,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+     KeyCode::KEY_4, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+     KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+   </autogen>
+  </item>
+
+  <!--
+      Shift + Hyper + Comma/Period to Left/Right Brackets
+
+      By default the Shift + Hyper + Comma/Period keyboard shortcuts activate
+      sysdiagnose, but we want to use them to move windows between screens (a la
+      AwesomeWM, DWM, etc.) Slate can't seem to bind to these shortcuts on its
+      own, but KeyRemap4MacBook can. As a workaround, we have Slate bind to the
+      Shift + Hyper + Left/Right Bracket shortcuts, and we use KeyRemap4MacBook
+      to map from Comma/Period to the Left/Right Bracket.
+  -->
+  <item>
+    <name>Shift + Hyper + Comma/Period to Left/Right Brackets</name>
+    <appendix>Workaround for binding sysdiagnose shortcuts to move window between screens.</appendix>
+    <identifier>custom.override_sysdiagnose_shortcuts</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::COMMA,
+      ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+
+      KeyCode::BRACKET_LEFT,
+      ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::DOT,
+      ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+
+      KeyCode::BRACKET_RIGHT,
+      ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+    </autogen>
+  </item>
+
+  <!-- Simultaneously pressing Left Shift + Right Shift activates Caps Lock -->
+  <item>
+    <name>Simultaneous Key Presses [Shift_L+Shift_R] to Caps Lock</name>
+    <identifier>custom.simultaneouskeypresses_ss_to_capslock</identifier>
+    <autogen>
+      __SimultaneousKeyPresses__
+      KeyCode::SHIFT_L, KeyCode::SHIFT_R,
+      KeyCode::CAPSLOCK
+    </autogen>
+  </item>
+
+  <!-- Pause/Break to Eject -->
+  <item>
+    <name>Pause/Break Key to Eject</name>
+    <identifier>custom.pause_break_to_eject</identifier>
+    <autogen>
+      __KeyToConsumer__
+      KeyCode::PC_PAUSE,
+      ConsumerKeyCode::EJECT
+    </autogen>
+  </item>
+
+  <!-- Fn to Command -->
+  <item>
+    <name>Fn to Command</name>
+    <identifier>custom.fn_to_command</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::FN,
+      KeyCode::COMMAND_L
     </autogen>
   </item>
 </root>
