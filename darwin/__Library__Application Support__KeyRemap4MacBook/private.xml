@@ -42,13 +42,26 @@
       DeviceProduct::INTERNAL_KEYBOARD_TRACKPAD
     </device_only>
 
-    <autogen>
-      --KeyToKey--
-      KeyCode::F18,
+    <block>
+      <not>VIRTUALMACHINE</not>
+      <autogen>
+        --KeyToKey--
+        KeyCode::F18,
 
-      KeyCode::COMMAND_L,
-      ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
-    </autogen>
+        KeyCode::COMMAND_L,
+        ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+      </autogen>
+    </block>
+    <block>
+      <!-- For VMs, just send the Command key -->
+      <only>VIRTUALMACHINE</only>
+      <autogen>
+        --KeyToKey--
+        KeyCode::F18,
+
+        KeyCode::COMMAND_L
+      </autogen>
+    </block>
     <autogen>
       --KeyToKey--
       KeyCode::F19,
@@ -76,13 +89,27 @@
 
       KeyCode::OPTION_L
     </autogen>
-    <autogen>
-      --KeyToKey--
-      KeyCode::F19,
 
-      KeyCode::COMMAND_L,
-      ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
-    </autogen>
+    <block>
+      <not>VIRTUALMACHINE</not>
+      <autogen>
+        --KeyToKey--
+        KeyCode::F19,
+
+        KeyCode::COMMAND_L,
+        ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+      </autogen>
+    </block>
+    <block>
+      <!-- For VMs, just send the Command key -->
+      <only>VIRTUALMACHINE</only>
+      <autogen>
+        --KeyToKey--
+        KeyCode::F19,
+
+        KeyCode::COMMAND_L
+      </autogen>
+    </block>
   </item>
 
   <!-- Logitech G9 mouse config -->
