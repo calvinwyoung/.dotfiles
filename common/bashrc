@@ -15,6 +15,9 @@ HISTCONTROL=ignoreboth
 # Ignore these commands in history file
 HISTIGNORE=ls:ll:la:pwd:exit:df:clear
 
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+
 # Set PATH to include user's bin dir if it exists
 if [ -d "$HOME/.bin" ]; then
     PATH="$HOME/.bin:$PATH"

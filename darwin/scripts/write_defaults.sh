@@ -22,14 +22,17 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
 
-# Automatically hide and show the Dock
+# Enable autohide on the Dock
 defaults write com.apple.dock autohide -bool true
 
-# Remove the auto-hiding Dock delay
+# Remove the autohiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Remove all default apps from the Dock
+defaults write com.apple.dock persistent-apps -array
 
 ###############################################################################
 # Finder                                                                      #

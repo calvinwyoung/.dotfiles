@@ -1,0 +1,3 @@
+#!/bin/bash
+# Returns the length of the input string.
+echo ${#1}
