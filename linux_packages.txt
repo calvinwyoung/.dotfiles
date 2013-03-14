@@ -1,12 +1,13 @@
 # List of packages to be installed on Ubuntu machines.
-# Usage: sudo xargs -a linux_packages.txt apt-get install
+# Usage: grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
 
 xserver-xorg
 build-essential
 hal
 
-# Shell utilities
+# Utilities
 zsh
+xterm
 htop
 scrot
 unrar
@@ -15,16 +16,10 @@ dnsutils
 alsa-utils
 feh
 
-# For "import" screenshot command
-imagemagick
-
 # Text editing
 emacs
 emacs-goodies-el
 vim
-
-# For slock
-suckless-tools
 
 # Appearance / Fonts
 ttf-dejavu
@@ -33,17 +28,32 @@ elementary-icon-theme
 gtk2-engines-murrine
 lxappearance
 
+# For "import" screenshot command
+imagemagick
+
+# For slock
+suckless-tools
+
 # Thunar + plugins
 thunar
 thunar-volman
 thunar-archive-plugin
 
 awesome
+awesome-extra
 clipit
 keepassx
 leafpad
 mirage
 xdiskusage
+
+#
+# Other non-essential goodies
+#
+
+# For recovering deleted files from disk
+# foremost
+# scalpel
 
 # For making bootable usb sticks
 # unetbootin

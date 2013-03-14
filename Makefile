@@ -24,4 +24,4 @@ darwin: common
 	launchctl remove com.apple.stackshot
 
 install_linux_packages:
-	sudo xargs -a linux_packages.txt apt-get install
+	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
