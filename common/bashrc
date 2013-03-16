@@ -26,6 +26,13 @@ fi
 # Disable Ctrl+S to suspend terminal
 stty -ixon
 
+# Enable bash completion
+if [ `uname` == "Darwin" ]; then
+    [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+else
+    [[ -f /etc/bash_completion ]] && source /etc/bash_completion
+fi
+
 # ------------------------
 # Prompt
 # ------------------------
@@ -59,3 +66,4 @@ alias la="ls -alh"
 alias grep="grep --color=auto"
 alias e="emacsclient -t"
 alias vssh="cd ~/twicevm; vagrant ssh"
+alias ipython="ipython --colors Linux"
