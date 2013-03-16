@@ -1,5 +1,4 @@
 screen -t htop htop
-# screen -t rtorrent rtorrent
 
 startup_message off
 autodetach on

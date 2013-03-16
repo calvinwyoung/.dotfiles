@@ -8,4 +8,6 @@
     ci = commit
     co = checkout
     br = branch
+    di = diff
+    dc = diff --cached
     glog = log --graph --decorate --pretty=oneline --abbrev-commit
