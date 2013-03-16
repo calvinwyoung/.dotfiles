@@ -1,6 +1,3 @@
-[submodule "common/oh-my-zsh"]
-	path = common/oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "common/emacs.d/vendor/scss-mode"]
 	path = common/emacs.d/vendor/scss-mode
 	url = git://github.com/antonj/scss-mode.git
