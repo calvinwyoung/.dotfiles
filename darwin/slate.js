@@ -30,8 +30,18 @@ slate.configAll({
 
 slate.bindAll({
     // Change focus
-    "j:cmd;ctrl;alt": slate.op("focus", {"direction": "down"}),
-    "k:cmd;ctrl;alt": slate.op("focus", {"direction": "up"}),
+    "j:cmd;ctrl;alt": function(win) {
+        focusNextWindow(win, 1);
+    },
+    "k:cmd;ctrl;alt": function(win) {
+        focusNextWindow(win, -1);
+    },
+    ",:cmd;ctrl;alt": function(win) {
+        focusNextScreen(win, -1);
+    },
+    ".:cmd;ctrl;alt": function(win) {
+        focusNextScreen(win, 1);
+    },
     "h:cmd;ctrl;alt": slate.op("focus", {"direction": "left"}),
     "l:cmd;ctrl;alt": slate.op("focus", {"direction": "right"}),
     "n:cmd;ctrl;alt": slate.op("focus", {"direction": "behind"}),
@@ -311,6 +321,101 @@ function getNextPlacement(winCoords, width, height, positions) {
 }
 
 /**
+ * Given a window object, focuses on the next window in the specified direction.
+ *
+ * The direction argument can either be 1 to move clockwise or -1 to move
+ * counter-clockwise.
+ */
+function focusNextWindow(win, direction) {
+    // Default value should be 1.
+    direction = _.isUndefined(direction) ? 1 : direction;
+
+    var screenWindowsMap = getScreenWindows(),
+        screenWindows = screenWindowsMap[win.screen().id()],
+        screenCenter = getRectCenter(win.screen().visibleRect());
+
+    // Sort windows clockwise.
+    screenWindows.sort(function(a, b) {
+        // Get the center points for the two windows.
+        var aCenter = getRectCenter(a.rect()),
+            bCenter = getRectCenter(b.rect()),
+            result = null;
+
+        // Compute the cross product of vectors (center -> a) x (center -> b).
+        var det = ((aCenter.x - screenCenter.x) * (bCenter.y - screenCenter.y) -
+                   (bCenter.x - screenCenter.x) * (aCenter.y - screenCenter.y));
+
+        // If the cross product is positive, then windows a and b form a
+        // clockwise rotation around the screen center.
+        if (det != 0) {
+            result = -det;
+        } else {
+            // Points a and b are on the same line from the center check which
+            // point is closer to the screen center.
+            var aDist = (Math.pow(aCenter.x - screenCenter.x, 2) +
+                         Math.pow(aCenter.y - screenCenter.y, 2));
+            var bDist = (Math.pow(bCenter.x - screenCenter.x, 2) +
+                         Math.pow(bCenter.y - screenCenter.y, 2));
+
+            // If window a is farther from the center, then it should precede b.
+            result = bDist - aDist;
+        }
+
+        // If we're not sorting clockwise, then reverse the order.
+        result *= direction;
+
+        return result;
+    });
+
+    // Get the ID of the current window in the sorted window list.
+    var curWindowIx;
+    for (curWindowIx = 0; curWindowIx < screenWindows.length; curWindowIx++) {
+        if (isWindowsMatch(screenWindows[curWindowIx], win)) {
+            break;
+        }
+    }
+
+    // Focus on the next window.
+    screenWindows[(curWindowIx + 1) % screenWindows.length].focus();
+}
+
+function focusNextScreen(win, direction) {
+    // Default value should be 1.
+    direction = _.isUndefined(direction) ? 1 : direction;
+
+    var screenWindowsMap = getScreenWindows(),
+        curScreenID = win.screen().id(),
+        nextScreenID = mod1(curScreenID + direction, _.size(screenWindowsMap)),
+        nextScreenWindows = screenWindowsMap[nextScreenID];
+
+    nextScreenWindows[0].focus();
+}
+
+/**
+ * Returns a mapping between each screen ID and each window on that screen.
+ *
+ * @returns, dict: dictionary mapping each screen ID to a list of windows on
+ *     that screen
+ */
+function getScreenWindows() {
+    var screenWindowsMap = {};
+
+    slate.eachApp(function(app) {
+        app.eachWindow(function(win) {
+            var screenID = win.screen().id();
+            if (!screenWindowsMap[screenID]) {
+                screenWindowsMap[screenID] = [];
+            }
+            if (!win.isMinimizedOrHidden() && win.title()) {
+                screenWindowsMap[screenID].push(win);
+            }
+        });
+    });
+
+    return screenWindowsMap;
+}
+
+/**
  * Converts a rect object to a coordinate objects.
  *
  * The input rect object is expected to be of the given format:
@@ -344,6 +449,16 @@ function rectToCoords(rectObj) {
         "y2": rectObj.y + rectObj.height,
         "width": rectObj.width,
         "height": rectObj.height
+    };
+}
+
+/**
+ * Returns the center point of the given rect object.
+ */
+function getRectCenter(rect) {
+    return {
+        "x": rect.x + rect.width / 2,
+        "y": rect.y + rect.height / 2
     };
 }
 
@@ -399,3 +514,25 @@ function isApprox(value1, value2, tolerance) {
     tolerance = tolerance || 20;
     return Math.max(value1, value2) - Math.min(value1, value2) < tolerance;
 };
+
+/**
+ * Returns true if the two window arguments refer to the same window on the
+ * screen.
+ *
+ * This method exists because there doesn't seem to be an obvious way of
+ * otherwise uniquely identifying windows.
+ *
+ * @returns true if the given window objects refer to the same window
+ */
+function isWindowsMatch(win1, win2) {
+    return (win1.title() === win2.title() &&
+            win1.topLeft().x === win2.topLeft().x &&
+            win1.topLeft().y === win2.topLeft().y);
+}
+
+/**
+ * Performs a modulus operation on the given dividend and divisor.
+ */
+function mod1(dividend, divisor) {
+    return ((dividend % divisor) + divisor) % divisor;
+}
