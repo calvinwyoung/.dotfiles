@@ -31,10 +31,13 @@ slate.configAll({
 slate.bindAll({
     // Change focus
     "j:cmd;ctrl;alt": function(win) {
-        focusNextWindow(win, 1);
+        focusNextWindow(win, false);
     },
     "k:cmd;ctrl;alt": function(win) {
-        focusNextWindow(win, -1);
+        focusNextWindow(win, true);
+    },
+    "0:shift,cmd;ctrl;alt": function(win) {
+        BASE_WINDOW_FOCUS_DIRECTIONS.toggle(win.screen().id());
     },
     ",:cmd;ctrl;alt": function(win) {
         focusNextScreen(win, -1);
@@ -227,6 +230,51 @@ slate.bind("o:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
 }));
 
 /* ---------------- */
+/* GLOBAL VARIABLES */
+/* ---------------- */
+
+var BASE_WINDOW_FOCUS_DIRECTIONS = (function() {
+    // This object maps a screen ID to the window focus direction for that
+    // screen.
+    var screenFocusDirectionMap = {};
+
+    // The default focus direction for each screen. A positive value denotes
+    // clockwise, and a negative value denotes counter-clockwise.
+    var defaultFocusDirection = 1;
+
+    return {
+        /**
+         * Gets the base focus direction for the given screen.
+         *
+         * @param screenID, int: the ID of the screen whose focus direction will
+         *     be returned
+         *
+         * @returns int: the base focus direction of the given screen
+         */
+        get: function(screenID) {
+            if (!(screenID in screenFocusDirectionMap)) {
+                screenFocusDirectionMap[screenID] = defaultFocusDirection;
+            }
+            return screenFocusDirectionMap[screenID];
+        },
+
+        /**
+         * Toggles the focus direction for the given screen.
+         *
+         * If the base focus direction for the screen is currently 1 (i.e.,
+         * clockwise), then it switches it to -1 (i.e., counter-clockwise).
+         *
+         * @param screenID, int: the ID of the screen whose focus direction will
+         *     be toggled
+         */
+        toggle: function(screenID) {
+            var curFocusDirection = this.get(screenID);
+            screenFocusDirectionMap[screenID] = -1 * curFocusDirection;
+        }
+    };
+})();
+
+/* ---------------- */
 /* HELPER FUNCTIONS */
 /* ---------------- */
 
@@ -323,16 +371,20 @@ function getNextPlacement(winCoords, width, height, positions) {
 /**
  * Given a window object, focuses on the next window in the specified direction.
  *
- * The direction argument can either be 1 to move clockwise or -1 to move
- * counter-clockwise.
+ * If ``reverse`` is true, then focuses on the previous window instead.
  */
-function focusNextWindow(win, direction) {
-    // Default value should be 1.
-    direction = _.isUndefined(direction) ? 1 : direction;
-
+function focusNextWindow(win, reverse) {
     var screenWindowsMap = getScreenWindows(),
-        screenWindows = screenWindowsMap[win.screen().id()],
-        screenCenter = getRectCenter(win.screen().visibleRect());
+        curScreenID = win.screen().id(),
+        screenWindows = screenWindowsMap[curScreenID],
+        screenCenter = getRectCenter(win.screen().visibleRect()),
+        direction = BASE_WINDOW_FOCUS_DIRECTIONS.get(curScreenID);
+
+    // This value should be "false" if not specified.
+    reverse = _.isUndefined(reverse) ? false : reverse;
+    if (reverse) {
+        direction *= -1;
+    }
 
     // Sort windows clockwise.
     screenWindows.sort(function(a, b) {
@@ -347,9 +399,9 @@ function focusNextWindow(win, direction) {
 
         // If the cross product is positive, then windows a and b form a
         // clockwise rotation around the screen center.
-        if (det != 0) {
-            result = -det;
-        } else {
+        result = -det;
+
+        if (result === 0) {
             // Points a and b are on the same line from the center check which
             // point is closer to the screen center.
             var aDist = (Math.pow(aCenter.x - screenCenter.x, 2) +
@@ -385,10 +437,11 @@ function focusNextScreen(win, direction) {
 
     var screenWindowsMap = getScreenWindows(),
         curScreenID = win.screen().id(),
-        nextScreenID = mod1(curScreenID + direction, _.size(screenWindowsMap)),
-        nextScreenWindows = screenWindowsMap[nextScreenID];
+        nextScreenID = mod(curScreenID + direction, slate.screenCount());
 
-    nextScreenWindows[0].focus();
+    if (screenWindowsMap[nextScreenID].length > 0) {
+        screenWindowsMap[nextScreenID][0].focus();
+    }
 }
 
 /**
@@ -441,14 +494,14 @@ function getScreenWindows() {
  * where (x1, y1) is the coordinate of the top-left corner and (x2, y2) is the
  * coordinate of the bottom-right corner.
  */
-function rectToCoords(rectObj) {
+function rectToCoords(rect) {
     return {
-        "x1": rectObj.x,
-        "y1": rectObj.y,
-        "x2": rectObj.x + rectObj.width,
-        "y2": rectObj.y + rectObj.height,
-        "width": rectObj.width,
-        "height": rectObj.height
+        "x1": rect.x,
+        "y1": rect.y,
+        "x2": rect.x + rect.width,
+        "y2": rect.y + rect.height,
+        "width": rect.width,
+        "height": rect.height
     };
 }
 
@@ -533,6 +586,6 @@ function isWindowsMatch(win1, win2) {
 /**
  * Performs a modulus operation on the given dividend and divisor.
  */
-function mod1(dividend, divisor) {
+function mod(dividend, divisor) {
     return ((dividend % divisor) + divisor) % divisor;
 }
