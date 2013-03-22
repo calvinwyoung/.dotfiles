@@ -1,3 +1,6 @@
+.PHONY: common darwin linux clean_common clean_linux clean_darwin \
+	install_linux_packages
+
 common:
 	python create_symlinks.py common
 	git submodule update --init --recursive
