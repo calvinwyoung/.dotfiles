@@ -19,51 +19,50 @@ import sys
 HOME_DIR = os.path.expanduser("~")
 
 
-def create_symlink(link_name, source, simulate):
-    """Creates a symbolic link named `link_name` pointing to `source`.
+def create_symlink(target, source):
+    """Creates a symbolic link named `target` pointing to `source`.
 
     This method also prompts the user before overwriting any existing files.
 
     Args:
         source, str: the path to the symlink source
-        link_name, str: the name of the symlink to be created
+        target, str: the name of the symlink to be created
     """
-    print "Installing file %s -> %s" % (link_name, source)
-    if simulate:
-        return
+    print "Installing file %s -> %s" % (target, source)
 
     # If the symlink path already exists, then notify the user before
     # overwriting anything.
-    if os.path.lexists(link_name):
+    if os.path.lexists(target):
         # If an identical symlink already exists, then we're free to skip it.
-        if os.path.islink(link_name) and os.readlink(link_name) == source:
+        if os.path.islink(target) and os.readlink(target) == source:
             return
 
-        response = raw_input("Overwrite file %s? [Y/n] " % link_name)
+        response = raw_input("Overwrite file %s? [Y/n] " % target)
         if not response or response.lower().strip() == "y":
-            if os.path.isfile(link_name) or os.path.islink(link_name):
-                os.remove(link_name)
+            if os.path.isfile(target) or os.path.islink(target):
+                os.remove(target)
             else:
-                shutil.rmtree(link_name)
+                shutil.rmtree(target)
         else:
-            print "Skipping %s..." % link_name
+            print "Skipping %s..." % target
             return
 
     # Ensure that the directory to which the symlink will be written exists.
-    elif not os.path.exists(os.path.dirname(link_name)):
-        os.makedirs(os.path.dirname(link_name))
+    elif not os.path.exists(os.path.dirname(target)):
+        os.makedirs(os.path.dirname(target))
 
     # Finally, create the actual symlink.
-    os.symlink(source, link_name)
+    os.symlink(source, target)
     print "  Done."
 
-def main(directories, simulate=False):
+
+def main(directories, list_only=False):
     """Creates dotfile symlinks for files in the given directories.
 
     Args:
         directories, list[str]: list of directories containing dotfiles
-        simulate, bool: if True, the only performs a simulation of creating a
-            symlink without modifying the filesystem
+        list_only, bool: if True, then only prints a list of symlinks that would
+            be created without modifying the filesystem
     """
     for directory in directories:
         dotfile_dir = os.path.abspath(directory)
@@ -74,12 +73,12 @@ def main(directories, simulate=False):
 
             filename_parts = filename.split("__")
             filename_parts[0] = ".%s" % filename_parts[0]
-            symlink_name = os.path.join(*filename_parts)
+            target_path = os.path.join(HOME_DIR, *filename_parts)
 
-            create_symlink(
-                os.path.join(HOME_DIR, symlink_name),
-                os.path.join(dotfile_dir, filename),
-                simulate)
+            if list_only:
+                print target_path
+            else:
+                create_symlink(target_path, os.path.join(dotfile_dir, filename))
 
 
 if __name__ == "__main__":
@@ -87,9 +86,10 @@ if __name__ == "__main__":
 
     parser.add_argument("directories", nargs="+",
                         help="directories containing dotfiles")
-    parser.add_argument("-s", "--simulate", action="store_true",
-                        help=("performs a simulation of installing symlinks "
-                              "without modifying the file system"))
+    parser.add_argument("-l", "--list_only", action="store_true",
+                        help=("lists the paths to all symlinks that would be "
+                              "created"))
 
     args = parser.parse_args()
-    sys.exit(main(args.directories, args.simulate))
+
+    sys.exit(main(args.directories, args.list_only))

@@ -40,10 +40,10 @@ slate.bindAll({
         BASE_WINDOW_FOCUS_DIRECTIONS.toggle(win.screen().id());
     },
     ",:cmd;ctrl;alt": function(win) {
-        focusNextScreen(win, -1);
+        focusNextScreen(win, true);
     },
     ".:cmd;ctrl;alt": function(win) {
-        focusNextScreen(win, 1);
+        focusNextScreen(win, false);
     },
     "h:cmd;ctrl;alt": slate.op("focus", {"direction": "left"}),
     "l:cmd;ctrl;alt": slate.op("focus", {"direction": "right"}),
@@ -274,6 +274,23 @@ var BASE_WINDOW_FOCUS_DIRECTIONS = (function() {
     };
 })();
 
+// NOTE: This doesn't work yet. It seems that you can't save the reference to a
+// window and then use it to call ``.focus()`` later. Maybe I'll get this
+// working some day...
+var LAST_FOCUSED_WINDOW = (function() {
+    var screenWindowMap = {};
+
+    slate.on("windowFocused", function(event, win) {
+        screenWindowMap[win.screen().id()] = win;
+    });
+
+    return {
+        get: function (screenID) {
+            return screenWindowMap[screenID];
+        }
+    };
+})();
+
 /* ---------------- */
 /* HELPER FUNCTIONS */
 /* ---------------- */
@@ -372,6 +389,10 @@ function getNextPlacement(winCoords, width, height, positions) {
  * Given a window object, focuses on the next window in the specified direction.
  *
  * If ``reverse`` is true, then focuses on the previous window instead.
+ *
+ * @param win, window: a reference to the currently focused window
+ * @param reverse, bool: if true, then moves focus in the same direction as the
+ *     base focus direction, otherwise moves focus in the opposite direction
  */
 function focusNextWindow(win, reverse) {
     var screenWindowsMap = getScreenWindows(),
@@ -431,12 +452,22 @@ function focusNextWindow(win, reverse) {
     screenWindows[(curWindowIx + 1) % screenWindows.length].focus();
 }
 
-function focusNextScreen(win, direction) {
-    // Default value should be 1.
-    direction = _.isUndefined(direction) ? 1 : direction;
+/**
+ * Moves focus to a window on the next screen.
+ *
+ * A ``reverse`` argument can be provided to reverse the focus direction.
+ *
+ * @param win, window: a reference to the currently focused window
+ * @param reverse, bool: if true, then moves focus to the next screen, otherwise
+ *     moves focus to the previous screen
+ */
+function focusNextScreen(win, reverse) {
+    // This value should be "false" if not specified.
+    reverse = _.isUndefined(reverse) ? false : reverse;
 
     var screenWindowsMap = getScreenWindows(),
         curScreenID = win.screen().id(),
+        direction = reverse ? -1 : 1,
         nextScreenID = mod(curScreenID + direction, slate.screenCount());
 
     if (screenWindowsMap[nextScreenID].length > 0) {
@@ -459,6 +490,7 @@ function getScreenWindows() {
             if (!screenWindowsMap[screenID]) {
                 screenWindowsMap[screenID] = [];
             }
+
             if (!win.isMinimizedOrHidden() && win.title()) {
                 screenWindowsMap[screenID].push(win);
             }
@@ -569,6 +601,18 @@ function isApprox(value1, value2, tolerance) {
 };
 
 /**
+ * Returns the fingerpring for a given window object.
+ *
+ * @param win: a window object
+ * @returns, str: the string fingerprint for the given window object.
+ */
+function getWindowFingerprint(win) {
+    var rect = win.rect();
+    return (win.pid() + ":" + win.title() + ":" + rect.x + ":" + rect.y + ":" +
+            rect.width + ":" + rect.height);
+}
+
+/**
  * Returns true if the two window arguments refer to the same window on the
  * screen.
  *
@@ -578,9 +622,7 @@ function isApprox(value1, value2, tolerance) {
  * @returns true if the given window objects refer to the same window
  */
 function isWindowsMatch(win1, win2) {
-    return (win1.title() === win2.title() &&
-            win1.topLeft().x === win2.topLeft().x &&
-            win1.topLeft().y === win2.topLeft().y);
+    return getWindowFingerprint(win1) === getWindowFingerprint(win2);
 }
 
 /**

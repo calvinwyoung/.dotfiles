@@ -1,5 +1,3 @@
-.PHONY: common linux darwin install_linux_packages
-
 common:
 	python create_symlinks.py common
 	git submodule update --init --recursive
@@ -19,9 +17,14 @@ darwin: common
 # Enable our login_init hook.
 	launchctl load ~/Library/LaunchAgents/login_init.plist
 
-# Disable the stackshot daemon so we free up the Command + Control + Option +
-# Shift + [.,] keyboard shortcuts.
-	launchctl remove com.apple.stackshot
+clean_common:
+	python create_symlinks.py -l common | tr "\n" "\0" | xargs -0 rm
+
+clean_linux: clean_common
+	python create_symlinks.py -l linux | tr "\n" "\0" | xargs -0 rm
+
+clean_darwin: clean_common
+	python create_symlinks.py -l darwin | tr "\n" "\0" | xargs -0 rm
 
 install_linux_packages:
 	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y

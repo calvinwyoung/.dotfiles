@@ -1,4 +1,4 @@
-screen -t htop htop
+escape ^[[
 
 startup_message off
 autodetach on
