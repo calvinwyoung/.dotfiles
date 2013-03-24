@@ -61,7 +61,7 @@ $ '
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias ls=$([ `uname` == "Darwin" ] && echo "ls -G" || echo "ls --color=auto")
+alias ls=$([ `uname` == "Darwin" ] && echo "ls -GF" || echo "ls -F --color=auto")
 alias la="ls -alh"
 alias grep="grep --color=auto"
 alias e="emacsclient -t"
