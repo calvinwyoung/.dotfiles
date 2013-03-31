@@ -274,7 +274,7 @@
    <name>Move window to space</name>
    <appendix>Moves window to spaces with Shift + Hyper + #.</appendix>
    <appendix>NOTE: Requires binding F17 to "Move cursor to titlebar w/ Keyboard Maestro.</appendix>
-   <identifier>private.mission_control_hacks</identifier>
+   <identifier>custom.mission_control_hacks</identifier>
    <autogen>
      __KeyToKey__
      KeyCode::KEY_1, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
