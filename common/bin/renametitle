@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in "$@"; do
+    mv "$i" "`echo "$i" | perl -pe 's/\S+/\u$&/g'`";
+done
