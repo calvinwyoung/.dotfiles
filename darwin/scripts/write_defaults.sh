@@ -9,6 +9,11 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
+# Disable volume change beeps and UI sound effects (may require restart)
+defaults write com.apple.sound.beep.feedback -int 0
+defaults write com.apple.systemsound com.apple.sound.beep.volume -float 0
+defaults write com.apple.systemsound com.apple.sound.uiaudio.enabled -int 0
+
 ###############################################################################
 # Dock, Dashboard, Mission Control                                            #
 ###############################################################################
@@ -56,6 +61,9 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # Remove the spring loading delay for directories
 defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
+# Don't write .DS_Store files to network drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
 # Hide standard folders.
 chflags hidden ~/Library
 chflags hidden ~/Documents
@@ -84,6 +92,9 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCorner
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+# Disable two finger swipe between pages
+defaults write -g AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
