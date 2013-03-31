@@ -395,11 +395,21 @@ function getNextPlacement(winCoords, width, height, positions) {
  *     base focus direction, otherwise moves focus in the opposite direction
  */
 function focusNextWindow(win, reverse) {
+    // If no window is defined, then just return early.
+    if (_.isUndefined(win)) {
+        return;
+    }
+
     var screenWindowsMap = getScreenWindows(),
         curScreenID = win.screen().id(),
         screenWindows = screenWindowsMap[curScreenID],
         screenCenter = getRectCenter(win.screen().visibleRect()),
         direction = BASE_WINDOW_FOCUS_DIRECTIONS.get(curScreenID);
+
+    // If there aren't any other windows on this screen, then return early.
+    if (screenWindows.length === 0) {
+        return;
+    }
 
     // This value should be "false" if not specified.
     reverse = _.isUndefined(reverse) ? false : reverse;
@@ -434,10 +444,11 @@ function focusNextWindow(win, reverse) {
             result = bDist - aDist;
         }
 
-        // If we're not sorting clockwise, then reverse the order.
-        result *= direction;
+        if (result === 0) {
+            result = getWindowFingerprint(a) < getWindowFingerprint(b) ? -1 : 1;
+        }
 
-        return result;
+        return result * direction;
     });
 
     // Get the ID of the current window in the sorted window list.
@@ -449,7 +460,7 @@ function focusNextWindow(win, reverse) {
     }
 
     // Focus on the next window.
-    screenWindows[(curWindowIx + 1) % screenWindows.length].focus();
+    screenWindows[mod(curWindowIx + 1, screenWindows.length)].focus();
 }
 
 /**
