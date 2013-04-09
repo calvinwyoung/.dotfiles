@@ -1,2 +1,6 @@
 #!/bin/bash
 sshfs -o no_readahead,noappledouble,nolocalcaches,volname=stuff haxerbox-remote:/stuff /stuff
+
+if [ `uname` == "Darwin" ]; then
+    open /stuff
+fi
