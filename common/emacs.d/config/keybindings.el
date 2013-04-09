@@ -51,8 +51,11 @@
 ;; Make it easier to sudo edit files
 (global-set-key "\C-x\C-\M-f" 'sudo-find-file)
 
-;; Emulate vim's "%" command to match parentheses
+;; Emulate vim's "%" command for moving to a matching parentheses
 (global-set-key [?\C-%] 'goto-match-paren)
+
+;; Emulate vim's "*" command for searching for the word under the cursor
+(global-set-key [?\C-*] 'my-isearch-word-at-point)
 
 ;; Compile command
 (global-set-key [\C-f11] 'compile)
