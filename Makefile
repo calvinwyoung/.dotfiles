@@ -1,5 +1,4 @@
-.PHONY: common darwin linux clean_common clean_linux clean_darwin \
-	install_linux_packages
+.PHONY: common darwin linux clean install_linux_packages
 
 common:
 	python create_symlinks.py common
@@ -20,14 +19,10 @@ darwin: common
 # Enable our login_init hook.
 	launchctl load ~/Library/LaunchAgents/login_init.plist
 
-clean_common:
-	python create_symlinks.py -l common | tr "\n" "\0" | xargs -0 rm
-
-clean_linux: clean_common
-	python create_symlinks.py -l linux | tr "\n" "\0" | xargs -0 rm
-
-clean_darwin: clean_common
-	python create_symlinks.py -l darwin | tr "\n" "\0" | xargs -0 rm
+clean:
+	python create_symlinks.py -l common | tr "\n" "\0" | xargs -0 rm -f
+	python create_symlinks.py -l linux | tr "\n" "\0" | xargs -0 rm -f
+	python create_symlinks.py -l darwin | tr "\n" "\0" | xargs -0 rm -f
 
 install_linux_packages:
 	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
