@@ -23,6 +23,10 @@
 		<integer>1</integer>
 		<key>custom.command_arrows_to_page_up_page_down_home_end</key>
 		<integer>1</integer>
+		<key>custom.control_based_browser_shortcuts</key>
+		<integer>1</integer>
+		<key>custom.control_option_w_to_command_w</key>
+		<integer>1</integer>
 		<key>custom.fn_to_command</key>
 		<integer>1</integer>
 		<key>custom.hyper_click_support</key>
@@ -45,8 +49,6 @@
 		<integer>150</integer>
 		<key>parameter.simultaneouskeypresses_delay</key>
 		<integer>100</integer>
-		<key>remap.copy_paste_winstyle_new_browser_tab</key>
-		<integer>1</integer>
 	</dict>
 	<key>isStatusbarEnable</key>
 	<false/>

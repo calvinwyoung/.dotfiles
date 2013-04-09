@@ -269,6 +269,84 @@
     </autogen>
   </item>
 
+  <!-- Browsers: Control-based Browser Shortcuts -->
+  <item>
+    <name>Browsers: Control-based Browser Shortcuts</name>
+    <appendix>Ctrl + T to Command + T</appendix>
+    <appendix>Ctrl + L to Command + L</appendix>
+    <appendix>Ctrl + [1-9] to Command + [1-9]</appendix>
+    <identifier>custom.control_based_browser_shortcuts</identifier>
+
+    <only>SAFARI,FIREFOX,THUNDERBIRD,GOOGLE_CHROME,OPERA</only>
+
+    <autogen>
+      __KeyToKey__
+      KeyCode::T, ModifierFlag::CONTROL_L,
+
+      KeyCode::T, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::CONTROL_L,
+
+      KeyCode::L, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_1, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_1, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_2, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_3, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_4, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_5, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_5, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_6, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_6, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_7, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_7, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_8, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_8, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_9, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_9, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <!-- Move window to space -->
   <item>
    <name>Move window to space</name>
@@ -346,6 +424,19 @@
 
       KeyCode::BRACKET_RIGHT,
       ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+    </autogen>
+  </item>
+
+  <!-- Control + Option + W to Command + W -->
+  <item>
+    <name>Control + Option + W to Command + W</name>
+    <appendix>Control + Option + W to Command + W</appendix>
+    <identifier>custom.control_option_w_to_command_w</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::W, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L,
+
+      KeyCode::W, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
