@@ -1,5 +1,11 @@
-# Enable case-insensitive tab completion
+# Enable case-insensitive tab completion.
 set completion-ignore-case on
 
-# List all matches in case multiple possible completions are possible
+# List all matches in case multiple possible completions are possible.
 set show-all-if-ambiguous on
+
+# Make up/down arrows and Ctrl+P/N search forward/backward through history.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\C-p": history-search-backward
+"\C-n": history-search-forward
