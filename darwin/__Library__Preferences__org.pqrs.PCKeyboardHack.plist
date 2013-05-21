@@ -5,7 +5,7 @@
 	<key>SUFeedURL</key>
 	<string>http://pqrs.org/macosx/keyremap4macbook/files/PCKeyboardHack-appcast.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2013-03-31T04:15:54Z</date>
+	<date>2013-05-18T20:07:01Z</date>
 	<key>sysctl</key>
 	<dict>
 		<key>enable_command_l</key>

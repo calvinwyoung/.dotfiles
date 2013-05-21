@@ -157,43 +157,42 @@
 
     <autogen>
       __PointingButtonToPointingButton__
-      PointingButton::LEFT, VK_CONTROL,
-      PointingButton::LEFT, VK_COMMAND
+      PointingButton::LEFT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+      PointingButton::LEFT, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
   <!-- Emulate Linux-style moving/resizing. To be used in combination with
-       Zooom2, which should have the following bindings:
+       Zooom2.
 
-           Movement Shortcut: Option + Command
-           Resize Shortcut: Option + Command + Control
-
-       NOTE: When Hyper + Left Click is activated, the "Control" key doesn't get
-       passed through because we have a separate binding that maps Control +
-       Left Click to Command + Left Click.
-
-       NOTE 2: By default, OS X binds Option + LeftClick to hide all other
+       NOTE: By default, OS X binds Option + LeftClick to hide all other
        windows. This isn't directly relevant to this implementation, but it's
        useful to know.
   -->
   <item>
     <name>Zooom2 Support</name>
     <identifier>custom.zooom2_support</identifier>
-    <appendix>Hyper + Left Click to Command + Option + Right Click</appendix>
-    <appendix>Hyper + Right Click to Command + Option + Control + Right Click</appendix>
+    <appendix>Hyper + Left Click to Hyper + Right Click</appendix>
+    <appendix>Hyper + Right Click to Hyper + Shift + Right Click</appendix>
 
-    <!-- Hyper + Left Click to Command + Option + Left Click -->
+    <!-- Hyper + Left Click to Hyper + Right Click -->
     <autogen>
       __PointingButtonToPointingButton__
-      PointingButton::LEFT, VK_COMMAND | VK_OPTION,
-      PointingButton::RIGHT, VK_COMMAND | VK_OPTION
+      PointingButton::LEFT,
+      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+
+      PointingButton::RIGHT,
+      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
     </autogen>
 
-    <!-- Hyper + Right Click to Command + Option + Control + Right Click -->
+    <!-- Hyper + Right Click to Hyper + Shift + Right Click -->
     <autogen>
       __PointingButtonToPointingButton__
-      PointingButton::RIGHT, VK_COMMAND | VK_OPTION,
-      PointingButton::RIGHT, VK_COMMAND | VK_OPTION | VK_CONTROL
+      PointingButton::RIGHT,
+      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+
+      PointingButton::RIGHT,
+      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
     </autogen>
   </item>
 
