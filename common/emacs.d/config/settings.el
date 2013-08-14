@@ -105,6 +105,13 @@
 ;; Turn on visual line mode for text mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+;; Make autocompletion for buffer names case-insensitive
+(setq read-buffer-completion-ignore-case 1)
+
+;; Kill buffers that have been open for a long time
+(require 'midnight)
+(setq clean-buffer-list-delay-general 1)
+
 ;; Omit hidden files in dired mode
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
