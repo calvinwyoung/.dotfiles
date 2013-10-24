@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>SUFeedURL</key>
-	<string>http://pqrs.org/macosx/keyremap4macbook/files/appcast.xml</string>
+	<string>https://pqrs.org/macosx/keyremap4macbook/files/appcast.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2013-05-18T20:08:20Z</date>
+	<date>2013-10-23T23:17:51Z</date>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
@@ -61,6 +61,8 @@
 		<integer>150</integer>
 		<key>parameter.simultaneouskeypresses_delay</key>
 		<integer>100</integer>
+		<key>remap.fkeys_to_consumer_f10</key>
+		<integer>1</integer>
 	</dict>
 	<key>isQuitByHand</key>
 	<false/>
