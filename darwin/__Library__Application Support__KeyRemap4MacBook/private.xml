@@ -1,35 +1,5 @@
 <?xml version="1.0"?>
 <root>
-  <!-- Apple Keyboard Definition -->
-  <devicevendordef>
-    <vendorname>APPLE_COMPUTER</vendorname>
-    <vendorid>0x05ac</vendorid>
-  </devicevendordef>
-  <deviceproductdef>
-    <productname>INTERNAL_KEYBOARD_TRACKPAD</productname>
-    <productid>0x0252</productid>
-  </deviceproductdef>
-
-  <!-- Microsoft Keyboard Definition -->
-  <devicevendordef>
-    <vendorname>MICROSOFT</vendorname>
-    <vendorid>0x045e</vendorid>
-  </devicevendordef>
-  <deviceproductdef>
-    <productname>COMFORT_CURVE_KEYBOARD_2000</productname>
-    <productid>0x00dd</productid>
-  </deviceproductdef>
-
-  <!-- Logitech G9 Mouse Definition -->
-  <devicevendordef>
-    <vendorname>LOGITECH</vendorname>
-    <vendorid>0x046d</vendorid>
-  </devicevendordef>
-  <deviceproductdef>
-    <productname>LOGITECH_G9_MOUSE</productname>
-    <productid>0xc041</productid>
-  </deviceproductdef>
-
   <!-- For Apple Keyboards -->
   <item>
     <name>Remap Hyper/Option (Apple Keyboard)</name>
@@ -39,7 +9,7 @@
 
     <device_only>
       DeviceVendor::APPLE_COMPUTER,
-      DeviceProduct::INTERNAL_KEYBOARD_TRACKPAD
+      DeviceProduct::ANY
     </device_only>
 
     <block>
@@ -78,10 +48,10 @@
     <appendix>This requires OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.</appendix>
     <identifier>custom.pc_keyboard_remap_hyper_option</identifier>
 
-    <device_only>
-      DeviceVendor::MICROSOFT,
-      DeviceProduct::COMFORT_CURVE_KEYBOARD_2000
-    </device_only>
+    <device_not>
+      DeviceVendor::APPLE_COMPUTER,
+      DeviceProduct::ANY
+    </device_not>
 
     <autogen>
       --KeyToKey--
@@ -120,10 +90,10 @@
     <appendix>ScrollRight to Command + ]</appendix>
     <appendix>ScrollLeft to Middle Click</appendix>
 
-    <device_only>
-      DeviceVendor::LOGITECH,
-      DeviceProduct::LOGITECH_G9_MOUSE
-    </device_only>
+    <device_not>
+      DeviceVendor::APPLE_COMPUTER,
+      DeviceProduct::ANY
+    </device_not>
 
     <!-- Mouse back button to "Back" -->
     <autogen>
