@@ -2,10 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>668 954 384 129 0 0 1920 1178 </string>
 	<key>SUFeedURL</key>
-	<string>http://pqrs.org/macosx/keyremap4macbook/files/PCKeyboardHack-appcast.xml</string>
+	<string>https://pqrs.org/macosx/keyremap4macbook/files/PCKeyboardHack-appcast.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2013-05-18T20:07:01Z</date>
+	<date>2013-10-23T23:17:47Z</date>
+	<key>WebKitDefaultFontSize</key>
+	<integer>11</integer>
+	<key>WebKitStandardFont</key>
+	<string>Lucida Grande</string>
 	<key>sysctl</key>
 	<dict>
 		<key>enable_command_l</key>
