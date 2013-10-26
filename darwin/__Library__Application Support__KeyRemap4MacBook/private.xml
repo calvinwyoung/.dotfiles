@@ -135,34 +135,34 @@
   <!-- Emulate Linux-style moving/resizing. To be used in combination with
        Zooom2.
 
-       NOTE: By default, OS X binds Option + LeftClick to hide all other
-       windows. This isn't directly relevant to this implementation, but it's
-       useful to know.
+       Here, we use Fn is the movement modifier key for Zooom2 because it's the only
+       modifier key that doesn't have any default functionality when combined with
+       left-click.
   -->
   <item>
     <name>Zooom2 Support</name>
     <identifier>custom.zooom2_support</identifier>
-    <appendix>Hyper + Left Click to Hyper + Right Click</appendix>
-    <appendix>Hyper + Right Click to Hyper + Shift + Right Click</appendix>
+    <appendix>Hyper + Left Click to Fn + Left Click</appendix>
+    <appendix>Hyper + Right Click to Fn + Shift + Left Click</appendix>
 
-    <!-- Hyper + Left Click to Hyper + Right Click -->
+    <!-- Hyper + Left Click to Fn + Left Click -->
     <autogen>
       __PointingButtonToPointingButton__
       PointingButton::LEFT,
       ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
 
-      PointingButton::RIGHT,
-      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+      PointingButton::LEFT,
+      ModifierFlag::FN
     </autogen>
 
-    <!-- Hyper + Right Click to Hyper + Shift + Right Click -->
+    <!-- Hyper + Right Click to Fn + Shift + Right Click -->
     <autogen>
       __PointingButtonToPointingButton__
       PointingButton::RIGHT,
       ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
 
-      PointingButton::RIGHT,
-      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
+      PointingButton::LEFT,
+      ModifierFlag::FN | ModifierFlag::SHIFT_L
     </autogen>
   </item>
 
