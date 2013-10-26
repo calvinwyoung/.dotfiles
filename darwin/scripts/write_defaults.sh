@@ -19,7 +19,7 @@ defaults write com.apple.systemsound com.apple.sound.uiaudio.enabled -int 0
 ###############################################################################
 
 # Make Mission Control animations faster.
-defaults write com.apple.dock expose-animation-duration -float 0.05
+defaults write com.apple.dock expose-animation-duration -float 0.02
 
 # Don’t show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
