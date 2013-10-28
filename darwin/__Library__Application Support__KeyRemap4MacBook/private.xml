@@ -390,6 +390,28 @@
     </autogen>
   </item>
 
+  <!-- Mission Control Shortcuts -->
+  <item>
+    <name>Mission Control Shortcuts</name>
+    <identifier>custom.mission_control_shortcuts</identifier>
+    <appendix>Hyper + X to Mission Control</appendix>
+    <appendix>Hyper + D to Show Desktop</appendix>
+
+    <autogen>
+      __KeyToKey__
+      KeyCode::X, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L,
+
+      KeyCode::EXPOSE_ALL
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L,
+
+      KeyCode::EXPOSE_ALL, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
+
   <!-- Move window to space -->
   <item>
    <name>Move window to space</name>
@@ -467,19 +489,6 @@
 
       KeyCode::BRACKET_RIGHT,
       ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
-    </autogen>
-  </item>
-
-  <!-- Hyper + D to Show Desktop -->
-  <item>
-    <name>Hyper + D to Show Desktop</name>
-    <identifier>custom.hyper_d_to_show_desktop</identifier>
-
-    <autogen>
-      __KeyToKey__
-      KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L,
-
-      KeyCode::EXPOSE_ALL, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
