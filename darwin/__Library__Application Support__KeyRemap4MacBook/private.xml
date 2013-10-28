@@ -351,6 +351,45 @@
     </autogen>
   </item>
 
+  <!-- Control-based Zooming -->
+  <item>
+    <name>Control-based Zooming</name>
+    <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
+    <appendix>Ctrl + ScrollWheel to Command + [+/-]</appendix>
+    <identifier>custom.control_based_zooming</identifier>
+
+    <autogen>
+      __KeyToKey__
+      KeyCode::EQUAL, ModifierFlag::CONTROL_L,
+
+      KeyCode::EQUAL, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::MINUS, ModifierFlag::CONTROL_L,
+
+      KeyCode::MINUS, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_0, ModifierFlag::CONTROL_L,
+
+      KeyCode::KEY_0, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::UP, ModifierFlag::CONTROL_L,
+
+      KeyCode::EQUAL, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::DOWN, ModifierFlag::CONTROL_L,
+
+      KeyCode::MINUS, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <!-- Move window to space -->
   <item>
    <name>Move window to space</name>

@@ -29,6 +29,8 @@
 		<integer>1</integer>
 		<key>custom.control_based_browser_shortcuts</key>
 		<integer>1</integer>
+		<key>custom.control_based_zooming</key>
+		<integer>1</integer>
 		<key>custom.control_left_click_to_command_left_click</key>
 		<integer>1</integer>
 		<key>custom.control_option_w_to_command_w</key>
