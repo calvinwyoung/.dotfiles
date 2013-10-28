@@ -431,10 +431,22 @@
     </autogen>
   </item>
 
+  <!-- Hyper + D to Show Desktop -->
+  <item>
+    <name>Hyper + D to Show Desktop</name>
+    <identifier>custom.hyper_d_to_show_desktop</identifier>
+
+    <autogen>
+      __KeyToKey__
+      KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L,
+
+      KeyCode::EXPOSE_ALL, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <!-- Control + Option + W to Command + W -->
   <item>
     <name>Control + Option + W to Command + W</name>
-    <appendix>Control + Option + W to Command + W</appendix>
     <identifier>custom.control_option_w_to_command_w</identifier>
     <autogen>
       __KeyToKey__

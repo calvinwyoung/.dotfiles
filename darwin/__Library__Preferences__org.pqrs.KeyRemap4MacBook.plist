@@ -37,6 +37,8 @@
 		<integer>1</integer>
 		<key>custom.hyper_click_support</key>
 		<integer>1</integer>
+		<key>custom.hyper_d_to_show_desktop</key>
+		<integer>1</integer>
 		<key>custom.logitech_g9_mouse_config</key>
 		<integer>1</integer>
 		<key>custom.mission_control_hacks</key>
