@@ -360,31 +360,31 @@
 
     <autogen>
       __KeyToKey__
-      KeyCode::EQUAL, ModifierFlag::CONTROL_L,
+      KeyCode::EQUAL, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::EQUAL, ModifierFlag::COMMAND_L
     </autogen>
     <autogen>
       __KeyToKey__
-      KeyCode::MINUS, ModifierFlag::CONTROL_L,
+      KeyCode::MINUS, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::MINUS, ModifierFlag::COMMAND_L
     </autogen>
     <autogen>
       __KeyToKey__
-      KeyCode::KEY_0, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_0, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::KEY_0, ModifierFlag::COMMAND_L
     </autogen>
     <autogen>
       __ScrollWheelToKey__
-      ScrollWheel::UP, ModifierFlag::CONTROL_L,
+      ScrollWheel::UP, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::EQUAL, ModifierFlag::COMMAND_L
     </autogen>
     <autogen>
       __ScrollWheelToKey__
-      ScrollWheel::DOWN, ModifierFlag::CONTROL_L,
+      ScrollWheel::DOWN, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::MINUS, ModifierFlag::COMMAND_L
     </autogen>
