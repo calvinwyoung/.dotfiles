@@ -1,11 +1,6 @@
 ;;;;;;;;;;
 ;; Python
 ;;;;;;;;;;
-(add-to-list 'load-path (concat vendor-dir "python-mode/"))
-(autoload 'python-mode "python.el"
-  "Major mode for editing Python files" t)
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-
 ;; PEP 8/PEP 257 prefers preceding the triple quotes at the end of a multiline
 ;; docstring with a blank line, I prefer using a docstring style that doesn't
 ;; insert the extra blank line.

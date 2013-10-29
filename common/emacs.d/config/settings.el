@@ -136,15 +136,16 @@
 ;; Stop emacs from prompting us before killing buffers in daemon mode
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
-;; Files with extensions in the completion-ignored-extensions list will be
-;; omitted from the file completions list.
-(defadvice completion--file-name-table (after
-                                        ignoring-backups-f-n-completion
-                                        activate)
+;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
+;; *.pyo) should be omitted from the file completions list.
+(defadvice completion-file-name-table (after
+                                       ignoring-backups-f-n-completion
+                                       activate)
   "Filter out results when the have completion-ignored-extensions"
   (let ((res ad-return-value))
     (if (and (listp res)
              (stringp (car res))
-             (cdr res))                 ; length > 1, don't ignore sole match
+             ;; length > 1, don't ignore sole match
+             (cdr res))
         (setq ad-return-value
               (completion-pcm--filename-try-filter res)))))
