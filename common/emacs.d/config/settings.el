@@ -71,6 +71,9 @@
 ;; Use 80-character lines
 (setq-default fill-column 80)
 
+;; Enable electric pair mode for auto-pairing delimiters
+(electric-pair-mode 1)
+
 ;; Set whitespace mode to highlight column 80+ chars
 (setq whitespace-style '(lines-tail)
       whitespace-line-column 80)

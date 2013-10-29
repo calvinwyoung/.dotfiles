@@ -4,9 +4,6 @@
 [submodule "common/emacs.d/vendor/markdown-mode"]
 	path = common/emacs.d/vendor/markdown-mode
 	url = git://github.com/defunkt/markdown-mode.git
-[submodule "common/emacs.d/vendor/autopair"]
-	path = common/emacs.d/vendor/autopair
-	url = git://github.com/capitaomorte/autopair.git
 [submodule "common/emacs.d/vendor/python-mode"]
 	path = common/emacs.d/vendor/python-mode
 	url = git://github.com/fgallina/python.el.git
