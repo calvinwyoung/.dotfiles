@@ -25,11 +25,13 @@
 		<integer>1</integer>
 		<key>custom.apple_keyboard_remap_hyper_option</key>
 		<integer>1</integer>
+		<key>custom.apple_keyboard_remap_right_modifiers</key>
+		<integer>1</integer>
 		<key>custom.command_arrows_to_page_up_page_down_home_end</key>
 		<integer>1</integer>
 		<key>custom.control_based_browser_shortcuts</key>
 		<integer>1</integer>
-		<key>custom.control_based_zooming</key>
+		<key>custom.control_based_commands</key>
 		<integer>1</integer>
 		<key>custom.control_left_click_to_command_left_click</key>
 		<integer>1</integer>

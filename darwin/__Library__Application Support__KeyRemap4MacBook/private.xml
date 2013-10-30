@@ -40,6 +40,30 @@
     </autogen>
   </item>
 
+  <item>
+    <name>Swap Right Command + Option (Apple Keyboard)</name>
+    <appendix>Map Right Command to Right Option</appendix>
+    <appendix>Map Right Option to Right Command</appendix>
+    <identifier>custom.apple_keyboard_remap_right_modifiers</identifier>
+
+    <device_only>
+      DeviceVendor::APPLE_COMPUTER,
+      DeviceProduct::ANY
+    </device_only>
+
+    <autogen>
+      --KeyToKey--
+      KeyCode::COMMAND_R,
+
+      KeyCode::OPTION_R
+    </autogen>
+    <autogen>
+      --KeyToKey--
+      KeyCode::OPTION_R,
+
+      KeyCode::COMMAND_R
+    </autogen>
+  </item>
 
   <!-- For PC Keyboards -->
   <item>
@@ -123,7 +147,6 @@
   <item>
     <name>Control + Left Click to Command + Left Click</name>
     <identifier>custom.control_left_click_to_command_left_click</identifier>
-    <appendix>Control + Left Click to Command + Left Click</appendix>
 
     <autogen>
       __PointingButtonToPointingButton__
@@ -199,6 +222,60 @@
       --KeyToKey--
       KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L,
       KeyCode::END
+    </autogen>
+  </item>
+
+  <!-- Control-based Commands -->
+  <item>
+    <name>Control-based Commands</name>
+    <appendix>Ctrl + [ to Command + [</appendix>
+    <appendix>Ctrl + ] to Command + ]</appendix>
+    <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
+    <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
+    <appendix>Ctrl + ScrollWheel to Command + [+/-]</appendix>
+    <identifier>custom.control_based_commands</identifier>
+
+    <autogen>
+      __KeyToKey__
+      KeyCode::BRACKET_LEFT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::BRACKET_RIGHT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::EQUAL, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::EQUAL, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::MINUS, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::MINUS, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_0, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::KEY_0, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::UP, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::EQUAL, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __ScrollWheelToKey__
+      ScrollWheel::DOWN, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+      KeyCode::MINUS, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
@@ -348,45 +425,6 @@
       KeyCode::KEY_9, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
       KeyCode::KEY_9, ModifierFlag::COMMAND_L
-    </autogen>
-  </item>
-
-  <!-- Control-based Zooming -->
-  <item>
-    <name>Control-based Zooming</name>
-    <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
-    <appendix>Ctrl + ScrollWheel to Command + [+/-]</appendix>
-    <identifier>custom.control_based_zooming</identifier>
-
-    <autogen>
-      __KeyToKey__
-      KeyCode::EQUAL, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
-
-      KeyCode::EQUAL, ModifierFlag::COMMAND_L
-    </autogen>
-    <autogen>
-      __KeyToKey__
-      KeyCode::MINUS, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
-
-      KeyCode::MINUS, ModifierFlag::COMMAND_L
-    </autogen>
-    <autogen>
-      __KeyToKey__
-      KeyCode::KEY_0, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
-
-      KeyCode::KEY_0, ModifierFlag::COMMAND_L
-    </autogen>
-    <autogen>
-      __ScrollWheelToKey__
-      ScrollWheel::UP, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
-
-      KeyCode::EQUAL, ModifierFlag::COMMAND_L
-    </autogen>
-    <autogen>
-      __ScrollWheelToKey__
-      ScrollWheel::DOWN, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
-
-      KeyCode::MINUS, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
