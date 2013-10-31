@@ -45,9 +45,6 @@ slate.bindAll({
     ".:cmd;ctrl;alt": function(win) {
         focusNextScreen(win, false);
     },
-    "h:cmd;ctrl;alt": slate.op("focus", {"direction": "left"}),
-    "l:cmd;ctrl;alt": slate.op("focus", {"direction": "right"}),
-    "n:cmd;ctrl;alt": slate.op("focus", {"direction": "behind"}),
 
     // Push windows around
     "j:shift;cmd;ctrl;alt": slate.op("push", {"direction": "down"}),
@@ -62,7 +59,7 @@ slate.bindAll({
     // Undo the last movement operation
     "/:cmd;ctrl;alt": slate.op("undo"),
 
-    // Undo the last movement operation
+    // Relaunch slate
     "r:shift;cmd;ctrl;alt": slate.op("relaunch"),
 
     // Show window hints.
@@ -146,7 +143,7 @@ slate.bind("i:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
 
 // Resize the window so it's 1/3 the width of the screen and 1/2 the height of
 // the screen, and move it between the four corners.
-slate.bind("o:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+slate.bind("n:cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
     var width = screenCoords.width / 3,
         height = screenCoords.height / 2,
         positions = [
@@ -200,7 +197,7 @@ slate.bind("u:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
 
 // Resize the window so it's 1/2 the width of the screen and 1/2 the height of
 // the screen, and move it between the four corners.
-slate.bind("o:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
+slate.bind("n:shift;cmd;ctrl;alt", cycleBuilder(function(screenCoords) {
     var width = screenCoords.width / 2,
         height = screenCoords.height / 2,
         positions = [

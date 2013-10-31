@@ -23,9 +23,7 @@
 	<dict>
 		<key>custom.app_finder_switch_open_rename</key>
 		<integer>1</integer>
-		<key>custom.apple_keyboard_remap_hyper_option</key>
-		<integer>1</integer>
-		<key>custom.apple_keyboard_remap_right_modifiers</key>
+		<key>custom.apple_keyboard_modifier_keys</key>
 		<integer>1</integer>
 		<key>custom.command_arrows_to_page_up_page_down_home_end</key>
 		<integer>1</integer>
@@ -51,7 +49,7 @@
 		<integer>1</integer>
 		<key>custom.pause_break_to_eject</key>
 		<integer>1</integer>
-		<key>custom.pc_keyboard_remap_hyper_option</key>
+		<key>custom.pc_keyboard_modifier_keys</key>
 		<integer>1</integer>
 		<key>custom.simultaneouskeypresses_ss_to_capslock</key>
 		<integer>1</integer>
@@ -63,12 +61,20 @@
 		<integer>1</integer>
 		<key>notsave.automatically_enable_pointing_device</key>
 		<integer>1</integer>
+		<key>parameter.keyoverlaidmodifier_initial_modifier_wait</key>
+		<integer>150</integer>
+		<key>parameter.keyoverlaidmodifier_timeout</key>
+		<integer>500</integer>
 		<key>parameter.scrollwheeltokey_keyrepeat_wait</key>
 		<integer>150</integer>
 		<key>parameter.simultaneouskeypresses_delay</key>
 		<integer>100</integer>
 		<key>remap.fkeys_to_consumer_f10</key>
 		<integer>1</integer>
+		<key>repeat.initial_wait</key>
+		<integer>400</integer>
+		<key>repeat.wait</key>
+		<integer>33</integer>
 	</dict>
 	<key>isQuitByHand</key>
 	<false/>

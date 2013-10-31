@@ -109,8 +109,6 @@ defaults write -g NSScrollViewRubberbanding -int 0
 
 # Enable very fast key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain KeyRepeat -int 0
-defaults write NSGlobalDomain InitialKeyRepeat -int 0
 
 ###############################################################################
 # Screen                                                                      #
