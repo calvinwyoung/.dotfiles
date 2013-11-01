@@ -1,6 +1,21 @@
 ;;;;;;;;;;
 ;; Python
 ;;;;;;;;;;
+;; Add triple-quote support for electric-pair-mode when editing Python files.
+(defun python-electric-pair-string-delimiter ()
+  (when (and electric-pair-mode
+             (memq last-command-event '(?\" ?\'))
+             (let ((count 0))
+               (while (eq (char-before (- (point) count)) last-command-event)
+                 (setq count (1+ count)))
+               (= count 3)))
+    (save-excursion (insert (make-string 3 last-command-event)))))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (add-hook 'post-self-insert-hook
+                      #'python-electric-pair-string-delimiter 'append t)))
+
 ;; PEP 8/PEP 257 prefers preceding the triple quotes at the end of a multiline
 ;; docstring with a blank line, I prefer using a docstring style that doesn't
 ;; insert the extra blank line.
