@@ -14,12 +14,20 @@
 	<string>Lucida Grande</string>
 	<key>sysctl</key>
 	<dict>
+		<key>enable_capslock</key>
+		<integer>1</integer>
 		<key>enable_command_l</key>
+		<integer>1</integer>
+		<key>enable_control_l</key>
 		<integer>1</integer>
 		<key>enable_option_l</key>
 		<integer>1</integer>
+		<key>keycode_capslock</key>
+		<integer>59</integer>
 		<key>keycode_command_l</key>
 		<integer>80</integer>
+		<key>keycode_control_l</key>
+		<integer>55</integer>
 		<key>keycode_option_l</key>
 		<integer>79</integer>
 	</dict>
