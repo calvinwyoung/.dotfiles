@@ -218,15 +218,15 @@
     </autogen>
   </item>
 
-  <!-- Control-based Commands -->
+  <!-- Control-based Shortcuts -->
   <item>
-    <name>Control-based Commands</name>
+    <name>Control-based Shortcuts</name>
     <appendix>Ctrl + [ to Command + [</appendix>
     <appendix>Ctrl + ] to Command + ]</appendix>
     <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
     <appendix>Ctrl + [+/-/0] to Command + [+/-/0]</appendix>
     <appendix>Ctrl + ScrollWheel to Command + [+/-]</appendix>
-    <identifier>custom.control_based_commands</identifier>
+    <identifier>custom.control_based_shortcuts</identifier>
 
     <autogen>
       __KeyToKey__
@@ -565,6 +565,23 @@
       __KeyToKey__
       KeyCode::FN,
       KeyCode::COMMAND_L
+    </autogen>
+  </item>
+
+  <!-- Disable bad habit keyboard shortcuts -->
+  <item>
+    <name>Break Bad Habits</name>
+    <identifier>custom.break_bad_habits</identifier>
+    <appendix>Disable Option_L + F/B</appendix>
+    <autogen>
+      __KeyToKey__
+      KeyCode::B, ModifierFlag::OPTION_L,
+      KeyCode::VK_NONE
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::OPTION_L,
+      KeyCode::VK_NONE
     </autogen>
   </item>
 </root>
