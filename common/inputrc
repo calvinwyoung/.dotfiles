@@ -4,6 +4,11 @@ set completion-ignore-case on
 # List all matches in case multiple possible completions are possible.
 set show-all-if-ambiguous on
 
+# Adds punctuation as word delimiters, and make Ctrl + W kill word until last
+# punctuation mark.
+set bind-tty-special-chars off
+"\C-w": backward-kill-word
+
 # Make up/down arrows and Ctrl+P/N search forward/backward through history.
 "\e[A": history-search-backward
 "\e[B": history-search-forward
