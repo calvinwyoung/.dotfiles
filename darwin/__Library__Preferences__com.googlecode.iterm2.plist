@@ -53,6 +53,13 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x74-0x40000</key>
+		<dict>
+			<key>Action</key>
+			<integer>27</integer>
+			<key>Text</key>
+			<string>C6F5E60C-25AF-4B3B-A136-56006B89C06C</string>
+		</dict>
 		<key>0x76-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -251,9 +258,9 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>109 622 605 485 0 0 1920 1178 </string>
+	<string>39 263 924 485 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 0 639 589 0 0 1920 1178 </string>
+	<string>40 0 585 473 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>4535 149 585 451 3200 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -269,6 +276,8 @@
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>Allow Title Reporting</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -428,6 +437,8 @@
 				<key>Red Component</key>
 				<real>0.0</real>
 			</dict>
+			<key>Background Image Is Tiled</key>
+			<false/>
 			<key>Background Image Location</key>
 			<string></string>
 			<key>Blend</key>
@@ -946,6 +957,10 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Canonical Parser</key>
+			<false/>
+			<key>Use Italic Font</key>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1022,7 +1037,7 @@
 	<key>SUFeedURL</key>
 	<string>http://iterm2.com/appcasts/testing.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2013-10-28T23:11:43Z</date>
+	<date>2013-11-04T20:37:28Z</date>
 	<key>SUSkippedVersion</key>
 	<string>1.0.0.20130613</string>
 	<key>SavePasteHistory</key>
