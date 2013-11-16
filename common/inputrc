@@ -9,6 +9,9 @@ set show-all-if-ambiguous on
 set bind-tty-special-chars off
 "\C-w": backward-kill-word
 
+# Completed names which are symlinks to directories will have a slash appended.
+set mark-symlinked-directories on
+
 # Make up/down arrows and Ctrl+P/N search forward/backward through history.
 "\e[A": history-search-backward
 "\e[B": history-search-forward
