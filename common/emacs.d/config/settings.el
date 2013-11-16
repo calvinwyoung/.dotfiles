@@ -74,12 +74,10 @@
 ;; Enable electric pair mode for auto-pairing delimiters
 (electric-pair-mode 1)
 
-;; Set whitespace mode to highlight column 80+ chars
-(setq whitespace-style '(lines-tail)
-      whitespace-line-column 80)
-
-;; Make trailing whitespaces visible
-(setq-default show-trailing-whitespace t)
+;; Set whitespace mode to highlight column 80+ chars, as well as any trailing
+;; whitespaces.
+(setq whitespace-line-column 80
+      whitespace-style '(face tabs trailing lines-tail))
 
 ;; Delete trailing whitespaces on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)

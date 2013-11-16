@@ -13,6 +13,10 @@
 
 (add-hook 'python-mode-hook
           (lambda ()
+            ;; Enable whitespace mode for highlighting long lines.
+            (whitespace-mode)
+
+            ;; Add electric-pair support for triple-quotes.
             (add-hook 'post-self-insert-hook
                       #'python-electric-pair-string-delimiter 'append t)))
 
@@ -96,14 +100,14 @@
 ;;;;;;;;
 (add-hook 'java-mode-hook 'java-mode-hook)
 
+;; Define Java specific hook
+(defun java-mode-hook ()
+  (local-set-key [C-f7] 'javac-current))
+
 ;; Compile the current Java buffer
 (defun javac-current()
   (interactive)
   (compile (concat "javac " buffer-file-name)))
-
-;; Define Java specific hook
-(defun java-mode-hook ()
-  (local-set-key [C-f7] 'javac-current))
 
 ;;;;;;;;;;;;
 ;; C / C++
