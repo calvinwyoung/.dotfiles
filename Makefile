@@ -1,4 +1,4 @@
-.PHONY: common darwin linux clean install_linux_packages
+.PHONY: common darwin linux clean convert_plists install_linux_packages
 
 common:
 	python create_symlinks.py common
@@ -23,6 +23,9 @@ clean:
 	python create_symlinks.py -l common | tr "\n" "\0" | xargs -0 rm -f
 	python create_symlinks.py -l linux | tr "\n" "\0" | xargs -0 rm -f
 	python create_symlinks.py -l darwin | tr "\n" "\0" | xargs -0 rm -f
+
+convert_plists:
+	find darwin -name "*.plist" | xargs plutil -convert xml1
 
 install_linux_packages:
 	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
