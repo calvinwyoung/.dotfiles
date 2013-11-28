@@ -39,10 +39,10 @@ slate.bindAll({
     "0:shift,cmd;ctrl;alt": function(win) {
         BASE_WINDOW_FOCUS_DIRECTIONS.toggle(win.screen().id());
     },
-    ",:cmd;ctrl;alt": function(win) {
+    "[:cmd;ctrl;alt": function(win) {
         focusNextScreen(win, true);
     },
-    ".:cmd;ctrl;alt": function(win) {
+    "]:cmd;ctrl;alt": function(win) {
         focusNextScreen(win, false);
     },
 
