@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Window Management</name>
+
+    <!-- Mission Control Shortcuts -->
+    <item>
+      <name>Mission Control Shortcuts</name>
+      <identifier>custom.mission_control_shortcuts</identifier>
+      <appendix>Hyper + X to Mission Control</appendix>
+      <appendix>Hyper + D to Show Desktop</appendix>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::X,
+        {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::EXPOSE_ALL
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::D,
+        {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::EXPOSE_ALL, ModifierFlag::COMMAND_L
+      </autogen>
+    </item>
+
+
+    <!-- Move window to space -->
+    <item>
+      <name>Move window to space</name>
+      <appendix>Moves window to spaces with Shift + Hyper + #.</appendix>
+      <appendix>NOTE: Requires binding F17 to "Move cursor to titlebar w/ Keyboard Maestro.</appendix>
+      <identifier>custom.mission_control_hacks</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_1,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::F17,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+        KeyCode::KEY_1, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_2,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::F17,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+        KeyCode::KEY_2, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_3,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::F17,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+        KeyCode::KEY_3, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_4,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::F17,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+        KeyCode::KEY_4, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+      </autogen>
+    </item>
+
+    <!-- Hyper + Comma/Period to Left/Right Brackets
+
+
+         By default the Hyper + Comma/Period keyboard shortcuts should move
+         focus to different screens (a la AwesomeWM, DWM, etc.). Additionally,
+         we Shift + Hyper + Comma/Period to move windows across different
+         screens, but this is activates sysdiagnose by default. We can't disable
+         this binding, so we need map the Hyper + Comma/Period shortcuts to
+         something else. Slate should bind to Hyper + Left/Right Brackets
+         instead of Hyper + Comma/Period.
+    -->
+    <item>
+      <name>Slate: Hyper + Comma/Period to Left/Right Brackets</name>
+      <appendix>Workaround for binding sysdiagnose shortcuts to move window between screens.</appendix>
+      <identifier>custom.override_sysdiagnose_shortcuts</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::COMMA,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::BRACKET_LEFT,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::F17
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::DOT,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+
+        KeyCode::BRACKET_RIGHT,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::F17
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::COMMA,
+        {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::BRACKET_LEFT,
+        {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::F17
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::DOT,
+        {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::BRACKET_RIGHT,
+        {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::F17
+      </autogen>
+    </item>
+  </item>
+</root>

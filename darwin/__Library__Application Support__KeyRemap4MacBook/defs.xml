@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<root>
+  <appdef>
+    <appname>KEEPASSX</appname>
+    <equal>org.keepassx.keepassx</equal>
+  </appdef>
+
+  <replacementdef>
+    <replacementname>MODIFIER_FLAG_HYPER</replacementname>
+    <replacementvalue>
+      ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+    </replacementvalue>
+  </replacementdef>
+
+  <replacementdef>
+    <replacementname>BROWSERS</replacementname>
+    <replacementvalue>
+      GOOGLE_CHROME,
+      SAFARI,
+      FIREFOX,
+      OPERA
+    </replacementvalue>
+  </replacementdef>
+
+  <replacementdef>
+    <replacementname>EMACS_MODE_IGNORE_APPS</replacementname>
+    <replacementvalue>
+      ECLIPSE,
+      EMACS,
+      REMOTEDESKTOPCONNECTION,
+      TERMINAL,
+      VI,
+      VIRTUALMACHINE,
+      X11
+    </replacementvalue>
+  </replacementdef>
+</root>

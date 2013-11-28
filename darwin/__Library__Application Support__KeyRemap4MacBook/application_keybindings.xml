@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Application-Specific Keybindings</name>
+
+    <!-- Enables Control + # for selecting specific tabs -->
+    <item>
+      <name>Control-based Tab Navigation</name>
+      <appendix>Ctrl + [1-9] to Command + [1-9]</appendix>
+      <appendix>(Only in Terminal, Xcode, and Browsers)</appendix>
+      <identifier>custom.control_based_tab_manipulation</identifier>
+
+      <only>
+        TERMINAL,
+        XCODE,
+        {{ BROWSERS }}
+      </only>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_1, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_1, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_2, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_2, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_3, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_3, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_4, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_4, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_5, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_5, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_6, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_6, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_7, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_7, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_8, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_8, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_9, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_9, ModifierFlag::COMMAND_L
+      </autogen>
+    </item>
+
+    <!-- Finder: Use F2 to Rename files, and Return to open them. -->
+    <item>
+      <name>Finder: F2 to Rename, Return to Open</name>
+      <appendix>Return to "Open" command</appendix>
+      <appendix>F2 to "Rename" command</appendix>
+      <appendix>+ pressing Return while renaming (via F2) saves the new name instead of opening</appendix>
+      <identifier>custom.app_finder_switch_open_rename</identifier>
+
+      <only>FINDER</only>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::F2,
+
+        KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+      <autogen>
+        <!-- Also make this work with the Brightness Up key. -->
+        __ConsumerToKey__
+        ConsumerKeyCode::BRIGHTNESS_UP,
+
+        KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::RETURN, ModifierFlag::NONE,
+
+        KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+
+        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_R,
+
+        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_L,
+
+        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_R,
+
+        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
+        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+      </autogen>
+    </item>
+
+    <item>
+      <name>KeePassX: Copy Username and Password</name>
+      <appendix>Ctrl + Option + C to Copy Username and Password</appendix>
+      <appendix>Ctrl + B to Copy Username</appendix>
+      <appendix>Ctrl + U to Open URL</appendix>
+      <identifier>custom.keepassx_copy_username_and_password</identifier>
+
+      <only>KEEPASSX</only>
+
+      <!-- Copy username and password -->
+      <autogen>
+        __KeyToKey__
+        KeyCode::C,
+        ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::C, ModifierFlag::COMMAND_L,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::B, ModifierFlag::COMMAND_L
+      </autogen>
+
+      <!-- Copy Username -->
+      <autogen>
+        __KeyToKey__
+        KeyCode::B,  ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::B, ModifierFlag::COMMAND_L
+      </autogen>
+
+      <!-- Open URL -->
+      <autogen>
+        __KeyToKey__
+        KeyCode::U,  ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::U, ModifierFlag::COMMAND_L
+      </autogen>
+    </item>
+  </item>
+</root>

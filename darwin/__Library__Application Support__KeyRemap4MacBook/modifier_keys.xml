@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Modifier Keys</name>
+
+    <!-- For Apple Keyboards -->
+    <item>
+      <name>Apple Keyboard Modifier Keys</name>
+      <appendix>Right Command to Right Option</appendix>
+      <appendix>Right Option to Right Command</appendix>
+      <appendix>F18 to "Hyper" (i.e., Control + Option + Command)</appendix>
+      <appendix>F19 to Option</appendix>
+      <appendix></appendix>
+      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.)</appendix>
+      <identifier>custom.apple_keyboard_modifier_keys</identifier>
+
+      <device_only>
+        DeviceVendor::APPLE_COMPUTER,
+        DeviceProduct::ANY
+      </device_only>
+
+      <!-- Right Command / Option -->
+      <autogen>
+        --KeyToKey--
+        KeyCode::COMMAND_R,
+
+        KeyCode::OPTION_R
+      </autogen>
+      <autogen>
+        --KeyToKey--
+        KeyCode::OPTION_R,
+
+        KeyCode::COMMAND_R
+      </autogen>
+
+      <block>
+        <not>VIRTUALMACHINE</not>
+        <autogen>
+          --KeyToKey--
+          KeyCode::F18,
+
+          KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+        </autogen>
+      </block>
+      <block>
+        <!-- For VMs, just send the Command key -->
+        <only>VIRTUALMACHINE</only>
+        <autogen>
+          --KeyToKey--
+          KeyCode::F18,
+
+          KeyCode::COMMAND_L
+        </autogen>
+      </block>
+      <autogen>
+        --KeyToKey--
+        KeyCode::F19,
+
+        KeyCode::OPTION_L
+      </autogen>
+    </item>
+
+    <!-- For PC Keyboards -->
+    <item>
+      <name>PC Keyboard Modifier Keys</name>
+      <appendix>F18 to Option</appendix>
+      <appendix>F19 to "Hyper" (i.e., Control + Option + Command).</appendix>
+      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.)</appendix>
+      <appendix></appendix>
+      <identifier>custom.pc_keyboard_modifier_keys</identifier>
+
+      <device_not>
+        DeviceVendor::APPLE_COMPUTER,
+        DeviceProduct::ANY
+      </device_not>
+
+      <autogen>
+        --KeyToKey--
+        KeyCode::F18,
+
+        KeyCode::OPTION_L
+      </autogen>
+
+      <block>
+        <not>VIRTUALMACHINE</not>
+        <autogen>
+          --KeyToKey--
+          KeyCode::F19,
+
+          KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+        </autogen>
+      </block>
+      <block>
+        <!-- For VMs, just send the Command key -->
+        <only>VIRTUALMACHINE</only>
+        <autogen>
+          --KeyToKey--
+          KeyCode::F19,
+
+          KeyCode::COMMAND_L
+        </autogen>
+      </block>
+    </item>
+
+    <!-- Simultaneously pressing Left Shift + Right Shift activates Caps Lock -->
+    <item>
+      <name>Simultaneous Key Presses [Shift_L+Shift_R] to Caps Lock</name>
+      <identifier>custom.simultaneouskeypresses_ss_to_capslock</identifier>
+      <autogen>
+        __SimultaneousKeyPresses__
+        KeyCode::SHIFT_L, KeyCode::SHIFT_R,
+
+        KeyCode::CAPSLOCK
+      </autogen>
+    </item>
+
+    <!-- Pause/Break to Eject -->
+    <item>
+      <name>Pause/Break Key to Eject</name>
+      <identifier>custom.pause_break_to_eject</identifier>
+      <autogen>
+        __KeyToConsumer__
+        KeyCode::PC_PAUSE,
+
+        ConsumerKeyCode::EJECT
+      </autogen>
+    </item>
+
+    <!-- Fn to Command -->
+    <item>
+      <name>Fn to Command</name>
+      <identifier>custom.fn_to_command</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::FN,
+
+        KeyCode::COMMAND_L
+      </autogen>
+    </item>
+  </item>
+</root>

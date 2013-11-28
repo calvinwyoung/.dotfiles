@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Global Keybindings</name>
+
+    <!-- Simulates Page Up/Page Down/Home/End using arrow keys. This important
+         because those keys aren't available on the laptop keyboard.
+    -->
+    <item>
+      <name>Command + Arrows to Page Up/Page Down/Home/End</name>
+      <identifier>custom.command_arrows_to_page_up_page_down_home_end</identifier>
+      <appendix>Command + Up to Page Up</appendix>
+      <appendix>Command + Down to Page Down</appendix>
+      <appendix>Command + Left to Home</appendix>
+      <appendix>Command + Right to End</appendix>
+      <appendix>(Except in Finder and Terminal)</appendix>
+
+      <!-- Don't enable these shortcuts in Finder/iTerm, which already have
+           bindings for Command + Arrow keys.
+      -->
+      <not>
+        FINDER,
+        TERMINAL
+      </not>
+
+      <autogen>
+        --KeyToKey--
+        KeyCode::CURSOR_UP, ModifierFlag::COMMAND_L,
+        KeyCode::PAGEUP
+      </autogen>
+      <autogen>
+        --KeyToKey--
+        KeyCode::CURSOR_DOWN, ModifierFlag::COMMAND_L,
+        KeyCode::PAGEDOWN
+      </autogen>
+      <autogen>
+        --KeyToKey--
+        KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L,
+        KeyCode::HOME
+      </autogen>
+      <autogen>
+        --KeyToKey--
+        KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L,
+        KeyCode::END
+      </autogen>
+    </item>
+
+    <!-- Remaps some standard keyboard shorcuts to use the control key instead of
+         command.
+    -->
+    <item>
+      <name>Control-based Shortcuts</name>
+      <appendix>Ctrl + T/L/R/S/C/V/X/Z to Command + T/L/R/S/C/V/X/Z</appendix>
+      <appendix>Ctrl + Option + F to Command + F</appendix>
+      <appendix>Ctrl + Option + W to Command + W</appendix>
+      <appendix>Ctrl + [/] to Command + [/]</appendix>
+      <appendix>Ctrl + +/-/0 to Command + +/-/0</appendix>
+      <appendix>Ctrl + ScrollWheel to Command + +/-</appendix>
+      <appendix>(Except in Emacs, Terminal, and Virtual Machines)</appendix>
+      <identifier>custom.control_based_shortcuts</identifier>
+
+      <not>
+        EMACS,
+        TERMINAL,
+        VIRTUALMACHINE,
+        VNC
+      </not>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::T, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::T, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::T, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+        KeyCode::T, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::L, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::R, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::R, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::R, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+        KeyCode::R, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::S, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::C, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::C, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::V, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::V, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::X, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::X, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::Z, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::Z, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::Z, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+        KeyCode::Z, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::W, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::W, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::F, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::F, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::BRACKET_LEFT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::BRACKET_RIGHT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::EQUAL, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::EQUAL, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::MINUS, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::MINUS, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::KEY_0, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::KEY_0, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __ScrollWheelToKey__
+        ScrollWheel::UP, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::EQUAL, ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __ScrollWheelToKey__
+        ScrollWheel::DOWN, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::MINUS, ModifierFlag::COMMAND_L
+      </autogen>
+    </item>
+
+    <include path="emacs_mode.xml">
+      <replacementdef>
+        <replacementname>CAPSLOCK_OR_NONE</replacementname>
+        <replacementvalue>ModifierFlag::NONE</replacementvalue>
+      </replacementdef>
+    </include>
+    <include path="emacs_mode.xml">
+      <replacementdef>
+        <replacementname>CAPSLOCK_OR_NONE</replacementname>
+        <replacementvalue>ModifierFlag::CAPSLOCK | ModifierFlag::NONE</replacementvalue>
+      </replacementdef>
+    </include>
+
+    <!-- Emacs MarkSet mode -->
+    <item>
+      <name>Markset mode</name>
+
+      <!-- Controls turning on MarkSet mode -->
+      <item>
+        <name>Enable MarkSet mode</name>
+        <identifier>custom.ctrl_space_set_mark</identifier>
+        <appendix>Emulates the Control + Space set mark function in Emacs</appendix>
+        <appendix>(Except in Emacs, Terminal, Virtual Machines, etc.)</appendix>
+
+        <not>{{ EMACS_MODE_IGNORE_APPS }}</not>
+
+        <autogen>
+          __KeyToKey__
+          KeyCode::SPACE, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::NONE,
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_ON,
+          KeyCode::VK_CONFIG_FORCE_ON_notsave_ctrl_space_set_mark_core
+        </autogen>
+      </item>
+
+      <!-- Binding definitions that will be enabled in MarkSet mode -->
+      <item>
+        <name>MarkSet mode bindings</name>
+        <appendix>Ctrl + W to Command + X</appendix>
+        <appendix>Ctrl + D to Delete</appendix>
+        <appendix>Option + W to Command + C</appendix>
+        <appendix>Ctrl + G to turn off MarkSet</appendix>
+        <appendix>Ctrl + Space to turn off MarkSet</appendix>
+        <identifier vk_config="true">notsave.ctrl_space_set_mark_core</identifier>
+
+        <!-- Set the status message text -->
+        <autogen>
+          __ShowStatusMessage__
+          MarkSet
+        </autogen>
+
+        <!-- Move cursor up by 5 lines -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::P, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L
+        </autogen>
+
+        <!-- Move cursor down by 5 lines -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::N, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L,
+          KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L
+        </autogen>
+
+        <!-- Cut -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::W, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_OFF,
+          KeyCode::X, ModifierFlag::COMMAND_L,
+          KeyCode::VK_CONFIG_FORCE_OFF_notsave_ctrl_space_set_mark_core,
+          Option::NOREPEAT,
+        </autogen>
+
+        <!-- Copy -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::W, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION  | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_OFF,
+          KeyCode::C, ModifierFlag::COMMAND_L,
+          KeyCode::VK_CONFIG_FORCE_OFF_notsave_ctrl_space_set_mark_core,
+          KeyCode::CURSOR_RIGHT,
+          Option::NOREPEAT,
+        </autogen>
+
+        <!-- Delete without adding to clipboard -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::D, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_OFF,
+          KeyCode::DELETE,
+          KeyCode::VK_CONFIG_FORCE_OFF_notsave_ctrl_space_set_mark_core,
+          Option::NOREPEAT,
+        </autogen>
+
+        <!-- End Markset mode, leaving selected region highlighted -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::G, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_OFF,
+          KeyCode::VK_CONFIG_FORCE_OFF_notsave_ctrl_space_set_mark_core,
+          Option::NOREPEAT,
+        </autogen>
+
+        <!-- End Markset mode, leaving selected region highlighted -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::SPACE, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::VK_LOCK_SHIFT_L_FORCE_OFF,
+          KeyCode::VK_CONFIG_FORCE_OFF_notsave_ctrl_space_set_mark_core,
+          Option::NOREPEAT,
+        </autogen>
+      </item>
+    </item>
+
+    <!-- Disable bad habit keyboard shortcuts -->
+    <item>
+      <name>Break Bad Habits</name>
+      <identifier>custom.break_bad_habits</identifier>
+      <appendix>Disable Option_L + F/B (Force using Option_R)</appendix>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::B,
+        ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::VK_NONE
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::F,
+        ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::VK_NONE
+      </autogen>
+    </item>
+
+    <!-- Emulates the Home/End keys on PCs -->
+    <item>
+      <name>PC Style Home/End</name>
+      <identifier>custom.pc_style_home_end</identifier>
+      <appendix>Home to Ctrl + A</appendix>
+      <appendix>End to Ctrl + E</appendix>
+      <appendix>(Except in Browsers)</appendix>
+
+      <not>
+        {{ BROWSERS }},
+        VIRTUALMACHINE,
+        VNC
+      </not>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::HOME,
+
+        KeyCode::A, ModifierFlag::CONTROL_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::END,
+
+        KeyCode::E, ModifierFlag::CONTROL_L
+      </autogen>
+    </item>
+  </item>
+</root>

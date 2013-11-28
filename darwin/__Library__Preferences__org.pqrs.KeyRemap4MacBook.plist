@@ -5,7 +5,7 @@
 	<key>SUFeedURL</key>
 	<string>https://pqrs.org/macosx/keyremap4macbook/files/appcast.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2013-10-28T23:11:42Z</date>
+	<date>2013-11-11T06:01:35Z</date>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
@@ -29,17 +29,25 @@
 		<integer>1</integer>
 		<key>custom.command_arrows_to_page_up_page_down_home_end</key>
 		<integer>1</integer>
-		<key>custom.control_based_browser_shortcuts</key>
-		<integer>1</integer>
 		<key>custom.control_based_shortcuts</key>
+		<integer>1</integer>
+		<key>custom.control_based_tab_manipulation</key>
 		<integer>1</integer>
 		<key>custom.control_left_click_to_command_left_click</key>
 		<integer>1</integer>
-		<key>custom.control_option_w_to_command_w</key>
+		<key>custom.ctrl_space_set_mark</key>
+		<integer>1</integer>
+		<key>custom.emacs_mode</key>
+		<integer>1</integer>
+		<key>custom.emacs_mode ModifierFlag::CAPSLOCK | ModifierFlag::NONE</key>
+		<integer>1</integer>
+		<key>custom.emacs_mode ModifierFlag::NONE</key>
 		<integer>1</integer>
 		<key>custom.fn_to_command</key>
 		<integer>1</integer>
 		<key>custom.hyper_click_support</key>
+		<integer>1</integer>
+		<key>custom.keepassx_copy_username_and_password</key>
 		<integer>1</integer>
 		<key>custom.logitech_g9_mouse_config</key>
 		<integer>1</integer>
@@ -53,6 +61,8 @@
 		<integer>1</integer>
 		<key>custom.pc_keyboard_modifier_keys</key>
 		<integer>1</integer>
+		<key>custom.pc_style_home_end</key>
+		<integer>1</integer>
 		<key>custom.simultaneouskeypresses_ss_to_capslock</key>
 		<integer>1</integer>
 		<key>custom.sysdiagnose_shortcut_hack</key>
@@ -63,6 +73,8 @@
 		<integer>1</integer>
 		<key>notsave.automatically_enable_pointing_device</key>
 		<integer>1</integer>
+		<key>parameter.acceleration_of_scroll</key>
+		<integer>3</integer>
 		<key>parameter.keyoverlaidmodifier_initial_modifier_wait</key>
 		<integer>150</integer>
 		<key>parameter.keyoverlaidmodifier_timeout</key>
