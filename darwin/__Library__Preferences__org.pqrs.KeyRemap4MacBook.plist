@@ -74,11 +74,9 @@
 		<key>notsave.automatically_enable_pointing_device</key>
 		<integer>1</integer>
 		<key>parameter.acceleration_of_scroll</key>
-		<integer>3</integer>
-		<key>parameter.keyoverlaidmodifier_initial_modifier_wait</key>
-		<integer>150</integer>
-		<key>parameter.keyoverlaidmodifier_timeout</key>
-		<integer>500</integer>
+		<integer>15</integer>
+		<key>parameter.maximum_speed_of_scroll</key>
+		<integer>15</integer>
 		<key>parameter.scrollwheeltokey_keyrepeat_wait</key>
 		<integer>150</integer>
 		<key>parameter.simultaneouskeypresses_delay</key>
