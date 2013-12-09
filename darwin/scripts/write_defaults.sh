@@ -123,7 +123,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 ###############################################################################
 
 for app in "Dock" "Finder"; do
-    echo "Restargin $app"
+    echo "Restarting $app"
     killall "$app" > /dev/null 2>&1
 done
 echo "Done restarting apps. Note that some changes require restarting to take effect."
