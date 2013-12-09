@@ -34,7 +34,11 @@
       </autogen>
 
       <block>
-        <not>VIRTUALMACHINE</not>
+        <not>
+          VIRTUALMACHINE,
+          VNC
+        </not>
+
         <autogen>
           --KeyToKey--
           KeyCode::F18,
@@ -44,7 +48,11 @@
       </block>
       <block>
         <!-- For VMs, just send the Command key -->
-        <only>VIRTUALMACHINE</only>
+        <only>
+          VIRTUALMACHINE,
+          VNC
+        </only>
+
         <autogen>
           --KeyToKey--
           KeyCode::F18,
@@ -82,7 +90,11 @@
       </autogen>
 
       <block>
-        <not>VIRTUALMACHINE</not>
+        <not>
+          VIRTUALMACHINE,
+          VNC
+        </not>
+
         <autogen>
           --KeyToKey--
           KeyCode::F19,
@@ -92,7 +104,11 @@
       </block>
       <block>
         <!-- For VMs, just send the Command key -->
-        <only>VIRTUALMACHINE</only>
+        <only>
+          VIRTUALMACHINE,
+          VNC
+        </only>
+
         <autogen>
           --KeyToKey--
           KeyCode::F19,
