@@ -107,7 +107,10 @@ defaults write -g NSScrollAnimationEnabled -bool false
 # http://osxdaily.com/2012/05/10/disable-elastic-rubber-band-scrolling-in-mac-os-x/
 defaults write -g NSScrollViewRubberbanding -int 0
 
-# Enable very fast key repeat
+# Disable mouse acceleration (but not trackpad acceleration)
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
+# Enable key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 ###############################################################################
