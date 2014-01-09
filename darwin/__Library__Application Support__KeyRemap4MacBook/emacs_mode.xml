@@ -11,6 +11,38 @@
 
     <not>{{ EMACS_MODE_IGNORE_APPS }}</not>
 
+    <!-- Cursor Up -->
+    <autogen>
+      __KeyToKey__
+      KeyCode::P, ModifierFlag::CONTROL_L | {{ CAPSLOCK_OR_NONE }},
+
+      KeyCode::CURSOR_UP
+    </autogen>
+
+    <!-- Cursor Down -->
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::CONTROL_L | {{ CAPSLOCK_OR_NONE }},
+
+      KeyCode::CURSOR_DOWN
+    </autogen>
+
+    <!-- Cursor Left -->
+    <autogen>
+      __KeyToKey__
+      KeyCode::B, ModifierFlag::CONTROL_L | {{ CAPSLOCK_OR_NONE }},
+
+      KeyCode::CURSOR_LEFT
+    </autogen>
+
+    <!-- Cursor Right -->
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::CONTROL_L | {{ CAPSLOCK_OR_NONE }},
+
+      KeyCode::CURSOR_RIGHT
+    </autogen>
+
     <!-- Home -->
     <autogen>
       __KeyToKey__

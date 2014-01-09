@@ -55,6 +55,7 @@
       <appendix>Ctrl + Option + W to Command + W</appendix>
       <appendix>Ctrl + [/] to Command + [/]</appendix>
       <appendix>Ctrl + +/-/0 to Command + +/-/0</appendix>
+      <appendix>Ctrl + Left/Right Arrow to Option + Left/Right Arrow</appendix>
       <appendix>Ctrl + ScrollWheel to Command + +/-</appendix>
       <appendix>(Except in Emacs, Terminal, and Virtual Machines)</appendix>
       <identifier>custom.control_based_shortcuts</identifier>
@@ -175,6 +176,30 @@
         KeyCode::KEY_0, ModifierFlag::COMMAND_L
       </autogen>
       <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_LEFT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_LEFT, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+        KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_RIGHT, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+
+        KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_RIGHT, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+        KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L
+      </autogen>
+      <autogen>
         __ScrollWheelToKey__
         ScrollWheel::UP, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
 
@@ -236,6 +261,38 @@
         <autogen>
           __ShowStatusMessage__
           MarkSet
+        </autogen>
+
+        <!-- Move cursor forward one character -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::F, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_RIGHT, ModifierFlag::SHIFT_L,
+        </autogen>
+
+        <!-- Move cursor backward one character -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::B, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_LEFT, ModifierFlag::SHIFT_L,
+        </autogen>
+
+        <!-- Move cursor forward one word -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::F, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
+        </autogen>
+
+        <!-- Move cursor backward one word -->
+        <autogen>
+          __KeyToKey__
+          KeyCode::B, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
+
+          KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L,
         </autogen>
 
         <!-- Move cursor up by 5 lines -->
