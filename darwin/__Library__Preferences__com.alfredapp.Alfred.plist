@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>http://media.alfredapp.com/update/appcast.xml</string>
+	<key>SULastCheckTime</key>
+	<date>2013-10-22T20:48:53Z</date>
+	<key>SUScheduledCheckInterval</key>
+	<real>604800</real>
+	<key>SUSkippedVersion</key>
+	<string>268</string>
+	<key>WebKitDefaultFontSize</key>
+	<integer>11</integer>
+	<key>WebKitStandardFont</key>
+	<string>Lucida Grande</string>
+	<key>appbundle</key>
+	<string>267</string>
+	<key>appearance.fadeIn</key>
+	<false/>
+	<key>appearance.hideHat</key>
+	<true/>
+	<key>appearance.hideStatusBarIcon</key>
+	<true/>
+	<key>appearance.themeuid</key>
+	<string>alfred.theme.darkandsmooth</string>
+	<key>appearance.windowPositionSaved</key>
+	<true/>
+	<key>appsetup</key>
+	<string>1.3.3</string>
+	<key>clipboard.enabled</key>
+	<true/>
+	<key>clipboard.hotKey</key>
+	<integer>9</integer>
+	<key>clipboard.hotMod</key>
+	<integer>786721</integer>
+	<key>clipboard.hotString</key>
+	<string>V</string>
+	<key>clipboard.snippets.showparent</key>
+	<false/>
+	<key>hotKey</key>
+	<integer>35</integer>
+	<key>hotMod</key>
+	<integer>1835305</integer>
+	<key>hotString</key>
+	<string>P</string>
+	<key>itunes.libraryxml</key>
+	<string>~/Music/iTunes/iTunes Music Library.xml</string>
+	<key>keyboard.locale</key>
+	<string>com.apple.keylayout.US</string>
+	<key>results.actionModifier</key>
+	<integer>1</integer>
+	<key>results.ctrlEnter</key>
+	<integer>4</integer>
+	<key>stats.count</key>
+	<integer>4003</integer>
+	<key>stats.from</key>
+	<date>2013-03-29T07:00:00Z</date>
+	<key>terminal.application</key>
+	<integer>1</integer>
+	<key>weblocale</key>
+	<string>United States</string>
+	<key>windowPositionX</key>
+	<real>328</real>
+	<key>windowPositionY</key>
+	<real>578</real>
+	<key>windowScreenCount</key>
+	<integer>1</integer>
+</dict>
+</plist>
