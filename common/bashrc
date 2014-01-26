@@ -23,6 +23,11 @@ if [ -d "$HOME/.bin" ]; then
     PATH="$HOME/.bin:$PATH"
 fi
 
+# Include the rvm bin
+if [ -d "$HOME/.rvm/bin" ]; then
+    PATH="$HOME/.rvm/bin:$PATH"
+fi
+
 # Disable Ctrl+S to suspend terminal
 stty -ixon
 
