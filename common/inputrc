@@ -1,7 +1,7 @@
 # Enable case-insensitive tab completion.
 set completion-ignore-case on
 
-# List all matches in case multiple possible completions are possible.
+# If more than one completion is possible, then list all matches immediately.
 set show-all-if-ambiguous on
 
 # Adds punctuation as word delimiters, and make Ctrl + W kill word until last
