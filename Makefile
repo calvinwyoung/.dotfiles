@@ -1,17 +1,17 @@
 .PHONY: common darwin linux clean convert_plists install_linux_packages
 
 common:
-	python create_symlinks.py common
+	python create_symlinks.py common/
 	git submodule update --init --recursive
 
 # js2-mode must be byte-compiled or it runs balls-slow.
 	$(MAKE) -C common/emacs.d/vendor/js2-mode
 
 linux: common
-	python create_symlinks.py linux
+	python create_symlinks.py linux/
 
 darwin: common
-	python create_symlinks.py darwin
+	python create_symlinks.py darwin/
 
 # Apply custom default settings.
 	sh ~/.scripts/write_defaults.sh
@@ -20,9 +20,9 @@ darwin: common
 	launchctl load ~/Library/LaunchAgents/login_init.plist
 
 clean:
-	python create_symlinks.py -l common | tr "\n" "\0" | xargs -0 rm -f
-	python create_symlinks.py -l linux | tr "\n" "\0" | xargs -0 rm -f
-	python create_symlinks.py -l darwin | tr "\n" "\0" | xargs -0 rm -f
+	python create_symlinks.py -l common/  | tr "\n" "\0" | xargs -0 rm -f
+	python create_symlinks.py -l linux/ | tr "\n" "\0" | xargs -0 rm -f
+	python create_symlinks.py -l darwin/ | tr "\n" "\0" | xargs -0 rm -f
 
 convert_plists:
 	find darwin -name "*.plist" | xargs plutil -convert xml1

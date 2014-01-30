@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-"""Setup script to install the dotfiles for the current user.
+"""Setup script to install the dotfiles in the given directories.
 
-For each file/subdirectory in the current directory, this script installs a
-symlink in the user's home directory named ".[filename]". If the filename
-contains a double-underscore (i.e., "__"), the part of the filename following
-the double-underscore will be interpreted as subdirectory. Therefore, for a file
-named "parent__child", this script will install a symlink at "~/.parent/child"
-that points to "parent__child".
+This script creates a symlink from `~/.[name]` for each file in the
+corresponding system directory.  If a file named `~/.[name]` already exists,
+then we prompt the user before overwriting it. This script interpretes all
+double-udnerscores (i.e., `__`) in teh file name as directory partitions.
+partition. Therefore, a file named `parent__child` will be installed to
+`~/.parent/child`.
 """
 
 import argparse
