@@ -1,5 +1,5 @@
 #!/bin/bash
-# Finds non-ascii characters in the given files
+# Finds non-ascii characters in the given files.
 if [ `uname` == "Darwin" ]; then
     pcregrep --color="auto" -n "[\x80-\xFF]" "$@"
 else
