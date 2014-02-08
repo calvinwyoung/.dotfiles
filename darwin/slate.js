@@ -69,16 +69,6 @@ slate.bindAll({
     // "tab:alt": slate.op("switch"),
 });
 
-/* ----------------------- */
-/* APPLESCRIPT KEYBINDINGS */
-/* ----------------------- */
-
-bindApplescript("`:cmd;ctrl;alt", "open_finder.scpt");
-bindApplescript("return:cmd;ctrl;alt", "open_iterm.scpt");
-bindApplescript("e:cmd;ctrl;alt", "open_emacs.scpt");
-bindApplescript("w:cmd;ctrl;alt", "open_google_chrome.scpt");
-bindApplescript("w:shift;cmd;ctrl;alt", "open_google_chrome_incognito.scpt");
-
 /* ------------------ */
 /* LAYOUT KEYBINDINGS */
 /* ------------------ */

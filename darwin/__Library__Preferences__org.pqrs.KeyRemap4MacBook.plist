@@ -5,7 +5,7 @@
 	<key>SUFeedURL</key>
 	<string>https://pqrs.org/macosx/keyremap4macbook/files/appcast.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2014-01-06T07:02:26Z</date>
+	<date>2014-02-06T19:48:01Z</date>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
@@ -24,6 +24,8 @@
 		<key>custom.app_finder_switch_open_rename</key>
 		<integer>1</integer>
 		<key>custom.apple_keyboard_modifier_keys</key>
+		<integer>1</integer>
+		<key>custom.application_launchers</key>
 		<integer>1</integer>
 		<key>custom.break_bad_habits</key>
 		<integer>1</integer>

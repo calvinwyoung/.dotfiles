@@ -3,6 +3,71 @@
   <item>
     <name>Application-Specific Keybindings</name>
 
+    <!-- Application launchers -->
+    <item>
+      <name>Application Launchers</name>
+      <appendix>Hyper + ` to open Finder</appendix>
+      <appendix>Hyper + Return to open iTerm</appendix>
+      <appendix>Hyper + E to open Emacs</appendix>
+      <appendix>Hyper + W to open Chrome</appendix>
+      <appendix>Hyper + S to open KeePassX</appendix>
+      <identifier>custom.application_launchers</identifier>
+
+      <!-- Define special keycodes for launching apps -->
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_Finder</name>
+        <url type="file">/System/Library/CoreServices/Finder.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_iTerm</name>
+        <url type="file">/Applications/iTerm.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_Chrome</name>
+        <url type="file">/Applications/Google Chrome.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_Emacs</name>
+        <url type="file">/Applications/Emacs.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_KeePassX</name>
+        <url type="file">/Applications/KeePassX.app</url>
+      </vkopenurldef>
+
+      <!-- Then define the actual applicaton launcher shortcuts. -->
+      <autogen>
+        __KeyToKey__
+        KeyCode::BACKQUOTE, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_Finder
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::RETURN, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_iTerm
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::E, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_Emacs
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::W, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_Chrome
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::S, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_KeePassX
+      </autogen>
+    </item>
+
     <!-- Enables Control + # for selecting specific tabs -->
     <item>
       <name>Control-based Tab Navigation</name>
