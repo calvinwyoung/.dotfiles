@@ -1,13 +1,18 @@
-;; Enable auto indenting.
-(global-set-key (kbd "RET") 'newline-and-indent)
-
 ;; Use a simpler buffer list.
 (global-set-key "\C-x\C-b" 'bs-show)
 (setq bs-default-configuration "files-and-scratch")
 
-;; Easier buffer switching.
-(global-set-key "\C-\M-h" 'previous-buffer)
-(global-set-key "\C-\M-l" 'next-buffer)
+;; Add commands for redo. The first binding is for GUI mode, and the second one
+;; is for terminal mode.
+(global-set-key (kbd "C-M-/") 'redo)
+(global-set-key (kbd "C-M-_") 'redo)
+
+;; Easier buffer switching. The naming here is kind of confusing -- the
+;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
+;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
+;; direction.
+(global-set-key "\C-\M-h" 'cycle-buffer)
+(global-set-key "\C-\M-l" 'cycle-buffer-backward)
 
 ;; Easier window switching.
 (global-set-key "\C-\M-k" 'windmove-up)
@@ -16,6 +21,9 @@
 ;; Bind both Ctrl + V and Meta + V to paste.
 (global-set-key "\C-v" 'cua-paste)
 (global-set-key "\M-v" 'cua-paste)
+
+;; Enable auto indenting.
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; Make Ctrl + W kill previous word with custom function.
 (global-set-key "\C-w" 'backward-kill-word)

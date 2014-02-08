@@ -11,5 +11,5 @@
 (load-library "settings")
 (load-library "defuns")
 (load-library "modes")
-(load-library "keybindings")
 (load-library "plugins")
+(load-library "keybindings")

@@ -26,6 +26,16 @@
 ;; (See http://www.python.org/dev/peps/pep-0008/#documentation-strings)
 (setq python-fill-docstring-style 'pep-257-nn)
 
+;;;;;;;;
+;; Ruby
+;;;;;;;;
+(eval-after-load 'ruby-mode
+  '(progn
+     ;; Preent ruby-mode from mapping Ctrl + Meta + h to backward-word-kill, for
+     ;; which we already use Ctrl + w. Instead, we reserve this binding for
+     ;; buffer-switching.
+     (define-key ruby-mode-map "\C-\M-h" nil)))
+
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
