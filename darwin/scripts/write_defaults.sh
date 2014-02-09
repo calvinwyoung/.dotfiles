@@ -113,6 +113,10 @@ defaults write .GlobalPreferences com.apple.mouse.scaling -1
 # Enable key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Enable zooming by using command key + scroll whell
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 1048576
+
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
