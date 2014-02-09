@@ -29,3 +29,6 @@ convert_plists:
 
 install_linux_packages:
 	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
+
+download_osx_packages:
+	bash download_osx_packages.sh
