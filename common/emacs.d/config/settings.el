@@ -1,7 +1,8 @@
-;; Set default directory
+;; Set the default directory to the home directory regardless of where Emacs was
+;; started.
 (setq default-directory "~/")
 
-;; Set window title
+;; Set window title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
 ;; Turn off the splash screen
