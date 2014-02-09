@@ -46,7 +46,7 @@ defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock tilesize -integer 32
 
 # Disable the indicator lights for currently running apps.
-defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock show-process-indicators -bool false
 
 ###############################################################################
 # Finder                                                                      #
