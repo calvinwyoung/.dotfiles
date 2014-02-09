@@ -21,23 +21,32 @@ defaults write com.apple.systemsound com.apple.sound.uiaudio.enabled -int 0
 # Make Mission Control animations faster.
 defaults write com.apple.dock expose-animation-duration -float 0.02
 
-# Don’t show Dashboard as a Space
+# Don’t show Dashboard as a Space.
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# Disable Dashboard
+# Disable Dashboard.
 defaults write com.apple.dashboard mcx-disabled -bool true
 
-# Enable autohide on the Dock
+# Enable autohide on the Dock.
 defaults write com.apple.dock autohide -bool true
 
-# Remove the autohiding Dock delay
+# Remove the autohiding Dock delay.
 defaults write com.apple.dock autohide-delay -float 0
 
-# Remove the animation when hiding/showing the Dock
+# Remove the animation when hiding/showing the Dock.
 defaults write com.apple.dock autohide-time-modifier -float 0
 
-# Remove all default apps from the Dock
+# Remove all default apps from the Dock.
 defaults write com.apple.dock persistent-apps -array
+
+# Pin Dock to the left edge.
+defaults write com.apple.dock orientation -string left
+
+# Set the Dock tile sizes.
+defaults write com.apple.dock tilesize -integer 32
+
+# Disable the indicator lights for currently running apps.
+defaults write com.apple.dock show-process-indicators -bool true
 
 ###############################################################################
 # Finder                                                                      #
