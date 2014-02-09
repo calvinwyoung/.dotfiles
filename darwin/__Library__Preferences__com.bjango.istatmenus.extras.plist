@@ -65,6 +65,8 @@
 	</array>
 	<key>SkinType</key>
 	<integer>0</integer>
+	<key>_mac_id</key>
+	<string>8eb75a86b484f9aeb49c1cc86c34016c</string>
 	<key>migratedExtras4.0</key>
 	<true/>
 	<key>sendDiagnostics</key>
