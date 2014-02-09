@@ -95,40 +95,43 @@ defaults write com.apple.finder NSUserKeyEquivalents \
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-# Trackpad: enable tap to click for this user and for the login screen
+# Trackpad: enable tap to click for this user and for the login screen.
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Trackpad: map bottom right corner to right-click
+# Trackpad: map bottom right corner to right-click.
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Disable two finger swipe between pages
+# Disable two finger swipe between pages.
 defaults write -g AppleEnableSwipeNavigateWithScrolls -bool false
 
-# Disable “natural” (Lion-style) scrolling
+# Disable “natural” (Lion-style) scrolling.
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-# Always show scrollbars
+# Always show scrollbars.
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-# Disable smooth scrolling
+# Disable smooth scrolling.
 defaults write -g NSScrollAnimationEnabled -bool false
 
-# Disable elastic scrolling
+# Disable elastic scrolling.
 # http://osxdaily.com/2012/05/10/disable-elastic-rubber-band-scrolling-in-mac-os-x/
 defaults write -g NSScrollViewRubberbanding -int 0
 
-# Disable mouse acceleration (but not trackpad acceleration)
+# Disable mouse acceleration (this doesn't affect the trackpad).
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
-# Enable key repeat
+# Set trackpad tracking speed.
+defaults write NSGlobalDomain com.apple.trackpad.scaling -int 2
+
+# Enable key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-# Enable zooming by using command key + scroll whell
+# Enable zooming by using command key + scroll whell.
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 1048576
 
