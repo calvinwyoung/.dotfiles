@@ -1,3 +1,6 @@
+;; Set default directory
+(setq default-directory "~/")
+
 ;; Set window title
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
