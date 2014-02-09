@@ -74,7 +74,6 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
 # Hide standard folders.
-chflags hidden ~/Library
 chflags hidden ~/Movies
 chflags hidden ~/Music
 chflags hidden ~/Public

@@ -7,9 +7,9 @@
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{800, 520}</string>
 	<key>NSWindow Frame alfredpreferences</key>
-	<string>2061 379 1100 602 1920 0 1920 1200 </string>
+	<string>58 175 1100 602 0 0 1440 878 </string>
 	<key>appearance.theme</key>
-	<string>alfred.theme.custom.ACDB4207-67B0-4643-BB6E-D8209D5203C4</string>
+	<string>alfred.theme.darkandsmooth</string>
 	<key>features.clipboard.enabled</key>
 	<true/>
 	<key>hotkey.default</key>
@@ -22,12 +22,12 @@
 		<string>P</string>
 	</dict>
 	<key>lastTab</key>
-	<string>features</string>
+	<string>appearance</string>
 	<key>lastTabBuild</key>
-	<string>218</string>
+	<string>227</string>
 	<key>lastTabTS</key>
-	<real>411608578.65467203</real>
+	<real>413624693.97736698</real>
 	<key>version</key>
-	<string>2.1</string>
+	<string>2.1.1</string>
 </dict>
 </plist>
