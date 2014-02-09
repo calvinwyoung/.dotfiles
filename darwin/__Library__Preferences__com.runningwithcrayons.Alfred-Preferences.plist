@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSNavLastRootDirectory</key>
+	<string>~/Documents</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{800, 520}</string>
+	<key>NSWindow Frame alfredpreferences</key>
+	<string>2061 379 1100 602 1920 0 1920 1200 </string>
+	<key>appearance.theme</key>
+	<string>alfred.theme.custom.ACDB4207-67B0-4643-BB6E-D8209D5203C4</string>
+	<key>features.clipboard.enabled</key>
+	<true/>
+	<key>hotkey.default</key>
+	<dict>
+		<key>key</key>
+		<integer>35</integer>
+		<key>mod</key>
+		<integer>1835008</integer>
+		<key>string</key>
+		<string>P</string>
+	</dict>
+	<key>lastTab</key>
+	<string>features</string>
+	<key>lastTabBuild</key>
+	<string>218</string>
+	<key>lastTabTS</key>
+	<real>411608578.65467203</real>
+	<key>version</key>
+	<string>2.1</string>
+</dict>
+</plist>
