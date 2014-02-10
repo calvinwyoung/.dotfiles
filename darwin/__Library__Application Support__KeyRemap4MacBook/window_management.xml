@@ -101,40 +101,36 @@
       <autogen>
         __KeyToKey__
         KeyCode::COMMA,
-        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::BRACKET_LEFT,
-        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
-        KeyCode::VK_WAIT_100MS,
-        KeyCode::F17
+        {{ MODIFIER_FLAG_HYPER }}
       </autogen>
       <autogen>
         __KeyToKey__
         KeyCode::DOT,
-        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::BRACKET_RIGHT,
-        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
-        KeyCode::VK_WAIT_100MS,
-        KeyCode::F17
+        {{ MODIFIER_FLAG_HYPER }}
       </autogen>
       <autogen>
         __KeyToKey__
         KeyCode::COMMA,
-        {{ MODIFIER_FLAG_HYPER }},
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
 
         KeyCode::BRACKET_LEFT,
-        {{ MODIFIER_FLAG_HYPER }},
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
         KeyCode::VK_WAIT_100MS,
         KeyCode::F17
       </autogen>
       <autogen>
         __KeyToKey__
         KeyCode::DOT,
-        {{ MODIFIER_FLAG_HYPER }},
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
 
         KeyCode::BRACKET_RIGHT,
-        {{ MODIFIER_FLAG_HYPER }},
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::SHIFT_L,
         KeyCode::VK_WAIT_100MS,
         KeyCode::F17
       </autogen>
