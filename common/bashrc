@@ -33,7 +33,7 @@ stty -ixon
 
 # Enable bash completion
 if [ `uname` == "Darwin" ]; then
-    [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+    [[ -f /opt/local/etc/profile.d/bash_completion.sh ]] && source /opt/local/etc/profile.d/bash_completion.sh
 else
     [[ -f /etc/bash_completion ]] && source /etc/bash_completion
 fi
