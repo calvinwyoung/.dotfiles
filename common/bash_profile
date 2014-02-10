@@ -1,5 +1,5 @@
 # Add MacPorts packages to PATH
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
+export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
 
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 [[ -f $HOME/.profile ]] && . $HOME/.profile
