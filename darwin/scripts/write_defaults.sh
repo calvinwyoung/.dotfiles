@@ -21,6 +21,9 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
 # Dock, Dashboard, Mission Control                                            #
 ###############################################################################
 
+# Disable "Displays have separate spaces".
+defaults write com.apple.spaces spans-displays -bool true
+
 # Make Mission Control animations faster.
 defaults write com.apple.dock expose-animation-duration -float 0.02
 
