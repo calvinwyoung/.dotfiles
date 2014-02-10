@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+# sudo port install coreutils
+# sudo port install findutils
+# sudo port install grep
 # sudo port install bash-completion
+# sudo port install p5-file-rename
 # sudo port install git-core +bash_completion
 # sudo port install emacs-app
 
