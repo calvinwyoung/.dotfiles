@@ -13,6 +13,14 @@ linux: common
 darwin: common
 	python create_symlinks.py darwin/
 
+# Also create symlink for ~/Library/Preferences directory. Directory symlinks
+# using the `ln` command are tricky, so only do this if the Preferences
+# directory is a real directory and not a symlink.
+	if [ ! -h ~/Library/Preferences ]; then \
+	    sudo rm -rf ~/Library/Preferences; \
+	    ln -s ~/Documents/App\ Storage/OSX__Library__Preferences ~/Library/Preferences; \
+	fi
+
 # Apply custom default settings.
 	sh ~/.scripts/write_defaults.sh
 
