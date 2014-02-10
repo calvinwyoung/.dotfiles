@@ -6,7 +6,10 @@
 # sudo port install bash-completion
 # sudo port install p5-file-rename
 # sudo port install git-core +bash_completion
+# sudo port install watch
+# sudo port install emacs
 # sudo port install emacs-app
+# sudo port install unrar
 
 URLS=(
     # MacPorts

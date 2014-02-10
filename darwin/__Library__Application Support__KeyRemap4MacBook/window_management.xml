@@ -3,30 +3,6 @@
   <item>
     <name>Window Management</name>
 
-    <!-- Mission Control Shortcuts -->
-    <item>
-      <name>Mission Control Shortcuts</name>
-      <identifier>custom.mission_control_shortcuts</identifier>
-      <appendix>Hyper + X to Mission Control</appendix>
-      <appendix>Hyper + D to Show Desktop</appendix>
-
-      <autogen>
-        __KeyToKey__
-        KeyCode::X,
-        {{ MODIFIER_FLAG_HYPER }},
-
-        KeyCode::EXPOSE_ALL
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::D,
-        {{ MODIFIER_FLAG_HYPER }},
-
-        KeyCode::EXPOSE_ALL, ModifierFlag::COMMAND_L
-      </autogen>
-    </item>
-
-
     <!-- Move window to space -->
     <item>
       <name>Move window to space</name>
@@ -104,7 +80,9 @@
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::BRACKET_LEFT,
-        {{ MODIFIER_FLAG_HYPER }}
+        {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_WAIT_50MS,
+        KeyCode::F17
       </autogen>
       <autogen>
         __KeyToKey__
@@ -112,7 +90,9 @@
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::BRACKET_RIGHT,
-        {{ MODIFIER_FLAG_HYPER }}
+        {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::VK_WAIT_50MS,
+        KeyCode::F17
       </autogen>
       <autogen>
         __KeyToKey__
