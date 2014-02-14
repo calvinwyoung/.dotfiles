@@ -23,10 +23,15 @@ if [ -d "$HOME/.bin" ]; then
     PATH="$HOME/.bin:$PATH"
 fi
 
-# Include the rvm bin
+# For RVM.
 if [ -d "$HOME/.rvm/bin" ]; then
     PATH="$HOME/.rvm/bin:$PATH"
 fi
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+    # Load RVM into a shell session *as a function*
+    source "$HOME/.rvm/scripts/rvm"
+fi
+
 
 # Disable Ctrl+S to suspend terminal
 stty -ixon
