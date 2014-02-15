@@ -2,7 +2,7 @@
 ;; started.
 (setq default-directory "~/")
 
-;; Set window title.
+;; Set frame title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
 ;; Turn off the splash screen
