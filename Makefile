@@ -1,3 +1,5 @@
+OSX_PREFS_SYNC_DIR = ~/Documents/App\ Storage/OSX__Library__Preferences
+
 .PHONY: common darwin linux clean convert_plists install_linux_packages
 
 common:
@@ -13,13 +15,12 @@ linux: common
 darwin: common
 	python create_symlinks.py darwin/
 
-# Also create symlink for ~/Library/Preferences directory. Directory symlinks
-# using the `ln` command are tricky, so only do this if the Preferences
-# directory is a real directory and not a symlink.
-	if [ ! -h ~/Library/Preferences ]; then \
-	    sudo rm -rf ~/Library/Preferences; \
-	    ln -s ~/Documents/App\ Storage/OSX__Library__Preferences ~/Library/Preferences; \
-	fi
+# Create a symlink for our Preferences directory. Since the `ln` command can't
+# overwrite directories, we must remove the original directory (but only if it's
+# a real directory and not a symlink). Use the `-f` and `-T` flags to make `ln`
+# overwrite old symlinks without dereferencing them.
+	if [ ! -h ~/Library/Preferences ]; then rm -rf ~/Library/Preferences; fi
+	ln -sfT $(OSX_PREFS_SYNC_DIR) ~/Library/Preferences
 
 # Apply custom default settings.
 	sh ~/.scripts/write_defaults.sh
