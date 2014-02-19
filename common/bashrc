@@ -3,20 +3,27 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-# Integrate QT applications with GTK theme
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-
-# Set default text editor
-export EDITOR="vim"
-
 # Ignore duplicates in bash_history
 HISTCONTROL=ignoreboth
 
 # Ignore these commands in history file
 HISTIGNORE=ls:ll:la:pwd:exit:df:clear
 
-# Append to the Bash history file, rather than overwriting it
+# Append to the bash history file, rather than overwriting it
 shopt -s histappend
+
+# Disable Ctrl+S to suspend terminal
+stty -ixon
+
+# ------------------------
+# Environment variables
+# ------------------------
+
+# Integrate QT applications with GTK theme
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+# Set default text editor
+export EDITOR="vim"
 
 # Set PATH to include user's bin dir if it exists
 if [ -d "$HOME/.bin" ]; then
@@ -42,8 +49,11 @@ elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# Disable Ctrl+S to suspend terminal
-stty -ixon
+# Add MacPorts packages to PATH.
+if [ `uname` == "Darwin" ]; then
+    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql92/bin:$PATH
+    export PYTHONPATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages:$PYTHONPATH
+fi
 
 # Enable bash completion
 if [ `uname` == "Darwin" ]; then
@@ -72,6 +82,8 @@ function git_prompt_info {
 
 # Color bash prompt
 export PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] $(virtualenv_prompt_info)\[\033[01;33m\]$(git_prompt_info)\[\033[00m\]
+$ '
+export SUDO_PS1='\[\033[01;31;40m\]\u@\h \[\033[00m\]\w
 $ '
 
 # ------------------------

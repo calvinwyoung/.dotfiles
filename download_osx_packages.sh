@@ -10,6 +10,10 @@
 # sudo port install emacs
 # sudo port install emacs-app
 # sudo port install unrar
+# sudo port install python27
+# sudo port install py27-ipython
+# sudo port select --set python python27
+# sudo port select --set ipython ipython27
 
 URLS=(
     # MacPorts
