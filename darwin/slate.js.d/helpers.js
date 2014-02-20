@@ -77,14 +77,14 @@ var helpers = (function() {
 
             // If the window is already in the current position, then move it to
             // the next position in the list.
-            if (self.isCoordsExactMatch(winCoords, posCoords)) {
+            if (self.isCoordsApproxMatch(winCoords, posCoords)) {
                 nextPosIx = (i + 1) % positions.length;
                 break;
             }
-            // Otherwise, if the window is in approximately in the current
-            // position, then move it such that it's exactly in the current
+            // Otherwise, if the window mostly overlaps the current target
+            // position, then move it so that it's exactly in the current target
             // position.
-            else if (self.isCoordsApproxMatch(winCoords, posCoords)) {
+            else if (self.isCoordsOverlapMatch(winCoords, posCoords)) {
                 nextPosIx = i;
                 break;
             }
@@ -309,12 +309,12 @@ var helpers = (function() {
     };
 
     /**
-     * Returns true if the given coords objects are "exact" matches.
+     * Returns true if the given coords objects are approximate matches.
      *
-     * We consider the given coordinates to be "exact" matches if each of the
-     * four corresponding coordinate values are within 10 pixels.
+     * Please refer to the `isApprox` match for implementation details about how
+     * we determine whether two coordinates are approximate matches.
      */
-    self.isCoordsExactMatch = function(coords1, coords2) {
+    self.isCoordsApproxMatch = function(coords1, coords2) {
         return (self.isApprox(coords1.x1, coords2.x1) &&
                 self.isApprox(coords1.y1, coords2.y1) &&
                 self.isApprox(coords1.x2, coords2.x2) &&
@@ -322,13 +322,13 @@ var helpers = (function() {
     };
 
     /**
-     * Returns true if the given coordinate objects are an approximate match.
+     * Returns true if the given coordinate objects are mostly overlapping.
      *
      * We define an approximate match as one where at least half of the area of
      * the first coordinate object is within the bounds of the second coordinate
      * object.
      */
-    self.isCoordsApproxMatch = function(coords1, coords2) {
+    self.isCoordsOverlapMatch = function(coords1, coords2) {
         var overlapCoords = {
             "x1": Math.max(coords1.x1, coords2.x1),
             "y1": Math.max(coords1.y1, coords2.y1),
