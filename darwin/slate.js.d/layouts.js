@@ -4,6 +4,15 @@ var layouts = (function() {
         RIGHT_SCREEN = "1";
 
     self.dualMonitors = slate.layout("dualMonitors", {
+        "_after_": {
+            "operations": [
+                function(win) {
+                    helpers.setWindowFocusDirection(LEFT_SCREEN, -1);
+                    helpers.setWindowFocusDirection(RIGHT_SCREEN, 1);
+                }
+            ]
+        },
+
         "Google Chrome": {
             "operations": [
                 slate.op("move", {

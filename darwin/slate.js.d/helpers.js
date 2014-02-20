@@ -225,6 +225,17 @@ var helpers = (function() {
     };
 
     /**
+     * Sets the base focus direction for the given screen.
+     *
+     * @param screenID, int: the ID of the screen whose focus direction will
+     *     be returned
+     * @param direction, int: the focus direction to set for the given screen
+     */
+    self.setWindowFocusDirection = function(screenID, direction) {
+        screenFocusDirections[screenID] = direction;
+    },
+
+    /**
      * Toggles the focus direction for the given screen.
      *
      * If the base focus direction for the screen is currently 1 (i.e.,
@@ -234,7 +245,9 @@ var helpers = (function() {
      *     be toggled
      */
     self.toggleWindowFocusDirection = function(screenID) {
-        screenFocusDirections[screenID] = -self.getWindowFocusDirection(screenID);
+        self.setWindowFocusDirection(
+            screenID,
+            -self.getWindowFocusDirection(screenID));
     };
 
     /**
@@ -363,7 +376,7 @@ var helpers = (function() {
     };
 
     /**
-     * Returns the fingerpring for a given window object.
+     * Returns the fingerprint for a given window object.
      *
      * @param win: a window object
      * @returns, str: the string fingerprint for the given window object.
