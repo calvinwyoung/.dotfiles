@@ -49,12 +49,7 @@ var keybindings = (function() {
     /* ------------------ */
 
     // Maximize the window on the current screen.
-    slate.bind("m:cmd;ctrl;alt", slate.op("move", {
-        "x": "screenOriginX",
-        "y": "screenOriginY",
-        "width": "screenSizeX",
-        "height": "screenSizeY"
-    }));
+    slate.bind("m:cmd;ctrl;alt", helpers.toggleMaximizedOp());
 
     // Resize the window so it's 2/3 the width of the screen and throw it to the
     // left or right.

@@ -6,19 +6,38 @@ var helpers = (function() {
 
         // The default focus direction for each screen. A positive value denotes
         // clockwise, and a negative value denotes counter-clockwise.
-        DEFAULT_FOCUS_DIRECTION = 1;
+        DEFAULT_FOCUS_DIRECTION = 1,
+
+        // Before a window is maximized, we save its size/position in this dict
+        // so we can revert it back to its original size/position later.
+        // Specifically, this dict maps window PIDs to `rect` objects.
+        preMaximizePositions = {};
 
     /**
-     * Binds a keyboard shortcut to execute the specified applescript name. All
-     * scripts are assumed to be relative to the ~/.scripts directory.
+     * Custom operation that lets us toggle maximizing a window.
      */
-    self.bindApplescript = function(shortcut, script_name) {
-        slate.bind(shortcut, slate.op("shell", {
-            "command": "/usr/bin/osascript " + script_name,
-            "wait": true,
-            "path": "~/.scripts"
-        }));
-    };
+    self.toggleMaximizedOp = function() {
+        return slate.operation("chain", {
+            "operations": [
+                function(win) {
+                    var screenRect = win.screen().visibleRect(),
+                        screenCoords = self.rectToCoords(screenRect),
+                        winCoords = self.rectToCoords(win.rect());
+
+                    if (self.isCoordsApproxMatch(winCoords, screenCoords)) {
+                        if (preMaximizePositions[win.pid()]) {
+                            win.doOperation(
+                                slate.op("move", preMaximizePositions[win.pid()])
+                            );
+                        }
+                    } else {
+                        preMaximizePositions[win.pid()] = win.rect();
+                        win.doOperation(slate.op("move", screenRect));
+                    }
+                }
+            ]
+        });
+    },
 
     /**
      * Helper function to define a new placement cycle.
