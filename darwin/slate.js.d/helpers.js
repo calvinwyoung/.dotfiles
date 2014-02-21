@@ -8,13 +8,22 @@ var helpers = (function() {
         // clockwise, and a negative value denotes counter-clockwise.
         DEFAULT_FOCUS_DIRECTION = 1,
 
-        // Before a window is maximized, we save its size/position in this dict
-        // so we can revert it back to its original size/position later.
-        // Specifically, this dict maps window PIDs to `rect` objects.
-        preMaximizePositions = {};
+        // Maps an app PID to its pre-maximized size/position, stored as a
+        // window `rect` object. This is used to revert windows back to their
+        // original sizes after maximizing them.
+        preMaximizedPositions = {};
 
     /**
-     * Custom operation that lets us toggle maximizing a window.
+     * Custom operation that lets us maximize a window, and then revert it back
+     * to its original position.
+     *
+     * Before maximizing a window, this operation records an entry in the
+     * `preMaximizedPositions` dictionary that maps the window's app PID to its
+     * original size/position. We use app PIDs because we can't uniquely
+     * identify windows, and app PIDs are the next best thing. A consequence of
+     * this is that if we maximize two windows from the same application, the
+     * position for the second window will overwrite the position of the
+     * first. This is not ideal, but the UX is fine in practice.
      */
     self.toggleMaximizedOp = function() {
         return slate.operation("chain", {
@@ -25,13 +34,13 @@ var helpers = (function() {
                         winCoords = self.rectToCoords(win.rect());
 
                     if (self.isCoordsApproxMatch(winCoords, screenCoords)) {
-                        if (preMaximizePositions[win.pid()]) {
+                        if (preMaximizedPositions[win.pid()]) {
                             win.doOperation(
-                                slate.op("move", preMaximizePositions[win.pid()])
+                                slate.op("move", preMaximizedPositions[win.pid()])
                             );
                         }
                     } else {
-                        preMaximizePositions[win.pid()] = win.rect();
+                        preMaximizedPositions[win.pid()] = win.rect();
                         win.doOperation(slate.op("move", screenRect));
                     }
                 }
