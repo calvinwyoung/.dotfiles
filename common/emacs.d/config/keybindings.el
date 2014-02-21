@@ -62,7 +62,10 @@
 (global-set-key "\M-;" 'comment-dwim-line)
 
 ;; Enable custom rename file and buffer command.
-(global-set-key "\C-xr" 'rename-file-and-buffer)
+(global-set-key "\C-xR" 'rename-file-and-buffer)
+
+;; Enable easier file deletion.
+(global-set-key "\C-xD" 'delete-current-file)
 
 ;; Make it easier to sudo edit files.
 (global-set-key "\C-x\C-\M-f" 'sudo-find-file)
@@ -80,7 +83,6 @@
 
 ;; Define custom minor mode keys.
 (defvar my-keys-map (make-keymap) "my-keys keymap.")
-
 (define-minor-mode my-keys
   "A minor mode so that my key settings override annoying major modes."
   t nil 'my-keys-map)

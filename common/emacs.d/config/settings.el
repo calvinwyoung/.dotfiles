@@ -2,6 +2,9 @@
 ;; started.
 (setq default-directory "~/")
 
+;; Set file shortcut registers.
+(set-register ?t '(file . "~/Documents/Notes/Todo.org"))
+
 ;; Set frame title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
