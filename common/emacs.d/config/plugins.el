@@ -52,3 +52,9 @@
 ;;;;;;;;;;;;;;;;
 (load-file (concat vendor-dir "cycle-buffer.el"))
 (require 'cycle-buffer)
+
+;;;;;;;;;;;;;;;;
+;; Dired single
+;;;;;;;;;;;;;;;;
+(load-file (concat vendor-dir "dired-single.el"))
+(require 'dired-single)

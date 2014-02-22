@@ -42,9 +42,9 @@
 (add-to-list 'load-path (concat vendor-dir "scss-mode/"))
 (autoload 'scss-mode "scss-mode.el"
   "Major mode for editing SCSS files" t)
+
 (setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
-(add-to-list 'auto-mode-alist '("\\.scsstt$" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scssmk$" . scss-mode))
 
 ;;;;;;;;;;;;
@@ -53,6 +53,7 @@
 (add-to-list 'load-path (concat vendor-dir "markdown-mode/"))
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
+
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 ;;;;;;;;;;;;;;
@@ -62,10 +63,10 @@
 ;; Make sure to load the byte-compiled library or this will be balls slow.
 (autoload 'js2-mode "js2-mode.elc"
   "Major mode for editing Javascript files" t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jstt$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsmk$" . js2-mode))
+
 (setq js2-enter-indents-newline t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsmk$" . js2-mode))
 
 ;;;;;;;;
 ;; HTML
@@ -75,18 +76,9 @@
             ;; Default indentation is usually 2 spaces, changing to 4.
             (setq sgml-basic-offset 4)))
 
-;; Set html-mode as default for .htmltt files
-(add-to-list 'auto-mode-alist '("\\.htmltt$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.htmlmk$" . html-mode))
-
-;; Set html-mode as default for .jqt files
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
-
-;;;;;;;
-;; Org
-;;;;;;;
-;; Open all *.txt files in ~/Dropbox/notes in org mode
-(add-to-list 'auto-mode-alist '("^.*/Dropbox/notes/.*\\.txt$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$" . html-mode))
 
 ;;;;;;;
 ;; Lua
@@ -94,8 +86,9 @@
 (add-to-list 'load-path (concat vendor-dir "lua-mode/"))
 (autoload 'lua-mode "lua-mode.el"
   "Major mode for editing Lua files" t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+
 (setq lua-indent-level 4)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
 ;;;;;;;;
 ;; Conf

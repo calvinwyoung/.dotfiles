@@ -10,6 +10,6 @@
 ;; Load core configuration
 (load-library "settings")
 (load-library "defuns")
-(load-library "modes")
+(load-library "lang-modes")
 (load-library "plugins")
 (load-library "keybindings")

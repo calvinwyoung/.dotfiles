@@ -1,22 +1,11 @@
-;; Use a simpler buffer list.
-(global-set-key "\C-x\C-b" 'bs-show)
-(setq bs-default-configuration "files-and-scratch")
+;;;;;;;;;;;
+;; Editing
+;;;;;;;;;;;
 
 ;; Add commands for redo. The first binding is for GUI mode, and the second one
 ;; is for terminal mode.
 (global-set-key (kbd "C-M-/") 'redo)
 (global-set-key (kbd "C-M-_") 'redo)
-
-;; Easier buffer switching. The naming here is kind of confusing -- the
-;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
-;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
-;; direction.
-(global-set-key "\C-\M-h" 'cycle-buffer)
-(global-set-key "\C-\M-l" 'cycle-buffer-backward)
-
-;; Easier window switching.
-(global-set-key "\C-\M-k" 'windmove-up)
-(global-set-key "\C-\M-j" 'windmove-down)
 
 ;; Bind both Ctrl + V and Meta + V to paste.
 (global-set-key "\C-v" 'cua-paste)
@@ -29,10 +18,6 @@
 (global-set-key "\C-w" 'backward-kill-word)
 (define-key (current-global-map) [remap backward-kill-word]
   'my-backward-kill-word)
-
-;; Execute extended command.
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 ;; Make it easier to execute goto line.
 (global-set-key "\M-g" 'goto-line)
@@ -61,25 +46,15 @@
 ;; Use custom comment function.
 (global-set-key "\M-;" 'comment-dwim-line)
 
-;; Enable custom rename file and buffer command.
-(global-set-key "\C-xR" 'rename-file-and-buffer)
-
-;; Enable easier file deletion.
-(global-set-key "\C-xD" 'delete-current-file)
-
-;; Make it easier to sudo edit files.
-(global-set-key "\C-x\C-\M-f" 'sudo-find-file)
-
 ;; Emulate vim's "%" command for moving to a matching parentheses.
 (global-set-key [?\C-%] 'goto-match-paren)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'my-isearch-word-at-point)
 
-;; Compile command.
-(global-set-key [\C-f11] 'compile)
-(global-set-key [\S-f11] 'kill-compilation)
-(global-set-key [f11] 'next-error)
+;; Easier window switching.
+(global-set-key "\C-\M-k" 'windmove-up)
+(global-set-key "\C-\M-j" 'windmove-down)
 
 ;; Define custom minor mode keys.
 (defvar my-keys-map (make-keymap) "my-keys keymap.")
@@ -94,3 +69,67 @@
 ;; Move up and down by 5 lines with M-n and M-p..
 (define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
 (define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Buffer management
+;;;;;;;;;;;;;;;;;;;;;
+
+;; Use a simpler buffer list.
+(global-set-key "\C-x\C-b" 'bs-show)
+(setq bs-default-configuration "files-and-scratch")
+
+;; Easier buffer switching. The naming here is kind of confusing -- the
+;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
+;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
+;; direction.
+(global-set-key "\C-\M-h" 'cycle-buffer)
+(global-set-key "\C-\M-l" 'cycle-buffer-backward)
+
+;;;;;;;;;;;;;;;;;;;
+;; File management
+;;;;;;;;;;;;;;;;;;;
+
+;; Make it easier to sudo edit files.
+(global-set-key "\C-x\C-\M-f" 'sudo-find-file)
+
+;; Enable custom rename file and buffer command.
+(global-set-key "\C-xR" 'rename-file-and-buffer)
+
+;; Enable easier file deletion.
+(global-set-key "\C-xD" 'delete-current-file)
+
+;; Custom key map for reusing dired buffers with the `dired-single` plugin.
+(defun my-dired-keys-map ()
+  "Custom key mappings to allow reusing single buffer in dired "
+  ;; <add other stuff here>
+  (define-key dired-mode-map (kbd "RET") 'dired-single-buffer)
+  (define-key dired-mode-map (kbd "<mouse-1>") 'dired-single-buffer-mouse)
+  (define-key dired-mode-map "^"
+    (function
+     (lambda nil (interactive) (dired-single-buffer "..")))))
+
+;; If dired's already loaded, then the keymap will be bound
+(if (boundp 'dired-mode-map)
+    ;; We're good to go; just add our bindings.
+    (my-dired-keys-map)
+  ;; It's not loaded yet, so add our bindings to the load-hook.
+  (add-hook 'dired-load-hook 'my-dired-keys-map))
+
+;; Override the default dired binding to open the "magic buffer" in the current
+;; file's directory.
+(global-set-key "\C-xd" (lambda()
+                          (interactive)
+                          (dired-single-magic-buffer default-directory)))
+
+;;;;;;;;;
+;; Misc.
+;;;;;;;;;
+
+;; Compile command.
+(global-set-key [\C-f11] 'compile)
+(global-set-key [\S-f11] 'kill-compilation)
+(global-set-key [f11] 'next-error)
+
+;; Execute extended command.
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
