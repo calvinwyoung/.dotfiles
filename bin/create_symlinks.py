@@ -56,13 +56,13 @@ def create_symlink(target, source):
     print "  Done."
 
 
-def main(directories, list_only=False):
+def main(directories, list_symlinks=False):
     """Creates dotfile symlinks for files in the given directories.
 
     Args:
         directories, list[str]: list of directories containing dotfiles
-        list_only, bool: if True, then only prints a list of symlinks that would
-            be created without modifying the filesystem
+        list_symlinks, bool: if True, then only prints a list of symlinks that
+           would be created without modifying the filesystem
     """
     for directory in directories:
         dotfile_dir = os.path.abspath(directory)
@@ -75,7 +75,7 @@ def main(directories, list_only=False):
             filename_parts[0] = ".%s" % filename_parts[0]
             target_path = os.path.join(HOME_DIR, *filename_parts)
 
-            if list_only:
+            if list_symlinks:
                 print target_path
             else:
                 create_symlink(target_path, os.path.join(dotfile_dir, filename))
@@ -84,12 +84,17 @@ def main(directories, list_only=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create dotfile symlinks.")
 
-    parser.add_argument("directories", nargs="+",
-                        help="directories containing dotfiles")
-    parser.add_argument("-l", "--list_only", action="store_true",
-                        help=("lists the paths to all symlinks that would be "
-                              "created"))
+    parser.add_argument(
+        "directories",
+        nargs="+",
+        help="directories containing dotfiles")
+    parser.add_argument(
+        "-l",
+        "--list_symlinks",
+        action="store_true",
+        help=("prints a list of symlinks that would be created without making "
+              "any changes to the file system"))
 
     args = parser.parse_args()
 
-    sys.exit(main(args.directories, args.list_only))
+    sys.exit(main(args.directories, args.list_symlinks))
