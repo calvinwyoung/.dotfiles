@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
 
-# sudo port install coreutils
-# sudo port install findutils
-# sudo port install grep
-# sudo port install bash-completion
-# sudo port install p5-file-rename
-# sudo port install git-core +bash_completion
-# sudo port install watch
-# sudo port install emacs
-# sudo port install emacs-app
-# sudo port install unrar
-# sudo port install python27
-# sudo port install py27-ipython
-# sudo port select --set python python27
-# sudo port select --set ipython ipython27
-
 URLS=(
     # MacPorts
     "http://www.macports.org/install.php"

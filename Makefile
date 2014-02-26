@@ -1,19 +1,19 @@
 OSX_PREFS_SYNC_DIR = ~/Documents/App\ Storage/OSX__Library__Preferences
 
-.PHONY: common darwin linux clean convert_plists install_linux_packages
+.PHONY: common darwin linux clean
 
 common:
-	python create_symlinks.py common/
+	python bin/create_symlinks.py common/
 	git submodule update --init --recursive
 
 # js2-mode must be byte-compiled or it runs balls-slow.
 	$(MAKE) -C common/emacs.d/vendor/js2-mode
 
 linux: common
-	python create_symlinks.py linux/
+	python bin/create_symlinks.py linux/
 
 darwin: common
-	python create_symlinks.py darwin/
+	python bin/create_symlinks.py darwin/
 
 # Create a symlink for our Preferences directory. Since the `ln` command can't
 # overwrite directories, we must remove the original directory (but only if it's
@@ -29,12 +29,6 @@ darwin: common
 	launchctl load ~/Library/LaunchAgents/login_init.plist
 
 clean:
-	python create_symlinks.py -l common/  | tr "\n" "\0" | xargs -0 rm -f
-	python create_symlinks.py -l linux/ | tr "\n" "\0" | xargs -0 rm -f
-	python create_symlinks.py -l darwin/ | tr "\n" "\0" | xargs -0 rm -f
-
-install_linux_packages:
-	grep -v "^#" linux_packages.txt | xargs sudo apt-get install -y
-
-download_osx_packages:
-	bash download_osx_packages.sh
+	python bin/create_symlinks.py -l common/  | tr "\n" "\0" | xargs -0 rm -f
+	python bin/create_symlinks.py -l linux/ | tr "\n" "\0" | xargs -0 rm -f
+	python bin/create_symlinks.py -l darwin/ | tr "\n" "\0" | xargs -0 rm -f
