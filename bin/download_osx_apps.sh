@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 URLS=(
+    # OS X Command Line Tools
+    "https://developer.apple.com/downloads"
+
     # MacPorts
     "http://www.macports.org/install.php"
 
@@ -8,9 +11,6 @@ URLS=(
     "https://pqrs.org/macosx/keyremap4macbook/"
     "https://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en"
     "https://github.com/jigish/slate"
-
-    # Emacs
-    "http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg"
 
     # iTerm2
     "http://www.iterm2.com/#/section/home"
@@ -26,6 +26,9 @@ URLS=(
 
     # Chrome
     "https://www.google.com/intl/en/chrome/browser/"
+
+    # Google Drive
+    "https://tools.google.com/dlpage/drive/?hl=en"
 )
 
 for url in "${URLS[@]}"

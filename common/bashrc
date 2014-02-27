@@ -89,6 +89,8 @@ $ '
 # ------------------------
 # Aliases
 # ------------------------
+# Must use the `--` operator in order to bind an alias to `-`
+alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
