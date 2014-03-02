@@ -137,7 +137,7 @@
         __KeyToKey__
         KeyCode::R, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE,
 
-        KeyCode::R, ModifierFlag::COMMAND_L
+        KeyCode::R, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
       </autogen>
       <autogen>
         __KeyToKey__

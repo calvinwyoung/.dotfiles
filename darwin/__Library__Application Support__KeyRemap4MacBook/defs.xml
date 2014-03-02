@@ -5,6 +5,12 @@
     <equal>org.keepassx.keepassx</equal>
   </appdef>
 
+  <appdef>
+    <appname>FINDER</appname>
+    <equal>com.apple.finder</equal>
+    <equal>com.cocoatech.PathFinder</equal>
+  </appdef>
+
   <replacementdef>
     <replacementname>MODIFIER_FLAG_HYPER</replacementname>
     <replacementvalue>
