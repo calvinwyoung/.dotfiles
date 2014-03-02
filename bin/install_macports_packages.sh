@@ -12,7 +12,6 @@ PACKAGES=(
     "emacs-app"
     "unrar"
     "python27"
-    "py27-ipython"
 )
 
 VARIANTS=(
@@ -23,5 +22,12 @@ JOINED_PACKAGES=`(IFS=" "; echo "${PACKAGES[*]}")`
 JOINED_VARIANTS=`(IFS=" "; echo "${VARIANTS[*]}")`
 sudo port install $JOINED_PACKAGES $JOINED_VARIANTS
 
+# Switch to macports python.
 sudo port select --set python python27
-sudo port select --set ipython ipython27
+
+# To use bash completion, we need to switch to the macports version of bash.
+# This requires that we first add the PATH for the macports bash to /etc/shells.
+if ! grep -Fxq "/opt/local/bin/bash" /etc/shells; then
+    echo "/opt/local/bin/bash" | sudo tee -a /etc/shells
+fi
+chsh -s /opt/local/bin/bash
