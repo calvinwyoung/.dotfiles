@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set the menu bar date format.
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
+
 # Disable "New Window" animations.
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
 
@@ -12,8 +15,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Disable volume change beeps and UI sound effects (may require restart).
 defaults write -g com.apple.sound.beep.feedback -integer 0
 
-# Set the menu bar date format.
-defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
+# Disable startup sound.
+sudo nvram SystemAudioVolume=%80
 
 ###############################################################################
 # Dock, Dashboard, Mission Control                                            #
