@@ -227,7 +227,9 @@ var helpers = (function() {
         reverse = _.isUndefined(reverse) ? false : reverse;
 
         var screenWindowsMap = self.getScreenWindows(),
-            curScreenID = win.screen().id(),
+            curScreenID = _.isUndefined(win) ?
+                _.keys(screenWindowsMap)[0] :
+                win.screen().id(),
             direction = reverse ? -1 : 1,
             nextScreenID = self.mod(curScreenID + direction,
                                     slate.screenCount());
