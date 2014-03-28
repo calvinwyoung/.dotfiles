@@ -1,24 +1,27 @@
 var helpers = (function() {
     var self = {},
 
-        // Maps a screen ID to the window focus direction for that screen.
-        screenFocusDirections = {},
-
         // The default focus direction for each screen. A positive value denotes
         // clockwise, and a negative value denotes counter-clockwise.
         DEFAULT_FOCUS_DIRECTION = 1,
 
+        // Maps a screen ID to the window focus direction for that screen.
+        SCREEN_FOCUS_DIRECTIONS = {},
+
         // Maps an app PID to its pre-maximized size/position, stored as a
         // window `rect` object. This is used to revert windows back to their
         // original sizes after maximizing them.
-        preMaximizedPositions = {};
+        PRE_MAXIMIZED_POSITIONS = {},
+
+        // Stores the fingerprint of the last used window for each screen.
+        LAST_FOCUSED_WIN_BY_SCREEN = {};
 
     /**
      * Custom operation that lets us maximize a window, and then revert it back
      * to its original position.
      *
      * Before maximizing a window, this operation records an entry in the
-     * `preMaximizedPositions` dictionary that maps the window's app PID to its
+     * `PRE_MAXIMIZED_POSITIONS` dictionary that maps the window's app PID to its
      * original size/position. We use app PIDs because we can't uniquely
      * identify windows, and app PIDs are the next best thing. A consequence of
      * this is that if we maximize two windows from the same application, the
@@ -34,13 +37,13 @@ var helpers = (function() {
                         winCoords = self.rectToCoords(win.rect());
 
                     if (self.isCoordsApproxMatch(winCoords, screenCoords)) {
-                        if (preMaximizedPositions[win.pid()]) {
+                        if (PRE_MAXIMIZED_POSITIONS[win.pid()]) {
                             win.doOperation(
-                                slate.op("move", preMaximizedPositions[win.pid()])
+                                slate.op("move", PRE_MAXIMIZED_POSITIONS[win.pid()])
                             );
                         }
                     } else {
-                        preMaximizedPositions[win.pid()] = win.rect();
+                        PRE_MAXIMIZED_POSITIONS[win.pid()] = win.rect();
                         win.doOperation(slate.op("move", screenRect));
                     }
                 }
@@ -190,8 +193,7 @@ var helpers = (function() {
             }
 
             if (result === 0) {
-                if (self.getWindowFingerprint(a) <
-                        self.getWindowFingerprint(b)) {
+                if (self.getWindowFingerprint(a) < self.getWindowFingerprint(b)) {
                     result = -1;
                 } else {
                     result = 1;
@@ -235,7 +237,25 @@ var helpers = (function() {
                                     slate.screenCount());
 
         if (screenWindowsMap[nextScreenID].length > 0) {
-            screenWindowsMap[nextScreenID][0].focus();
+            // First, save the currently focused window's fingerprint for this
+            // screen.
+            LAST_FOCUSED_WIN_BY_SCREEN[curScreenID] =
+                self.getWindowFingerprint(win);
+
+            // Look for a window that matches the last focused window for the
+            // next screen.
+            var nextWindowFingerprint = LAST_FOCUSED_WIN_BY_SCREEN[nextScreenID],
+                nextWindow = _.find(screenWindowsMap[nextScreenID], function(win) {
+                    return self.getWindowFingerprint(win) === nextWindowFingerprint;
+                });
+
+            // If a window wasn't found, the default to the first window on that
+            // screen.
+            if (!nextWindow) {
+                nextWindow = screenWindowsMap[nextScreenID][0];
+            }
+
+            nextWindow.focus();
         }
     };
 
@@ -248,10 +268,10 @@ var helpers = (function() {
      * @returns int: the base focus direction of the given screen
      */
     self.getWindowFocusDirection = function(screenID) {
-        if (!(screenID in screenFocusDirections)) {
-            screenFocusDirections[screenID] = DEFAULT_FOCUS_DIRECTION;
+        if (!(screenID in SCREEN_FOCUS_DIRECTIONS)) {
+            SCREEN_FOCUS_DIRECTIONS[screenID] = DEFAULT_FOCUS_DIRECTION;
         }
-        return screenFocusDirections[screenID];
+        return SCREEN_FOCUS_DIRECTIONS[screenID];
     };
 
     /**
@@ -262,7 +282,7 @@ var helpers = (function() {
      * @param direction, int: the focus direction to set for the given screen
      */
     self.setWindowFocusDirection = function(screenID, direction) {
-        screenFocusDirections[screenID] = direction;
+        SCREEN_FOCUS_DIRECTIONS[screenID] = direction;
     },
 
     /**
@@ -408,13 +428,17 @@ var helpers = (function() {
     /**
      * Returns the fingerprint for a given window object.
      *
+     * This method simply concatenates the window PID with its coordinates. Note
+     * that we can't use the window title because it can change very frequently
+     * for some apps (e.g., Chrome).
+     *
      * @param win: a window object
      * @returns, str: the string fingerprint for the given window object.
      */
     self.getWindowFingerprint = function(win) {
         var rect = win.rect();
-        return (win.pid() + ":" + win.title() + ":" + rect.x + ":" + rect.y +
-                ":" + rect.width + ":" + rect.height);
+        return (win.pid() + ":" +
+                rect.x + ":" + rect.y + ":" + rect.width + ":" + rect.height);
     };
 
     /**
