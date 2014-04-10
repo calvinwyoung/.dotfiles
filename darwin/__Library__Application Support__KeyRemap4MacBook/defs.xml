@@ -8,6 +8,10 @@
   <appdef>
     <appname>FINDER</appname>
     <equal>com.apple.finder</equal>
+  </appdef>
+
+  <appdef>
+    <appname>PATH_FINDER</appname>
     <equal>com.cocoatech.PathFinder</equal>
   </appdef>
 

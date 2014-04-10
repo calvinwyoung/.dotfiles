@@ -143,7 +143,7 @@
       <appendix>Return to "Open" command</appendix>
       <appendix>F2 to "Rename" command</appendix>
       <appendix>+ pressing Return while renaming (via F2) saves the new name instead of opening</appendix>
-      <identifier>custom.app_finder_switch_open_rename</identifier>
+      <identifier>custom.app_finder_keys</identifier>
 
       <only>FINDER</only>
 
@@ -153,8 +153,9 @@
 
         KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
       </autogen>
+
+      <!-- Also make sure "Rename" work with the Brightness Up key. -->
       <autogen>
-        <!-- Also make this work with the Brightness Up key. -->
         __ConsumerToKey__
         ConsumerKeyCode::BRIGHTNESS_UP,
 
@@ -196,12 +197,32 @@
       </autogen>
     </item>
 
+    <!-- Path Finder: Use F2 to Rename files. -->
+    <item>
+      <name>Path Finder: F2 to Rename</name>
+      <appendix>F2 to "Rename" command</appendix>
+      <identifier>custom.app_path_finder_keys</identifier>
+
+      <autogen>
+        __KeyToKey__
+        KeyCode::F2,
+
+        KeyCode::R,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_L,
+      </autogen>
+      <autogen>
+        __ConsumerToKey__
+        ConsumerKeyCode::BRIGHTNESS_UP,
+
+        KeyCode::R,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_L,
+      </autogen>
+    </item>
+
     <item>
       <name>KeePassX: Copy Username and Password</name>
       <appendix>Ctrl + Option + C to Copy Username and Password</appendix>
       <appendix>Ctrl + B to Copy Username</appendix>
       <appendix>Ctrl + U to Open URL</appendix>
-      <identifier>custom.keepassx_copy_username_and_password</identifier>
+      <identifier>custom.app_keepassx_keys</identifier>
 
       <only>KEEPASSX</only>
 

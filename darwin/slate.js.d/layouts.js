@@ -49,13 +49,6 @@ var layouts = (function() {
             "sort-title": true,
             "operations": [
                 slate.op("move", {
-                    "screen": LEFT_SCREEN,
-                    "x": "screenOriginX",
-                    "y": "screenOriginY+(screenSizeY/2)",
-                    "width": "screenSizeX/3",
-                    "height": "screenSizeY/2"
-                }),
-                slate.op("move", {
                     "screen": RIGHT_SCREEN,
                     "x": "screenOriginX+(screenSizeX*2/3)",
                     "y": "screenOriginY",
@@ -65,6 +58,13 @@ var layouts = (function() {
                 slate.op("move", {
                     "screen": RIGHT_SCREEN,
                     "x": "screenOriginX+(screenSizeX*2/3)",
+                    "y": "screenOriginY+(screenSizeY/2)",
+                    "width": "screenSizeX/3",
+                    "height": "screenSizeY/2"
+                }),
+                slate.op("move", {
+                    "screen": LEFT_SCREEN,
+                    "x": "screenOriginX",
                     "y": "screenOriginY+(screenSizeY/2)",
                     "width": "screenSizeX/3",
                     "height": "screenSizeY/2"
