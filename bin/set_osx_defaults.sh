@@ -18,6 +18,11 @@ defaults write -g com.apple.sound.beep.feedback -integer 0
 # Disable startup sound.
 sudo nvram SystemAudioVolume=%80
 
+# Hide Spotlight icon.
+if [ -e /System/Library/CoreServices/Search.bundle ]; then
+    sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+fi
+
 ###############################################################################
 # Dock, Dashboard, Mission Control                                            #
 ###############################################################################
@@ -152,7 +157,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Dock" "Finder"; do
+for app in "Dock" "Finder" "SystemUIServer"; do
     echo "Restarting $app"
     killall "$app" > /dev/null 2>&1
 done
