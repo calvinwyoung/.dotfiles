@@ -203,6 +203,8 @@
       <appendix>F2 to "Rename" command</appendix>
       <identifier>custom.app_path_finder_keys</identifier>
 
+      <only>PATH_FINDER</only>
+
       <autogen>
         __KeyToKey__
         KeyCode::F2,
