@@ -118,14 +118,16 @@
       </block>
     </item>
 
-    <!-- Simultaneously pressing Left Shift + Right Shift activates Caps Lock -->
+    <!-- Tapping the Command key toggles Caps Lock -->
     <item>
-      <name>Simultaneous Key Presses [Shift_L+Shift_R] to Caps Lock</name>
-      <identifier>custom.simultaneouskeypresses_ss_to_capslock</identifier>
+      <name>Tapping Command to Caps Lock</name>
+      <identifier>custom.tapping_command_to_capslock</identifier>
       <autogen>
-        __SimultaneousKeyPresses__
-        KeyCode::SHIFT_L, KeyCode::SHIFT_R,
-
+        __KeyOverlaidModifier__
+        KeyCode::COMMAND_L,
+        <!-- When held continuously, fire off a COMMAND_L key -->
+        KeyCode::COMMAND_L, ModifierFlag::NONE,
+        <!-- When tapped, fire a CAPSLOCK key -->
         KeyCode::CAPSLOCK
       </autogen>
     </item>
