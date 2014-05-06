@@ -118,20 +118,6 @@
       </block>
     </item>
 
-    <!-- Tapping the Command key toggles Caps Lock -->
-    <item>
-      <name>Tapping Command to Caps Lock</name>
-      <identifier>custom.tapping_command_to_capslock</identifier>
-      <autogen>
-        __KeyOverlaidModifier__
-        KeyCode::COMMAND_L,
-        <!-- When held continuously, fire off a COMMAND_L key -->
-        KeyCode::COMMAND_L, ModifierFlag::NONE,
-        <!-- When tapped, fire a CAPSLOCK key -->
-        KeyCode::CAPSLOCK
-      </autogen>
-    </item>
-
     <!-- Pause/Break to Eject -->
     <item>
       <name>Pause/Break Key to Eject</name>
@@ -144,15 +130,64 @@
       </autogen>
     </item>
 
-    <!-- Fn to Command -->
+    <!-- Tapping the Command/Fn key toggles Caps Lock -->
     <item>
-      <name>Fn to Command</name>
-      <identifier>custom.fn_to_command</identifier>
+      <name>Tapping Command/Fn to Caps Lock</name>
+      <identifier>custom.tapping_command_to_capslock</identifier>
+      <appendix>Holding Command/Fn generates Command</appendix>
       <autogen>
-        __KeyToKey__
+        __KeyOverlaidModifier__
+        KeyCode::COMMAND_L,
+
+        <!-- When held continuously, fire off a COMMAND_L key -->
+        KeyCode::COMMAND_L, ModifierFlag::NONE,
+
+        <!-- When tapped, fire a CAPSLOCK key -->
+        KeyCode::CAPSLOCK,
+        KeyCode::VK_CONFIG_FORCE_ON_notsave_caps_lock_mode
+      </autogen>
+      <autogen>
+        __KeyOverlaidModifier__
         KeyCode::FN,
 
-        KeyCode::COMMAND_L
+        <!-- When held continuously, fire off a COMMAND_L key -->
+        KeyCode::COMMAND_L, ModifierFlag::NONE,
+
+        <!-- When tapped, fire a CAPSLOCK key -->
+        KeyCode::CAPSLOCK,
+        KeyCode::VK_CONFIG_FORCE_ON_notsave_caps_lock_mode
+      </autogen>
+    </item>
+
+    <!-- Show a status message when Caps Lock gets enabled. -->
+    <item>
+      <name>Caps lock mode.</name>
+      <identifier vk_config="true">notsave.caps_lock_mode</identifier>
+      <autogen>
+        __ShowStatusMessage__
+        Caps Lock Enabled
+      </autogen>
+      <autogen>
+        __KeyOverlaidModifier__
+        KeyCode::COMMAND_L,
+
+        <!-- When held continuously, fire off a COMMAND_L key -->
+        KeyCode::COMMAND_L, ModifierFlag::NONE,
+
+        <!-- When tapped, fire a CAPSLOCK key -->
+        KeyCode::CAPSLOCK,
+        KeyCode::VK_CONFIG_FORCE_OFF_notsave_caps_lock_mode
+      </autogen>
+      <autogen>
+        __KeyOverlaidModifier__
+        KeyCode::FN,
+
+        <!-- When held continuously, fire off a COMMAND_L key -->
+        KeyCode::COMMAND_L, ModifierFlag::NONE,
+
+        <!-- When tapped, fire a CAPSLOCK key -->
+        KeyCode::CAPSLOCK,
+        KeyCode::VK_CONFIG_FORCE_OFF_notsave_caps_lock_mode
       </autogen>
     </item>
   </item>

@@ -303,7 +303,7 @@
         <!-- Set the status message text -->
         <autogen>
           __ShowStatusMessage__
-          MarkSet
+          MarkSet Enabled
         </autogen>
 
         <!-- Move cursor forward one character -->
