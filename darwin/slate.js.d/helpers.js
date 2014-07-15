@@ -229,18 +229,17 @@ var helpers = (function() {
         reverse = _.isUndefined(reverse) ? false : reverse;
 
         var screenWindowsMap = self.getScreenWindows(),
-            curScreenID = _.isUndefined(win) ?
-                _.keys(screenWindowsMap)[0] :
-                win.screen().id(),
+            curScreenID = win ? win.screen().id() : _.keys(screenWindowsMap)[0],
             direction = reverse ? -1 : 1,
-            nextScreenID = self.mod(curScreenID + direction,
-                                    slate.screenCount());
+            nextScreenID = self.mod(curScreenID + direction, slate.screenCount());
 
         if (screenWindowsMap[nextScreenID].length > 0) {
-            // First, save the currently focused window's fingerprint for this
+            // If the current window exists, then save its fingerprint for this
             // screen.
-            LAST_FOCUSED_WIN_BY_SCREEN[curScreenID] =
-                self.getWindowFingerprint(win);
+            if (win) {
+                LAST_FOCUSED_WIN_BY_SCREEN[curScreenID] =
+                    self.getWindowFingerprint(win);
+            }
 
             // Look for a window that matches the last focused window for the
             // next screen.
