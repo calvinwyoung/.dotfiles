@@ -146,12 +146,13 @@
       <identifier>custom.app_finder_keys</identifier>
 
       <only>FINDER</only>
+      <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
 
       <autogen>
         __KeyToKey__
         KeyCode::F2,
 
-        KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+        KeyCode::RETURN
       </autogen>
 
       <!-- Also make sure "Rename" work with the Brightness Up key. -->
@@ -159,41 +160,13 @@
         __ConsumerToKey__
         ConsumerKeyCode::BRIGHTNESS_UP,
 
-        KeyCode::RETURN, KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
+        KeyCode::RETURN
       </autogen>
       <autogen>
         __KeyToKey__
         KeyCode::RETURN, ModifierFlag::NONE,
 
         KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
-
-        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
-        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::N,  ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_R,
-
-        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
-        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_L,
-
-        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
-        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::N,  ModifierFlag::COMMAND_R |  ModifierFlag::SHIFT_R,
-
-        KeyCode::N, ModifierFlag::COMMAND_L |  ModifierFlag::SHIFT_L,
-        KeyCode::VK_CONFIG_TOGGLE_notsave_app_finder_return_accepts_rename
       </autogen>
     </item>
 
@@ -204,6 +177,7 @@
       <identifier>custom.app_path_finder_keys</identifier>
 
       <only>PATH_FINDER</only>
+      <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
 
       <autogen>
         __KeyToKey__
