@@ -41,12 +41,12 @@
       </autogen>
     </item>
 
-    <!-- Emulate Linux-style moving/resizing. To be used in combination with
-         Zooom2.
+    <!-- Emulate Linux-style "Hyper + Click" for moving/resizing. To be used in
+         combination with Zooom2.
 
-         Here, we use Fn is the movement modifier key for Zooom2 because it's the only
-         modifier key that doesn't have any default functionality when combined with
-         left-click.
+         Here, we use Fn as the movement modifier key for Zooom2 because it's
+         the only one that doesn't come with any default functionality when
+         combined with left-click.
     -->
     <item>
       <name>Zooom2 Support</name>
@@ -76,8 +76,8 @@
     </item>
 
     <!-- Control + Left Click emulates Right Click by default, which is really
-         annoying, so remap it to Command + Left Click instead, which is useful
-         for opening links new tabs in Chrome.
+         annoying. Here, we remap it to Command + Left Click instead, which is
+         useful for opening links in new tabs in Chrome.
     -->
     <item>
       <name>Control + Left Click to Command + Left Click</name>

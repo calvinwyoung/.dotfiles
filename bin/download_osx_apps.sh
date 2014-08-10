@@ -8,8 +8,8 @@ URLS=(
     "http://www.macports.org/install.php"
 
     # Hotkeys and window management
-    "https://pqrs.org/macosx/keyremap4macbook/"
-    "https://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en"
+    "https://pqrs.org/osx/karabiner/"
+    "https://pqrs.org/osx/karabiner/seil.html.en"
     "https://github.com/jigish/slate"
 
     # iTerm2

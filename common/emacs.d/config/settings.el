@@ -65,9 +65,10 @@
 ;; Stop asking me to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Make initial scratch mode usable. Initialize it to org-mode by default
+;; Make text mode the default mode for new buffers, and for the scratch buffer.
+(setq-default major-mode 'text-mode)
+(setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
-(setq initial-major-mode 'org-mode)
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -79,7 +80,7 @@
 (setq-default fill-column 80)
 
 ;; Enable electric pair mode for auto-pairing delimiters
-(electric-pair-mode 1)
+(electric-pair-mode t)
 
 ;; Set whitespace mode to highlight column 80+ chars, as well as any trailing
 ;; whitespaces.
@@ -88,6 +89,10 @@
 
 ;; Delete trailing whitespaces on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+;; TODO (CY): Need to backward-kill-word before we can use this.
+;; Treat components in camelCased variable names as individual words.
+;; (global-subword-mode t)
 
 ;; Show line numbers. Seriously, who codes without line numbers?
 (global-linum-mode t)

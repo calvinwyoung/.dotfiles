@@ -57,7 +57,7 @@ map! <C-K> <Esc><Right>Da
 " yank to end of line
 nnoremap Y y$
 
-" braces autocomplet
+" autocomplete curly braces
 inoremap {<CR>  {<CR>}<Esc>O
 
 " disable creation of .netrwhist history file
