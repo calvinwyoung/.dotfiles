@@ -90,6 +90,17 @@
 (setq lua-indent-level 4)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
+;;;;;;;;;;;;
+;; Org-mode
+;;;;;;;;;;;;
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq tab-stop-list (number-sequence 2 200 2))
+            (setq tab-width 2)
+            (org-indent-mode t)
+            (local-set-key (kbd "M-[") 'org-metaleft)
+            (local-set-key (kbd "M-]") 'org-metaright)))
+
 ;;;;;;;;
 ;; Conf
 ;;;;;;;;
