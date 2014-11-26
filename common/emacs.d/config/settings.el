@@ -115,7 +115,9 @@
 ;; Enable winner-mode for managing window configurations.
 (winner-mode t)
 
-;; Turn on visual line mode for text mode.
+;; Turn on visual line mode for text mode. This enables word-wrap in the current
+;; buffer, and rebinds C-a, C-e, etc. to operate on visual lines instead of
+;; logical lines.
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; Make autocompletion for buffer names case-insensitive.
