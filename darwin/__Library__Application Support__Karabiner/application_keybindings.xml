@@ -11,6 +11,7 @@
       <appendix>Hyper + E to open Emacs</appendix>
       <appendix>Hyper + W to open Chrome</appendix>
       <appendix>Hyper + S to open KeePassX</appendix>
+      <appendix>Hyper + H to open HipChat</appendix>
       <identifier>custom.application_launchers</identifier>
 
       <!-- Define special keycodes for launching apps -->
@@ -33,6 +34,10 @@
       <vkopenurldef>
         <name>KeyCode::VK_OPEN_URL_APP_KeePassX</name>
         <url type="file">/Applications/KeePassX.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_HipChat</name>
+        <url type="file">/Applications/HipChat.app</url>
       </vkopenurldef>
 
       <!-- Then define the actual applicaton launcher shortcuts. -->
@@ -65,6 +70,12 @@
         KeyCode::S, {{ MODIFIER_FLAG_HYPER }},
 
         KeyCode::VK_OPEN_URL_APP_KeePassX
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::H, {{ MODIFIER_FLAG_HYPER }},
+
+        KeyCode::VK_OPEN_URL_APP_HipChat
       </autogen>
     </item>
 
