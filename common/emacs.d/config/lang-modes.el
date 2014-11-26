@@ -25,13 +25,7 @@
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
-(add-to-list 'load-path (concat vendor-dir "scss-mode/"))
-(autoload 'scss-mode "scss-mode.el"
-  "Major mode for editing SCSS files" t)
-
 (setq scss-compile-at-save nil)
-(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
-(add-to-list 'auto-mode-alist '("\\.scssmk$" . scss-mode))
 
 ;;;;;;;;;;;;
 ;; Markdown

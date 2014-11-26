@@ -4,6 +4,7 @@
 (defvar required-packages
   '(js2-mode
     projectile
+    scss-mode
     yaml-mode))
 
 ;; List the repositories we want to install from.
