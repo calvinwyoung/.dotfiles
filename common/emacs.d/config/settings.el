@@ -79,8 +79,12 @@
 ;; Use 80-character lines.
 (setq-default fill-column 80)
 
-;; Enable electric pair mode for auto-pairing delimiters.
+;; Enable electric pair mode for auto-pairing delimiters. Disable
+;; `electric-pair-preserve-balance' so as not to insert extraneous double-quotes
+;; when there's an unbalanced pairing.
+;; (See https://lists.gnu.org/archive/html/emacs-devel/2014-04/msg00020.html
 (electric-pair-mode t)
+(setq electric-pair-preserve-balance nil)
 
 ;; Set whitespace mode to highlight column 80+ chars, as well as any trailing
 ;; whitespaces.
