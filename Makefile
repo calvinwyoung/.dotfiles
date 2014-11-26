@@ -17,10 +17,10 @@ darwin: common
 
 # Create a symlink for our Preferences directory. Since the `ln` command can't
 # overwrite directories, we must remove the original directory (but only if it's
-# a real directory and not a symlink). Use the `-f` and `-T` flags to make `ln`
+# a real directory and not a symlink). Use the `-f` and `-n` flags to make `ln`
 # overwrite old symlinks without dereferencing them.
 	if [ ! -h ~/Library/Preferences ]; then rm -rf ~/Library/Preferences; fi
-	ln -sfT $(OSX_PREFS_SYNC_DIR) ~/Library/Preferences
+	ln -sfn $(OSX_PREFS_SYNC_DIR) ~/Library/Preferences
 
 # Apply custom default settings.
 	bin/set_osx_defaults.sh
