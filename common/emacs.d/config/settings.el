@@ -8,7 +8,7 @@
 ;; Set frame title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
 
-;; Turn off the splash screen
+;; Turn off the splash screen.
 (setq inhibit-splash-screen t)
 
 (defun set-window-system-settings (frame)
@@ -55,14 +55,14 @@
 (set-window-system-settings (selected-frame))
 (add-hook 'after-make-frame-functions 'set-window-system-settings)
 
-;; Prevent leftover backup turds
+;; Prevent leftover backup turds.
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
 ;; Use the default Emacs24 wombat color theme.
 (load-theme 'wombat t)
 
-;; Stop asking me to type "yes" or "no"
+;; Stop asking me to type "yes" or "no".
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Make text mode the default mode for new buffers, and for the scratch buffer.
@@ -70,16 +70,16 @@
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
 
-;; Use spaces instead of tabs
+;; Use spaces instead of tabs.
 (setq-default indent-tabs-mode nil)
 
-;; Use 4-character tabs
+;; Use 4-character tabs.
 (setq tab-width 4)
 
-;; Use 80-character lines
+;; Use 80-character lines.
 (setq-default fill-column 80)
 
-;; Enable electric pair mode for auto-pairing delimiters
+;; Enable electric pair mode for auto-pairing delimiters.
 (electric-pair-mode t)
 
 ;; Set whitespace mode to highlight column 80+ chars, as well as any trailing
@@ -98,39 +98,39 @@
 (global-linum-mode t)
 (setq linum-format "%d ")
 
-;; Highlight matching parentheses
+;; Highlight matching parentheses.
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
-;; Enable CUA mode for rectangle selection, but disable its key bindings
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
+;; Enable delete-selection mode so that pasting while an active region is
+;; selected overwrites that region.
+(delete-selection-mode t)
 
-;; Display the current column number in the mode line
+;; Display the current column number in the mode line.
 (column-number-mode t)
 
 ;; Use ssh in tramp mode by default
 (setq tramp-default-method "ssh")
 
-;; Enable winner-mode for managing window configurations
+;; Enable winner-mode for managing window configurations.
 (winner-mode t)
 
-;; Turn on visual line mode for text mode
+;; Turn on visual line mode for text mode.
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
-;; Make autocompletion for buffer names case-insensitive
+;; Make autocompletion for buffer names case-insensitive.
 (setq read-buffer-completion-ignore-case 1)
 
-;; Kill buffers that have been open for a long time
+;; Kill buffers that have been open for a long time.
 (require 'midnight)
 (setq clean-buffer-list-delay-general 1)
 
-;; Omit hidden files in dired mode
+;; Omit hidden files in dired mode.
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
-;; Set the default browser to chrome
+;; Set the default browser to chrome.
 (if (eq system-type 'gnu/linux)
     (setq browse-url-browser-function 'browse-url-generic
           browse-url-generic-program "google-chrome")
@@ -143,7 +143,7 @@
       (setq x-select-enable-clipboard t)
       (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)))
 
-;; Stop emacs from prompting us before killing buffers in daemon mode
+;; Stop emacs from prompting us before killing buffers in daemon mode.
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
 ;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,

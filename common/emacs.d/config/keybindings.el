@@ -8,11 +8,11 @@
 (global-set-key (kbd "C-M-_") 'redo)
 
 ;; Bind both Ctrl + V and Meta + V to paste.
-(global-set-key "\C-v" 'cua-paste)
-(global-set-key "\M-v" 'cua-paste)
+(global-set-key "\C-v" 'yank)
+(global-set-key "\M-v" 'yank)
 
-;; Enable auto indenting.
-(global-set-key (kbd "RET") 'newline-and-indent)
+;; Bind Ctrl + Enter to enable rectangle-mark-mode (a la cua-selection-mode).
+(global-set-key (kbd "<C-return>") 'rectangle-mark-mode)
 
 ;; Make Ctrl + W kill previous word with custom function.
 (global-set-key "\C-w" 'backward-kill-word)
