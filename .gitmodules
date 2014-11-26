@@ -1,6 +1,3 @@
-[submodule "common/emacs.d/vendor/markdown-mode"]
-	path = common/emacs.d/vendor/markdown-mode
-	url = git://github.com/defunkt/markdown-mode.git
 [submodule "common/emacs.d/vendor/lua-mode"]
 	path = common/emacs.d/vendor/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
