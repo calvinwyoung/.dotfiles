@@ -6,7 +6,8 @@
     lua-mode
     projectile
     scss-mode
-    yaml-mode))
+    yaml-mode
+    yasnippet))
 
 ;; List the repositories we want to install from.
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
