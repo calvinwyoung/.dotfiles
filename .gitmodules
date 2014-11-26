@@ -10,9 +10,6 @@
 [submodule "common/emacs.d/vendor/yasnippet"]
 	path = common/emacs.d/vendor/yasnippet
 	url = git://github.com/capitaomorte/yasnippet.git
-[submodule "common/emacs.d/vendor/js2-mode"]
-	path = common/emacs.d/vendor/js2-mode
-	url = git://github.com/mooz/js2-mode.git
 [submodule "common/emacs.d/vendor/auto-complete"]
 	path = common/emacs.d/vendor/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git

@@ -45,14 +45,7 @@
 ;;;;;;;;;;;;;;
 ;; Javascript
 ;;;;;;;;;;;;;;
-(add-to-list 'load-path (concat vendor-dir "js2-mode/"))
-;; Make sure to load the byte-compiled library or this will be balls slow.
-(autoload 'js2-mode "js2-mode.elc"
-  "Major mode for editing Javascript files" t)
-
-(setq js2-enter-indents-newline t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsmk$" . js2-mode))
 
 ;;;;;;;;
 ;; HTML

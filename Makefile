@@ -6,9 +6,6 @@ common:
 	bin/create_symlinks.py common/
 	git submodule update --init --recursive
 
-# js2-mode must be byte-compiled or it runs balls-slow.
-	$(MAKE) -C common/emacs.d/vendor/js2-mode
-
 linux: common
 	bin/create_symlinks.py linux/
 

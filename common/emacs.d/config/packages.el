@@ -2,7 +2,8 @@
 
 ;; List of packages we need to install.
 (defvar required-packages
-  '(projectile
+  '(js2-mode
+    projectile
     yaml-mode))
 
 ;; List the repositories we want to install from.
