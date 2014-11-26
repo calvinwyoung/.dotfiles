@@ -47,12 +47,7 @@
 ;;;;;;;
 ;; Lua
 ;;;;;;;
-(add-to-list 'load-path (concat vendor-dir "lua-mode/"))
-(autoload 'lua-mode "lua-mode.el"
-  "Major mode for editing Lua files" t)
-
 (setq lua-indent-level 4)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
 ;;;;;;;;;;;;
 ;; Org-mode

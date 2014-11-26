@@ -3,6 +3,7 @@
 ;; List of packages we need to install.
 (defvar required-packages
   '(js2-mode
+    lua-mode
     projectile
     scss-mode
     yaml-mode))
