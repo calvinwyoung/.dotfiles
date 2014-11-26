@@ -8,6 +8,7 @@
 (add-to-list 'load-path config-dir)
 
 ;; Load core configuration
+(load-library "packages")
 (load-library "settings")
 (load-library "defuns")
 (load-library "lang-modes")
