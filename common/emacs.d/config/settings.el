@@ -127,6 +127,9 @@
 ;; Make autocompletion for buffer names case-insensitive.
 (setq read-buffer-completion-ignore-case 1)
 
+;; Stop emacs from prompting us before killing buffers in daemon mode.
+(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
+
 ;; Kill buffers that have been open for a long time.
 (require 'midnight)
 (setq clean-buffer-list-delay-general 1)
@@ -135,6 +138,21 @@
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
+;; *.pyo) should be omitted from the file completions list.
+;; Source: http://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window#1731634
+(defadvice completion-file-name-table (after
+                                       ignoring-backups-f-n-completion
+                                       activate)
+  "Filter out results when the have completion-ignored-extensions"
+  (let ((res ad-return-value))
+    (if (and (listp res)
+             (stringp (car res))
+             ;; length > 1, don't ignore sole match
+             (cdr res))
+        (setq ad-return-value
+              (completion-pcm--filename-try-filter res)))))
 
 ;; Set the default browser to chrome.
 (if (eq system-type 'gnu/linux)
@@ -149,19 +167,8 @@
       (setq x-select-enable-clipboard t)
       (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)))
 
-;; Stop emacs from prompting us before killing buffers in daemon mode.
-(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
-
-;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
-;; *.pyo) should be omitted from the file completions list.
-(defadvice completion-file-name-table (after
-                                       ignoring-backups-f-n-completion
-                                       activate)
-  "Filter out results when the have completion-ignored-extensions"
-  (let ((res ad-return-value))
-    (if (and (listp res)
-             (stringp (car res))
-             ;; length > 1, don't ignore sole match
-             (cdr res))
-        (setq ad-return-value
-              (completion-pcm--filename-try-filter res)))))
+;; When using OS X, add a few additional directories to the PATH.
+;; Source: http://stackoverflow.com/questions/930439/using-git-with-emacs#931491
+(when (eq system-type 'darwin)
+  (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
+  (push "/opt/local/bin" exec-path))

@@ -25,7 +25,12 @@
 ;;;;;;;;;;;;
 ;; CSS/SCSS
 ;;;;;;;;;;;;
+(load-file (concat vendor-dir "scss-mode.el"))
+(autoload 'scss-mode "scss-mode.el"
+  "Major mode for editing SCSS files" t)
+
 (setq scss-compile-at-save nil)
+(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 
 ;;;;;;;;;;;;;;
 ;; Javascript

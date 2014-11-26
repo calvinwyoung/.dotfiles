@@ -2,7 +2,7 @@
 ;; YASnippet
 ;;;;;;;;;;;;;
 ;; Enable yasnippets everywhere
-(yas-global-mode 1)
+(yas-global-mode t)
 
 ;; Enable dropdown menu when there are multiple snippet options
 (setq yas-prompt-functions '(yas-dropdown-prompt yas-no-prompt))
@@ -12,6 +12,23 @@
 (define-key yas-minor-mode-map (kbd "C-<tab>") 'yas/expand)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
+
+;;;;;;;;;;;;;;
+;; Projectile
+;;;;;;;;;;;;;;
+
+;; Change projectile prefix from \C-c p -> \C-x p. Note this must be set before
+;; enabling projectile mode globally.
+(setq projectile-keymap-prefix "\C-xp")
+
+;; Enable Projectile everywhere.
+(projectile-global-mode t)
+
+;; Use grizzle instead of ido-mode for autocompletion.
+(setq projectile-completion-system 'grizzl)
+
+;; Always enable caching when indexing project files.
+(setq projectile-enable-caching t)
 
 ;;;;;;;;;;;;;;;;;
 ;; Auto-complete

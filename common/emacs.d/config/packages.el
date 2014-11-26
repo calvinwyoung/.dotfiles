@@ -2,10 +2,12 @@
 
 ;; List of packages we need to install.
 (defvar required-packages
-  '(js2-mode
+  '(
+    ;; For better auto-completion with projectile
+    grizzl
+    js2-mode
     lua-mode
     projectile
-    scss-mode
     yaml-mode
     yasnippet))
 
@@ -15,6 +17,8 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
+;; Helper function for checking whether all required packages are installed.
+;; Source: http://toumorokoshi.github.io/emacs-from-scratch-part-2-package-management.html
 (defun check-packages-installed-p ()
   "Returns true if any of the packages in `required-packages' aren't installed."
   (loop for p in required-packages

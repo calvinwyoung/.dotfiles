@@ -214,6 +214,9 @@ columns left."
   (interactive "p")
   (shift-text-horizontally (- arg)))
 
+;; TODO (CY): This is busted. See here instead:
+;; http://www.emacswiki.org/emacs/SearchAtPoint
+
 ;; Emulate vim's "*" character for searching for the word under the cursor.
 ;; Source: http://stackoverflow.com/questions/589691/how-can-i-emulate-vims-search-in-gnu-emacs#590915
 (defun my-isearch-word-at-point ()
