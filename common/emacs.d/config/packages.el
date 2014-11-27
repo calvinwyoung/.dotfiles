@@ -3,8 +3,10 @@
 ;; List of packages we need to install.
 (defvar required-packages
   '(
-    ;; For better auto-completion with projectile
+    ;; For better auto-completion with projectile.
     grizzl
+    ;; For highlighting symbols and jumping between them.
+    highlight-symbol
     js2-mode
     lua-mode
     projectile

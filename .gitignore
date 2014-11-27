@@ -1,4 +1,9 @@
 ncmpcpp/error.log
-common/emacs.d/elpa
 .DS_Store
 .netrwhist
+
+# Ignore elpa packages.
+common/emacs.d/elpa
+
+# Ignore projectile cache files.
+common/emacs.d/projectile*
