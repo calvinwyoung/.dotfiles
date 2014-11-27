@@ -1,6 +1,7 @@
 ;;;;;;;;;;;;;
 ;; YASnippet
 ;;;;;;;;;;;;;
+
 ;; Enable yasnippets everywhere
 (yas-global-mode t)
 
@@ -12,6 +13,36 @@
 (define-key yas-minor-mode-map (kbd "C-<tab>") 'yas/expand)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
+
+;;;;;;;;;;;;;;;;;
+;; Auto-complete
+;;;;;;;;;;;;;;;;;
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; The latest versions of auto-complete stumbles on yasnippet. This is
+;; supposedly fixed in the latest version of auto-complete, but it still breaks
+;; for us. Until this is fixed for real, we should just prevent yasnippet from
+;; appearing in auto-complete. (11/27/2014)
+;; Source: http://www.kurup.org/blog/2012/10/15/emacs-autocomplete-stumbles-on-yasnippet/
+(setq ac-source-yasnippet nil)
+
+;; Set some colors.
+(set-face-background 'ac-candidate-face "#141414")
+(set-face-foreground 'ac-candidate-face "#f6f3e8")
+(set-face-background 'ac-selection-face "#64a8d8")
+
+;; By default, auto-complete analyzes completion operations and ranks candidates
+;; higher in the search results if they've been selected multiple times. This
+;; usually just gets in the way, so we disable it here.
+(setq ac-use-comphist nil)
+
+;; Remove delay before auto-complete shows completions.
+(setq ac-delay 0.0)
+
+(ac-set-trigger-key "TAB")
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 ;;;;;;;;;;;;;;
 ;; Projectile
@@ -29,31 +60,6 @@
 
 ;; Always enable caching when indexing project files.
 (setq projectile-enable-caching t)
-
-;;;;;;;;;;;;;;;;;
-;; Auto-complete
-;;;;;;;;;;;;;;;;;
-(require 'auto-complete-config)
-(ac-config-default)
-
-;; Set some colors.
-(set-face-background 'ac-candidate-face "#141414")
-(set-face-foreground 'ac-candidate-face "#f6f3e8")
-(set-face-background 'ac-selection-face "#64a8d8")
-
-;; By default, auto-complete analyzes completion operations and ranks candidates
-;; higher in the search results if they've been selected multiple times. This
-;; usually just gets in the way, so we disable it here.
-(setq ac-use-comphist nil)
-
-;; By default, the auto-complete dropdown will open each time new characters are
-;; inserted. Here we disable this behavior, and require hitting the trigger key
-;; (i.e., tab) to activate the dropdown.
-(setq ac-auto-start nil)
-(ac-set-trigger-key "TAB")
-
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 ;;;;;;;;
 ;; Redo
