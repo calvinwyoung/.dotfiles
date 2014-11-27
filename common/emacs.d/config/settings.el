@@ -94,10 +94,6 @@
 ;; Delete trailing whitespaces on file save
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 
-;; TODO (CY): Need to backward-kill-word before we can use this.
-;; Treat components in camelCased variable names as individual words.
-;; (global-subword-mode t)
-
 ;; Show line numbers. Seriously, who codes without line numbers?
 (global-linum-mode t)
 (setq linum-format "%d ")
