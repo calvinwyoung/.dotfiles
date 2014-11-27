@@ -314,7 +314,12 @@ var helpers = (function() {
 
         slate.eachApp(function(app) {
             app.eachWindow(function(win) {
-                if (!win.isMinimizedOrHidden() && win.title()) {
+                if ((!win.isMinimizedOrHidden() && win.title()) ||
+                        // HACK: The current version of HipChat (v3.1) doesn't
+                        // have a window title, so we need to special-case it
+                        // here in order to allow cycling focus to
+                        // it. (11/26/2014)
+                        app.name() === "HipChat") {
                     screenWindowsMap[win.screen().id()].push(win);
                 }
             });
