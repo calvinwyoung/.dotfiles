@@ -175,7 +175,9 @@ close buffer without prompt for save."
       (when (or (> arg 0) (not (bobp)))
         (forward-line)
         (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg))
+          (transpose-lines arg)
+          (when (< arg 0)
+            (forward-line -1)))
         (forward-line -1))
       (move-to-column column t)))))
 
