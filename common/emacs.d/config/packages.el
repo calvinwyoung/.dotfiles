@@ -3,10 +3,12 @@
 ;; List of packages we need to install.
 (defvar required-packages
   '(auto-complete
+    expand-region
     helm-projectile
     js2-mode
     lua-mode
     projectile
+    web-mode
     yaml-mode
     yasnippet))
 

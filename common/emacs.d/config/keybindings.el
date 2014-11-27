@@ -57,6 +57,9 @@
 (global-set-key "\C-\M-k" 'windmove-up)
 (global-set-key "\C-\M-j" 'windmove-down)
 
+;; Replace mark-sexp with the superior expand-region.
+(global-set-key (kbd "C-M-SPC") 'er/expand-region)
+
 ;; Define custom minor mode keys.
 (defvar my-keys-map (make-keymap) "my-keys keymap.")
 (define-minor-mode my-keys
