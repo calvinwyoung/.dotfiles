@@ -33,24 +33,25 @@
 ;;;;;;;;;;;;;;;;;
 ;; Auto-complete
 ;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (concat vendor-dir "auto-complete/"))
-(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/popup"))
-(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/fuzzy"))
-(add-to-list 'load-path (concat vendor-dir "auto-complete/lib/ert"))
-(add-to-list 'load-path (concat vendor-dir "auto-complete/dict"))
 (require 'auto-complete-config)
-
-(setq ac-use-comphist nil)
 (ac-config-default)
-(setq ac-auto-start nil)
 
-;; Appearance
+;; Set some colors.
 (set-face-background 'ac-candidate-face "#141414")
 (set-face-foreground 'ac-candidate-face "#f6f3e8")
 (set-face-background 'ac-selection-face "#64a8d8")
 
-;; Keybindings
+;; By default, auto-complete analyzes completion operations and ranks candidates
+;; higher in the search results if they've been selected multiple times. This
+;; usually just gets in the way, so we disable it here.
+(setq ac-use-comphist nil)
+
+;; By default, the auto-complete dropdown will open each time new characters are
+;; inserted. Here we disable this behavior, and require hitting the trigger key
+;; (i.e., tab) to activate the dropdown.
+(setq ac-auto-start nil)
 (ac-set-trigger-key "TAB")
+
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 

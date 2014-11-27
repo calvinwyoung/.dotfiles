@@ -3,6 +3,7 @@
 ;; List of packages we need to install.
 (defvar required-packages
   '(
+    auto-complete
     ;; For better auto-completion with projectile.
     grizzl
     ;; For highlighting symbols and jumping between them.
