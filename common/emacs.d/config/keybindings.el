@@ -49,12 +49,9 @@
 ;; Emulate vim's "%" command for moving to a matching parentheses.
 (global-set-key [?\C-%] 'goto-match-paren)
 
-;; Emulate vim's "*" and "#" commands for searching for the word under the
-;; cursor.
-(add-hook 'prog-mode-hook (lambda () (highlight-symbol-mode)))
-(setq highlight-symbol-on-navigation-p t)
-(global-set-key [?\C-*] 'highlight-symbol-next)
-(global-set-key [?\C-#] 'highlight-symbol-prev)
+;; Emulate vim's "*" command for searching for the word under the cursor.
+(global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
+(define-key isearch-mode-map [?\C-*] 'isearch-repeat-forward)
 
 ;; Easier window switching.
 (global-set-key "\C-\M-k" 'windmove-up)

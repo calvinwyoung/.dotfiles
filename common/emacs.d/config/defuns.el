@@ -176,21 +176,15 @@ close buffer without prompt for save."
         (forward-line)
         (when (or (< arg 0) (not (eobp)))
           (transpose-lines arg)
-          (when (< arg 0)
+          ;; Account for changes to transpose-lines in Emacs 24.3
+          (when (and (eval-when-compile
+                       (not (version-list-<
+                             (version-to-list emacs-version)
+                             '(24 3 50 0))))
+                     (< arg 0))
             (forward-line -1)))
         (forward-line -1))
       (move-to-column column t)))))
-
-;; Source: http://stackoverflow.com/questions/3156450/shift-a-region-or-line-in-emacs#3156642
-(defun shift-text-horizontally (arg)
-  "Shift a region of text args columns left or right."
-  (if (use-region-p)
-      (let ((mark (mark)))
-        (save-excursion
-          (indent-rigidly (region-beginning) (region-end) arg)
-          (push-mark mark t t)
-          (setq deactivate-mark nil)))
-    (indent-rigidly (line-beginning-position) (line-end-position) arg)))
 
 (defun move-text-down (arg)
   "Move region (transient-mark-mode active) or current line arg
@@ -203,6 +197,17 @@ lines down."
 lines up."
   (interactive "*p")
   (move-text-vertically (- arg)))
+
+;; Source: http://stackoverflow.com/questions/3156450/shift-a-region-or-line-in-emacs#3156642
+(defun shift-text-horizontally (arg)
+  "Shift a region of text args columns left or right."
+  (if (use-region-p)
+      (let ((mark (mark)))
+        (save-excursion
+          (indent-rigidly (region-beginning) (region-end) arg)
+          (push-mark mark t t)
+          (setq deactivate-mark nil)))
+    (indent-rigidly (line-beginning-position) (line-end-position) arg)))
 
 (defun shift-text-right (arg)
   "Shift region (transient-mark-mode active) or current line arg

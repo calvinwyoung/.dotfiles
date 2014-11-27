@@ -6,8 +6,6 @@
     auto-complete
     ;; For better auto-completion with projectile.
     grizzl
-    ;; For highlighting symbols and jumping between them.
-    highlight-symbol
     js2-mode
     lua-mode
     projectile

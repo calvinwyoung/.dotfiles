@@ -102,6 +102,9 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
+;; Highlight matches immediately when performing incremental search.
+(setq lazy-highlight-initial-delay 0)
+
 ;; Enable delete-selection mode so that pasting while an active region is
 ;; selected overwrites that region.
 (delete-selection-mode t)
