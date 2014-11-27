@@ -7,6 +7,7 @@
 
 (add-to-list 'load-path config-dir)
 (add-to-list 'load-path vendor-dir)
+(add-to-list 'custom-theme-load-path vendor-dir)
 
 ;; Load core configuration
 (load-library "packages")

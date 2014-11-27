@@ -59,8 +59,8 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
-;; Use the default Emacs24 wombat color theme.
-(load-theme 'wombat t)
+;; Use the custom smyx theme.
+(load-theme 'smyx t)
 
 ;; Stop asking me to type "yes" or "no".
 (fset 'yes-or-no-p 'y-or-n-p)

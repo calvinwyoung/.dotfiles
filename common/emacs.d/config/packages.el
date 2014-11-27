@@ -2,10 +2,8 @@
 
 ;; List of packages we need to install.
 (defvar required-packages
-  '(
-    auto-complete
-    ;; For better auto-completion with projectile.
-    grizzl
+  '(auto-complete
+    helm-projectile
     js2-mode
     lua-mode
     projectile
@@ -15,7 +13,8 @@
 ;; List the repositories we want to install from.
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
 (package-initialize)
 
 ;; Helper function for checking whether all required packages are installed.

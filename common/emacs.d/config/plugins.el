@@ -55,11 +55,17 @@
 ;; Enable Projectile everywhere.
 (projectile-global-mode t)
 
-;; Use grizzle instead of ido-mode for autocompletion.
-(setq projectile-completion-system 'grizzl)
-
 ;; Always enable caching when indexing project files.
 (setq projectile-enable-caching t)
+
+;; Use helm instead of ido-mode for autocompletion.
+(setq projectile-completion-system 'helm)
+
+;; Allow switching between js, scss, and html files more easily.
+(add-to-list 'projectile-other-file-alist '("js" "scss" "html" "htmlmk"))
+(add-to-list 'projectile-other-file-alist '("scss" "js" "html" "htmlmk"))
+(add-to-list 'projectile-other-file-alist '("htmlmk" "scss" "js"))
+(add-to-list 'projectile-other-file-alist '("html" "scss" "js"))
 
 ;;;;;;;;
 ;; Redo
