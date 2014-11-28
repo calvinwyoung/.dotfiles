@@ -68,6 +68,30 @@
 (add-to-list 'projectile-other-file-alist '("html" "scss" "js"))
 
 ;;;;;;;;
+;; Helm
+;;;;;;;;
+
+;; Enable helm mode everywhere.
+(helm-mode)
+
+;; Rebind tab to run persistent action (e.g., complete directory name in
+;; find-file).
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; Make TAB works in terminal as well.
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+
+;; Helm hijakcs the Ctrl + W command -- we should rebind it to what we expect.
+(define-key helm-map "\C-w" 'backward-kill-word)
+
+;; Show helm's keyring instead of blindly cycling through the keyring.
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
+;; Replace the normal find-file command with helm's pimped-out version.
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(define-key helm-map (kbd "C-j")  'helm-select-action)
+
+;;;;;;;;
 ;; Redo
 ;;;;;;;;
 (require 'redo)
