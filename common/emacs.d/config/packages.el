@@ -9,6 +9,7 @@
     lua-mode
     projectile
     web-mode
+    wgrep
     yaml-mode
     yasnippet))
 

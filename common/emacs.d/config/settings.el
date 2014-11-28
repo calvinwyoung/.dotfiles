@@ -79,12 +79,17 @@
 ;; Use 80-character lines.
 (setq-default fill-column 80)
 
+;; Never allow emacs to automatically split windows horizontally (i.e., position
+;; windows to the left/right).
+(setq split-width-threshold nil)
+
+;; TODO (CY): Come back to this.
 ;; Enable electric pair mode for auto-pairing delimiters. Disable
 ;; `electric-pair-preserve-balance' so as not to insert extraneous double-quotes
 ;; when there's an unbalanced pairing.
 ;; (See https://lists.gnu.org/archive/html/emacs-devel/2014-04/msg00020.html
 (electric-pair-mode t)
-(setq electric-pair-preserve-balance nil)
+;; (setq electric-pair-preserve-balance nil)
 
 ;; Set whitespace mode to highlight column 80+ chars, as well as any trailing
 ;; whitespaces.
@@ -129,6 +134,9 @@
 ;; Stop emacs from prompting us before killing buffers in daemon mode.
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
+;; Always enable next-error-follow-minor-mode when in compilation mode.
+(add-hook 'compilation-mode-hook 'next-error-follow-minor-mode)
+
 ;; Kill buffers that have been open for a long time.
 (require 'midnight)
 (setq clean-buffer-list-delay-general 1)
@@ -137,6 +145,10 @@
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+;; When using wgrep, auto-save buffers after we finish editing.
+(require 'wgrep)
+(setq wgrep-auto-save-buffer t)
 
 ;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
 ;; *.pyo) should be omitted from the file completions list.

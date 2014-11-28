@@ -51,7 +51,7 @@
       (smyx-bg+3 "#585858")
 
       (smyx-red+1 "#992222")
-     (smyx-red "#FAB1AB")
+      (smyx-red "#FAB1AB")
       (smyx-red-1 "#FAB1AB")
       (smyx-red-2 "#FAB1AB")
       (smyx-red-3 "#FAB1AB")
@@ -169,7 +169,7 @@
    `(isearch-fail ((,class (:foreground ,smyx-black :background ,smyx-pink))))
 
    `(lazy-highlight ((,class (:foreground ,smyx-black :background ,smyx-yellow))))
-   `(query-replace ((,class (:background ,smyx-gray-5))))
+   `(query-replace ((,class (:foreground ,smyx-black :background ,smyx-green))))
    `(Highline-face ((,class (:background ,smyx-green))))
    `(italic ((,class (nil))))
    `(left-margin ((,class (nil))))

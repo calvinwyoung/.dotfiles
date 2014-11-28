@@ -74,6 +74,10 @@
 (define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
 (define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
 
+;; Remap M + [ / ] in compilation mode to visit the next error.
+(define-key compilation-minor-mode-map (kbd "M-]") 'compilation-next-error)
+(define-key compilation-minor-mode-map (kbd "M-[") 'compilation-previous-error)
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Buffer management
 ;;;;;;;;;;;;;;;;;;;;;

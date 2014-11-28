@@ -80,16 +80,18 @@
 ;; Make TAB works in terminal as well.
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
+;; Remape Ctrl + tab to list select actions.
+(define-key helm-map (kbd "C-<tab>") 'helm-select-action)
+
 ;; Helm hijakcs the Ctrl + W command -- we should rebind it to what we expect.
 (define-key helm-map "\C-w" 'backward-kill-word)
+(define-key helm-map "\C-k" 'kill-visual-line)
 
 ;; Show helm's keyring instead of blindly cycling through the keyring.
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 ;; Replace the normal find-file command with helm's pimped-out version.
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-(define-key helm-map (kbd "C-j")  'helm-select-action)
 
 ;;;;;;;;
 ;; Redo
