@@ -74,6 +74,10 @@
 ;; Enable helm mode everywhere.
 (helm-mode)
 
+;; Prevent helm-find-files from showing files matching regexps in
+;; `helm-boring-file-regexp-list'.
+(setq helm-ff-skip-boring-files t)
+
 ;; Rebind tab to run persistent action (e.g., complete directory name in
 ;; find-file). First binding is for GUI mode, and the second is for terminals.
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)

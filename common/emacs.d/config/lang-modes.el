@@ -50,7 +50,12 @@
 (add-hook 'html-mode-hook
           (lambda ()
             ;; Default indentation is usually 2 spaces, changing to 4.
-            (setq sgml-basic-offset 4)))
+            (setq sgml-basic-offset 4)
+
+            ;; Enable flyspell-prog-mode. This gets enabled automatically for
+            ;; major-modes that descend from `prog-mode', but unfortunately
+            ;; `html-mode' descends from `text-mode'.
+            (flyspell-prog-mode)))
 
 (add-to-list 'auto-mode-alist '("\\.htmlmk$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
