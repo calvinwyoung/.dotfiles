@@ -75,9 +75,8 @@
 (helm-mode)
 
 ;; Rebind tab to run persistent action (e.g., complete directory name in
-;; find-file).
+;; find-file). First binding is for GUI mode, and the second is for terminals.
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-;; Make TAB works in terminal as well.
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
 ;; Remape Ctrl + tab to list select actions.
@@ -98,12 +97,46 @@
 ;;;;;;;;
 (require 'redo)
 
+;; First binding is for GUI mode, and the second is for terminals.
+(global-set-key (kbd "C-M-/") 'redo)
+(global-set-key (kbd "C-M-_") 'redo)
+
 ;;;;;;;;;;;;;;;;
 ;; Cycle buffer
 ;;;;;;;;;;;;;;;;
 (require 'cycle-buffer)
 
+;; Easier buffer switching. The naming here is kind of confusing -- the
+;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
+;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
+;; direction.
+(global-set-key "\C-\M-h" 'cycle-buffer)
+(global-set-key "\C-\M-l" 'cycle-buffer-backward)
+
 ;;;;;;;;;;;;;;;;
 ;; Dired single
 ;;;;;;;;;;;;;;;;
 (require 'dired-single)
+
+;; Override the default dired binding to open the "magic buffer" in the current
+;; file's directory. This prevents dired from creating a new buffer each time a
+;; new directory is visited.
+(global-set-key "\C-xd" (lambda()
+                          (interactive)
+                          (dired-single-magic-buffer default-directory)))
+
+;; Custom key map for reusing dired buffers with `dired-single`.
+(defun my-dired-keys-map ()
+  "Custom key mappings to allow reusing single buffer in dired "
+  (define-key dired-mode-map (kbd "RET") 'dired-single-buffer)
+  (define-key dired-mode-map (kbd "<mouse-1>") 'dired-single-buffer-mouse)
+  (define-key dired-mode-map "^" (lambda()
+                                   (interactive)
+                                   (dired-single-buffer ".."))))
+
+;; If dired's already loaded, then the keymap will be bound
+(if (boundp 'dired-mode-map)
+    ;; We're good to go; just add our bindings.
+    (my-dired-keys-map)
+  ;; It's not loaded yet, so add our bindings to the load-hook.
+  (add-hook 'dired-load-hook 'my-dired-keys-map))

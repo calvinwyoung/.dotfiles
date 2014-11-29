@@ -2,11 +2,6 @@
 ;; Editing
 ;;;;;;;;;;;
 
-;; Add commands for redo. The first binding is for GUI mode, and the second one
-;; is for terminal mode.
-(global-set-key (kbd "C-M-/") 'redo)
-(global-set-key (kbd "C-M-_") 'redo)
-
 ;; Bind both Ctrl + V and Meta + V to paste.
 (global-set-key "\C-v" 'yank)
 (global-set-key "\M-v" 'yank)
@@ -49,10 +44,6 @@
 ;; Emulate vim's "%" command for moving to a matching parentheses.
 (global-set-key [?\C-%] 'goto-match-paren)
 
-;; Emulate vim's "*" command for searching for the word under the cursor.
-(global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
-(define-key isearch-mode-map [?\C-*] 'isearch-repeat-forward)
-
 ;; Easier window switching.
 (global-set-key "\C-\M-k" 'windmove-up)
 (global-set-key "\C-\M-j" 'windmove-down)
@@ -74,6 +65,17 @@
 (define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
 (define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
 
+;;;;;;;;;;;;;;;;;;
+;; Find / replace
+;;;;;;;;;;;;;;;;;;
+
+;; Make it easier to call grep.
+(global-set-key "\C-\M-g" 'rgrep)
+
+;; Emulate vim's "*" command for searching for the word under the cursor.
+(global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
+(define-key isearch-mode-map [?\C-*] 'isearch-repeat-forward)
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Buffer management
 ;;;;;;;;;;;;;;;;;;;;;
@@ -81,13 +83,6 @@
 ;; Use a simpler buffer list.
 (global-set-key "\C-x\C-b" 'bs-show)
 (setq bs-default-configuration "files-and-scratch")
-
-;; Easier buffer switching. The naming here is kind of confusing -- the
-;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
-;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
-;; direction.
-(global-set-key "\C-\M-h" 'cycle-buffer)
-(global-set-key "\C-\M-l" 'cycle-buffer-backward)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; File management
@@ -101,29 +96,6 @@
 
 ;; Enable easier file deletion.
 (global-set-key "\C-xD" 'delete-current-file)
-
-;; Custom key map for reusing dired buffers with the `dired-single` plugin.
-(defun my-dired-keys-map ()
-  "Custom key mappings to allow reusing single buffer in dired "
-  ;; <add other stuff here>
-  (define-key dired-mode-map (kbd "RET") 'dired-single-buffer)
-  (define-key dired-mode-map (kbd "<mouse-1>") 'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^" (lambda()
-                                   (interactive)
-                                   (dired-single-buffer ".."))))
-
-;; If dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; We're good to go; just add our bindings.
-    (my-dired-keys-map)
-  ;; It's not loaded yet, so add our bindings to the load-hook.
-  (add-hook 'dired-load-hook 'my-dired-keys-map))
-
-;; Override the default dired binding to open the "magic buffer" in the current
-;; file's directory.
-(global-set-key "\C-xd" (lambda()
-                          (interactive)
-                          (dired-single-magic-buffer default-directory)))
 
 ;;;;;;;;;
 ;; Misc.
