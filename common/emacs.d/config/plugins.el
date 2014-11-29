@@ -67,6 +67,14 @@
 (add-to-list 'projectile-other-file-alist '("htmlmk" "scss" "js"))
 (add-to-list 'projectile-other-file-alist '("html" "scss" "js"))
 
+;; By default, projectile-replace operates on the entire project root unless a
+;; prefix argument is specified, in which case it will prompt for a
+;; directory. Since we prefer specifying a directory, we reverse the default so
+;; we only operate on the project root when a prefix is used.
+(define-key projectile-command-map (kbd "r") (lambda(&optional arg)
+                                               (interactive "P")
+                                               (projectile-replace (not arg))))
+
 ;;;;;;;;
 ;; Helm
 ;;;;;;;;
