@@ -1,3 +1,11 @@
+;;;;;;;;;;;;;
+;; Prog mode
+;;;;;;;;;;;;;
+(add-hook 'prog-mode-hook
+          (lambda ()
+            ;; Enable Fly Spell spell-checking in all programming modes.
+            (flyspell-prog-mode)))
+
 ;;;;;;;;;;
 ;; Python
 ;;;;;;;;;;
