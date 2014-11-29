@@ -72,6 +72,9 @@
             (local-set-key (kbd "M-[") 'org-metaleft)
             (local-set-key (kbd "M-]") 'org-metaright)))
 
+;; Prevent org-mode from opening files in folded view by default.
+(setq org-startup-folded nil)
+
 ;;;;;;;;
 ;; Conf
 ;;;;;;;;
