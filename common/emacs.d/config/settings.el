@@ -148,9 +148,11 @@
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
-;; When using wgrep, auto-save buffers after we finish editing.
+;; When using wgrep, auto-save buffers after we finish editing. Also bind "e" to
+;; enable wgrep mode to be consistent with hotkey for occur-edit-mode.
 (require 'wgrep)
 (setq wgrep-auto-save-buffer t)
+(setq wgrep-enable-key "e")
 
 ;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
 ;; *.pyo) should be omitted from the file completions list.
