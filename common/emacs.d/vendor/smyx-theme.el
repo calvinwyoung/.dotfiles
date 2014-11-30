@@ -554,6 +554,8 @@
    `(org-agenda-structure
      ((,class (:inherit font-lock-comment-face))))
    `(org-archived ((,class (:slant italic))))
+
+   ;; CUSTOM (CY): Remove the box around org-mode checkboxes
    `(org-checkbox ((,class (:background ,smyx-black :foreground ,smyx-white))))
    `(org-date ((,class (:foreground ,smyx-green))))
    `(org-done ((,class (:bold t :weight bold :foreground ,smyx-green-1))))

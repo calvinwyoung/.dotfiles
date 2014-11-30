@@ -65,12 +65,18 @@
 (define-key my-keys-map "\M-n" (lambda() (interactive) (next-line 10)))
 (define-key my-keys-map "\M-p" (lambda() (interactive) (previous-line 10)))
 
+;; Enable multiple cursors mode.
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 ;;;;;;;;;;;;;;;;;;
 ;; Find / replace
 ;;;;;;;;;;;;;;;;;;
 
 ;; Make it easier to call grep.
-(global-set-key "\C-\M-g" 'rgrep)
+(global-set-key "\C-xg" 'rgrep)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'isearch-forward-symbol-at-point)

@@ -95,7 +95,13 @@ Special commands:
   (modify-syntax-entry ?* ". 23b" css-mode-syntax-table)
   (modify-syntax-entry ?\n ">" css-mode-syntax-table)
   (add-to-list 'compilation-error-regexp-alist scss-compile-error-regex)
-  (add-hook 'after-save-hook 'scss-compile-maybe nil t))
+  (add-hook 'after-save-hook 'scss-compile-maybe nil t)
+
+  ;; CUSTOM (CY): Make single-line comments the default.
+  (set (make-local-variable 'comment-start) "//")
+  (set (make-local-variable 'comment-end) "")
+  (set (make-local-variable 'comment-start-skip) "\\(//+\\|/\\*+\\)\\s *")
+  )
 
 (define-key scss-mode-map "\C-c\C-c" 'scss-compile)
 
