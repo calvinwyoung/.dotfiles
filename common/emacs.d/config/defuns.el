@@ -70,6 +70,16 @@ With argument ARG and region inactive, do this that many times."
                             (line-beginning-position))))))
     ))
 
+;; Wrap occur-mode to default to the symbol under the cursor if one exists.
+;; Source: https://groups.google.com/forum/#!topic/gnu.emacs.help/3hFe5aSs3kM
+(defun occur-symbol-at-point ()
+  (interactive)
+  (let ((sym (thing-at-point 'symbol)))
+    (if sym
+        ; regexp-history defvared in replace.el
+        (push (regexp-quote sym) regexp-history))
+    (call-interactively 'occur)))
+
 ;; Change default behavior of comment-dwim
 (defun comment-dwim-line (&optional arg)
   "Replacement for the comment-dwim command.
@@ -139,6 +149,14 @@ the end of the line, then comment current line."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
+
+;; Hides the header at the top of the grep buffer since it's not useful for us.
+;; http://stackoverflow.com/questions/16122801/remove-header-information-from-rgrep-grep-output-in-emacs
+(defun delete-grep-header ()
+  (save-excursion
+    (with-current-buffer grep-last-buffer
+      (goto-line 5)
+      (narrow-to-region (point) (point-max)))))
 
 ;; Source: http://xahlee.blogspot.com/2010/05/emacs-command-to-delete-current-file.html
 (defun delete-current-file ()

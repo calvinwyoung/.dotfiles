@@ -75,11 +75,14 @@
 ;; Find / replace
 ;;;;;;;;;;;;;;;;;;
 
-;; Make it easier to call rgrep.
+;; Make it easier to call rgrep. Also make sure we hide the grep hider on
+;; completion since it's not useful to us.
 (global-set-key "\C-xg" 'rgrep)
+(defadvice rgrep (after delete-grep-header activate) (delete-grep-header))
 
-;; Make it easier to call occur.
-(global-set-key "\C-xo" 'occur)
+;; Make it easier to call occur. Use our custom function that defaults to the
+;; symbol under the cursor.
+(global-set-key "\C-xo" 'occur-symbol-at-point)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
