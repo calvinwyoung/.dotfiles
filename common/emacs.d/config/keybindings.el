@@ -75,8 +75,11 @@
 ;; Find / replace
 ;;;;;;;;;;;;;;;;;;
 
-;; Make it easier to call grep.
+;; Make it easier to call rgrep.
 (global-set-key "\C-xg" 'rgrep)
+
+;; Make it easier to call occur.
+(global-set-key "\C-xo" 'occur)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'isearch-forward-symbol-at-point)

@@ -134,8 +134,10 @@
 ;; Stop emacs from prompting us before killing buffers in daemon mode.
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
-;; Always enable next-error-follow-minor-mode when in compilation mode.
+;; Always enable next-error-follow-minor-mode when in compilation-mode (for grep
+;; output) and occur-mode.
 (add-hook 'compilation-mode-hook 'next-error-follow-minor-mode)
+(add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
 
 ;; Kill buffers that have been open for a long time.
 (require 'midnight)
