@@ -84,6 +84,9 @@
 ;; symbol under the cursor.
 (global-set-key "\C-xo" 'occur-symbol-at-point)
 
+;; Override Ctrl + s to default to performing isearch with symbol at point.
+(global-set-key "\C-s" 'isearch-forward-symbol-at-point)
+
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
 (define-key isearch-mode-map [?\C-*] 'isearch-repeat-forward)
