@@ -115,6 +115,10 @@
 ;; Misc.
 ;;;;;;;;;
 
+;; Use C-p and C-n to cycle through minibuffer history.
+(define-key minibuffer-local-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-map "\C-n" 'next-history-element)
+
 ;; Compile command.
 (global-set-key [\C-f11] 'compile)
 (global-set-key [\S-f11] 'kill-compilation)
