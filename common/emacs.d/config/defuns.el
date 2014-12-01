@@ -80,6 +80,18 @@ With argument ARG and region inactive, do this that many times."
         (push (regexp-quote sym) regexp-history))
     (call-interactively 'occur)))
 
+;; Similar to `isearch-occur', activates rgrep and uses the last isearch query
+;; string as the default regexp. This should only be called from isearch-mode.
+(defun isearch-rgrep ()
+  "Runs `rgrep' using the last search string as the regexp."
+  (interactive)
+  (let ((read-regexp-defaults-function (lambda nil
+                                         (if isearch-regexp
+                                             isearch-string
+                                           (regexp-quote isearch-string)))))
+    (isearch-exit)
+    (call-interactively 'rgrep)))
+
 ;; Change default behavior of comment-dwim
 (defun comment-dwim-line (&optional arg)
   "Replacement for the comment-dwim command.

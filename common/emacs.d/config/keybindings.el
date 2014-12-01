@@ -84,6 +84,7 @@
 ;; symbol under the cursor.
 (global-set-key "\C-xo" 'occur-symbol-at-point)
 (define-key isearch-mode-map "\C-xo" 'isearch-occur)
+(define-key isearch-mode-map "\C-xg" 'isearch-rgrep)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (global-set-key [?\C-*] 'isearch-forward-symbol-at-point)
