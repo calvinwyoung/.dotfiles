@@ -28,7 +28,7 @@
      ;; Prevent ruby-mode from mapping Ctrl + Meta + h to backward-word-kill, for
      ;; which we already use Ctrl + w. Instead, we reserve this binding for
      ;; buffer-switching.
-     (define-key ruby-mode-map "\C-\M-h" nil)))
+     (define-key ruby-mode-map (kbd "C-M-h") nil)))
 
 ;;;;;;;;;;;;
 ;; CSS/SCSS

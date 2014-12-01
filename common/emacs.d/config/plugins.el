@@ -41,16 +41,16 @@
 (setq ac-delay 0.0)
 
 (ac-set-trigger-key "TAB")
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(define-key ac-complete-mode-map (kbd "C-n") 'ac-next)
+(define-key ac-complete-mode-map (kbd "C-p") 'ac-previous)
 
 ;;;;;;;;;;;;;;
 ;; Projectile
 ;;;;;;;;;;;;;;
 
-;; Change projectile prefix from \C-c p -> \C-x p. Note this must be set before
+;; Change projectile prefix from Ctrl-c p -> Ctrl-x p. Note this must be set before
 ;; enabling projectile mode globally.
-(setq projectile-keymap-prefix "\C-xp")
+(setq projectile-keymap-prefix (kbd "C-x p"))
 
 ;; Enable Projectile everywhere.
 (projectile-global-mode t)
@@ -95,8 +95,8 @@
 (define-key helm-map (kbd "C-<tab>") 'helm-select-action)
 
 ;; Helm hijakcs the Ctrl + W command -- we should rebind it to what we expect.
-(define-key helm-map "\C-w" 'backward-kill-word)
-(define-key helm-map "\C-k" 'kill-visual-line)
+(define-key helm-map (kbd "C-w") 'backward-kill-word)
+(define-key helm-map (kbd "C-k") 'kill-visual-line)
 
 ;; Show helm's keyring instead of blindly cycling through the keyring.
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -122,8 +122,8 @@
 ;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
 ;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
 ;; direction.
-(global-set-key "\C-\M-h" 'cycle-buffer)
-(global-set-key "\C-\M-l" 'cycle-buffer-backward)
+(global-set-key (kbd "C-M-h") 'cycle-buffer)
+(global-set-key (kbd "C-M-l") 'cycle-buffer-backward)
 
 ;;;;;;;;;;;;;;;;
 ;; Dired single
@@ -133,18 +133,18 @@
 ;; Override the default dired binding to open the "magic buffer" in the current
 ;; file's directory. This prevents dired from creating a new buffer each time a
 ;; new directory is visited.
-(global-set-key "\C-xd" (lambda()
-                          (interactive)
-                          (dired-single-magic-buffer default-directory)))
+(global-set-key (kbd "C-x d") (lambda()
+                                (interactive)
+                                (dired-single-magic-buffer default-directory)))
 
 ;; Custom key map for reusing dired buffers with `dired-single`.
 (defun my-dired-keys-map ()
   "Custom key mappings to allow reusing single buffer in dired "
   (define-key dired-mode-map (kbd "RET") 'dired-single-buffer)
   (define-key dired-mode-map (kbd "<mouse-1>") 'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^" (lambda()
-                                   (interactive)
-                                   (dired-single-buffer ".."))))
+  (define-key dired-mode-map (kbd "^") (lambda()
+                                         (interactive)
+                                         (dired-single-buffer ".."))))
 
 ;; If dired's already loaded, then the keymap will be bound
 (if (boundp 'dired-mode-map)
