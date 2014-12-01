@@ -80,6 +80,13 @@
 (global-set-key (kbd "C-x g") 'rgrep)
 (defadvice rgrep (after delete-grep-header activate) (delete-grep-header))
 
+;; When in grep mode, let the TAB key show the error source without switching
+;; focus to it. Also add hotkeys to occur-mode to make it behave like grep-mode.
+(define-key grep-mode-map (kbd "<tab>") 'compilation-display-error)
+(define-key occur-mode-map (kbd "<tab>") 'occur-mode-display-occurrence)
+(define-key occur-mode-map (kbd "n") 'next-error-no-select)
+(define-key occur-mode-map (kbd "p") 'previous-error-no-select)
+
 ;; Make it easier to call occur. Use our custom function that defaults to the
 ;; symbol under the cursor.
 (global-set-key (kbd "C-x o") 'occur-symbol-at-point)
