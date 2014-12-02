@@ -44,6 +44,7 @@
     </replacementvalue>
   </replacementdef>
 
+  <!-- Moves the cursor to the top right of the current window. -->
   <vkopenurldef>
     <name>
       KeyCode::VK_OPEN_URL_SHELL_warp_mouse_cursor_position_front_window_top_right
@@ -51,6 +52,20 @@
     <url type="shell">
       <![CDATA[
                /Applications/Karabiner.app/Contents/Library/utilities/bin/warp-mouse-cursor-position front_window top -60 right 10
+      ]]>
+    </url>
+  </vkopenurldef>
+
+  <!-- Temporarily mutes the machine for 30 seconds.  -->
+  <vkopenurldef>
+    <name>
+      KeyCode::VK_OPEN_URL_SHELL_mute_temporarily
+    </name>
+    <url type="shell">
+      <![CDATA[
+               /usr/bin/osascript -e "set volume output muted true";
+               /bin/sleep 30;
+               /usr/bin/osascript -e "set volume output muted false";
       ]]>
     </url>
   </vkopenurldef>

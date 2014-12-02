@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# Flush this machine's local DNS cache.
+#
+# Usage: ./flushdns
+#
+
 if [ `uname` == "Darwin" ]; then
     sudo killall -HUP mDNSResponder
 else
