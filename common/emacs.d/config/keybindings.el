@@ -134,3 +134,4 @@
 (global-set-key [C-f11] 'compile)
 (global-set-key [S-f11] 'kill-compilation)
 (global-set-key [f11] 'next-error)
+(global-set-key [f12] 'previous-error)
