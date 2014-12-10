@@ -153,6 +153,13 @@
 (add-hook 'grep-mode-hook (lambda () (pop-to-buffer (get-buffer "*grep*"))))
 (add-hook 'occur-hook (lambda () (pop-to-buffer occur-buf)))
 
+;; Monkey patch to ignore -C -C option from git blame command.
+;; Source: http://blog.kyanny.me/entry/2014/08/16/022311
+(defadvice vc-git-annotate-command (around vc-git-annotate-command activate)
+  "Remove '-C -C' option from `git blame` command"
+  (let ((name (file-relative-name file)))
+    (vc-git-command buf 'async nil "blame" "--date=iso" rev "--" name)))
+
 ;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
 ;; *.pyo) should be omitted from the file completions list.
 ;; Source: http://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window#1731634
