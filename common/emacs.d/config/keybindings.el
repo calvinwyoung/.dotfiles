@@ -78,7 +78,6 @@
 ;; Make it easier to call rgrep. Also make sure we hide the grep hider on
 ;; completion since it's not useful to us.
 (global-set-key (kbd "C-x g") 'rgrep)
-(defadvice rgrep (after delete-grep-header activate) (delete-grep-header))
 
 ;; When in grep mode, let the TAB key show the error source without switching
 ;; focus to it. Also add hotkeys to occur-mode to make it behave like grep-mode.

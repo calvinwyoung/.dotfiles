@@ -162,14 +162,6 @@ the end of the line, then comment current line."
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 
-;; Hides the header at the top of the grep buffer since it's not useful for us.
-;; http://stackoverflow.com/questions/16122801/remove-header-information-from-rgrep-grep-output-in-emacs
-(defun delete-grep-header ()
-  (save-excursion
-    (with-current-buffer grep-last-buffer
-      (goto-line 5)
-      (narrow-to-region (point) (point-max)))))
-
 ;; Source: http://xahlee.blogspot.com/2010/05/emacs-command-to-delete-current-file.html
 (defun delete-current-file ()
   "Delete the file associated with the current buffer.

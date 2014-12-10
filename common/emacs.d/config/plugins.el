@@ -62,10 +62,11 @@
 (setq projectile-completion-system 'helm)
 
 ;; Allow switching between js, scss, and html files more easily.
-(add-to-list 'projectile-other-file-alist '("js" "scss" "html" "htmlmk"))
-(add-to-list 'projectile-other-file-alist '("scss" "js" "html" "htmlmk"))
-(add-to-list 'projectile-other-file-alist '("htmlmk" "scss" "js"))
-(add-to-list 'projectile-other-file-alist '("html" "scss" "js"))
+(add-to-list 'projectile-other-file-alist '("js" "scss" "jqt" "html" "htmlmk"))
+(add-to-list 'projectile-other-file-alist '("scss" "js" "jqt" "html" "htmlmk"))
+(add-to-list 'projectile-other-file-alist '("jqt" "scss" "js" "html" "htmlmk"))
+(add-to-list 'projectile-other-file-alist '("htmlmk" "jqt" "scss" "js"))
+(add-to-list 'projectile-other-file-alist '("html" "jqt" "scss" "js"))
 
 ;; By default, projectile-replace operates on the entire project root unless a
 ;; prefix argument is specified, in which case it will prompt for a

@@ -149,6 +149,10 @@
 (setq wgrep-auto-save-buffer t)
 (setq wgrep-enable-key "e")
 
+;; Jump to grep-mode or occur-mode buffers as soon as they're active.
+(add-hook 'grep-mode-hook (lambda () (pop-to-buffer (get-buffer "*grep*"))))
+(add-hook 'occur-hook (lambda () (pop-to-buffer occur-buf)))
+
 ;; Files with extensions in the completion-ignored-extensions list (e.g., *.pyc,
 ;; *.pyo) should be omitted from the file completions list.
 ;; Source: http://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window#1731634
