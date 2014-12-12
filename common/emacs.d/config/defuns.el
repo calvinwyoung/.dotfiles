@@ -265,7 +265,7 @@ columns left."
 bullet of the current list item"
   (org-element-property :contents-begin (org-element-at-point)))
 
-(defun cy/org-return (arg)
+(defun cy/org-return (&optional arg)
   "Custom implementation of org-return that makes the Return key
 act more like traditional text editors.
 
@@ -275,36 +275,44 @@ act more like traditional text editors.
   outdents the item, or clears it if it's already at the outer-most
   indentation level."
   (interactive "P")
-  ;; We should only run our logic if we're at a list item.
+  ;; We should only invoke our custom logic if we're in a list item.
   (if (org-at-item-p)
       ;; If we're at the beginning of an empty list item, then try to outdent
       ;; it. If it can't be outdented (primarily b/c it's already at the
       ;; outer-most indentation level), then delete it.
-      (if (and (<= (point) (cy/org-beginning-of-item-after-bullet))
-               (eolp))
+      (if (and (eolp) (<= (point) (cy/org-beginning-of-item-after-bullet)))
           (condition-case nil
               (call-interactively 'org-outdent-item)
-            ('error (delete-region (line-beginning-position)
-                                   (line-end-position))))
+            ('error (delete-region (line-beginning-position) (line-end-position))))
+
+        ;; Otherwise, we should insert the correct list item depending on
+        ;; whether we're on a checkbox.
         (if (org-at-item-checkbox-p)
             (org-insert-todo-heading arg)
           (org-meta-return arg)))
-    (org-return)))
+    (org-return arg)))
 
 (defun cy/org-delete-backward-char (arg)
   "Custom implementation of org-delete-backward-char that deletes
 the bullet and moves to the end of the previous line if the point
 is just after the bullet character."
   (interactive "p")
-  (let ((beginning-of-item-after-bullet (cy/org-beginning-of-item-after-bullet)))
-    (if (and (org-at-item-p)
-             (<= (point) beginning-of-item-after-bullet))
+  ;; We should only invoke our custom logic if we're at the beginning of a list
+  ;; item right after the bullet character.
+  (if (and (org-at-item-p) (<= (point) (cy/org-beginning-of-item-after-bullet)))
+      ;; If the previous line is empty, then just delete the previous line (i.e.,
+      ;; shift the list up by one line).
+      (if (org-previous-line-empty-p)
+          (delete-region (line-beginning-position)
+                         (save-excursion (forward-line -1) (line-beginning-position)))
+
+        ;; Otherwise we should delete to the end of the previous line.
         (progn
-          ;; If we're not already at the end of a line (i.e., we're on an empty
-          ;; list item), then we should move to the point after the bullet. This
-          ;; handles the case when the cursor is in the middle of a checkbox.
+          ;; If we're not already at the end of a line, then we should move to
+          ;; the point after the bullet. This handles the case when the cursor
+          ;; is in the middle of a checkbox.
           (if (not (eolp))
-              (goto-char beginning-of-item-after-bullet))
+              (goto-char (cy/org-beginning-of-item-after-bullet)))
           (delete-region (point)
-                         (save-excursion (forward-line -1) (line-end-position))))
-      (org-delete-backward-char arg))))
+                         (save-excursion (forward-line -1) (line-end-position)))))
+    (org-delete-backward-char arg)))

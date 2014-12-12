@@ -81,6 +81,15 @@
             ;; Enable speed keys when cursor is at the beginning of a headline.
             (setq org-use-speed-commands t)
 
+            ;; Override Return and Backspace w/ convenient helpers on lists.
+            (local-set-key (kbd "<return>") 'cy/org-return)
+            (local-set-key (kbd "<backspace>") 'cy/org-delete-backward-char)
+
+            ;; We want M-[ and M-] to shift list items in/out by a tabstop, so we bind
+            ;; them here.
+            (local-set-key (kbd "M-[") 'org-metaleft)
+            (local-set-key (kbd "M-]") 'org-metaright)
+
             ;; We want to add custom keybindings for M-[ and M-], but to make
             ;; that work we need to unbind those keys from custom-keys-mode,
             ;; which would otherwise take precedence. Unfortunately this is a
@@ -94,15 +103,9 @@
               (make-local-variable 'minor-mode-overriding-map-alist)
               (push `(custom-keys-mode . ,newmap) minor-mode-overriding-map-alist))))
 
-;; We want M-[ and M-] to shift list items in/out by a tabstop, so we bind them
-;; here.
-(define-key org-mode-map (kbd "M-[") 'org-metaleft)
-(define-key org-mode-map (kbd "M-]") 'org-metaright)
-(define-key org-mode-map (kbd "<return>") 'cy/org-return)
-(define-key org-mode-map (kbd "<backspace>") 'cy/org-delete-backward-char)
-
-
-;; Prevent org-mode from opening files in folded view by default.
+;; Prevent org-mode from opening files in folded view by default. This needs to
+;; be set outside of the org-mode-hook so it takes effect before org-mode is
+;; loaded.
 (setq org-startup-folded nil)
 
 ;;;;;;;;
