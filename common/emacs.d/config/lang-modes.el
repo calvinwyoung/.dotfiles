@@ -71,11 +71,36 @@
 ;;;;;;;;;;;;
 (add-hook 'org-mode-hook
           (lambda ()
+            ;; Indent mode makes nested lists easier to look at.
+            (org-indent-mode t)
+
             (setq tab-stop-list (number-sequence 2 200 2))
             (setq tab-width 2)
-            (org-indent-mode t)
-            (local-set-key (kbd "M-[") 'org-metaleft)
-            (local-set-key (kbd "M-]") 'org-metaright)))
+            (setq org-list-empty-line-terminates-plain-lists t)
+
+            ;; Enable speed keys when cursor is at the beginning of a headline.
+            (setq org-use-speed-commands t)
+
+            ;; We want to add custom keybindings for M-[ and M-], but to make
+            ;; that work we need to unbind those keys from custom-keys-mode,
+            ;; which would otherwise take precedence. Unfortunately this is a
+            ;; bit tricky...
+            ;; Source: http://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/
+            (let ((oldmap (cdr (assoc 'custom-keys-mode minor-mode-map-alist)))
+                  (newmap (make-sparse-keymap)))
+              (set-keymap-parent newmap oldmap)
+              (define-key newmap (kbd "M-[") nil)
+              (define-key newmap (kbd "M-]") nil)
+              (make-local-variable 'minor-mode-overriding-map-alist)
+              (push `(custom-keys-mode . ,newmap) minor-mode-overriding-map-alist))))
+
+;; We want M-[ and M-] to shift list items in/out by a tabstop, so we bind them
+;; here.
+(define-key org-mode-map (kbd "M-[") 'org-metaleft)
+(define-key org-mode-map (kbd "M-]") 'org-metaright)
+(define-key org-mode-map (kbd "<return>") 'cy/org-return)
+(define-key org-mode-map (kbd "<backspace>") 'cy/org-delete-backward-char)
+
 
 ;; Prevent org-mode from opening files in folded view by default.
 (setq org-startup-folded nil)

@@ -134,7 +134,7 @@
 ;; Stop emacs from prompting us before killing buffers in daemon mode.
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
-;; Kill buffers that have been open for a long time.
+;; Enable midnight mode. Kill *all* buffers that haven't been accessed in 1 day.
 (require 'midnight)
 (setq clean-buffer-list-delay-general 1)
 
@@ -149,9 +149,11 @@
 (setq wgrep-auto-save-buffer t)
 (setq wgrep-enable-key "e")
 
-;; Jump to grep-mode or occur-mode buffers as soon as they're active.
+;; Jump to grep-mode, occur-mode, and help-mode buffers as soon as they're
+;; active.
 (add-hook 'grep-mode-hook (lambda () (pop-to-buffer (get-buffer "*grep*"))))
 (add-hook 'occur-hook (lambda () (pop-to-buffer occur-buf)))
+(add-hook 'help-mode-hook (lambda () (pop-to-buffer (get-buffer "*Help*"))))
 
 ;; Monkey patch to ignore -C -C option from git blame command.
 ;; Source: http://blog.kyanny.me/entry/2014/08/16/022311

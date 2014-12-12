@@ -1,3 +1,11 @@
+;; Define custom minor mode keys.
+(defvar custom-keys-mode-map (make-keymap)
+  "Keymap for custom-keys-mode-mode minor mode.")
+
+(define-minor-mode custom-keys-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t nil 'custom-keys-mode-map)
+
 ;; Emulate vim's o and O commands for opening new lines above/below the current
 ;; line.
 ;; Based on: http://www.emacswiki.org/emacs/OpenNextLine
@@ -69,6 +77,15 @@ With argument ARG and region inactive, do this that many times."
                        (max (save-excursion (backward-word)(point))
                             (line-beginning-position))))))
     ))
+
+;; Also add support for deleting words backwards without adding them to the yank
+;; ring.
+;; Source: http://stackoverflow.com/questions/6133799/delete-a-word-without-adding-it-to-the-kill-ring-in-emacs#6133921
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
 
 ;; Wrap occur-mode to default to the symbol under the cursor if one exists.
 ;; Source: https://groups.google.com/forum/#!topic/gnu.emacs.help/3hFe5aSs3kM
@@ -242,3 +259,52 @@ columns right."
 columns left."
   (interactive "p")
   (shift-text-horizontally (- arg)))
+
+(defun cy/org-beginning-of-item-after-bullet ()
+  "Returns the position before the first character after the
+bullet of the current list item"
+  (org-element-property :contents-begin (org-element-at-point)))
+
+(defun cy/org-return (arg)
+  "Custom implementation of org-return that makes the Return key
+act more like traditional text editors.
+
+- Pressing Return at the end of a list item inserts a new list item.
+- Pressing Return at the end of a checkbox inserts a new checkbox.
+- Pressing return at the beginning of an empty list or checkbox item
+  outdents the item, or clears it if it's already at the outer-most
+  indentation level."
+  (interactive "P")
+  ;; We should only run our logic if we're at a list item.
+  (if (org-at-item-p)
+      ;; If we're at the beginning of an empty list item, then try to outdent
+      ;; it. If it can't be outdented (primarily b/c it's already at the
+      ;; outer-most indentation level), then delete it.
+      (if (and (<= (point) (cy/org-beginning-of-item-after-bullet))
+               (eolp))
+          (condition-case nil
+              (call-interactively 'org-outdent-item)
+            ('error (delete-region (line-beginning-position)
+                                   (line-end-position))))
+        (if (org-at-item-checkbox-p)
+            (org-insert-todo-heading arg)
+          (org-meta-return arg)))
+    (org-return)))
+
+(defun cy/org-delete-backward-char (arg)
+  "Custom implementation of org-delete-backward-char that deletes
+the bullet and moves to the end of the previous line if the point
+is just after the bullet character."
+  (interactive "p")
+  (let ((beginning-of-item-after-bullet (cy/org-beginning-of-item-after-bullet)))
+    (if (and (org-at-item-p)
+             (<= (point) beginning-of-item-after-bullet))
+        (progn
+          ;; If we're not already at the end of a line (i.e., we're on an empty
+          ;; list item), then we should move to the point after the bullet. This
+          ;; handles the case when the cursor is in the middle of a checkbox.
+          (if (not (eolp))
+              (goto-char beginning-of-item-after-bullet))
+          (delete-region (point)
+                         (save-excursion (forward-line -1) (line-end-position))))
+      (org-delete-backward-char arg))))

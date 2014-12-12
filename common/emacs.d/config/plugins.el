@@ -100,10 +100,10 @@
 (define-key helm-map (kbd "C-k") 'kill-visual-line)
 
 ;; Show helm's keyring instead of blindly cycling through the keyring.
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(define-key custom-keys-mode-map (kbd "M-y") 'helm-show-kill-ring)
 
 ;; Replace the normal find-file command with helm's pimped-out version.
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-find-files)
 
 ;;;;;;;;
 ;; Redo
@@ -111,8 +111,8 @@
 (require 'redo)
 
 ;; First binding is for GUI mode, and the second is for terminals.
-(global-set-key (kbd "C-M-/") 'redo)
-(global-set-key (kbd "C-M-_") 'redo)
+(define-key custom-keys-mode-map (kbd "C-M-/") 'redo)
+(define-key custom-keys-mode-map (kbd "C-M-_") 'redo)
 
 ;;;;;;;;;;;;;;;;
 ;; Cycle buffer
@@ -123,8 +123,8 @@
 ;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
 ;; most recently used buffer). `cycle-buffer-backward` goes in the opposite
 ;; direction.
-(global-set-key (kbd "C-M-h") 'cycle-buffer)
-(global-set-key (kbd "C-M-l") 'cycle-buffer-backward)
+(define-key custom-keys-mode-map (kbd "C-M-h") 'cycle-buffer)
+(define-key custom-keys-mode-map (kbd "C-M-l") 'cycle-buffer-backward)
 
 ;;;;;;;;;;;;;;;;
 ;; Dired single
@@ -134,9 +134,10 @@
 ;; Override the default dired binding to open the "magic buffer" in the current
 ;; file's directory. This prevents dired from creating a new buffer each time a
 ;; new directory is visited.
-(global-set-key (kbd "C-x d") (lambda()
-                                (interactive)
-                                (dired-single-magic-buffer default-directory)))
+(define-key custom-keys-mode-map (kbd "C-x d")
+  (lambda()
+    (interactive)
+    (dired-single-magic-buffer default-directory)))
 
 ;; Custom key map for reusing dired buffers with `dired-single`.
 (defun my-dired-keys-map ()
