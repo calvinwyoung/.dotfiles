@@ -9,7 +9,7 @@
 ;; Emulate vim's o and O commands for opening new lines above/below the current
 ;; line.
 ;; Based on: http://www.emacswiki.org/emacs/OpenNextLine
-(defun open-next-line (arg)
+(defun cy/open-next-line (arg)
   "Move to the next line and then opens a line.
 See also `newline-and-indent'."
   (interactive "p")
@@ -18,7 +18,7 @@ See also `newline-and-indent'."
   (next-line 1)
   (indent-according-to-mode))
 
-(defun open-previous-line (arg)
+(defun cy/open-previous-line (arg)
   "Open a new line before the current one.
 See also `newline-and-indent'."
   (interactive "p")
@@ -27,7 +27,7 @@ See also `newline-and-indent'."
   (indent-according-to-mode))
 
 ;; Mark line without selection
-(defun mark-line (&optional arg)
+(defun cy/mark-line (&optional arg)
   "Marks a line from start of indentation to end"
   (interactive "p")
   (beginning-of-line)
@@ -35,7 +35,7 @@ See also `newline-and-indent'."
   (end-of-line))
 
 ;; Copy word without selection
-(defun copy-word (&optional arg)
+(defun cy/copy-word (&optional arg)
   "Copy words at point into kill-ring"
   (interactive "P")
   (let ((beg (progn
@@ -48,7 +48,7 @@ See also `newline-and-indent'."
     (copy-region-as-kill beg end)))
 
 ;; Copy line without selection
-(defun copy-line (&optional arg)
+(defun cy/copy-line (&optional arg)
   "Save current line into Kill-Ring without mark the line "
    (interactive "P")
    (let ((beg (line-beginning-position))
@@ -56,7 +56,7 @@ See also `newline-and-indent'."
      (copy-region-as-kill beg end)))
 
 ;; Vim-like custom backward-kill-word function
-(defun my-backward-kill-word (&optional arg)
+(defun cy/backward-kill-word (&optional arg)
   "Replacement for the backward-kill-word command
 If the region is active, then invoke kill-region.  Otherwise, use the
 following custom backward-kill-word procedure.
@@ -74,14 +74,13 @@ With argument ARG and region inactive, do this that many times."
         (if (bolp)
             (kill-backward-chars 1)
           (kill-region (point)
-                       (max (save-excursion (backward-word)(point))
-                            (line-beginning-position))))))
-    ))
+                       (max (save-excursion (backward-word) (point))
+                            (line-beginning-position))))))))
 
 ;; Also add support for deleting words backwards without adding them to the yank
 ;; ring.
 ;; Source: http://stackoverflow.com/questions/6133799/delete-a-word-without-adding-it-to-the-kill-ring-in-emacs#6133921
-(defun backward-delete-word (arg)
+(defun cy/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
   (interactive "p")
@@ -89,7 +88,7 @@ With argument ARG, do this that many times."
 
 ;; Wrap occur-mode to default to the symbol under the cursor if one exists.
 ;; Source: https://groups.google.com/forum/#!topic/gnu.emacs.help/3hFe5aSs3kM
-(defun occur-symbol-at-point ()
+(defun cy/occur-symbol-at-point ()
   (interactive)
   (let ((sym (thing-at-point 'symbol)))
     (if sym
@@ -99,7 +98,7 @@ With argument ARG, do this that many times."
 
 ;; Similar to `isearch-occur', activates rgrep and uses the last isearch query
 ;; string as the default regexp. This should only be called from isearch-mode.
-(defun isearch-rgrep ()
+(defun cy/isearch-rgrep ()
   "Runs `rgrep' using the last search string as the regexp."
   (interactive)
   (let ((read-regexp-defaults-function (lambda nil
@@ -109,8 +108,8 @@ With argument ARG, do this that many times."
     (isearch-exit)
     (call-interactively 'rgrep)))
 
-;; Change default behavior of comment-dwim
-(defun comment-dwim-line (&optional arg)
+;; Change default behavior of comment-dwim.
+(defun cy/comment-dwim (&optional arg)
   "Replacement for the comment-dwim command.
 If no region is selected and current line is not blank and we are not at
 the end of the line, then comment current line."
@@ -123,7 +122,7 @@ the end of the line, then comment current line."
 
 ;; Duplicate a line, optionally commenting the original.
 ;; Based on: http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
-(defun duplicate-line (&optional comment)
+(defun cy/duplicate-line (&optional comment)
   "Duplicates the current line, and comments the original."
   (interactive)
   (beginning-of-line)
@@ -136,14 +135,14 @@ the end of the line, then comment current line."
      (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
     (forward-line -1)))
 
-(defun duplicate-line-and-comment ()
+(defun cy/duplicate-line-and-comment ()
   "Duplicates the current line, and comments the original."
   (interactive)
   (duplicate-line t))
 
 ;; Emulate vim's "%" command to match parentheses.
 ;; Source: http://www.emacswiki.org/emacs/NavigatingParentheses#toc2
-(defun goto-match-paren (arg)
+(defun cy/goto-match-paren (arg)
   "Go to the matching  if on (){}[], similar to vi style of % "
   (interactive "p")
   ;; first, check for "outside of bracket" positions expected by forward-sexp, etc.
@@ -155,7 +154,7 @@ the end of the line, then comment current line."
         (t nil)))
 
 ;; Source: http://tuxicity.se/emacs/elisp/2010/03/26/rename-file-and-buffer-in-emacs.html
-(defun rename-file-and-buffer ()
+(defun cy/rename-file-and-buffer ()
   "Renames current buffer and file it is visiting."
   (interactive)
   (let ((name (buffer-name))
@@ -173,14 +172,14 @@ the end of the line, then comment current line."
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
 ;; Source: http://stackoverflow.com/questions/95631/open-a-file-with-su-sudo-inside-emacs#7043786
-(defun sudo-find-file (file-name)
+(defun cy/sudo-find-file (file-name)
   "Opens a file as sudo"
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 
 ;; Source: http://xahlee.blogspot.com/2010/05/emacs-command-to-delete-current-file.html
-(defun delete-current-file ()
+(defun cy/delete-current-file ()
   "Delete the file associated with the current buffer.
 Delete the current buffer too.  If no file is associated, just
 close buffer without prompt for save."
@@ -293,9 +292,13 @@ act more like traditional text editors.
     (org-return arg)))
 
 (defun cy/org-delete-backward-char (arg)
-  "Custom implementation of org-delete-backward-char that deletes
-the bullet and moves to the end of the previous line if the point
-is just after the bullet character."
+  "Custom implementation of org-delete-backward-char that makes
+the Backspace key act more like traditional text editors.
+
+- Pressing backspace at the beginning of a list item deletes to
+  the previous line.
+- If the previous line is a blank line, then we kill the previous
+  line instead."
   (interactive "p")
   ;; We should only invoke our custom logic if we're at the beginning of a list
   ;; item right after the bullet character.

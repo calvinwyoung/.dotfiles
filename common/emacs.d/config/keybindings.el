@@ -12,27 +12,27 @@
 ;; Make Ctrl + W kill previous word with custom function.
 (define-key custom-keys-mode-map (kbd "C-w") 'backward-kill-word)
 
-;; Remap backward-kill-word to my-backward-kill-word everywhere. In mini-buffer
+;; Remap backward-kill-word to cy/backward-kill-word everywhere. In mini-buffer
 ;; mode, remap it instead to backward-delete-word, which doesn't save to the
 ;; kill ring.
-(define-key custom-keys-mode-map [remap backward-kill-word] 'my-backward-kill-word)
-(define-key minibuffer-local-map [remap backward-kill-word] 'backward-delete-word)
+(define-key custom-keys-mode-map [remap backward-kill-word] 'cy/backward-kill-word)
+(define-key minibuffer-local-map [remap backward-kill-word] 'cy/backward-delete-word)
 
 ;; Make it easier to execute goto line.
 (define-key custom-keys-mode-map (kbd "M-g") 'goto-line)
 
 ;; Behave like vim's open line commands.
-(define-key custom-keys-mode-map (kbd "C-M-o") 'open-previous-line)
-(define-key custom-keys-mode-map (kbd "C-o") 'open-next-line)
+(define-key custom-keys-mode-map (kbd "C-M-o") 'cy/open-previous-line)
+(define-key custom-keys-mode-map (kbd "C-o") 'cy/open-next-line)
 
 ;; Map some copy chords.
-(define-key custom-keys-mode-map (kbd "C-x l") 'mark-line)
-(define-key custom-keys-mode-map (kbd "C-c w") 'copy-word)
-(define-key custom-keys-mode-map (kbd "C-c l") 'copy-line)
+(define-key custom-keys-mode-map (kbd "C-x l") 'cy/mark-line)
+(define-key custom-keys-mode-map (kbd "C-c w") 'cy/copy-word)
+(define-key custom-keys-mode-map (kbd "C-c l") 'cy/copy-line)
 
 ;; Duplicate line and optionally comment it.
-(define-key custom-keys-mode-map (kbd "C-c y") 'duplicate-line)
-(define-key custom-keys-mode-map (kbd "C-c ;") 'duplicate-line-and-comment)
+(define-key custom-keys-mode-map (kbd "C-c y") 'cy/duplicate-line)
+(define-key custom-keys-mode-map (kbd "C-c ;") 'cy/duplicate-line-and-comment)
 
 ;; Make it easier to move lines and regions.
 (define-key custom-keys-mode-map (kbd "M-<up>") 'move-text-up)
@@ -43,10 +43,10 @@
 (define-key custom-keys-mode-map (kbd "M-]") (lambda() (interactive) (shift-text-right 4)))
 
 ;; Use custom comment function.
-(define-key custom-keys-mode-map (kbd "M-;") 'comment-dwim-line)
+(define-key custom-keys-mode-map (kbd "M-;") 'cy/comment-dwim)
 
 ;; Emulate vim's "%" command for moving to a matching parentheses.
-(define-key custom-keys-mode-map (kbd "C-%") 'goto-match-paren)
+(define-key custom-keys-mode-map (kbd "C-%") 'cy/goto-match-paren)
 
 ;; Easier window switching.
 (define-key custom-keys-mode-map (kbd "C-M-k") 'windmove-up)
@@ -86,9 +86,9 @@
 
 ;; Make it easier to call occur. Use our custom function that defaults to the
 ;; symbol under the cursor.
-(define-key custom-keys-mode-map (kbd "C-x o") 'occur-symbol-at-point)
+(define-key custom-keys-mode-map (kbd "C-x o") 'cy/occur-symbol-at-point)
 (define-key isearch-mode-map (kbd "C-x o") 'isearch-occur)
-(define-key isearch-mode-map (kbd "C-x g") 'isearch-rgrep)
+(define-key isearch-mode-map (kbd "C-x g") 'cy/isearch-rgrep)
 
 ;; Emulate vim's "*" command for searching for the word under the cursor.
 (define-key custom-keys-mode-map (kbd "C-*") 'isearch-forward-symbol-at-point)
@@ -110,13 +110,13 @@
 ;;;;;;;;;;;;;;;;;;;
 
 ;; Make it easier to sudo edit files.
-(define-key custom-keys-mode-map (kbd "C-x C-M-f") 'sudo-find-file)
+(define-key custom-keys-mode-map (kbd "C-x C-M-f") 'cy/sudo-find-file)
 
 ;; Enable custom rename file and buffer command.
-(define-key custom-keys-mode-map (kbd "C-x R") 'rename-file-and-buffer)
+(define-key custom-keys-mode-map (kbd "C-x R") 'cy/rename-file-and-buffer)
 
 ;; Enable easier file deletion.
-(define-key custom-keys-mode-map (kbd "C-x D") 'delete-current-file)
+(define-key custom-keys-mode-map (kbd "C-x D") 'cy/delete-current-file)
 
 ;;;;;;;;;
 ;; Misc.
