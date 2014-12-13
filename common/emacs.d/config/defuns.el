@@ -26,14 +26,6 @@ See also `newline-and-indent'."
   (open-line arg)
   (indent-according-to-mode))
 
-;; Mark line without selection
-(defun cy/mark-line (&optional arg)
-  "Marks a line from start of indentation to end"
-  (interactive "p")
-  (beginning-of-line)
-  (cua-set-mark)
-  (end-of-line))
-
 ;; Copy word without selection
 (defun cy/copy-word (&optional arg)
   "Copy words at point into kill-ring"
@@ -190,6 +182,12 @@ close buffer without prompt for save."
       (kill-buffer (current-buffer))
       (when (not (equal current-file nil))
         (delete-file current-file)))))
+
+;; Source: http://www.emacswiki.org/emacs/RecreateScratchBuffer
+(defun cy/jump-to-scratch-buffer ()
+  "Jumps to the scratch buffer, creating it if necessary."
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*")))
 
 ;; Make it easier to move text in all direction.
 ;; Source: http://www.emacswiki.org/emacs/MoveText
