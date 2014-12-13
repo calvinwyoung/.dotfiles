@@ -81,6 +81,9 @@
             ;; Enable speed keys when cursor is at the beginning of a headline.
             (setq org-use-speed-commands t)
 
+            ;; Enable org-autolist-mode to make it easier to edit lists.
+            (org-autolist-mode t)
+
             ;; We want M-[ and M-] to shift list items in/out by a tabstop, so
             ;; we bind them here.
             (local-set-key (kbd "M-[") 'org-metaleft)

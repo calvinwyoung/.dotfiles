@@ -7,6 +7,7 @@
     helm-projectile
     js2-mode
     lua-mode
+    org-autolist
     projectile
     web-mode
     wgrep
