@@ -138,7 +138,7 @@ the end of the line, then comment current line."
 (defun cy/duplicate-line-and-comment ()
   "Duplicates the current line, and comments the original."
   (interactive)
-  (duplicate-line t))
+  (cy/duplicate-line t))
 
 ;; Emulate vim's "%" command to match parentheses.
 ;; Source: http://www.emacswiki.org/emacs/NavigatingParentheses#toc2
@@ -264,7 +264,7 @@ columns left."
 bullet of the current list item"
   (org-element-property :contents-begin (org-element-at-point)))
 
-(defun cy/org-return (&optional arg)
+(defun org-auto-list-return-advise (orig-fun &rest args)
   "Custom implementation of org-return that makes the Return key
 act more like traditional text editors.
 
@@ -287,11 +287,12 @@ act more like traditional text editors.
         ;; Otherwise, we should insert the correct list item depending on
         ;; whether we're on a checkbox.
         (if (org-at-item-checkbox-p)
-            (org-insert-todo-heading arg)
-          (org-meta-return arg)))
-    (org-return arg)))
+            (org-insert-todo-heading nil)
+          (org-meta-return)))
+    (apply orig-fun args)))
+(advice-add 'org-return :around #'org-auto-list-return-advise)
 
-(defun cy/org-delete-backward-char (arg)
+(defun org-auto-list-delete-backward-char-advise (orig-fun &rest args)
   "Custom implementation of org-delete-backward-char that makes
 the Backspace key act more like traditional text editors.
 
@@ -307,7 +308,8 @@ the Backspace key act more like traditional text editors.
       ;; shift the list up by one line).
       (if (org-previous-line-empty-p)
           (delete-region (line-beginning-position)
-                         (save-excursion (forward-line -1) (line-beginning-position)))
+                         (save-excursion (forward-line -1)
+                                         (line-beginning-position)))
 
         ;; Otherwise we should delete to the end of the previous line.
         (progn
@@ -316,6 +318,16 @@ the Backspace key act more like traditional text editors.
           ;; is in the middle of a checkbox.
           (if (not (eolp))
               (goto-char (cy/org-beginning-of-item-after-bullet)))
-          (delete-region (point)
-                         (save-excursion (forward-line -1) (line-end-position)))))
-    (org-delete-backward-char arg)))
+
+          ;; For most lines, we want to delete from bullet point to the end of
+          ;; the previous line. But if we're on the first line in the buffer,
+          ;; then we should just delete the bullet point.
+          (if (= 1 (line-number-at-pos))
+              (delete-region (point) (line-beginning-position))
+            (delete-region (point) (save-excursion (forward-line -1)
+                                                   (line-end-position))))))
+    (apply orig-fun args)))
+
+(advice-add 'org-delete-backward-char
+            :around
+            #'org-auto-list-delete-backward-char-advise)

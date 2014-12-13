@@ -81,12 +81,8 @@
             ;; Enable speed keys when cursor is at the beginning of a headline.
             (setq org-use-speed-commands t)
 
-            ;; Override Return and Backspace w/ convenient helpers on lists.
-            (local-set-key (kbd "<return>") 'cy/org-return)
-            (local-set-key (kbd "<backspace>") 'cy/org-delete-backward-char)
-
-            ;; We want M-[ and M-] to shift list items in/out by a tabstop, so we bind
-            ;; them here.
+            ;; We want M-[ and M-] to shift list items in/out by a tabstop, so
+            ;; we bind them here.
             (local-set-key (kbd "M-[") 'org-metaleft)
             (local-set-key (kbd "M-]") 'org-metaright)
 
