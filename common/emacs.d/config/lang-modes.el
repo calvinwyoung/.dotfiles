@@ -99,6 +99,8 @@
               (set-keymap-parent newmap oldmap)
               (define-key newmap (kbd "M-[") nil)
               (define-key newmap (kbd "M-]") nil)
+              (define-key newmap (kbd "M-<up>") nil)
+              (define-key newmap (kbd "M-<down>") nil)
               (make-local-variable 'minor-mode-overriding-map-alist)
               (push `(custom-keys-mode . ,newmap) minor-mode-overriding-map-alist))))
 
