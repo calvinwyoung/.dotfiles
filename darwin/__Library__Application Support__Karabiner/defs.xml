@@ -56,16 +56,20 @@
     </url>
   </vkopenurldef>
 
-  <!-- Temporarily mutes the machine for 30 seconds.  -->
+  <!-- Temporarily mutes the machine for 30 seconds. Execute commands in
+       background subshell so as not to block other hotkeys while it's running.
+       -->
   <vkopenurldef>
     <name>
       KeyCode::VK_OPEN_URL_SHELL_mute_temporarily
     </name>
     <url type="shell">
       <![CDATA[
+               (
                /usr/bin/osascript -e "set volume output muted true";
                /bin/sleep 30;
                /usr/bin/osascript -e "set volume output muted false";
+               ) &
       ]]>
     </url>
   </vkopenurldef>
