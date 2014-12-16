@@ -105,6 +105,9 @@
 ;; Replace the normal find-file command with helm's pimped-out version.
 (define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-find-files)
 
+;; Define a hotkey to enable helm's pimped out imenu.
+(define-key custom-keys-mode-map (kbd "C-x i") 'helm-imenu)
+
 ;;;;;;;;
 ;; Redo
 ;;;;;;;;
