@@ -161,7 +161,7 @@
 
     <!-- Show a status message when Caps Lock gets enabled. -->
     <item>
-      <name>Caps lock mode.</name>
+      <name>Caps lock mode</name>
       <identifier vk_config="true">notsave.caps_lock_mode</identifier>
       <autogen>
         __ShowStatusMessage__

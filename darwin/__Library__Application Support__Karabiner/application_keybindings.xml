@@ -43,37 +43,43 @@
       <!-- Then define the actual applicaton launcher shortcuts. -->
       <autogen>
         __KeyToKey__
-        KeyCode::BACKQUOTE, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::BACKQUOTE,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_Finder
       </autogen>
       <autogen>
         __KeyToKey__
-        KeyCode::RETURN, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::RETURN,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_iTerm
       </autogen>
       <autogen>
         __KeyToKey__
-        KeyCode::E, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::E,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_Emacs
       </autogen>
       <autogen>
         __KeyToKey__
-        KeyCode::W, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::W,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_Chrome
       </autogen>
       <autogen>
         __KeyToKey__
-        KeyCode::S, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::S,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_KeePassX
       </autogen>
       <autogen>
         __KeyToKey__
-        KeyCode::H, {{ MODIFIER_FLAG_HYPER }},
+        KeyCode::H,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_HipChat
       </autogen>

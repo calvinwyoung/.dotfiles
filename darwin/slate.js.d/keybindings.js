@@ -33,6 +33,7 @@ var keybindings = (function() {
 
         // Load our custom dual monitor layout.
         "padEnter:cmd;ctrl;alt": slate.op("layout", {"name": "dualMonitors"}),
+        "return:shift;cmd;ctrl;alt": slate.op("layout", {"name": "dualMonitors"}),
 
         // Undo the last movement operation
         "/:cmd;ctrl;alt": slate.op("undo"),
