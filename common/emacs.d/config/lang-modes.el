@@ -109,6 +109,20 @@
 ;; loaded.
 (setq org-startup-folded nil)
 
+;; Enable org-capture
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-capture-templates
+      '(("h" "Hi-pri"
+         checkitem
+         (file+headline "~/Documents/Notes/Todo.org" "TODO (Hi-pri)")
+         "- [ ] %?"
+         :prepend t)
+        ("l" "Low-pri"
+         checkitem
+         (file+headline "~/Documents/Notes/Todo.org" "TODO (Low-pri)")
+         "- [ ] %?"
+         :prepend t)))
+
 ;;;;;;;;
 ;; Conf
 ;;;;;;;;
