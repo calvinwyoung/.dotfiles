@@ -10,7 +10,7 @@
 
 ;; Bind trigger to be Ctrl + Tab so that it doesn't conflict with other plugins
 ;; that use the Tab key (e.g., Auto-Complete).
-(define-key yas-minor-mode-map (kbd "C-<tab>") 'yas/expand)
+(define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 
@@ -111,7 +111,7 @@
 ;;;;;;;;
 ;; Redo
 ;;;;;;;;
-(require 'redo)
+(autoload 'redo "redo" nil t)
 
 ;; First binding is for GUI mode, and the second is for terminals.
 (define-key custom-keys-mode-map (kbd "C-M-/") 'redo)
@@ -120,7 +120,7 @@
 ;;;;;;;;;;;;;;;;
 ;; Cycle buffer
 ;;;;;;;;;;;;;;;;
-(require 'cycle-buffer)
+(autoload 'cycle-buffer "cycle-buffer" nil t)
 
 ;; Easier buffer switching. The naming here is kind of confusing -- the
 ;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
@@ -132,7 +132,7 @@
 ;;;;;;;;;;;;;;;;
 ;; Dired single
 ;;;;;;;;;;;;;;;;
-(require 'dired-single)
+(autoload 'dired-sinle "dired-single" nil t)
 
 ;; Override the default dired binding to open the "magic buffer" in the current
 ;; file's directory. This prevents dired from creating a new buffer each time a
