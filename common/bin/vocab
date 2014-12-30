@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+#
+# Basic script for showing vocab flashcards.
+
+import argparse
+import os
+import random
+
+
+def build_words_dict(words_filename):
+    """Returns a dict mapping each word to its definition."""
+    words_dict = {}
+    with open(words_filename) as f:
+        word_components = f.read().split("\n\n")
+        for word_component in word_components:
+            word, definition = word_component.split("\n", 1)
+
+            # Also strip off the leading "*" character
+            word = word.lstrip("*").strip()
+
+            words_dict[word] = definition
+
+    return words_dict
+
+
+def main(words_filename, num_words):
+    words_dict = build_words_dict(words_filename)
+    shuffled_words = words_dict.items()
+    random.shuffle(shuffled_words)
+
+    if num_words < 0:
+        num_words = len(shuffled_words)
+
+    for i, (word, definition) in enumerate(shuffled_words[:num_words]):
+        print "(%d/%d) %s" % (i + 1, num_words, word)
+
+        try:
+            raw_input()
+        except EOFError:
+            return
+
+        print definition
+
+        try:
+            raw_input()
+        except EOFError:
+            return
+
+        print "---"
+        print
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Vocabulary flashcards.")
+    parser.add_argument("--words", "-w", type=str,
+                        help="Path to the words org file",
+                        default=os.path.expanduser("~/Documents/Notes/Vocab.org"))
+    parser.add_argument("num_words", type=int, nargs="?", default=-1)
+
+    args = parser.parse_args()
+    main(args.words, args.num_words)

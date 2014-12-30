@@ -4,6 +4,7 @@
 
 ;; Set file shortcut registers.
 (set-register ?t '(file . "~/Documents/Notes/Todo.org"))
+(set-register ?v '(file . "~/Documents/Notes/Vocab.org"))
 
 ;; Set frame title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))
