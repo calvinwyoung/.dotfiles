@@ -111,7 +111,7 @@
 ;;;;;;;;
 ;; Redo
 ;;;;;;;;
-(autoload 'redo "redo" nil t)
+(require 'redo)
 
 ;; First binding is for GUI mode, and the second is for terminals.
 (define-key custom-keys-mode-map (kbd "C-M-/") 'redo)
@@ -120,7 +120,7 @@
 ;;;;;;;;;;;;;;;;
 ;; Cycle buffer
 ;;;;;;;;;;;;;;;;
-(autoload 'cycle-buffer "cycle-buffer" nil t)
+(require 'cycle-buffer)
 
 ;; Easier buffer switching. The naming here is kind of confusing -- the
 ;; `cycle-buffer` command walks DOWN the stack (i.e., calling it will show the
@@ -132,7 +132,7 @@
 ;;;;;;;;;;;;;;;;
 ;; Dired single
 ;;;;;;;;;;;;;;;;
-(autoload 'dired-sinle "dired-single" nil t)
+(require 'dired-single)
 
 ;; Override the default dired binding to open the "magic buffer" in the current
 ;; file's directory. This prevents dired from creating a new buffer each time a
