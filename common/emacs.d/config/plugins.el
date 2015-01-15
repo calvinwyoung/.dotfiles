@@ -109,6 +109,16 @@
 (define-key custom-keys-mode-map (kbd "C-x i") 'helm-imenu)
 
 ;;;;;;;;
+;; Deft
+;;;;;;;;
+
+(setq deft-extension "org")
+(setq deft-directory "~/Documents/Notes")
+(setq deft-text-mode 'org-mode)
+(setq deft-use-filename-as-title t)
+(define-key custom-keys-mode-map (kbd "C-x f") 'deft)
+
+;;;;;;;;
 ;; Redo
 ;;;;;;;;
 (require 'redo)

@@ -3,6 +3,7 @@
 ;; List of packages we need to install.
 (defvar required-packages
   '(auto-complete
+    deft
     expand-region
     helm-projectile
     js2-mode

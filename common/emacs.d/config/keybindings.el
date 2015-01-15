@@ -79,9 +79,11 @@
 ;; When in grep mode, let the TAB key show the error source without switching
 ;; focus to it. Also add hotkeys to occur-mode to make it behave like grep-mode.
 (define-key grep-mode-map (kbd "<tab>") 'compilation-display-error)
+(define-key grep-mode-map (kbd "N") 'previous-error-no-select)
 (define-key occur-mode-map (kbd "<tab>") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "n") 'next-error-no-select)
 (define-key occur-mode-map (kbd "p") 'previous-error-no-select)
+(define-key occur-mode-map (kbd "N") 'previous-error-no-select)
 
 ;; Make it easier to call occur. Use our custom function that defaults to the
 ;; symbol under the cursor.
@@ -133,7 +135,6 @@
 
 ;; Execute extended command.
 (define-key custom-keys-mode-map (kbd "C-x C-m") 'execute-extended-command)
-(define-key custom-keys-mode-map (kbd "C-c C-m") 'execute-extended-command)
 
 ;; Compile command.
 (define-key custom-keys-mode-map [C-f11] 'compile)
