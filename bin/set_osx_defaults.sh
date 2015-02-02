@@ -145,9 +145,12 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 # Screen                                                                      #
 ###############################################################################
 
-# Require password immediately after sleep or screen saver begins
+# Require password immediately after sleep or screen saver begins.
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Disable automatic brightness adjustments.
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
 
 ###############################################################################
 # Kill affected applications                                                  #
