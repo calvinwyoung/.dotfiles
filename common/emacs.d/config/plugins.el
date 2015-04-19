@@ -118,6 +118,12 @@
 (setq deft-use-filename-as-title t)
 (define-key custom-keys-mode-map (kbd "C-x f") 'deft)
 
+;; Disable linum-mode so the width and add a trailing space to the time format
+;; in order to make sure deft shows the full mtime on the line. There's some
+;; funkiness that would otherwise cause the mtime string to get truncated.
+(setq deft-time-format " %Y-%m-%d %H:%M ")
+(add-hook 'deft-mode-hook (lambda () (linum-mode 0)))
+
 ;;;;;;;;
 ;; Redo
 ;;;;;;;;

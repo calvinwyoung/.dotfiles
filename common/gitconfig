@@ -12,3 +12,5 @@
     dc = diff --cached
     glog = log --graph --decorate --pretty=oneline --abbrev-commit
     rhh = reset --hard HEAD
+[push]
+    default = current

@@ -42,6 +42,11 @@
 ;;;;;;;;;;;;;;
 ;; Javascript
 ;;;;;;;;;;;;;;
+(add-hook 'js2-mode-hook
+          (lambda()
+            ;; Enable extra imenu goodies
+            (js2-imenu-extras-mode)))
+
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;;;;;;;;
@@ -81,8 +86,15 @@
             ;; Enable speed keys when cursor is at the beginning of a headline.
             (setq org-use-speed-commands t)
 
+            ;; Causes Ctrl-A to move the cursor to the beginning of the list
+            ;; contents (i.e., after the stars / bullet points / etc.)
+            ;; (setq org-special-ctrl-a/e t)
+
             ;; Enable org-autolist-mode to make it easier to edit lists.
             (org-autolist-mode t)
+
+            ;; Disable electric pair mode b/c it's awkward for writing prose.
+            (setq-local electric-pair-inhibit-predicate (lambda() nil))
 
             ;; We want M-[ and M-] to shift list items in/out by a tabstop, so
             ;; we bind them here.
