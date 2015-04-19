@@ -1,10 +1,15 @@
 #!/usr/bin/osascript
 #
 # Quits OSX applications that don't have any open windows.
+#
+# Usage: ./quit-windowless-apps.scpt
+#
+# To run this periodically, just add a crontab entry:
+#     0 * * * * /path/to/script.scpt > /dev/null 2>&3
 
 # List of apps that should remain open, even if we don't find any windows for
 # them.
-set whiteList to {"Finder", "Path Finder", "KeePassX", "Emacs-x86_64-10_9", "iTerm", "HipChat", "Google Chrome", "Eclipse", "Xcode"}
+set whiteList to {"Finder", "Path Finder", "KeePassX", "Emacs-x86_64-10_9", "iTerm", "HipChat", "Google Chrome", "Eclipse", "Xcode", "Time Out Free"}
 
 # Buffer to store names of all windowless apps before calling `killall` on them.
 set windowlessAppNames to {}
