@@ -5,6 +5,10 @@
 ;; Set file shortcut registers.
 (set-register ?t '(file . "~/Documents/Notes/Todo.org"))
 (set-register ?v '(file . "~/Documents/Notes/Vocab.org"))
+(set-register ?s (registerv-make
+                  "jump to scratch buffer"
+                  :jump-func (lambda (k) (cy/jump-to-scratch-buffer))
+                  :print-func (lambda (k) (princ "jump to scratch buffer"))))
 
 ;; Set frame title.
 (setq frame-title-format '(buffer-file-name "%f - Emacs" "Emacs"))

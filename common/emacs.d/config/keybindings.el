@@ -106,9 +106,6 @@
 ;; Make it easy to kill both a buffer and the window it's in.
 (define-key custom-keys-mode-map (kbd "C-x K") 'kill-buffer-and-window)
 
-;; Make it easier to jump directly to the scratch buffer.
-(define-key custom-keys-mode-map (kbd "C-c s") 'cy/jump-to-scratch-buffer)
-
 ;;;;;;;;;;;;;;;;;;;
 ;; File management
 ;;;;;;;;;;;;;;;;;;;
