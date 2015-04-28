@@ -113,5 +113,29 @@
         KeyCode::VK_OPEN_URL_SHELL_warp_mouse_cursor_position_front_window_top_right
       </autogen>
     </item>
+
+    <!-- Use option instead of command for switching applications -->
+    <item>
+      <name>Option-based window switching</name>
+      <appendix>Option + tab to open application switcher</appendix>
+      <appendix>Option + backtick to focus on next window</appendix>
+      <identifier>custom.option_based_window_switching</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::TAB,
+        ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::TAB,
+        ModifierFlag::COMMAND_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::BACKQUOTE,
+        ModifierFlag::OPTION_L | ModifierFlag::NONE,
+
+        KeyCode::BACKQUOTE,
+        ModifierFlag::COMMAND_L
+      </autogen>
+    </item>
   </item>
 </root>

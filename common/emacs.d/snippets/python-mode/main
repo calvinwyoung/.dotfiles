@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: def main(): pass if __name__ == "__main__": ...
-# key: main
+# key: ifmain
 # expand-env: ((yas-indent-line 'nil))
 # --
 def main():

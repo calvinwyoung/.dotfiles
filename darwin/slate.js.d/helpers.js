@@ -180,7 +180,7 @@ var helpers = (function() {
             result = -det;
 
             if (result === 0) {
-                // Points a and b are on the same line from the center check
+                // If points a and b are on the same line from the center, check
                 // which point is closer to the screen center.
                 var aDist = (Math.pow(aCenter.x - screenCenter.x, 2) +
                              Math.pow(aCenter.y - screenCenter.y, 2));
