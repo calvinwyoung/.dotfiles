@@ -116,6 +116,7 @@
 (setq deft-directory "~/Documents/Notes")
 (setq deft-text-mode 'org-mode)
 (setq deft-use-filename-as-title t)
+(setq deft-auto-save-interval 30)
 (define-key custom-keys-mode-map (kbd "C-x f") 'deft)
 
 ;; Disable linum-mode so the width and add a trailing space to the time format
