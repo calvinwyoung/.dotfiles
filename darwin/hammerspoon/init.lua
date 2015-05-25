@@ -71,7 +71,7 @@ util.bindAll({
         HYPER_SHIFT,
         "r",
         function()
-            hs.alert.show("Config loaded")
+            hs.alert.show("Hammerspoon config reloaded", 1)
             hs.reload()
         end
     }

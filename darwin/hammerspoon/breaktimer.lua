@@ -41,7 +41,7 @@ local function showBreakGuards()
     for i, screen in ipairs(hs.screen.allScreens()) do
         local guard = hs.drawing.rectangle(screen:fullFrame())
         guard:setFill(true)
-        guard:setFillColor({red = .5, green = .5, blue = .5, alpha = 0.8})
+        guard:setFillColor({red = .3, green = .3, blue = .3, alpha = 0.9})
         guard:show()
 
         table.insert(BREAK_GUARDS, guard)
@@ -55,7 +55,7 @@ local function transitionWorkToBreak()
     showBreakGuards()
 
     hs.alert.closeAll()
-    hs.alert.show("Take a break")
+    hs.alert.show("Bro, take a break", 1)
 end
 
 local function transitionBreakToWork()
@@ -65,7 +65,7 @@ local function transitionBreakToWork()
     removeBreakGuards()
 
     hs.alert.closeAll()
-    hs.alert.show("Get back to work")
+    hs.alert.show("Back to work bro", 1)
 end
 
 -- Function to be executed each time the timer interval elapses. This function
