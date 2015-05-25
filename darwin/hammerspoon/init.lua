@@ -2,6 +2,7 @@ local focus = require "focus"
 local layouts = require "layouts"
 local util = require "util"
 local winmove = require "winmove"
+local breaktimer = require "breaktimer"
 
 -- Disable all animations.
 hs.window.animationDuration = 0
@@ -58,6 +59,9 @@ util.bindAll({
 
     -- Apply pre-defined window layouts.
     {HYPER_SHIFT, "return", layouts.applyDualMonitorLayout},
+
+    -- Toggle the break timer settings.
+    {HYPER, "0", breaktimer.toggleTimer},
 
     -- Show window hints.
     {HYPER, "space", hs.hints.windowHints},
