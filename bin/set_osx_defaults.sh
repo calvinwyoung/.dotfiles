@@ -138,7 +138,7 @@ defaults write .GlobalPreferences com.apple.mouse.scaling -1
 # Set trackpad tracking speed.
 defaults write NSGlobalDomain com.apple.trackpad.scaling -int 2
 
-# Enable key repeat.
+# Enable key repeat / disable vowel accent menus.
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 ###############################################################################

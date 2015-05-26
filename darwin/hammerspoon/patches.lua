@@ -121,10 +121,6 @@ function patches.layout_apply(layout)
                 local winframe = nil
                 local screenrect = nil
 
-
-                print(app:title(), _win:title())
-
-
                 -- Move window to destination display, if wanted
                 if display and displaypoint then
                     _win:setTopLeft(displaypoint)

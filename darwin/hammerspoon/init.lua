@@ -58,7 +58,7 @@ util.bindAll({
     },
 
     -- Apply pre-defined window layouts.
-    {HYPER_SHIFT, "return", layouts.applyDualMonitorLayout},
+    {HYPER_SHIFT, "return", layouts.applyLayoutForScreens},
 
     -- Toggle the break timer settings.
     {HYPER, "0", breaktimer.toggleTimer},
@@ -71,7 +71,7 @@ util.bindAll({
         HYPER_SHIFT,
         "r",
         function()
-            hs.alert.show("Hammerspoon config reloaded", 1)
+            hs.alert.show("Reloaded config", 1)
             hs.reload()
         end
     }

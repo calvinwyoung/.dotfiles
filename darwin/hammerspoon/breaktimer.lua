@@ -10,6 +10,9 @@ breaktimer.BREAK_TIME = 20
 -- A list of drawings that cover up each screen during a break period.
 local BREAK_GUARDS = nil
 
+-- The timer message to show on the screen during a break period.
+local BREAK_TIMER_MESSAGE = nil
+
 -- When we start the break timer, we'll initialize a `hs.timer` object in this
 -- variable to take care of the actual timing mechanism.
 local BREAK_TIMER = nil
@@ -26,6 +29,10 @@ local LAST_TRANSITION_TIME = nil
 local MENUBAR_ICON = nil
 
 local function removeBreakGuards()
+    if not BREAK_GUARDS then
+        return
+    end
+
     for i, guard in ipairs(BREAK_GUARDS) do
         guard:delete()
     end
@@ -33,39 +40,62 @@ local function removeBreakGuards()
 end
 
 local function showBreakGuards()
-    if BREAK_GUARDS then
-        removeBreakGuards()
-    end
+    removeBreakGuards()
 
     BREAK_GUARDS = {}
     for i, screen in ipairs(hs.screen.allScreens()) do
         local guard = hs.drawing.rectangle(screen:fullFrame())
         guard:setFill(true)
-        guard:setFillColor({red = .3, green = .3, blue = .3, alpha = 0.9})
+        guard:setFillColor({red = .2, green = .2, blue = .2, alpha = 0.92})
         guard:show()
 
         table.insert(BREAK_GUARDS, guard)
     end
 end
 
-local function transitionWorkToBreak()
+local function removeBreakTimerMessage()
+    if not BREAK_TIMER_MESSAGE then
+        return
+    end
+
+    BREAK_TIMER_MESSAGE:delete()
+    BREAK_TIMER_MESSAGE = nil
+end
+
+local function showBreakTimerMessage()
+    local screenFrame = hs.screen.mainScreen():fullFrame()
+
+    BREAK_TIMER_MESSAGE = hs.drawing.text({
+        x = screenFrame.w / 2 - 70,
+        y = screenFrame.h / 2.3 - 60,
+        w = 140,
+        h = 120
+    }, breaktimer.BREAK_TIME)
+    BREAK_TIMER_MESSAGE:setTextFont("Helvetica Neue UltraLight")
+    BREAK_TIMER_MESSAGE:setTextSize(120)
+    BREAK_TIMER_MESSAGE:setTextColor({red = 1, green = 1, blue = 1, alpha = 1})
+    BREAK_TIMER_MESSAGE:show()
+end
+
+local function updateBreakTimerMessage()
+    BREAK_TIMER_MESSAGE:setText(
+        LAST_TRANSITION_TIME + breaktimer.BREAK_TIME - os.time())
+end
+
+local function startBreakTime()
     CURRENT_STATE = "break"
     LAST_TRANSITION_TIME = os.time()
 
     showBreakGuards()
-
-    hs.alert.closeAll()
-    hs.alert.show("Bro, take a break", 1)
+    showBreakTimerMessage()
 end
 
-local function transitionBreakToWork()
+local function startWorkTime()
     CURRENT_STATE = "work"
     LAST_TRANSITION_TIME = os.time()
 
     removeBreakGuards()
-
-    hs.alert.closeAll()
-    hs.alert.show("Back to work bro", 1)
+    removeBreakTimerMessage()
 end
 
 -- Function to be executed each time the timer interval elapses. This function
@@ -73,12 +103,17 @@ end
 local function tick()
     if CURRENT_STATE == "work" then
         -- If we've exceeded our work time, then transition into break mode.
-        if os.time() - LAST_TRANSITION_TIME > breaktimer.WORK_TIME then
-            transitionWorkToBreak()
+        if os.time() - LAST_TRANSITION_TIME >= breaktimer.WORK_TIME then
+            startBreakTime()
         end
     else
-        if os.time() - LAST_TRANSITION_TIME > breaktimer.BREAK_TIME then
-            transitionBreakToWork()
+        if os.time() - LAST_TRANSITION_TIME >= breaktimer.BREAK_TIME then
+            startWorkTime()
+        -- If we're already in break mode and it's not time to transition back
+        -- to work mode, then update the timer message to display the remaining
+        -- break time.
+        else
+            updateBreakTimerMessage()
         end
     end
 end
@@ -126,11 +161,23 @@ function breaktimer.toggleTimer()
     elseif CURRENT_STATE == "work" then
         breaktimer.disable()
     else
-        transitionBreakToWork()
+        startWorkTime()
     end
 end
 
 -- We should enable the break timer as soon as this module is loaded.
 breaktimer.enable()
+
+-- We should also automatically start work time when we detect that the display
+-- or system wakes up.
+local caffeinateWatcher = hs.caffeinate.watcher.new(function(event)
+    if (event == hs.caffeinate.watcher.screensDidWake or
+        event == hs.caffeinate.watcher.systemDidWake) then
+        if breaktimer.isEnabled() then
+            startWorkTime()
+        end
+    end
+end)
+caffeinateWatcher:start()
 
 return breaktimer
