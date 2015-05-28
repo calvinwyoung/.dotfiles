@@ -1,5 +1,20 @@
 local util = {}
 
+-- Returns a table with the x and y coordinates of the top left of the given
+-- rect table.
+--
+-- Args:
+--     rect, table: a rect table {x = int, y = int, w = int, h = int}
+--
+-- Returns:
+--     a point table {x = int, y = int} indicating the top left point
+function util.getRectTopLeft(rect)
+    return {
+        x = rect.x,
+        y = rect.y
+    }
+end
+
 -- Returns a table with the x and y coordinates of the center of the given rect
 -- table.
 --

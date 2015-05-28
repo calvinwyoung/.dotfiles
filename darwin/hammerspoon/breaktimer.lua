@@ -79,7 +79,9 @@ end
 
 local function updateBreakTimerMessage()
     BREAK_TIMER_MESSAGE:setText(
-        LAST_TRANSITION_TIME + breaktimer.BREAK_TIME - os.time())
+        string.format(
+            "%2d",
+            LAST_TRANSITION_TIME + breaktimer.BREAK_TIME - os.time()))
 end
 
 local function startBreakTime()

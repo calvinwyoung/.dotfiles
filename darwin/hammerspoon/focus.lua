@@ -115,7 +115,10 @@ function focus.focusNextWindow(reverse)
 
     table.sort(screenWindows, winCmp)
 
-    local curWinIx = hs.fnutils.indexOf(screenWindows, win)
+    -- It's possible that the current window is not a standard window, in which
+    -- case it won't be found in the screenWindows list. In these cases, we
+    -- should be sure to assign curWinIx a default value.
+    local curWinIx = hs.fnutils.indexOf(screenWindows, win) or 0
     screenWindows[curWinIx % #screenWindows + 1]:focus()
 end
 
