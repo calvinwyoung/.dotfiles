@@ -21,6 +21,12 @@ util.bindAll({
     {HYPER, "[", focus.focusNextScreen},
     {HYPER, "]", focus.focusPrevScreen},
 
+    -- Push windows around on the same screen.
+    {HYPER_SHIFT, "j", winmove.pushSouth},
+    {HYPER_SHIFT, "k", winmove.pushNorth},
+    {HYPER_SHIFT, "h", winmove.pushWest},
+    {HYPER_SHIFT, "l", winmove.pushEast},
+
     -- Move windows to different screens.
     {HYPER_SHIFT, "[", winmove.moveToPrevScreen},
     {HYPER_SHIFT, "]", winmove.moveToNextScreen},

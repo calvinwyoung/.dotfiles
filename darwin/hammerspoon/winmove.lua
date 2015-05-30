@@ -17,7 +17,6 @@ function winmove.config(widthRatio, heightRatio, positions)
 end
 
 -- Moves the focused window to the next winmove cell.
-
 function winmove.moveToNextPosition(widthRatio, heightRatio, positions)
     local win = hs.window.focusedWindow()
     local winFrame = win:frame()
@@ -82,6 +81,38 @@ end
 -- Moves the current window one screen west.
 function winmove.moveToPrevScreen()
     hs.window.focusedWindow():moveOneScreenWest()
+end
+
+-- Pushes the window all the way to the north side of the screen.
+function winmove.pushNorth()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    frame.y = win:screen():frame().y
+    win:setFrame(frame)
+end
+
+-- Pushes the window all the way to the south side of the screen.
+function winmove.pushSouth()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    frame.y = win:screen():frame().y + win:screen():frame().h - frame.h
+    win:setFrame(frame)
+end
+
+-- Pushes the window all the way to the east side of the screen.
+function winmove.pushEast()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    frame.x = win:screen():frame().x + win:screen():frame().w - frame.w
+    win:setFrame(frame)
+end
+
+-- Pushes the window all the way to the west side of the screen.
+function winmove.pushWest()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    frame.x = win:screen():frame().x
+    win:setFrame(frame)
 end
 
 return winmove
