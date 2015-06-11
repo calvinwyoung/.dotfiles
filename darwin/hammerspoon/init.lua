@@ -3,6 +3,7 @@ local layouts = require "layouts"
 local util = require "util"
 local winmove = require "winmove"
 local breaktimer = require "breaktimer"
+local flux = require "flux"
 
 -- Disable all animations.
 hs.window.animationDuration = 0
@@ -68,6 +69,10 @@ util.bindAll({
 
     -- Toggle the break timer settings.
     {HYPER, "0", breaktimer.toggleTimer},
+
+    -- Increase / decrease flux intensity.
+    {HYPER, "-", flux.decreaseLevel},
+    {HYPER, "=", flux.increaseLevel},
 
     -- Show window hints.
     {HYPER, "space", hs.hints.windowHints},
