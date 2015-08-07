@@ -49,9 +49,10 @@ elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# Add MacPorts packages to PATH.
+# Add MacPorts and Homebrew packages to PATH.
 if [ `uname` == "Darwin" ]; then
     export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql92/bin:$PATH
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
     export PYTHONPATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages:$PYTHONPATH
 fi
 
