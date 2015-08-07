@@ -34,7 +34,12 @@ local function removeBreakGuards()
     end
 
     for i, guard in ipairs(BREAK_GUARDS) do
-        guard:delete()
+        -- Need to check that the guard exists. The guard might no longer exist
+        -- if we, for example, disconnected a monitor while the break guards
+        -- were up.
+        if guard then
+            guard:delete()
+        end
     end
     BREAK_GUARDS = nil
 end

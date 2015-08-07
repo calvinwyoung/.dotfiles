@@ -22,7 +22,9 @@ end
 local function getVisibleWindowsByScreen(screenId)
     local screenWindows = {}
     for i, win in ipairs(hs.window.visibleWindows()) do
-        if win:screen():id() == screenId then
+        -- For some reason, some straight types of windows might not be
+        -- associated with a screen, so we need to check that a screen exists.
+        if win:screen() and win:screen():id() == screenId then
             if (win:isStandard() and win:title():len() > 0) or (win:application():title() == "HipChat") then
                 table.insert(screenWindows, win)
             end
@@ -154,13 +156,13 @@ function focus.focusNextScreen(reverse)
                 function(win)
                     return win:id() == LAST_FOCUSED_WIN_BY_SCREEN[nextScreenId]
             end)
-        else
+        end
+
+        if not nextWindow then
             nextWindow = nextScreenWindows[1]
         end
 
-        if nextWindow then
-            nextWindow:focus()
-        end
+        nextWindow:focus()
     end
 end
 

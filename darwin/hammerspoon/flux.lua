@@ -3,15 +3,16 @@
 --
 local flux = {}
 
-flux.NUM_LEVELS = 4
+-- A list of 2-tuples {brightness, colortemp} specifying the different flux
+-- levels where `brightness` is in the range [0, 1] and `colortemp` is in [1000,
+-- 65000]. The default brightness / colortemp setting is {1, 6500}.
+flux.SETTINGS = {
+    {0.75, 5000},
+    {0.8, 5600},
+    {1, 6500}
+}
 
-flux.MIN_BRIGHTNESS = 0.5
-flux.MAX_BRIGHTNESS = 1
-
-flux.MIN_COLOR_TEMP = 3600
-flux.MAX_COLOR_TEMP = 6500
-
-local CUR_LEVEL = flux.NUM_LEVELS - 1
+local CUR_LEVEL = #flux.SETTINGS
 
 -- RGB values for whitepoint colors at different color temperatures.
 -- This table is the same one used in Redshift:
@@ -82,15 +83,17 @@ local WHITEPOINT_COLORS = {
 local function setLevel(level)
     CUR_LEVEL = level
 
-    local brightnessDelta = (
-        (flux.MAX_BRIGHTNESS - flux.MIN_BRIGHTNESS) /
-        (flux.NUM_LEVELS - 1))
-    local targetBrightness = flux.MIN_BRIGHTNESS + brightnessDelta * CUR_LEVEL
+    -- local brightnessDelta = (
+    --     (flux.MAX_BRIGHTNESS - flux.MIN_BRIGHTNESS) /
+    --     (flux.NUM_LEVELS - 1))
+    -- local targetBrightness = flux.MIN_BRIGHTNESS + brightnessDelta * CUR_LEVEL
 
-    local colorTempDelta = (
-        (flux.MAX_COLOR_TEMP - flux.MIN_COLOR_TEMP) /
-        (flux.NUM_LEVELS - 1))
-    local targetColorTemp = flux.MIN_COLOR_TEMP + colorTempDelta * CUR_LEVEL
+    -- local colorTempDelta = (
+    --     (flux.MAX_COLOR_TEMP - flux.MIN_COLOR_TEMP) /
+    --     (flux.NUM_LEVELS - 1))
+    -- local targetColorTemp = flux.MIN_COLOR_TEMP + colorTempDelta * CUR_LEVEL
+
+    local targetBrightness, targetColorTemp = table.unpack(flux.SETTINGS[level])
 
     -- Get the index of the target color temp in the whitepoint colors
     -- table. The first index in the table corresponds to 1000k, and the last
@@ -113,22 +116,21 @@ local function setLevel(level)
         blue = 0
     }
 
-    local screens = hs.screen.allScreens()
-    for i, screen in ipairs(screens) do
+    for i, screen in ipairs(hs.screen.allScreens()) do
         screen:setGamma(targetWhitepointWithBrightness, targetBlackpoint)
     end
 end
 
 -- Decreases the current brightness / gamma level.
 function flux.decreaseLevel()
-    if CUR_LEVEL > 0 then
+    if CUR_LEVEL > 1 then
         setLevel(CUR_LEVEL - 1)
     end
 end
 
 -- Increases the current brightness / gamma level.
 function flux.increaseLevel()
-    if CUR_LEVEL < flux.NUM_LEVELS - 1 then
+    if CUR_LEVEL < #flux.SETTINGS then
         setLevel(CUR_LEVEL + 1)
     end
 end
