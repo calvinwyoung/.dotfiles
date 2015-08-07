@@ -4,9 +4,6 @@ URLS=(
     # OS X Command Line Tools
     "https://developer.apple.com/downloads"
 
-    # MacPorts
-    "http://www.macports.org/install.php"
-
     # Hotkeys and window management
     "https://pqrs.org/osx/karabiner/"
     "https://pqrs.org/osx/karabiner/seil.html.en"
