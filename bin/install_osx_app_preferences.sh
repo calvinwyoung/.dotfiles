@@ -8,7 +8,9 @@ for filepath in $PREFERENCES_DIR/*; do
 done
 
 # Also sync Alfred preferences, which are managed separately.
-if [ -d $HOME/Library/Application\ Support/Alfred\ 2 ]; then
-    rm -rf $HOME/Library/Application\ Support/Alfred\ 2
+alfred_source=$HOME/Documents/.Settings/OSX__Library__Application_Support__Alfred_2/Alfred.alfredpreferences
+alfred_target=$HOME/Library/Application\ Support/Alfred\ 2/Alfred.alfredpreferences
+if [ -d $alfred_target ]; then
+    rm -rf $alfred_target
 fi
-ln -sf $HOME/Documents/.Settings/OSX__Library__Application_Support__Alfred_2/* $HOME/Library/Application\ Support/Alfred\ 2/
+ln -sf $alfred_source $alfred_target
