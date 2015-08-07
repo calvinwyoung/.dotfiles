@@ -10,7 +10,9 @@ URLS=(
     # Hotkeys and window management
     "https://pqrs.org/osx/karabiner/"
     "https://pqrs.org/osx/karabiner/seil.html.en"
-    "https://github.com/jigish/slate"
+    "https://github.com/Hammerspoon/hammerspoon"
+    "http://coderage-software.com/zooom/download/download.html"
+    "https://bahoom.com/hyperswitch"
 
     # iTerm2
     "http://www.iterm2.com/#/section/home"
