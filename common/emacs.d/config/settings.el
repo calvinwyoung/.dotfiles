@@ -3,8 +3,8 @@
 (setq default-directory "~/")
 
 ;; Set file shortcut registers.
-(set-register ?t '(file . "~/Documents/Notes/Todo.org"))
-(set-register ?v '(file . "~/Documents/Notes/Vocab.org"))
+(set-register ?t '(file . "~/Stuff/Notes/Todo.org"))
+(set-register ?v '(file . "~/Stuff/Notes/Vocab.org"))
 (set-register ?s (registerv-make
                   "jump to scratch buffer"
                   :jump-func (lambda (k) (cy/jump-to-scratch-buffer))

@@ -126,12 +126,12 @@
 (setq org-capture-templates
       '(("h" "Hi-pri"
          checkitem
-         (file+headline "~/Documents/Notes/Todo.org" "TODO (Hi-pri)")
+         (file+headline "~/Stuff/Notes/Todo.org" "TODO (Hi-pri)")
          "- [ ] %?"
          :prepend t)
         ("l" "Low-pri"
          checkitem
-         (file+headline "~/Documents/Notes/Todo.org" "TODO (Low-pri)")
+         (file+headline "~/Stuff/Notes/Todo.org" "TODO (Low-pri)")
          "- [ ] %?"
          :prepend t)))
 

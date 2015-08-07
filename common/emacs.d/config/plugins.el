@@ -113,7 +113,7 @@
 ;;;;;;;;
 
 (setq deft-extension "org")
-(setq deft-directory "~/Documents/Notes")
+(setq deft-directory "~/Stuff/Notes")
 (setq deft-text-mode 'org-mode)
 (setq deft-use-filename-as-title t)
 (setq deft-auto-save-interval 30)

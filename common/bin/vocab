@@ -54,7 +54,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Vocabulary flashcards.")
     parser.add_argument("--words", "-w", type=str,
                         help="Path to the words org file",
-                        default=os.path.expanduser("~/Documents/Notes/Vocab.org"))
+                        default=os.path.expanduser("~/Stuff/Notes/Vocab.org"))
     parser.add_argument("num_words", type=int, nargs="?", default=-1)
 
     args = parser.parse_args()
