@@ -39,6 +39,12 @@
         <name>KeyCode::VK_OPEN_URL_APP_HipChat</name>
         <url type="file">/Applications/HipChat.app</url>
       </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_Outlook</name>
+        <url type="file">
+          /Applications/Microsoft Office 2011/Microsoft Outlook.app
+        </url>
+      </vkopenurldef>
 
       <!-- Restart the Brigthness Slider application -->
       <vkopenurldef>
@@ -97,6 +103,13 @@
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_HipChat
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::O,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
+
+        KeyCode::VK_OPEN_URL_APP_Outlook
       </autogen>
       <autogen>
         __KeyToKey__
