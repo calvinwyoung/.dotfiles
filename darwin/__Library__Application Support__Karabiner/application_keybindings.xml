@@ -46,21 +46,6 @@
         </url>
       </vkopenurldef>
 
-      <!-- Restart the Brigthness Slider application -->
-      <vkopenurldef>
-        <name>
-          KeyCode::VK_OPEN_URL_SHELL_restart_brightness_slider
-        </name>
-        <url type="shell">
-          <![CDATA[
-                   (
-                   /usr/bin/osascript -e 'quit app "Brightness Slider"';
-                   /usr/bin/open "/Applications/Brightness Slider.app"
-                   ) &
-          ]]>
-        </url>
-      </vkopenurldef>
-
       <!-- Then define the actual applicaton launcher shortcuts. -->
       <autogen>
         __KeyToKey__
@@ -110,13 +95,6 @@
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_Outlook
-      </autogen>
-      <autogen>
-        __KeyToKey__
-        KeyCode::B,
-        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
-
-        KeyCode::VK_OPEN_URL_SHELL_restart_brightness_slider
       </autogen>
     </item>
 
