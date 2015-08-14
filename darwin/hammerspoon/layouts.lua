@@ -26,10 +26,10 @@ local function applySingleMonitorLayout()
             nil
         },
         {
-            "HipChat",
-            nil,
+            "Google Chrome",
+            "Hangouts - calyoung@ebay.com",
             allScreens[1],
-            hs.geometry.rect(0, 0, 1/2, 1),
+            hs.geometry.rect(0, 0, 1/3, 1/2),
             nil,
             nil
         },
@@ -73,8 +73,8 @@ local function applyDualMonitorLayout()
             nil
         },
         {
-            "HipChat",
-            nil,
+            "Google Chrome",
+            "Hangouts - calyoung@ebay.com",
             allScreens[1],
             hs.geometry.rect(0, 0, 1/3, 1/2),
             nil,
