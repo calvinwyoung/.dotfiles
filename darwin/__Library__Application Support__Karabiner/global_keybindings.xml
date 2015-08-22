@@ -13,7 +13,7 @@
       <appendix>Command + Down to Page Down</appendix>
       <appendix>Command + Left to Home</appendix>
       <appendix>Command + Right to End</appendix>
-      <appendix>(Except in Finder and Terminal)</appendix>
+      <appendix>(Except in Finder, Terminal, and Outlook)</appendix>
 
       <!-- Don't enable these shortcuts in Finder/iTerm, which already have
            bindings for Command + Arrow keys.
@@ -21,7 +21,8 @@
       <not>
         FINDER,
         PATH_FINDER,
-        TERMINAL
+        TERMINAL,
+        OUTLOOK
       </not>
 
       <autogen>

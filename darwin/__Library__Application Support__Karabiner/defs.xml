@@ -15,6 +15,11 @@
     <equal>com.cocoatech.PathFinder</equal>
   </appdef>
 
+  <appdef>
+    <appname>OUTLOOK</appname>
+    <equal>com.microsoft.Outlook</equal>
+  </appdef>
+
   <replacementdef>
     <replacementname>MODIFIER_FLAG_HYPER</replacementname>
     <replacementvalue>
@@ -51,7 +56,7 @@
     </name>
     <url type="shell">
       <![CDATA[
-               /Applications/Karabiner.app/Contents/Library/utilities/bin/warp-mouse-cursor-position front_window top -60 right 5
+               /Applications/Karabiner.app/Contents/Library/utilities/bin/warp-mouse-cursor-position front_window top -60 right 3
       ]]>
     </url>
   </vkopenurldef>
