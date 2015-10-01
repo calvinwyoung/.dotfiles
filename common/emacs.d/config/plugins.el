@@ -112,8 +112,8 @@
 ;; Deft
 ;;;;;;;;
 
-(setq deft-extension "org")
-(setq deft-directory "~/Stuff/Notes")
+(setq deft-extension "txt")
+(setq deft-directory cy/shared-notes-dir)
 (setq deft-text-mode 'org-mode)
 (setq deft-use-filename-as-title t)
 (setq deft-auto-save-interval 30)

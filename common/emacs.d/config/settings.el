@@ -2,9 +2,12 @@
 ;; started.
 (setq default-directory "~/")
 
+;; Define a custom variable for the path to the shared notes directory.
+(defvar cy/shared-notes-dir "~/Dropbox/Notes/")
+
 ;; Set file shortcut registers.
-(set-register ?t '(file . "~/Stuff/Notes/Todo.org"))
-(set-register ?v '(file . "~/Stuff/Notes/Vocab.org"))
+(set-register ?t (cons 'file (concat cy/shared-notes-dir "Todo.txt")))
+(set-register ?v (cons 'file (concat cy/shared-notes-dir "Vocab.txt")))
 (set-register ?s (registerv-make
                   "jump to scratch buffer"
                   :jump-func (lambda (k) (cy/jump-to-scratch-buffer))

@@ -116,22 +116,27 @@
               (make-local-variable 'minor-mode-overriding-map-alist)
               (push `(custom-keys-mode . ,newmap) minor-mode-overriding-map-alist))))
 
+;; Open all txt files in org-mode.
+(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
 ;; Prevent org-mode from opening files in folded view by default. This needs to
 ;; be set outside of the org-mode-hook so it takes effect before org-mode is
 ;; loaded.
 (setq org-startup-folded nil)
 
-;; Enable org-capture
+;; Enable org-capture.
 (define-key global-map "\C-cc" 'org-capture)
+
+;; Configure org-capture
 (setq org-capture-templates
       '(("h" "Hi-pri"
          checkitem
-         (file+headline "~/Stuff/Notes/Todo.org" "TODO (Hi-pri)")
+         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Hi-pri)")
          "- [ ] %?"
          :prepend t)
         ("l" "Low-pri"
          checkitem
-         (file+headline "~/Stuff/Notes/Todo.org" "TODO (Low-pri)")
+         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Low-pri)")
          "- [ ] %?"
          :prepend t)))
 
