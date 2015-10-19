@@ -75,7 +75,7 @@ local function showBreakTimerMessage()
         y = screenFrame.h / 2.3 - 60,
         w = 140,
         h = 120
-    }, breaktimer.BREAK_TIME)
+    }, tostring(breaktimer.BREAK_TIME))
     BREAK_TIMER_MESSAGE:setTextFont("Helvetica Neue UltraLight")
     BREAK_TIMER_MESSAGE:setTextSize(120)
     BREAK_TIMER_MESSAGE:setTextColor({red = 1, green = 1, blue = 1, alpha = 1})
