@@ -26,8 +26,8 @@ local function applySingleMonitorLayout()
             nil
         },
         {
-            "Google Chrome",
-            "Hangouts - calyoung@ebay.com",
+            "Messages",
+            nil,
             allScreens[1],
             hs.geometry.rect(0, 0, 1/3, 1/2),
             nil,
@@ -73,8 +73,8 @@ local function applyDualMonitorLayout()
             nil
         },
         {
-            "Google Chrome",
-            "Hangouts - calyoung@ebay.com",
+            "Messages",
+            nil,
             allScreens[1],
             hs.geometry.rect(0, 0, 1/3, 1/2),
             nil,
