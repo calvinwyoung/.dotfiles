@@ -8,7 +8,7 @@ local flux = {}
 -- 65000]. The default brightness / colortemp setting is {1, 6500}.
 flux.SETTINGS = {
     {0.75, 5000},
-    {0.8, 5600},
+    {0.9, 5800},
     {1, 6500}
 }
 
