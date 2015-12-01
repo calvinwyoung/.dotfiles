@@ -30,15 +30,6 @@ if [ -d "$HOME/.bin" ]; then
     export PATH="$HOME/.bin:$PATH"
 fi
 
-# For RVM.
-if [ -d "$HOME/.rvm/bin" ]; then
-    export PATH="$HOME/.rvm/bin:$PATH"
-fi
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-    # Load RVM into a shell session *as a function*
-    source "$HOME/.rvm/scripts/rvm"
-fi
-
 # For virtualenv, which gets installed in different places depending on whether
 # we're on Linux or OSX.
 export WORKON_HOME=$HOME/.virtualenvs
@@ -49,18 +40,26 @@ elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# Add MacPorts and Homebrew packages to PATH.
+# Add Homebrew packages to PATH.
 if [ `uname` == "Darwin" ]; then
-    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql92/bin:$PATH
-    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-    export PYTHONPATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages:$PYTHONPATH
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
 # Enable bash completion
 if [ `uname` == "Darwin" ]; then
-    [ -f /opt/local/etc/profile.d/bash_completion.sh ] && source /opt/local/etc/profile.d/bash_completion.sh
+    [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 else
     [ -f /etc/bash_completion ] && source /etc/bash_completion
+fi
+
+# Set up RVM. Note that RVM wants its `bin` folder to appear as the first entry
+# in the $PATH, so this must come after everything else that modifies $PATH.
+if [ -d "$HOME/.rvm/bin" ]; then
+    export PATH="$HOME/.rvm/bin:$PATH"
+fi
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+    # Load RVM into a shell session *as a function*
+    source "$HOME/.rvm/scripts/rvm"
 fi
 
 # ------------------------
