@@ -193,12 +193,13 @@
       KeyCode::CURSOR_DOWN
     </autogen>
 
-    <!-- Scroll up -->
+    <!-- Scroll up. Must use VK_MOUSEKEY_SCROLL_DOWN because we disabled natural
+         scrolling -->
     <autogen>
       __KeyToKey__
       KeyCode::P, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | {{ CAPSLOCK_OR_NONE }},
 
-      KeyCode::VK_MOUSEKEY_SCROLL_UP
+      KeyCode::VK_MOUSEKEY_SCROLL_DOWN
     </autogen>
 
     <!-- Scroll down -->
@@ -206,7 +207,7 @@
       __KeyToKey__
       KeyCode::N, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | {{ CAPSLOCK_OR_NONE }},
 
-      KeyCode::VK_MOUSEKEY_SCROLL_DOWN
+      KeyCode::VK_MOUSEKEY_SCROLL_UP
     </autogen>
   </item>
 </root>
