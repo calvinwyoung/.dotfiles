@@ -198,8 +198,8 @@
       (setq x-select-enable-clipboard t)
       (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)))
 
-;; When using OS X, add a few additional directories to the PATH.
-;; Source: http://stackoverflow.com/questions/930439/using-git-with-emacs#931491
-(when (eq system-type 'darwin)
-  (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
-  (push "/opt/local/bin" exec-path))
+;; When using OS X, ensure the PATH inside emacs is the same as in the
+;; shell. This ensures that binaries that are installed via Homebrew, `go get`,
+;; etc. are visible to emacs.
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))

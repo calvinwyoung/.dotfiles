@@ -49,6 +49,17 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+;;;;;;
+;; Go
+;;;;;;
+(add-hook 'go-mode-hook
+          (lambda()
+            ;; By default, go-mode uses a tab width of 8, but this is too wide
+            ;; so let's use a width of 4 instead.
+            (setq tab-width 4)
+            (setq standard-indent 4)
+            (add-hook 'before-save-hook 'gofmt-before-save)))
+
 ;;;;;;;;
 ;; HTML
 ;;;;;;;;

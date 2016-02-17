@@ -4,7 +4,9 @@
 (defvar required-packages
   '(auto-complete
     deft
+    exec-path-from-shell
     expand-region
+    go-mode
     helm-projectile
     js2-mode
     lua-mode

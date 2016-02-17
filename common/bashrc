@@ -52,6 +52,10 @@ else
     [ -f /etc/bash_completion ] && source /etc/bash_completion
 fi
 
+# Set up Go.
+export GOPATH=$HOME/Code/go
+export PATH="$PATH:$GOPATH/bin"
+
 # Set up RVM. Note that RVM wants its `bin` folder to appear as the first entry
 # in the $PATH, so this must come after everything else that modifies $PATH.
 if [ -d "$HOME/.rvm/bin" ]; then
