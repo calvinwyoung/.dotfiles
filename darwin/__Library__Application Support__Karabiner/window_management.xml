@@ -17,7 +17,8 @@
         KeyCode::VK_WAIT_50MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
         KeyCode::KEY_1, {{ MODIFIER_FLAG_HYPER }},
-        KeyCode::VK_WAIT_50MS,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_WAIT_100MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
       </autogen>
       <autogen>
@@ -29,7 +30,8 @@
         KeyCode::VK_WAIT_50MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
         KeyCode::KEY_2, {{ MODIFIER_FLAG_HYPER }},
-        KeyCode::VK_WAIT_50MS,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_WAIT_100MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
       </autogen>
       <autogen>
@@ -41,7 +43,8 @@
         KeyCode::VK_WAIT_50MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
         KeyCode::KEY_3, {{ MODIFIER_FLAG_HYPER }},
-        KeyCode::VK_WAIT_50MS,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_WAIT_100MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
       </autogen>
       <autogen>
@@ -53,7 +56,8 @@
         KeyCode::VK_WAIT_50MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
         KeyCode::KEY_4, {{ MODIFIER_FLAG_HYPER }},
-        KeyCode::VK_WAIT_50MS,
+        KeyCode::VK_WAIT_100MS,
+        KeyCode::VK_WAIT_100MS,
         KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
       </autogen>
     </item>

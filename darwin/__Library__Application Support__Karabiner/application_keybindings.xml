@@ -12,6 +12,7 @@
       <appendix>Hyper + W to open Chrome</appendix>
       <appendix>Hyper + S to open KeePassX</appendix>
       <appendix>Hyper + H to open Messages</appendix>
+      <appendix>Hyper + O to open Notes</appendix>
       <identifier>custom.application_launchers</identifier>
 
       <!-- Define special keycodes for launching apps -->
@@ -38,6 +39,10 @@
       <vkopenurldef>
         <name>KeyCode::VK_OPEN_URL_APP_Messages</name>
         <url type="file">/Applications/Messages.app</url>
+      </vkopenurldef>
+      <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_Notes</name>
+        <url type="file">/Applications/Notes.app</url>
       </vkopenurldef>
 
       <!-- Then define the actual applicaton launcher shortcuts. -->
@@ -82,6 +87,13 @@
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
         KeyCode::VK_OPEN_URL_APP_Messages
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::O,
+        {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
+
+        KeyCode::VK_OPEN_URL_APP_Notes
       </autogen>
     </item>
 
