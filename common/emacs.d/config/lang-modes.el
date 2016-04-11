@@ -140,14 +140,19 @@
 
 ;; Configure org-capture
 (setq org-capture-templates
-      '(("h" "Hi-pri"
+      '(("n" "Now"
          checkitem
-         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Hi-pri)")
+         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Now)")
          "- [ ] %?"
          :prepend t)
-        ("l" "Low-pri"
+        ("f" "Followup"
          checkitem
-         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Low-pri)")
+         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Followup)")
+         "- [ ] %?"
+         :prepend t)
+        ("l" "Later"
+         checkitem
+         (file+headline (concat cy/shared-notes-dir "Todo.txt") "TODO (Later)")
          "- [ ] %?"
          :prepend t)))
 
