@@ -34,6 +34,14 @@ local function applySingleMonitorLayout()
             nil
         },
         {
+            "Notes",
+            nil,
+            allScreens[1],
+            hs.geometry.rect(0, 1/2, 1/3, 1/2),
+            nil,
+            nil
+        },
+        {
             "Emacs",
             nil,
             allScreens[1],
@@ -77,6 +85,14 @@ local function applyDualMonitorLayout()
             nil,
             allScreens[1],
             hs.geometry.rect(0, 0, 1/3, 1/2),
+            nil,
+            nil
+        },
+        {
+            "Notes",
+            nil,
+            allScreens[1],
+            hs.geometry.rect(0, 1/2, 1/3, 1/2),
             nil,
             nil
         },

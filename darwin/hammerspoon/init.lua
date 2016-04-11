@@ -74,9 +74,6 @@ util.bindAll({
     {HYPER, "-", flux.decreaseLevel},
     {HYPER, "=", flux.increaseLevel},
 
-    -- Show window hints.
-    {HYPER, "space", hs.hints.windowHints},
-
     -- Reload config.
     {
         HYPER_SHIFT,
