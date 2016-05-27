@@ -9,8 +9,8 @@ breaktimer.BREAK_TIMINGS = {
     -- After every 10 minutes. take a 20 second break.
     {10 * 60, 20},
 
-    -- After every 1 minute, take a 2 second break.
-    {60, 2}
+    -- After every 1 minute, take a 1 second break.
+    {60, 1}
 }
 
 -- This will contain a list of last transition times for each break type in the
@@ -117,7 +117,11 @@ local function startBreakTime(breakIx)
 end
 
 local function startWorkTime()
-    for i=CURRENT_STATE, #LAST_TRANSITION_TIMES do
+    -- It's possible that CURRENT_STATE is nil: If we were in work time, and
+    -- then the display went to sleep then woke up, then we'll call
+    -- `startWorkTime` with a nil CURRENT_STATE. Therefore, use `(CURRENT_STATE
+    -- or 1)` to protect against this case.
+    for i=(CURRENT_STATE or 1), #LAST_TRANSITION_TIMES do
         LAST_TRANSITION_TIMES[i] = os.time()
     end
 
@@ -178,6 +182,7 @@ end
 
 -- Disable the break timer.
 function breaktimer.disable()
+    CURRENT_STATE = nil
     LAST_TRANSITION_TIMES = nil
 
     BREAK_TIMER:stop()
