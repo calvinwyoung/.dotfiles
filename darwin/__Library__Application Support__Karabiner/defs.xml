@@ -66,15 +66,11 @@
        -->
   <vkopenurldef>
     <name>
-      KeyCode::VK_OPEN_URL_SHELL_mute_temporarily
+      KeyCode::VK_OPEN_URL_SHELL_revive_ue_roll
     </name>
     <url type="shell">
       <![CDATA[
-               (
-               /usr/bin/osascript -e "set volume output muted true";
-               /bin/sleep 30;
-               /usr/bin/osascript -e "set volume output muted false";
-               ) &
+               /usr/bin/osascript ~/.bin/revive-ue-roll.scpt;
       ]]>
     </url>
   </vkopenurldef>

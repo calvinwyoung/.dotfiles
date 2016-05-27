@@ -469,18 +469,18 @@
       </autogen>
     </item>
 
-    <!-- Mutes for 30 seconds -->
+    <!-- Revives the UE Roll as the output audio device -->
     <item>
-      <name>Mute for 30 seconds</name>
-      <identifier>custom.mute_temporarily</identifier>
-      <appendix>Mute to mute for 30 seconds</appendix>
+      <name>Revive UE Roll</name>
+      <identifier>custom.revive_ue_roll</identifier>
+      <appendix>Revives the UE Roll as the primary output audio device</appendix>
 
       <autogen>
         __KeyToKey__
         ConsumerKeyCode::VOLUME_MUTE,
         {{ MODIFIER_FLAG_HYPER }} | ModifierFlag::NONE,
 
-        KeyCode::VK_OPEN_URL_SHELL_mute_temporarily
+        KeyCode::VK_OPEN_URL_SHELL_revive_ue_roll
       </autogen>
     </item>
   </item>
