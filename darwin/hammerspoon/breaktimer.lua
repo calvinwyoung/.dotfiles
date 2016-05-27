@@ -1,11 +1,21 @@
 --
--- Timer module that reminds me to take a break. Dims the screen for 20 seconds
--- every 10 minutes.
+-- Timer module that reminds me to take a break.
 --
 local breaktimer = {}
 
-breaktimer.WORK_TIME = 10 * 60
-breaktimer.BREAK_TIME = 20
+-- Define a list of break times. If two or more breaks would occur at the same
+-- time, then the break that is defined first takes precedence.
+breaktimer.BREAK_TIMINGS = {
+    -- After every 10 minutes. take a 20 second break.
+    {10 * 60, 20},
+
+    -- After every 1 minute, take a 2 second break.
+    {60, 2}
+}
+
+-- This will contain a list of last transition times for each break type in the
+-- BREAK_TIMINGS list.
+local LAST_TRANSITION_TIMES = nil
 
 -- A list of drawings that cover up each screen during a break period.
 local BREAK_GUARDS = nil
@@ -17,13 +27,12 @@ local BREAK_TIMER_MESSAGE = nil
 -- variable to take care of the actual timing mechanism.
 local BREAK_TIMER = nil
 
--- The break timer works as a state machine that transitions between "work" mode
--- and "break" mode.
+-- The break timer works as a state machine that transitions between a "work"
+-- state and one of the "break" states. If we're in a "work" state (the default
+-- state), then `CURRENT_STATE` will have a value of `nil`. If we're in one of
+-- the "break" states, then the value of `CURRENT_STATE` will be the index of
+-- the current break we're in.
 local CURRENT_STATE = nil
-
--- The time we made the last state transition (i.e., either moving from "work"
--- to "break" or vice versa).
-local LAST_TRANSITION_TIME = nil
 
 -- A menubar icon to indicate that the break timer is currently disabled.
 local MENUBAR_ICON = nil
@@ -75,7 +84,7 @@ local function showBreakTimerMessage()
         y = screenFrame.h / 2.3 - 60,
         w = 140,
         h = 120
-    }, tostring(breaktimer.BREAK_TIME))
+    }, tostring(breaktimer.BREAK_TIMINGS[CURRENT_STATE][2]))
     BREAK_TIMER_MESSAGE:setTextFont("Helvetica Neue UltraLight")
     BREAK_TIMER_MESSAGE:setTextSize(120)
     BREAK_TIMER_MESSAGE:setTextColor({red = 1, green = 1, blue = 1, alpha = 1})
@@ -83,23 +92,36 @@ local function showBreakTimerMessage()
 end
 
 local function updateBreakTimerMessage()
+    local lastTransitionTime = LAST_TRANSITION_TIMES[CURRENT_STATE]
+    local breakTime = breaktimer.BREAK_TIMINGS[CURRENT_STATE][2]
     BREAK_TIMER_MESSAGE:setText(
-        string.format(
-            "%2d",
-            LAST_TRANSITION_TIME + breaktimer.BREAK_TIME - os.time()))
+        string.format("%2d", lastTransitionTime + breakTime - os.time()))
 end
 
-local function startBreakTime()
-    CURRENT_STATE = "break"
-    LAST_TRANSITION_TIME = os.time()
+-- Start the break timer for the given break type. The `breakIx` is an index
+-- into the `BREAK_TIMINGS` array.
+local function startBreakTime(breakIx)
+    CURRENT_STATE = breakIx
+
+    -- When we start a break, we need to update the LAST_TRANSITION_TIMES entry
+    -- for that particular break, as well as all breaks that are defined after
+    -- that index. This allows us to ensure that if two breaks were to occur at
+    -- the same time, then the break that is defined first takes precedence and
+    -- overrides any subsequently defined breaks.
+    for i=breakIx, #LAST_TRANSITION_TIMES do
+        LAST_TRANSITION_TIMES[i] = os.time()
+    end
 
     showBreakGuards()
     showBreakTimerMessage()
 end
 
 local function startWorkTime()
-    CURRENT_STATE = "work"
-    LAST_TRANSITION_TIME = os.time()
+    for i=CURRENT_STATE, #LAST_TRANSITION_TIMES do
+        LAST_TRANSITION_TIMES[i] = os.time()
+    end
+
+    CURRENT_STATE = nil
 
     removeBreakGuards()
     removeBreakTimerMessage()
@@ -108,13 +130,24 @@ end
 -- Function to be executed each time the timer interval elapses. This function
 -- should simple check whether it's time to show the break guard.
 local function tick()
-    if CURRENT_STATE == "work" then
-        -- If we've exceeded our work time, then transition into break mode.
-        if os.time() - LAST_TRANSITION_TIME >= breaktimer.WORK_TIME then
-            startBreakTime()
+    if CURRENT_STATE == nil then
+        -- If we've exceeded one of the work times, then we need to transition
+        -- into break mode.
+        for i=1, #breaktimer.BREAK_TIMINGS do
+            local lastTransitionTime = LAST_TRANSITION_TIMES[i]
+            local workTime = breaktimer.BREAK_TIMINGS[i][1]
+
+            -- If we've exceeded our work time, then transition into break mode.
+            if os.time() - lastTransitionTime >= workTime then
+                startBreakTime(i)
+                break
+            end
         end
     else
-        if os.time() - LAST_TRANSITION_TIME >= breaktimer.BREAK_TIME then
+        local lastTransitionTime = LAST_TRANSITION_TIMES[CURRENT_STATE]
+        local breakTime = breaktimer.BREAK_TIMINGS[CURRENT_STATE][2]
+
+        if os.time() - lastTransitionTime >= breakTime then
             startWorkTime()
         -- If we're already in break mode and it's not time to transition back
         -- to work mode, then update the timer message to display the remaining
@@ -127,8 +160,12 @@ end
 
 -- Enable the break timer.
 function breaktimer.enable()
-    CURRENT_STATE = "work"
-    LAST_TRANSITION_TIME = os.time()
+    CURRENT_STATE = nil
+
+    LAST_TRANSITION_TIMES = {}
+    for i=1, #breaktimer.BREAK_TIMINGS do
+        LAST_TRANSITION_TIMES[i] = os.time()
+    end
 
     BREAK_TIMER = hs.timer.new(1, tick)
     BREAK_TIMER:start()
@@ -141,8 +178,7 @@ end
 
 -- Disable the break timer.
 function breaktimer.disable()
-    CURRENT_STATE = nil
-    LAST_TRANSITION_TIME = nil
+    LAST_TRANSITION_TIMES = nil
 
     BREAK_TIMER:stop()
     BREAK_TIMER = nil
@@ -165,7 +201,7 @@ end
 function breaktimer.toggleTimer()
     if not breaktimer.isEnabled() then
         breaktimer.enable()
-    elseif CURRENT_STATE == "work" then
+    elseif CURRENT_STATE == nil then
         breaktimer.disable()
     else
         startWorkTime()
