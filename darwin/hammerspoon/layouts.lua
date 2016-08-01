@@ -50,7 +50,7 @@ local function applySingleMonitorLayout()
             nil
         },
         {
-            "iTerm",
+            "iTerm2",
             nil,
             allScreens[1],
             {hs.geometry.rect(1/2, 0, 1/2, 1/2), hs.geometry.rect(1/2, 1/2, 1/2, 1/2)},
@@ -105,7 +105,7 @@ local function applyDualMonitorLayout()
             nil
         },
         {
-            "iTerm",
+            "iTerm2",
             nil,
             allScreens[2],
             {hs.geometry.rect(2/3, 0, 1/3, 1/2), hs.geometry.rect(2/3, 1/2, 1/3, 1/2)},
