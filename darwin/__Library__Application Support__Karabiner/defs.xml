@@ -56,7 +56,7 @@
     </name>
     <url type="shell">
       <![CDATA[
-               /Applications/Karabiner.app/Contents/Library/utilities/bin/warp-mouse-cursor-position front_window top -60 right 3
+               /Applications/Karabiner.app/Contents/Library/utilities/bin/warp-mouse-cursor-position front_window top +3 right -30
       ]]>
     </url>
   </vkopenurldef>
