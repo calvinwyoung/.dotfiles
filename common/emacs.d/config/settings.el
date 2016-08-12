@@ -20,7 +20,7 @@
 (setq inhibit-splash-screen t)
 
 (defun set-window-system-settings (frame)
-  "Sets the color theme for the given frame"
+  "Sets various window settings for the given frame"
   (select-frame frame)
   (if (window-system frame)
       ;; GUI emacs settings
@@ -67,8 +67,8 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
-;; Use the custom smyx theme.
-(load-theme 'smyx t)
+;; Use the custom wombat theme.
+(load-theme 'wombat t)
 
 ;; Stop asking me to type "yes" or "no".
 (fset 'yes-or-no-p 'y-or-n-p)

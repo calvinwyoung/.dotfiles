@@ -102,6 +102,9 @@
 ;; Show helm's keyring instead of blindly cycling through the keyring.
 (define-key custom-keys-mode-map (kbd "M-y") 'helm-show-kill-ring)
 
+;; Replace the normal `execute-extended-command' with helm's version.
+(define-key custom-keys-mode-map (kbd "C-x C-m") 'helm-M-x)
+
 ;; Replace the normal find-file command with helm's pimped-out version.
 (define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-find-files)
 

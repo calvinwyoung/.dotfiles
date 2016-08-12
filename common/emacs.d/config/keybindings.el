@@ -130,9 +130,6 @@
 ;; Disable custom keys in minibuffer mode.
 (add-hook 'minibuffer-setup-hook (lambda () (custom-keys-mode 0)))
 
-;; Execute extended command.
-(define-key custom-keys-mode-map (kbd "C-x C-m") 'execute-extended-command)
-
 ;; Compile command.
 (define-key custom-keys-mode-map [C-f11] 'compile)
 (define-key custom-keys-mode-map [S-f11] 'kill-compilation)

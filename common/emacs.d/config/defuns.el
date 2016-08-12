@@ -145,23 +145,21 @@ the end of the line, then comment current line."
         ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
         (t nil)))
 
-;; Source: http://tuxicity.se/emacs/elisp/2010/03/26/rename-file-and-buffer-in-emacs.html
+;; Source: https://github.com/bbatsov/crux/blob/master/crux.el#L261
 (defun cy/rename-file-and-buffer ()
-  "Renames current buffer and file it is visiting."
+  "Rename current buffer and if the buffer is visiting a file, rename it too."
   (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
+  (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
-      (let ((new-name (read-file-name "New name: " filename)))
-        (cond ((get-buffer new-name)
-               (error "A buffer named '%s' already exists!" new-name))
-              (t
-               (rename-file filename new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil)
-               (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
+        (rename-buffer (read-from-minibuffer "New name: " (buffer-name)))
+      (let* ((new-name (read-from-minibuffer "New name: " filename))
+             (containing-dir (file-name-directory new-name)))
+        (make-directory containing-dir t)
+        (cond
+         ((vc-backend filename) (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name t)
+          (set-visited-file-name new-name t t)))))))
 
 ;; Source: http://stackoverflow.com/questions/95631/open-a-file-with-su-sudo-inside-emacs#7043786
 (defun cy/sudo-find-file (file-name)
