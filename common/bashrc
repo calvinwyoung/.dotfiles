@@ -66,6 +66,9 @@ if [ -s "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
 
+# Set up Java.
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 # ------------------------
 # Prompt
 # ------------------------
@@ -103,6 +106,18 @@ alias la="ls -alh"
 alias grep="grep --color=auto"
 alias e="emacsclient -t"
 alias ipython="ipython --colors Linux"
+
+# Colorize man pages.
+man() {
+    env \
+	LESS_TERMCAP_md=$'\e[1;34m' \
+	LESS_TERMCAP_me=$'\e[0m' \
+	LESS_TERMCAP_se=$'\e[0m' \
+	LESS_TERMCAP_so=$'\e[1;40;92m' \
+	LESS_TERMCAP_ue=$'\e[0m' \
+	LESS_TERMCAP_us=$'\e[1;32m' \
+	man "$@"
+}
 
 # ------------------------
 # Other .bashrc files
