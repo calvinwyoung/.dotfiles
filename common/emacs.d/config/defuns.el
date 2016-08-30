@@ -189,7 +189,7 @@ close buffer without prompt for save."
 
 ;; Make it easier to move text in all direction.
 ;; Source: http://www.emacswiki.org/emacs/MoveText
-(defun move-text-vertically (arg)
+(defun cy/move-text-vertically (arg)
   "Move a region or line of text args lines up or down."
   (cond
    ((and mark-active transient-mark-mode)
@@ -220,20 +220,20 @@ close buffer without prompt for save."
         (forward-line -1))
       (move-to-column column t)))))
 
-(defun move-text-down (arg)
+(defun cy/move-text-down (arg)
   "Move region (transient-mark-mode active) or current line arg
 lines down."
   (interactive "*p")
-  (move-text-vertically arg))
+  (cy/move-text-vertically arg))
 
-(defun move-text-up (arg)
+(defun cy/move-text-up (arg)
   "Move region (transient-mark-mode active) or current line arg
 lines up."
   (interactive "*p")
-  (move-text-vertically (- arg)))
+  (cy/move-text-vertically (- arg)))
 
 ;; Source: http://stackoverflow.com/questions/3156450/shift-a-region-or-line-in-emacs#3156642
-(defun shift-text-horizontally (arg)
+(defun cy/shift-text-horizontally (arg)
   "Shift a region of text args columns left or right."
   (if (use-region-p)
       (let ((mark (mark)))
@@ -243,14 +243,75 @@ lines up."
           (setq deactivate-mark nil)))
     (indent-rigidly (line-beginning-position) (line-end-position) arg)))
 
-(defun shift-text-right (arg)
+(defun cy/shift-text-right (arg)
   "Shift region (transient-mark-mode active) or current line arg
 columns right."
   (interactive "p")
-  (shift-text-horizontally arg))
+  (cy/shift-text-horizontally arg))
 
-(defun shift-text-left (arg)
+(defun cy/shift-text-left (arg)
   "Shift region (transient-mark-mode active) or current line arg
 columns left."
   (interactive "p")
-  (shift-text-horizontally (- arg)))
+  (cy/shift-text-horizontally (- arg)))
+
+(defun cy/shift-text-tabstop-right (arg)
+  "Shift region (transient-mark-mode active) or current line arg
+tabstops right."
+  (interactive "p")
+  (cy/shift-text-horizontally (* arg (cy/major-mode-shift-offset))))
+
+(defun cy/shift-text-tabstop-left (arg)
+  "Shift region (transient-mark-mode active) or current line arg
+tabstops left."
+  (interactive "p")
+  (cy/shift-text-horizontally (- (* arg (cy/major-mode-shift-offset)))))
+
+;; Source: https://github.com/hbin/smart-shift
+(defvar cy/major-mode-shift-offsets-alist
+  '((lisp-mode . lisp-body-indent)
+    (emacs-lisp-mode . lisp-body-indent)
+
+    ;; Modes directly supported by CC Mode
+    (c-mode . c-basic-offset)
+    (c++-mode . c-basic-offset)
+    (objc-mode . c-basic-offset)
+    (java-mode . c-basic-offset)
+    (idl-mode . c-basic-offset)
+    (pike-mode . c-basic-offset)
+    (awk-mode . c-basic-offset)
+
+    (ruby-mode . ruby-indent-level)
+    (python-mode . python-indent-offset)
+    (swift-mode . swift-indent-offset)
+
+    (js-mode . js-indent-level)
+    (js2-mode . js2-basic-offset)
+    (coffee-mode . coffee-tab-width)
+
+    (css-mode . css-indent-offset)
+    (slim-mode . slim-indent-offset)
+    (html-mode . sgml-basic-offset)
+    (web-mode . (lambda ()
+                  (cond ((string= web-mode-content-type "css")
+                         web-mode-css-indent-offset)
+                        ((member web-mode-content-type
+                                 '("javascript" "json" "jsx" "php"))
+                         web-mode-code-indent-offset)
+                        (t web-mode-markup-indent-offset)))) ; xml, html, etc...
+
+    (sh-mode . sh-basic-offset)
+    (yaml-mode . yaml-indent-offset)
+    (text-mode . tab-width)
+    (fundamental-mode . tab-width))
+  "Alist which maps major modes to its indentation-level.")
+
+(defun cy/major-mode-shift-offset ()
+  "Returns the indentation-level of current major mode."
+  (let ((offset (assoc-default major-mode cy/major-mode-shift-offsets-alist
+                               (lambda (k v)
+                                 (derived-mode-p k)))))
+    (cond ((numberp offset) offset)
+          ((functionp offset) (funcall offset))
+          ((symbolp offset) (symbol-value offset))
+          (t tab-width))))

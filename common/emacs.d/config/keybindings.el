@@ -34,12 +34,12 @@
 (define-key custom-keys-mode-map (kbd "C-c ;") 'cy/duplicate-line-and-comment)
 
 ;; Make it easier to move lines and regions.
-(define-key custom-keys-mode-map (kbd "M-<up>") 'move-text-up)
-(define-key custom-keys-mode-map (kbd "M-<down>") 'move-text-down)
-(define-key custom-keys-mode-map (kbd "M-<left>") 'shift-text-left)
-(define-key custom-keys-mode-map (kbd "M-<right>") 'shift-text-right)
-(define-key custom-keys-mode-map (kbd "M-[") (lambda() (interactive) (shift-text-left 4)))
-(define-key custom-keys-mode-map (kbd "M-]") (lambda() (interactive) (shift-text-right 4)))
+(define-key custom-keys-mode-map (kbd "M-<up>") 'cy/move-text-up)
+(define-key custom-keys-mode-map (kbd "M-<down>") 'cy/move-text-down)
+(define-key custom-keys-mode-map (kbd "M-<left>") 'cy/shift-text-left)
+(define-key custom-keys-mode-map (kbd "M-<right>") 'cy/shift-text-right)
+(define-key custom-keys-mode-map (kbd "M-[") 'cy/shift-text-tabstop-left)
+(define-key custom-keys-mode-map (kbd "M-]") 'cy/shift-text-tabstop-right)
 
 ;; Use custom comment function.
 (define-key custom-keys-mode-map (kbd "M-;") 'cy/comment-dwim)
