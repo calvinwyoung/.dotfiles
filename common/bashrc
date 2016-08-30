@@ -15,6 +15,9 @@ shopt -s histappend
 # Disable Ctrl+S to suspend terminal
 stty -ixon
 
+# Enable iTerm2 integration if appropriate
+[ -f "$HOME/.iterm2_shell_integration.bash" ] && source "$HOME/.iterm2_shell_integration.bash"
+
 # ------------------------
 # Environment variables
 # ------------------------
@@ -118,8 +121,3 @@ man() {
 	LESS_TERMCAP_us=$'\e[1;32m' \
 	man "$@"
 }
-
-# ------------------------
-# Other .bashrc files
-# ------------------------
-[ -f "$HOME/.bashrc.twice" ] && source "$HOME/.bashrc.twice"
