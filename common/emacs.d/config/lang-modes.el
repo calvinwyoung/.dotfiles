@@ -3,7 +3,8 @@
 ;;;;;;;;;;;;;
 (add-hook 'prog-mode-hook
           (lambda ()
-            ;; Enable Fly Spell spell-checking in all programming modes.
+            ;; Enable Flycheck and Flyspell in all programming modes.
+            (flycheck-mode)
             (flyspell-prog-mode)))
 
 ;;;;;;;;;;
@@ -19,6 +20,10 @@
 ;; insert the extra blank line.
 ;; (See http://www.python.org/dev/peps/pep-0008/#documentation-strings)
 (setq python-fill-docstring-style 'pep-257-nn)
+
+;; Execute `flycheck-mypy' checker after `python-flake8' checker.
+(require 'flycheck-mypy)
+(flycheck-add-next-checker 'python-flake8 'python-mypy)
 
 ;;;;;;;;
 ;; Ruby

@@ -6,6 +6,7 @@
     deft
     exec-path-from-shell
     expand-region
+    flycheck
     go-mode
     helm-projectile
     js2-mode
