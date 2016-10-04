@@ -47,10 +47,18 @@
 ;;;;;;;;;;;;;;
 ;; Javascript
 ;;;;;;;;;;;;;;
+(require 'js-doc)
 (add-hook 'js2-mode-hook
           (lambda()
+            ;; Set indentation level to 2-spaces.
+            (setq js2-basic-offset 2)
+
             ;; Enable extra imenu goodies
-            (js2-imenu-extras-mode)))
+            (js2-imenu-extras-mode)
+
+            ;; Add some js-doc hotkeys.
+            (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+            (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
@@ -81,6 +89,7 @@
 (add-to-list 'auto-mode-alist '("\\.htmlmk$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 
 ;;;;;;;
 ;; Lua
