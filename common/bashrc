@@ -33,16 +33,6 @@ if [ -d "$HOME/.bin" ]; then
     export PATH="$HOME/.bin:$PATH"
 fi
 
-# For virtualenv, which gets installed in different places depending on whether
-# we're on Linux or OSX.
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-if [ -f /usr/bin/virtualenvwrapper.sh ]; then
-    source /usr/bin/virtualenvwrapper.sh
-elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
 # Add Homebrew packages to PATH.
 if [ `uname` == "Darwin" ]; then
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -68,6 +58,19 @@ if [ -s "$HOME/.rvm/scripts/rvm" ]; then
     # Load RVM into a shell session *as a function*
     source "$HOME/.rvm/scripts/rvm"
 fi
+
+# For virtualenv, which gets installed in different places depending on whether
+# we're on Linux or OSX. Also enable autoenv for activating virtualenvs
+# automagically. Note that for some reason autoenv needs to come *after* the RVM
+# commands to work properly.
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+if [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    source /usr/bin/virtualenvwrapper.sh
+elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+source $(brew --prefix autoenv)/activate.sh
 
 # Set up Java.
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -109,6 +112,14 @@ alias la="ls -alh"
 alias grep="grep --color=auto"
 alias e="emacsclient -t"
 alias ipython="ipython --colors Linux"
+
+alias dup="source /Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
+alias di="docker images"
+alias dip="docker-machine ip"
+function dclean() {
+    docker rm -v $(docker ps --all --quiet --filter "status=exited")
+    docker rmi $(docker images --filter "dangling=true" --quiet)
+}
 
 # Colorize man pages.
 man() {
