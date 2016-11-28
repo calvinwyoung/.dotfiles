@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Takes a screenshot from a remote display, and pipes the image to Preview.
+
+SSH_HOST=$1
+DISPLAY=${2:-0.0}
+
+ssh $SSH_HOST "DISPLAY=:$DISPLAY import -window root png:-" | open -a /Applications/Preview.app -f
