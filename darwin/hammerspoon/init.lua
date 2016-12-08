@@ -1,3 +1,4 @@
+local clipboard = require "clipboard"
 local focus = require "focus"
 local layouts = require "layouts"
 local util = require "util"
@@ -73,6 +74,10 @@ util.bindAll({
     -- Increase / decrease flux intensity.
     {HYPER, "-", flux.decreaseLevel},
     {HYPER, "=", flux.increaseLevel},
+
+    -- Helper function to paste the current contents of the clipboard by
+    -- emitting keystrokes.
+    {{"ctrl", "alt", "shift"}, "v", clipboard.pasteAsKeystrokes},
 
     -- Reload config.
     {
