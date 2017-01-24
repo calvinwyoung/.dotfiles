@@ -100,6 +100,12 @@ With argument ARG, do this that many times."
     (isearch-exit)
     (call-interactively 'rgrep)))
 
+;; Find all non-ascii characters in the current buffer.
+(defun cy/occur-non-ascii ()
+  "Find any non-ascii characters in the current buffer."
+  (interactive)
+  (occur "[^[:ascii:]]"))
+
 ;; Change default behavior of comment-dwim.
 (defun cy/comment-dwim (&optional arg)
   "Replacement for the comment-dwim command.
