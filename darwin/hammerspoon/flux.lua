@@ -83,16 +83,6 @@ local WHITEPOINT_COLORS = {
 local function setLevel(level)
     CUR_LEVEL = level
 
-    -- local brightnessDelta = (
-    --     (flux.MAX_BRIGHTNESS - flux.MIN_BRIGHTNESS) /
-    --     (flux.NUM_LEVELS - 1))
-    -- local targetBrightness = flux.MIN_BRIGHTNESS + brightnessDelta * CUR_LEVEL
-
-    -- local colorTempDelta = (
-    --     (flux.MAX_COLOR_TEMP - flux.MIN_COLOR_TEMP) /
-    --     (flux.NUM_LEVELS - 1))
-    -- local targetColorTemp = flux.MIN_COLOR_TEMP + colorTempDelta * CUR_LEVEL
-
     local targetBrightness, targetColorTemp = table.unpack(flux.SETTINGS[level])
 
     -- Get the index of the target color temp in the whitepoint colors
