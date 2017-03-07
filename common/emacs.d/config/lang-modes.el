@@ -60,7 +60,7 @@
             (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-jsx-mode))
 
 ;;;;;;
 ;; Go
@@ -90,6 +90,15 @@
 (add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
+
+;;;;;;;;;
+;; Latex
+;;;;;;;;;
+(add-hook 'latex-mode-hook
+          (lambda ()
+            ;; Prevent latex-mode from always formatting characters after an
+            ;; underscore as a subscript.
+            (setq tex-fontify-script nil)))
 
 ;;;;;;;
 ;; Lua
