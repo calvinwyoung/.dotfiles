@@ -321,3 +321,8 @@ tabstops left."
           ((functionp offset) (funcall offset))
           ((symbolp offset) (symbol-value offset))
           (t tab-width))))
+
+(defun cy/convert-to-unix-file ()
+  "Converts line endings to unix-style '\n' line endings."
+  (interactive)
+  (set-buffer-file-coding-system 'iso-latin-1-unix t))
