@@ -5,5 +5,6 @@ ncmpcpp/error.log
 # Ignore elpa packages.
 common/emacs.d/elpa
 
-# Ignore projectile cache files.
+# Ignore emacs cache files.
 common/emacs.d/projectile*
+common/emacs.d/.mc-lists.el
