@@ -60,7 +60,14 @@
             (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
+
+(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (save-excursion
+    (beginning-of-line)
+    (if (looking-at-p "^ +\/?> *$")
+        (delete-char sgml-basic-offset))))
 
 ;;;;;;
 ;; Go

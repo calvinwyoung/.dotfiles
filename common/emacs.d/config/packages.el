@@ -13,6 +13,7 @@
     lua-mode
     org-autolist
     projectile
+    rjsx-mode
     web-mode
     wgrep
     yaml-mode
