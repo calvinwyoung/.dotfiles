@@ -5,6 +5,7 @@ local layouts = {}
 
 local focus = require "focus"
 local patches = require "patches"
+local util = require "util"
 
 local function applySingleMonitorLayout()
     local allScreens = hs.screen.allScreens()
@@ -115,10 +116,83 @@ local function applyDualMonitorLayout()
     })
 end
 
+local function applyLaptopWithMonitorLayout()
+    local allScreens = hs.screen.allScreens()
+    if #allScreens ~= 2 then
+        return
+    end
+
+    local laptopScreen = util.find(
+        allScreens,
+        function(s) return s:name() == "Color LCD" end)
+
+    local monitorScreen = util.find(
+        allScreens,
+        function(s) return s:name() ~= "Color LCD" end)
+
+    if not laptopScreen then
+        return
+    end
+
+    -- Set the proper focus direction for each screen.
+    focus.setWindowFocusDirection(allScreens[1]:id(), -1)
+    focus.setWindowFocusDirection(allScreens[2]:id(), 1)
+
+    -- Move windows to the correct places.
+    patches.layout_apply({
+        {
+            "Google Chrome",
+            nil,
+            laptopScreen,
+            hs.geometry.rect(0, 0, 1, 1),
+            nil,
+            nil
+        },
+        {
+            "Messages",
+            nil,
+            laptopScreen,
+            hs.geometry.rect(0, 0, 1/3, 1/2),
+            nil,
+            nil
+        },
+        {
+            "Notes",
+            nil,
+            laptopScreen,
+            hs.geometry.rect(0, 1/2, 1/3, 1/2),
+            nil,
+            nil
+        },
+        {
+            "Emacs",
+            nil,
+            monitorScreen,
+            {hs.geometry.rect(0, 0, 1/3, 1), hs.geometry.rect(1/3, 0, 1/3, 1)},
+            nil,
+            nil
+        },
+        {
+            "iTerm2",
+            nil,
+            monitorScreen,
+            {hs.geometry.rect(2/3, 0, 1/3, 1/2), hs.geometry.rect(2/3, 1/2, 1/3, 1/2)},
+            nil,
+            nil
+        }
+    })
+end
+
 function layouts.applyLayoutForScreens()
-    local numScreens = #hs.screen.allScreens()
-    if numScreens == 1 then
+    local allScreens = hs.screen.allScreens()
+    local laptopScreen = util.find(
+        allScreens,
+        function(s) return s:name() == "Color LCD" end)
+
+    if #allScreens == 1 then
         applySingleMonitorLayout()
+    elseif #allScreens == 2 and laptopScreen then
+        applyLaptopWithMonitorLayout()
     else
         applyDualMonitorLayout()
     end

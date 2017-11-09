@@ -135,4 +135,26 @@ function util.bindAll(configs)
     end
 end
 
+-- Implements the `any` function. Returns `true` if the predicate returns true
+-- for any object in the given table.
+function util.any(coll, pred)
+    for _, el in ipairs(coll) do
+        if pred(el) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Implements the `find` function. Returns the object in the table that returns
+-- `true` when applying the predicate.
+function util.find(coll, pred)
+    for _, el in ipairs(coll) do
+        if pred(el) then
+            return el
+        end
+    end
+    return nil
+end
+
 return util
