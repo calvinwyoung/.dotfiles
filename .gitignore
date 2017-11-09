@@ -8,3 +8,4 @@ common/emacs.d/elpa
 # Ignore emacs cache files.
 common/emacs.d/projectile*
 common/emacs.d/.mc-lists.el
+common/emacs.d/network-security.data

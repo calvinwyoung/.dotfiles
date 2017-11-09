@@ -3,9 +3,11 @@
 ;;;;;;;;;;;;;
 (add-hook 'prog-mode-hook
           (lambda ()
-            ;; Enable Flycheck and Flyspell in all programming modes.
-            (flycheck-mode)
-            (flyspell-prog-mode)))
+            ;; Enable Flycheck and Flyspell in all programming modes, except
+            ;; scss-mode.
+            (unless (derived-mode-p 'scss-mode)
+              (flycheck-mode)
+              (flyspell-prog-mode))))
 
 ;;;;;;;;;;
 ;; Python
