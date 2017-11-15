@@ -3,13 +3,13 @@
   <item>
     <name>Mouse Bindings</name>
 
-    <!-- Logitech G9 mouse config -->
+    <!-- External mouse config -->
     <item>
-      <name>Logitech G9 Mouse Config</name>
-      <identifier>custom.logitech_g9_mouse_config</identifier>
+      <name>External mouse Config</name>
+      <identifier>custom.external_mouse_config</identifier>
       <appendix>Mouse Back Button to Command + [</appendix>
+      <appendix>Mouse Forward Button to Command + ]</appendix>
       <appendix>ScrollRight to Command + ]</appendix>
-      <appendix>ScrollLeft to Middle Click</appendix>
 
       <device_not>
         DeviceVendor::APPLE_COMPUTER,
@@ -24,20 +24,20 @@
         KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L
       </autogen>
 
+      <!-- Mouse forward button to "Forward" -->
+      <autogen>
+        __PointingButtonToKey__
+        PointingButton::BUTTON5, ModifierFlag::NONE,
+
+        KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L
+      </autogen>
+
       <!-- Mouse scroll wheel right to "Forward" -->
       <autogen>
         __ScrollWheelToKey__
         ScrollWheel::RIGHT, ModifierFlag::NONE,
 
         KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L
-      </autogen>
-
-      <!-- Mouse scroll wheel left to Middle Click -->
-      <autogen>
-        __ScrollWheelToKey__
-        ScrollWheel::LEFT, ModifierFlag::NONE,
-
-        KeyCode::VK_MOUSEKEY_BUTTON_MIDDLE
       </autogen>
     </item>
 
