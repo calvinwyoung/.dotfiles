@@ -11,7 +11,7 @@
       <appendix>F18 to "Hyper" (i.e., Control + Option + Command)</appendix>
       <appendix>F19 to Option</appendix>
       <appendix></appendix>
-      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.)</appendix>
+      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in Seil.)</appendix>
       <identifier>custom.apple_keyboard_modifier_keys</identifier>
 
       <device_only>
@@ -73,7 +73,7 @@
       <name>PC Keyboard Modifier Keys</name>
       <appendix>F18 to Option</appendix>
       <appendix>F19 to "Hyper" (i.e., Control + Option + Command).</appendix>
-      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in PCKeyboardHack.)</appendix>
+      <appendix>(These require OPTION_L to keycode 79 and COMMAND_L to keycode 80 in Seil.)</appendix>
       <appendix></appendix>
       <identifier>custom.pc_keyboard_modifier_keys</identifier>
 
