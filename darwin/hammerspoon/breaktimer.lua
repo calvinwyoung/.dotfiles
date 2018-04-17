@@ -131,6 +131,22 @@ local function startWorkTime()
     removeBreakTimerMessage()
 end
 
+-- Punt the current break time by the give number of seconds. We do this by
+-- reset the `LAST_TRANSITION_TIMES` for each break (and each subsequently
+-- defined break) such that the next break should happen after `numSeconds` have
+-- elapsed.
+local function puntBreakTime(numSeconds)
+    for i=(CURRENT_STATE or 1), #LAST_TRANSITION_TIMES do
+        workTime = breaktimer.BREAK_TIMINGS[i][1]
+        LAST_TRANSITION_TIMES[i] = os.time() - workTime + numSeconds
+    end
+
+    CURRENT_STATE = nil
+
+    removeBreakGuards()
+    removeBreakTimerMessage()
+end
+
 -- Function to be executed each time the timer interval elapses. This function
 -- should simple check whether it's time to show the break guard.
 local function tick()
@@ -201,15 +217,14 @@ end
 --
 -- If the timer is disabled, then calling this enables the timer. If the timer
 -- is in work mode, then calling this disables the timer. If the timer is in
--- break mode, then calling this skips the break and moves immediately to work
--- mode.
+-- break mode, then calling this punts the break time off by 30 seconds.
 function breaktimer.toggleTimer()
     if not breaktimer.isEnabled() then
         breaktimer.enable()
     elseif CURRENT_STATE == nil then
         breaktimer.disable()
     else
-        startWorkTime()
+        puntBreakTime(30)
     end
 end
 
