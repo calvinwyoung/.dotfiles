@@ -1898,6 +1898,54 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "option",
+                                            "control"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "modifiers": [
+                                            "fn"
+                                        ],
+                                        "pointing_button": "button1"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "option",
+                                            "control"
+                                        ]
+                                    },
+                                    "pointing_button": "button2"
+                                },
+                                "to": [
+                                    {
+                                        "modifiers": [
+                                            "fn",
+                                            "left_shift"
+                                        ],
+                                        "pointing_button": "button2"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },

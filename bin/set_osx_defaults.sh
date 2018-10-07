@@ -9,19 +9,23 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
 # Expand save panel by default.
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
+# Accelerated playback when adjusting the window size (Cocoa applications).
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Enable "Reduce Motion" setting to make animations slightly less annoying.
+sudo defaults write com.apple.universalaccess reduceMotion -bool true
+
 # Disable the “Are you sure you want to open this application?” dialog.
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Disable animations when you open an application from the Dock.
+defaults write com.apple.dock launchanim -bool false
 
 # Disable volume change beeps and UI sound effects (may require restart).
 defaults write -g com.apple.sound.beep.feedback -integer 0
 
 # Disable startup sound.
 sudo nvram SystemAudioVolume=%80
-
-# Hide Spotlight icon.
-if [ -e /System/Library/CoreServices/Search.bundle ]; then
-    sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
-fi
 
 ###############################################################################
 # Dock, Dashboard, Mission Control                                            #

@@ -10,6 +10,7 @@ rule_defs = [
     rules.apple_modifiers_rule,
     rules.remap_caps_lock_and_control_rule,
     rules.mouse_bindings_rule,
+    rules.zooom2_bindings_rule,
     rules.control_based_shortcuts_rule,
     rules.page_up_down_home_end_rule,
     rules.pc_home_end_rule,

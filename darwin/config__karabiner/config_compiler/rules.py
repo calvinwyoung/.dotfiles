@@ -1,4 +1,4 @@
-hyper_key = ['left_command', 'left_option', 'left_control']
+HYPER = ['command', 'option', 'control']
 
 non_apple_modifiers_rule = {
     'description': 'Non-Apple modifiers (L-Command -> Hyper)',
@@ -114,6 +114,44 @@ mouse_bindings_rule = {
                 }
             },
             ('close_bracket', 'left_command')
+        )
+    ]
+}
+
+# Emulate Linux-style "Hyper + Click" for moving/resizing. To be used in
+# combination with Zooom2. Note that we use Fn as the movement modifier key for
+# Zooom2 because it's the only one that doesn't come with any default
+# functionality when combined with left-click. We need to add the following
+# settings to Zooom2:
+#
+#   - Movement shortcut: Fn
+#   - Resize shortcut: Fn + Shift
+zooom2_bindings_rule = {
+    'description': 'Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.',
+    'manipulators': [
+        (
+            {
+                'pointing_button': 'button1',
+                'modifiers': {
+                    'mandatory': HYPER
+                }
+            },
+            {
+                'pointing_button': 'button1',
+                'modifiers': ['fn']
+            }
+        ),
+        (
+            {
+                'pointing_button': 'button2',
+                'modifiers': {
+                    'mandatory': HYPER
+                }
+            },
+            {
+                'pointing_button': 'button2',
+                'modifiers': ['fn', 'left_shift']
+            }
         )
     ]
 }
@@ -388,7 +426,7 @@ application_launchers = {
     'description': 'Application launchers',
     'manipulators': [
         (
-            (key_code, hyper_key),
+            (key_code, HYPER),
             {
                 'shell_command': f'open -a "{app_name}"'
             }
@@ -415,7 +453,7 @@ finder_remappings = {
         # On the Microsoft Sculpt keyboard, the F2 action key actually performs
         # Hyper + Tab for some reason. Unclear why.
         (
-            ('tab', hyper_key),
+            ('tab', HYPER),
             ('return_or_enter')
         ),
         # On the Apple keyboard, intercept the brightness up key.

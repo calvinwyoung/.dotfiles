@@ -253,6 +253,54 @@
       ]
     },
     {
+      "description": "Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button1",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button1",
+              "modifiers": [
+                "fn"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button2",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button2",
+              "modifiers": [
+                "fn",
+                "left_shift"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "Control-based shortcuts",
       "manipulators": [
         {
@@ -1630,9 +1678,9 @@
             "key_code": "grave_accent_and_tilde",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1648,9 +1696,9 @@
             "key_code": "return_or_enter",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1666,9 +1714,9 @@
             "key_code": "e",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1684,9 +1732,9 @@
             "key_code": "w",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1702,9 +1750,9 @@
             "key_code": "s",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1720,9 +1768,9 @@
             "key_code": "h",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1738,9 +1786,9 @@
             "key_code": "o",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
@@ -1780,9 +1828,9 @@
             "key_code": "tab",
             "modifiers": {
               "mandatory": [
-                "left_command",
-                "left_option",
-                "left_control"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
