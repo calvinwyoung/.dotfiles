@@ -309,7 +309,7 @@ keepassx_rule = {
 }
 
 emacs_rule = {
-    'description': 'Implements Emacs hotkeys',
+    'description': 'Emacs everywhere hotkeys',
     'conditions': [
         {
             'type': 'frontmost_application_unless',
@@ -320,69 +320,127 @@ emacs_rule = {
         }
     ],
     'manipulators': [
+        # Cursor up.
         (
-            ('p', ['control']),
+            ('p', 'control'),
             ('up_arrow'),
         ),
+        # Cursor down.
         (
-            ('n', ['control']),
+            ('n', 'control'),
             ('down_arrow'),
         ),
+        # Cursor left.
         (
-            ('b', ['control']),
+            ('b', 'control'),
             ('left_arrow'),
         ),
+        # Cursor right.
         (
-            ('b', ['option']),
-            ('left_arrow', ['left_option'])
-        ),
-        (
-            ('f', ['control']),
+            ('f', 'control'),
             ('right_arrow')
         ),
+        # Cursor back one word.
         (
-            ('f', ['option']),
+            ('b', 'option'),
+            ('left_arrow', ['left_option'])
+        ),
+        # Cursor forward one word.
+        (
+            ('f', 'option'),
             ('right_arrow', ['left_option'])
         ),
+        # Cursor to beginning of line.
         (
-            ('a', ['control']),
+            ('a', 'control'),
             ('left_arrow', ['left_command'])
         ),
+        # Cursor to end of line.
         (
-            ('e', ['control']),
+            ('e', 'control'),
             ('right_arrow', ['left_command'])
         ),
+        # Delete word backward.
         (
-            ('w', ['control']),
+            ('w', 'control'),
             ('delete_or_backspace', ['left_option'])
         ),
+        # Delete word forward.
         (
-            ('w', ['option']),
+            ('d', 'option'),
+            ('delete_forward', ['left_option'])
+        ),
+        # Copy.
+        (
+            ('w', 'option'),
             ('c', ['left_command'])
         ),
+        # Paste.
         (
-            ('y', ['control']),
+            ('y', 'control'),
             ('v', ['left_command']),
         ),
-
         # Undo / redo.
         (
-            ('slash', ['control']),
+            ('slash', 'control'),
             ('z', ['left_command'])
         ),
         (
             ('slash', ['control', 'option']),
             ('z', ['left_command', 'left_shift'])
         ),
-
-        # Move cursor to
+        # Move cursor to first non-whitespace character online.
         (
-            ('m', ['option']),
+            ('m', 'option'),
             [
                 ('left_arrow', 'left_command'),
                 ('right_arrow', 'left_option'),
                 ('left_arrow', 'left_option')
             ]
+        ),
+        # Move cursor to top of file.
+        (
+            ('comma', ['option', 'shift']),
+            ('up_arrow', ['left_command'])
+        ),
+        # Move cursor to bottom of file.
+        (
+            ('period', ['option', 'shift']),
+            ('down_arrow', ['left_command'])
+        ),
+        # Open new line above current line.
+        (
+            ('o', ['control', 'option']),
+            [
+                ('a', ['left_control']),
+                ('up_arrow'),
+                ('e', ['left_control']),
+                ('return_or_enter')
+            ]
+        ),
+        # Cursor up 5 lines.
+        (
+            ('p', 'option'),
+            [('up_arrow') for i in range(5)]
+        ),
+        # Cursor down 5 lines.
+        (
+            ('n', 'option'),
+            [('down_arrow') for i in range(5)]
+        ),
+        # Scroll page up.
+        (
+            ('p', ['control', 'option']),
+            {
+                'mouse_key': {'vertical_wheel': -64}
+            }
+        ),
+        # Scroll page down.
+        (
+            ('n', ['control', 'option']),
+            {
+                'mouse_key': {'vertical_wheel': 64}
+            }
         )
     ]
 }
