@@ -1,6 +1,9 @@
 ncmpcpp/error.log
 .DS_Store
 .netrwhist
+.*pyc
+.mypy_cache/
+__pycache__/
 
 # Ignore elpa packages.
 common/emacs.d/elpa
