@@ -215,6 +215,27 @@
       ]
     },
     {
+      "description": "Pause / Break -> Eject",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "pause",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "eject"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "Mouse back button to Back (Forward with control)",
       "manipulators": [
         {
@@ -246,54 +267,6 @@
               "key_code": "close_bracket",
               "modifiers": [
                 "left_command"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button1",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "option",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "pointing_button": "button1",
-              "modifiers": [
-                "fn"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button2",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "option",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "pointing_button": "button2",
-              "modifiers": [
-                "fn",
-                "left_shift"
               ]
             }
           ]
@@ -1801,6 +1774,49 @@
       ]
     },
     {
+      "description": "Option + Tab / Backtick -> switch windows / apps",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": [
+                "left_command"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": [
+                "left_command"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "Finder: F2 to rename, Return to Open",
       "manipulators": [
         {
@@ -1892,23 +1908,25 @@
       ]
     },
     {
-      "description": "Option + Tab / Backtick -> switch windows / apps",
+      "description": "Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "tab",
+            "pointing_button": "button1",
             "modifiers": {
               "mandatory": [
-                "option"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
           "to": [
             {
-              "key_code": "tab",
+              "pointing_button": "button1",
               "modifiers": [
-                "left_command"
+                "fn"
               ]
             }
           ]
@@ -1916,18 +1934,78 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "grave_accent_and_tilde",
+            "pointing_button": "button2",
             "modifiers": {
               "mandatory": [
-                "option"
+                "command",
+                "option",
+                "control"
               ]
             }
           },
           "to": [
             {
-              "key_code": "grave_accent_and_tilde",
+              "pointing_button": "button2",
               "modifiers": [
-                "left_command"
+                "fn",
+                "left_shift"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Hammerspoon: Hyper + Comma/Period to Left/Right Brackets",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option",
+                "control"
+              ],
+              "optional": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "open_bracket",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_control"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option",
+                "control"
+              ],
+              "optional": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "close_bracket",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_control"
               ]
             }
           ]

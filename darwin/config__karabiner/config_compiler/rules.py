@@ -93,6 +93,18 @@ remap_caps_lock_and_control_rule = {
     ]
 }
 
+# Remaps the Pause key to Eject. This is useful because we can then use the
+# default MacOS Control + Shift + Eject shortcut to show the lock screen.
+pause_to_eject_rule = {
+    'description': 'Pause / Break -> Eject',
+    'manipulators': [
+        (
+            ('pause', None, 'any'),
+            ('eject')
+        )
+    ]
+}
+
 mouse_bindings_rule = {
     'description': 'Mouse back button to Back (Forward with control)',
     'manipulators': [
@@ -114,44 +126,6 @@ mouse_bindings_rule = {
                 }
             },
             ('close_bracket', 'left_command')
-        )
-    ]
-}
-
-# Emulate Linux-style "Hyper + Click" for moving/resizing. To be used in
-# combination with Zooom2. Note that we use Fn as the movement modifier key for
-# Zooom2 because it's the only one that doesn't come with any default
-# functionality when combined with left-click. We need to add the following
-# settings to Zooom2:
-#
-#   - Movement shortcut: Fn
-#   - Resize shortcut: Fn + Shift
-zooom2_bindings_rule = {
-    'description': 'Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.',
-    'manipulators': [
-        (
-            {
-                'pointing_button': 'button1',
-                'modifiers': {
-                    'mandatory': HYPER
-                }
-            },
-            {
-                'pointing_button': 'button1',
-                'modifiers': ['fn']
-            }
-        ),
-        (
-            {
-                'pointing_button': 'button2',
-                'modifiers': {
-                    'mandatory': HYPER
-                }
-            },
-            {
-                'pointing_button': 'button2',
-                'modifiers': ['fn', 'left_shift']
-            }
         )
     ]
 }
@@ -304,7 +278,7 @@ switch_tabs_rule = {
     ]
 }
 
-keepasx_rule = {
+keepassx_rule = {
     'description': 'KeePassX: Copy username and password',
     'conditions': [
         {
@@ -435,6 +409,20 @@ application_launchers = {
     ]
 }
 
+option_based_window_switching = {
+    'description': 'Option + Tab / Backtick -> switch windows / apps',
+    'manipulators': [
+        (
+            ('tab', 'option'),
+            ('tab', 'left_command'),
+        ),
+        (
+            ('grave_accent_and_tilde', 'option'),
+            ('grave_accent_and_tilde', 'left_command'),
+        )
+    ]
+}
+
 finder_remappings = {
     'description': 'Finder: F2 to rename, Return to Open',
     'conditions': [
@@ -468,16 +456,64 @@ finder_remappings = {
     ]
 }
 
-option_based_window_switching = {
-    'description': 'Option + Tab / Backtick -> switch windows / apps',
+# Emulate Linux-style "Hyper + Click" for moving/resizing. To be used in
+# combination with Zooom2. Note that we use Fn as the movement modifier key for
+# Zooom2 because it's the only one that doesn't come with any default
+# functionality when combined with left-click. We need to add the following
+# settings to Zooom2:
+#
+#   - Movement shortcut: Fn
+#   - Resize shortcut: Fn + Shift
+zooom2_remappings = {
+    'description': 'Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.',
     'manipulators': [
         (
-            ('tab', 'option'),
-            ('tab', 'left_command'),
+            {
+                'pointing_button': 'button1',
+                'modifiers': {
+                    'mandatory': HYPER
+                }
+            },
+            {
+                'pointing_button': 'button1',
+                'modifiers': ['fn']
+            }
         ),
         (
-            ('grave_accent_and_tilde', 'option'),
-            ('grave_accent_and_tilde', 'left_command'),
+            {
+                'pointing_button': 'button2',
+                'modifiers': {
+                    'mandatory': HYPER
+                }
+            },
+            {
+                'pointing_button': 'button2',
+                'modifiers': ['fn', 'left_shift']
+            }
+        )
+    ]
+}
+
+# Map Hyper + Comma/Period to Left/Right Brackets.  By default the Hyper +
+# Comma/Period keyboard shortcuts should move focus to different screens (a la
+# AwesomeWM, DWM, etc.). Additionally, we want Shift + Hyper + Comma/Period to
+# move windows across different screens, but this is activates sysdiagnose by
+# default. We can't disable this binding, so we need map the Hyper +
+# Comma/Period shortcuts to something else, and in our case we choose to use the
+# bracket keys. In Hammerspoon, we then need to create mappings for:
+#
+#   - Hyper + ]/[ -> Move focus between screens
+#   - Hyper + Shift -> ]/[ -> Move windows between screens
+hammerspoon_remappings = {
+    'description': 'Hammerspoon: Hyper + Comma/Period to Left/Right Brackets',
+    'manipulators': [
+        (
+            ('comma', HYPER, 'shift'),
+            ('open_bracket', ['left_command', 'left_option', 'left_control'])
+        ),
+        (
+            ('period', HYPER, 'shift'),
+            ('close_bracket', ['left_command', 'left_option', 'left_control'])
         )
     ]
 }
