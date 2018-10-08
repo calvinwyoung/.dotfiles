@@ -58,7 +58,7 @@ remap_caps_lock_and_control_rule = {
     'description': ', '.join([
         'Caps Lock -> Control',
         'Control_L / Fn_L -> Command_L',
-        'Control_L / Fn_L -> Caps Lock when tapped'
+        'Shift_L + Shift_R -> Caps Lock'
     ]),
     'manipulators': [
         # Caps lock to Control_L.
@@ -82,14 +82,23 @@ remap_caps_lock_and_control_rule = {
         # Fn -> Command_L.
         {
             'from': ('fn', None, 'any'),
-            'to': ('left_command'),
-            'to_if_alone': [
-                {
-                    'hold_down_milliseconds': 100,
-                    'key_code': 'caps_lock'
-                }
-            ]
+            'to': ('left_command')
         },
+
+        # Left Shift + Right Shift (simultaneously) -> Caps Lock.
+        (
+            {
+                "simultaneous": [
+                    {
+                        "key_code": "left_shift"
+                    },
+                    {
+                        "key_code": "right_shift"
+                    }
+                ]
+            },
+            ('caps_lock')
+        )
     ]
 }
 
