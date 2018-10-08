@@ -322,7 +322,10 @@ keepassx_rule = {
             ('c', ['control', 'option']),
             [
                 ('c', 'left_command'),
-                {'shell_command': 'sleep 0.2'},
+                # HACK: Simulates a 'sleep' before we execute the next key. We
+                # need this because KeePassX can't receive keystrokes fast
+                # enough.
+                *[('escape') for i in range(20)],
                 ('b', 'left_command')
             ]
         ),
@@ -398,6 +401,17 @@ emacs_rule = {
         (
             ('d', 'option'),
             ('delete_forward', ['left_option'])
+        ),
+        # Kill line. This is already built in to MacOS, but its default
+        # implementation doesn't do anything if the cursor is at the end of a
+        # line. Our implementation will kill the newline character, which is in
+        # line with our expectations from using emacs.
+        (
+            ('k', 'control'),
+            [
+                ('e', ['control', 'shift']),
+                ('delete_forward')
+            ]
         ),
         # Copy.
         (
