@@ -106,17 +106,19 @@ pause_to_eject_rule = {
 }
 
 mouse_bindings_rule = {
-    'description': 'Mouse back button to Back (Forward with control)',
+    'description': 'Mouse bindings: Back, Forward, Control + Click',
     'manipulators': [
+        # Remap the mouse "Back" button. Note that we need to define the "from"
+        # clause in its raw form to use the `pointing_button` directive.
         (
-            # Define this `from` clause in its raw form.
             {
                 'pointing_button': 'button4'
             },
             ('open_bracket', 'left_command')
         ),
+
+        # Control + "Back" button -> Forward.
         (
-            # Define this `from` clause in its raw form.
             {
                 'pointing_button': 'button4',
                 'modifiers': {
@@ -126,6 +128,24 @@ mouse_bindings_rule = {
                 }
             },
             ('close_bracket', 'left_command')
+        ),
+
+        # Control + Left Click emulates Right Click by default, which is really
+        # annoying. Here, we remap it to Command + Left Click instead, which is
+        # useful for opening links in new tabs in Chrome.
+        (
+            {
+                'pointing_button': 'button1',
+                'modifiers': {
+                    'mandatory': [
+                        'control'
+                    ]
+                }
+            },
+            {
+                'pointing_button': 'button1',
+                'modifiers': ['left_command']
+            }
         )
     ]
 }
@@ -408,14 +428,21 @@ emacs_rule = {
             ('period', ['option', 'shift']),
             ('down_arrow', ['left_command'])
         ),
-        # Open new line above current line.
+        # Open new line below the current line.
+        (
+            ('o', 'control'),
+            [
+                ('e', ['left_control']),
+                ('return_or_enter')
+            ]
+        ),
+        # Open new line above the current line.
         (
             ('o', ['control', 'option']),
             [
                 ('a', ['left_control']),
+                ('return_or_enter'),
                 ('up_arrow'),
-                ('e', ['left_control']),
-                ('return_or_enter')
             ]
         ),
         # Cursor up 5 lines.
@@ -441,7 +468,7 @@ emacs_rule = {
             {
                 'mouse_key': {'vertical_wheel': 64}
             }
-        )
+        ),
     ]
 }
 

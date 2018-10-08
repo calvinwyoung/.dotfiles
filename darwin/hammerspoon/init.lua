@@ -6,8 +6,15 @@ local winmove = require "winmove"
 local breaktimer = require "breaktimer"
 local flux = require "flux"
 
+-- The `statusindicator` module should be global so we can call it externally
+-- via applescript.
+statusindicator = require "statusindicator"
+
 -- Disable all animations.
 hs.window.animationDuration = 0
+
+--- Allow Applescript access to Hammerspoon
+hs.allowAppleScript(true)
 
 -- Hotkey definitions
 local HYPER = {"ctrl", "alt", "cmd"}

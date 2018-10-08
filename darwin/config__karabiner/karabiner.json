@@ -249,44 +249,6 @@
                         ]
                     },
                     {
-                        "description": "Mouse back button to Back (Forward with control)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "pointing_button": "button4"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "open_bracket",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    },
-                                    "pointing_button": "button4"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "close_bracket",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.",
                         "manipulators": [
                             {
@@ -2123,6 +2085,37 @@
                                     "key_code": "o",
                                     "modifiers": {
                                         "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "e",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "\\.Emacs$",
+                                            "\\.iterm2$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "mandatory": [
                                             "control",
                                             "option"
                                         ]
@@ -2136,16 +2129,10 @@
                                         ]
                                     },
                                     {
-                                        "key_code": "up_arrow"
-                                    },
-                                    {
-                                        "key_code": "e",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    },
-                                    {
                                         "key_code": "return_or_enter"
+                                    },
+                                    {
+                                        "key_code": "up_arrow"
                                     }
                                 ],
                                 "type": "basic"
@@ -2276,6 +2263,63 @@
                                         "mouse_key": {
                                             "vertical_wheel": 64
                                         }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Mouse bindings: Back, Forward, Control + Click",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "pointing_button": "button4"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    },
+                                    "pointing_button": "button4"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "modifiers": [
+                                            "left_command"
+                                        ],
+                                        "pointing_button": "button1"
                                     }
                                 ],
                                 "type": "basic"
