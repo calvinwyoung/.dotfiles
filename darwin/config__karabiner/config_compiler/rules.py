@@ -76,7 +76,10 @@ remap_caps_lock_and_control_rule = {
                     'hold_down_milliseconds': 100,
                     'key_code': 'caps_lock'
                 }
-            ]
+            ],
+            'parameters': {
+                'basic.to_if_alone_timeout_milliseconds': 200
+            }
         },
 
         # Fn -> Command_L.
