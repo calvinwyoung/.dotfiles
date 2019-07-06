@@ -67,7 +67,8 @@ remap_caps_lock_and_control_rule = {
             ('left_control')
         ),
 
-        # Control_L -> Command_L.
+        # Control_L -> Command_L. Tapping Control_L it for <100ms triggers caps
+        # lock.
         {
             'from': ('left_control', None, 'any'),
             'to': ('left_command'),
