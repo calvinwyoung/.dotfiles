@@ -83,21 +83,31 @@ remap_caps_lock_and_control_rule = {
             }
         },
 
-        # Fn -> Command_L.
+        # Fn -> Command_L. Tapping Fn it for <100ms triggers caps
+        # lock.
         {
             'from': ('fn', None, 'any'),
-            'to': ('left_command')
+            'to': ('left_command'),
+            'to_if_alone': [
+                {
+                    'hold_down_milliseconds': 100,
+                    'key_code': 'caps_lock'
+                }
+            ],
+            'parameters': {
+                'basic.to_if_alone_timeout_milliseconds': 200
+            }
         },
 
         # Left Shift + Right Shift (simultaneously) -> Caps Lock.
         (
             {
-                "simultaneous": [
+                'simultaneous': [
                     {
-                        "key_code": "left_shift"
+                        'key_code': 'left_shift'
                     },
                     {
-                        "key_code": "right_shift"
+                        'key_code': 'right_shift'
                     }
                 ]
             },
@@ -344,6 +354,32 @@ keepassx_rule = {
     ]
 }
 
+macpass_rule = {
+    'description': 'MacPass: Copy username and password',
+    'conditions': [
+        {
+            'type': 'frontmost_application_if',
+            'bundle_identifiers': [
+                '\\.MacPass$'
+            ]
+        }
+    ],
+    'manipulators': [
+        (
+            # Copy both the username and password in a single hotkey.
+            ('c', ['control', 'option']),
+            [
+                ('c', ['left_command', 'left_shift']),
+                # HACK: Simulates a 'sleep' before we execute the next key. We
+                # need this because MacPass can't receive keystrokes fast
+                # enough.
+                *[('escape') for i in range(20)],
+                ('c', ['left_command', 'left_option'])
+            ]
+        ),
+    ]
+}
+
 emacs_rule = {
     'description': 'Emacs everywhere hotkeys',
     'conditions': [
@@ -504,7 +540,7 @@ application_mappings = {
     'return_or_enter': 'iTerm.app',
     'e': 'Emacs.app',
     'w': 'Google Chrome.app',
-    's': 'KeePassX.app',
+    's': 'MacPass.app',
     'h': 'Messages.app',
     'o': 'Notes.app',
 }

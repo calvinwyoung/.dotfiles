@@ -16,6 +16,7 @@ rule_defs = [
     rules.pc_home_end_rule,
     rules.switch_tabs_rule,
     rules.keepassx_rule,
+    rules.macpass_rule,
     rules.emacs_rule,
     rules.application_launchers,
     rules.option_based_window_switching,

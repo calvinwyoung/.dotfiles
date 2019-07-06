@@ -6,7 +6,8 @@ ncmpcpp/error.log
 __pycache__/
 
 # Ignore karabiner compiled assets.
-darwin/config__karabiner/assets
+darwin/config__karabiner/assets/
+darwin/config__karabiner/automatic_backups/
 
 # Ignore elpa packages.
 common/emacs.d/elpa
@@ -15,3 +16,6 @@ common/emacs.d/elpa
 common/emacs.d/projectile*
 common/emacs.d/.mc-lists.el
 common/emacs.d/network-security.data
+common/emacs.d/auto-save-list/
+common/emacs.d/abbrev_defs
+common/emacs.d/tramp
