@@ -17,8 +17,8 @@ URLS=(
     # SSHFS
     "http://osxfuse.github.io/"
 
-    # KeePassX
-    "http://www.keepassx.org/downloads"
+    # MacPass
+    "https://macpassapp.org/"
 
     # iStatMenus
     "http://bjango.com/mac/istatmenus/"

@@ -8,6 +8,7 @@ __pycache__/
 # Ignore karabiner compiled assets.
 darwin/config__karabiner/assets/
 darwin/config__karabiner/automatic_backups/
+darwin/config__karabiner/karabiner.json
 
 # Ignore elpa packages.
 common/emacs.d/elpa

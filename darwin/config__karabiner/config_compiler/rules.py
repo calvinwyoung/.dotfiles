@@ -369,12 +369,12 @@ macpass_rule = {
             # Copy both the username and password in a single hotkey.
             ('c', ['control', 'option']),
             [
-                ('c', ['left_command', 'left_shift']),
+                ('c', ['left_command', 'left_option']),
                 # HACK: Simulates a 'sleep' before we execute the next key. We
                 # need this because MacPass can't receive keystrokes fast
                 # enough.
                 *[('escape') for i in range(20)],
-                ('c', ['left_command', 'left_option'])
+                ('c', ['left_command', 'left_shift'])
             ]
         ),
     ]

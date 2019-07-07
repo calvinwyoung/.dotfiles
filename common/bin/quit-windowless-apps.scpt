@@ -9,7 +9,7 @@
 
 # List of apps that should remain open, even if we don't find any windows for
 # them.
-set whiteList to {"Finder", "KeePassX", "Emacs-x86_64-10_9", "iTerm2", "Google Chrome", "Eclipse", "Xcode", "iTunes", "Messages", "Adobe Lightroom", "Notes"}
+set whiteList to {"Finder", "MacPass", "Emacs-x86_64-10_9", "iTerm2", "Google Chrome", "Eclipse", "Xcode", "iTunes", "Messages", "Adobe Lightroom", "Notes"}
 
 # Buffer to store names of all windowless apps before calling `killall` on them.
 set windowlessAppNames to {}
