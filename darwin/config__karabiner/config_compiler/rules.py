@@ -365,8 +365,8 @@ macpass_rule = {
         }
     ],
     'manipulators': [
+        # Copy both the username and password in a single hotkey.
         (
-            # Copy both the username and password in a single hotkey.
             ('c', ['control', 'option']),
             [
                 ('c', ['left_command', 'left_option']),
@@ -376,6 +376,12 @@ macpass_rule = {
                 *[('escape') for i in range(20)],
                 ('c', ['left_command', 'left_shift'])
             ]
+        ),
+
+        # Ctrl + F to focus on "Find" dialog.
+        (
+            ('f', 'control'),
+            ('f', 'left_command')
         ),
     ]
 }
