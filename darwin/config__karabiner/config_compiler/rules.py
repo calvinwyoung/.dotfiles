@@ -378,10 +378,16 @@ macpass_rule = {
             ]
         ),
 
-        # Ctrl + F to focus on "Find" dialog.
+        # Ctrl + G to clear out of the "Find" dialog. This works by first
+        # focusing on the Groups menu, then tapping the up arrow followed by the
+        # down arrow.
         (
-            ('f', 'control'),
-            ('f', 'left_command')
+            ('g', 'control'),
+            [
+                ('g', ['left_command', 'left_option']),
+                ('up_arrow'),
+                ('down_arrow'),
+            ]
         ),
     ]
 }
