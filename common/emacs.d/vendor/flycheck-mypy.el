@@ -58,7 +58,6 @@ E.g. when processing Python2 files, add \"--py2\".
 See URL `http://mypy-lang.org/'."
 
   :command ("mypy"
-            "--silent-imports"
             (eval flycheck-python-mypy-args)
             source-original)
   :error-patterns

@@ -45,6 +45,9 @@ else
     [ -f /etc/bash_completion ] && source /etc/bash_completion
 fi
 
+# Enable direnv.
+eval "$(direnv hook bash)"
+
 # Set up Go.
 export GOPATH=$HOME/Code/go
 export PATH="$PATH:$GOPATH/bin"
@@ -74,6 +77,11 @@ source $(brew --prefix autoenv)/activate.sh
 
 # Set up Java.
 export JAVA_HOME=$(/usr/libexec/java_home)
+
+# For OSX / Homebrew, enable Postgres 9.5.
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/postgresql@9.5/lib"
+export CPPFLAGS="-I/usr/local/opt/postgresql@9.5/include"
 
 # ------------------------
 # Prompt
