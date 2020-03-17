@@ -295,7 +295,7 @@ tabstops left."
                   (cond ((string= web-mode-content-type "css")
                          web-mode-css-indent-offset)
                         ((member web-mode-content-type
-                                 '("javascript" "json" "jsx" "php"))
+                                 '("javascript" "json" "jsx" "php" "tsx"))
                          web-mode-code-indent-offset)
                         (t web-mode-markup-indent-offset)))) ; xml, html, etc...
 

@@ -4,6 +4,7 @@
 (defvar required-packages
   '(auto-complete
     deft
+    dockerfile-mode
     exec-path-from-shell
     expand-region
     flycheck
@@ -14,6 +15,8 @@
     org-autolist
     projectile
     rjsx-mode
+    ;; For tsx mode
+    tide
     web-mode
     wgrep
     yaml-mode

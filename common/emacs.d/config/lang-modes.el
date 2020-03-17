@@ -42,8 +42,13 @@
 ;;;;;;;;;;;;
 (autoload 'scss-mode "scss-mode.el"
   "Major mode for editing SCSS files" t)
+(add-hook 'scss-mode-hook
+          (lambda()
+            ;; Set indentation level to 2 spaces.
+            (setq css-indent-offset 2)
 
-(setq scss-compile-at-save nil)
+            ;; Don't compile at save
+            (setq scss-compile-at-save nil)))
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 
 ;;;;;;;;;;;;;;
@@ -71,6 +76,47 @@
     (if (looking-at-p "^ +\/?> *$")
         (delete-char sgml-basic-offset))))
 
+;;;;;;;;;;;;;;
+;; JSON
+;;;;;;;;;;;;;;
+(add-hook 'js-mode-hook
+          (lambda()
+            ;; Set indentation level to 2-spaces.
+            (setq js-indent-level 2)))
+
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+
+;;;;;;;;;;;;;;;;;;;;
+;; Typescript (Tide)
+;;;;;;;;;;;;;;;;;;;;
+(require 'web-mode)
+(defun setup-tide-mode()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-enable-auto-quoting nil)
+
+  (setq typescript-indent-level 2))
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
+;; Enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
+;; Formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
 ;;;;;;
 ;; Go
 ;;;;;;
@@ -87,9 +133,6 @@
 ;;;;;;;;
 (add-hook 'html-mode-hook
           (lambda ()
-            ;; Default indentation is usually 2 spaces, changing to 4.
-            (setq sgml-basic-offset 4)
-
             ;; Enable flyspell-prog-mode. This gets enabled automatically for
             ;; major-modes that descend from `prog-mode', but unfortunately
             ;; `html-mode' descends from `text-mode'.
@@ -195,6 +238,11 @@
           (lambda ()
             ;; Must manually update tab stops to occur every 4 characters
             (setq tab-stop-list (number-sequence 4 200 4))))
+
+;;;;;;;;;;;;;;
+;; Dockerfiles
+;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 ;;;;;;;;
 ;; JAVA
