@@ -179,8 +179,9 @@ control_based_shortcuts_rule = {
         {
             'type': 'frontmost_application_unless',
             'bundle_identifiers': [
-                '\\.Emacs$',
-                '\\.iterm2$',
+                'org.gnu.Emacs',
+                'com.googlecode.iterm2',
+                'com.microsoft.VSCode',
             ]
         }
     ],
@@ -264,7 +265,7 @@ page_up_down_home_end_rule = {
             'type': 'frontmost_application_unless',
             'bundle_identifiers': [
                 '\\.finder$',
-                '\\.iterm2$'
+                'com.googlecode.iterm2'
             ]
         }
     ],
@@ -309,7 +310,7 @@ switch_tabs_rule = {
             'type': 'frontmost_application_if',
             'bundle_identifiers': [
                 '\\.Chrome$',
-                '\\.iterm2$'
+                'com.googlecode.iterm2'
             ]
         }
     ],
@@ -398,8 +399,9 @@ emacs_rule = {
         {
             'type': 'frontmost_application_unless',
             'bundle_identifiers': [
-                '\\.Emacs$',
-                '\\.iterm2$',
+                'org.gnu.Emacs',
+                'com.googlecode.iterm2',
+                'com.microsoft.VSCode',
             ]
         }
     ],
