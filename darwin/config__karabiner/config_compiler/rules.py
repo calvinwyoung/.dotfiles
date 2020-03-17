@@ -549,6 +549,30 @@ emacs_rule = {
     ]
 }
 
+vscode_rule = {
+    'description': 'VSCode rules',
+    'conditions': [
+        {
+            'type': 'frontmost_application_if',
+            'bundle_identifiers': [
+                'com.microsoft.VSCode',
+            ]
+        }
+    ],
+    'manipulators': [
+        # Cursor up 5 lines.
+        (
+            ('p', 'option'),
+            [('up_arrow') for i in range(5)]
+        ),
+        # Cursor down 5 lines.
+        (
+            ('n', 'option'),
+            [('down_arrow') for i in range(5)]
+        ),
+    ]
+}
+
 application_mappings = {
     'grave_accent_and_tilde': 'Finder.app',
     'return_or_enter': 'iTerm.app',

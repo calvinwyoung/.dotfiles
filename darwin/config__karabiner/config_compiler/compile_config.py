@@ -18,6 +18,7 @@ rule_defs = [
     rules.keepassx_rule,
     rules.macpass_rule,
     rules.emacs_rule,
+    rules.vscode_rule,
     rules.application_launchers,
     rules.option_based_window_switching,
     rules.finder_remappings,
