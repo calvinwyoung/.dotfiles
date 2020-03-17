@@ -264,7 +264,7 @@ page_up_down_home_end_rule = {
         {
             'type': 'frontmost_application_unless',
             'bundle_identifiers': [
-                '\\.finder$',
+                'com.apple.finder',
                 'com.googlecode.iterm2'
             ]
         }
@@ -309,7 +309,7 @@ switch_tabs_rule = {
         {
             'type': 'frontmost_application_if',
             'bundle_identifiers': [
-                '\\.Chrome$',
+                'com.google.Chrome',
                 'com.googlecode.iterm2'
             ]
         }
@@ -361,7 +361,7 @@ macpass_rule = {
         {
             'type': 'frontmost_application_if',
             'bundle_identifiers': [
-                '\\.MacPass$'
+                'com.hicknhacksoftware.MacPass'
             ]
         }
     ],
@@ -557,6 +557,7 @@ application_mappings = {
     's': 'MacPass.app',
     'h': 'Messages.app',
     'o': 'Notes.app',
+    'c': 'Visual Studio Code.app',
 }
 application_launchers = {
     'description': 'Application launchers',
@@ -591,7 +592,7 @@ finder_remappings = {
         {
             'type': 'frontmost_application_if',
             'bundle_identifiers': [
-                '\\.finder$'
+                'com.apple.finder'
             ]
         }
     ],
