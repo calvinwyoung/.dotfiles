@@ -67,7 +67,7 @@
             (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js?$" . rjsx-mode))
 
 (defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
   "Workaround sgml-mode and follow airbnb component style."
@@ -86,36 +86,61 @@
 
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 
-;;;;;;;;;;;;;;;;;;;;
-;; Typescript (Tide)
-;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;
+;; web-mode
+;;;;;;;;;;;(
 (require 'web-mode)
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq tab-width 2)
+            (setq indent-tabs-mode nil)
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-css-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)
+            (setq web-mode-indent-style 2)
+            (setq web-mode-enable-css-colorization t)
+            (setq web-mode-enable-auto-quoting nil)))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(setq-default web-mode-comment-formats
+              '(("java"       . "/*")
+                ("javascript" . "//")
+                ("php"        . "/*")))
+
+;;;;;;;;;;;;;;;
+;; Typescript
+;;;;;;;;;;;;;;;
+(require 'typescript-mode)
+(add-hook 'typescript-mode-hook
+          (lambda()
+            (setq typescript-indent-level 2)))
+
+(add-to-list 'auto-mode-alist '("\\.tsx?$" . typescript-mode))
+
+;;;;;;;;;;
+;; Tide
+;;;;;;;;;;
 (defun setup-tide-mode()
   (interactive)
   (tide-setup)
-  (flycheck-mode +1)
+  (flycheck-mode t)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+
+  ;; Show args in the echo area
   (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
+  ;; Highlight identifiers.
+  (tide-hl-identifier-mode t))
 
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-enable-auto-quoting nil)
-
-  (setq typescript-indent-level 2))
-
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-hook
+(add-hook 'typescript-mode-hook
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
-;; Enable typescript-tslint checker
-(flycheck-add-mode 'typescript-tslint 'web-mode)
-
 ;; Formats the buffer before saving
 (add-hook 'before-save-hook 'tide-format-before-save)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; TODO: Enable typescript-tslint checker
+;; (flycheck-add-mode 'typescript-tslint 'typescript-mode)
 
 ;;;;;;
 ;; Go
@@ -128,20 +153,6 @@
             (setq standard-indent 4)
             (add-hook 'before-save-hook 'gofmt-before-save)))
 
-;;;;;;;;
-;; HTML
-;;;;;;;;
-(add-hook 'html-mode-hook
-          (lambda ()
-            ;; Enable flyspell-prog-mode. This gets enabled automatically for
-            ;; major-modes that descend from `prog-mode', but unfortunately
-            ;; `html-mode' descends from `text-mode'.
-            (flyspell-prog-mode)))
-
-(add-to-list 'auto-mode-alist '("\\.htmlmk$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.jqt$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.erb$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 
 ;;;;;;;;;
 ;; Latex

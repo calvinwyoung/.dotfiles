@@ -15,8 +15,9 @@
     org-autolist
     projectile
     rjsx-mode
-    ;; For tsx mode
+    ;; For TSX
     tide
+    typescript-mode
     web-mode
     wgrep
     yaml-mode
