@@ -8,7 +8,12 @@ non_apple_modifiers_rule = {
             'type': 'device_unless',
             'identifiers': [
                 {
-                    'vendor_id': 1452
+                    'vendor_id': 1452,
+                    'description': 'Matches Apple keyboards'
+                },
+                {
+                    'vendor_id': 1133,
+                    'description': 'Matches Logitech K810 keyboard'
                 }
             ]
         }
@@ -29,7 +34,12 @@ apple_modifiers_rule = {
             'type': 'device_if',
             'identifiers': [
                 {
-                    'vendor_id': 1452
+                    'vendor_id': 1452,
+                    'description': 'Matches Apple keyboards'
+                },
+                {
+                    'vendor_id': 1133,
+                    'description': 'Matches Logitech K810 keyboard'
                 }
             ]
         }
