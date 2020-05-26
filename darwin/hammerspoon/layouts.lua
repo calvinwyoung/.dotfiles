@@ -84,7 +84,7 @@ local function applyUltrawideSingleMonitorLayout()
             "Google Chrome",
             nil,
             allScreens[1],
-            hs.geometry.rect(1/2, 0, 1/2, 1),
+            hs.geometry.rect(0, 0, 1/2, 1),
             nil,
             nil
         },
@@ -124,7 +124,7 @@ local function applyUltrawideSingleMonitorLayout()
             "Code",
             nil,
             allScreens[1],
-            hs.geometry.rect(0, 0, 1/2, 1),
+            hs.geometry.rect(1/2, 0, 1/2, 1),
             nil,
             nil
         },

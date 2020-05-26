@@ -3,7 +3,7 @@
 # Install homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Must install homebrew/dups in order to install some packages that override
+# Must install homebrew/dupes in order to install some packages that override
 # default system commands.
 brew tap homebrew/dupes
 

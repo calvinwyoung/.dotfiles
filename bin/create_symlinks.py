@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Setup script to install the dotfiles in the given directories.
 
 This script creates a symlink from `~/.[name]` for each file in the
@@ -28,7 +28,7 @@ def create_symlink(target, source):
         source, str: the path to the symlink source
         target, str: the name of the symlink to be created
     """
-    print "Installing file %s -> %s" % (target, source)
+    print(f'Installing file {target} -> {source}')
 
     # If the symlink path already exists, then notify the user before
     # overwriting anything.
@@ -37,14 +37,14 @@ def create_symlink(target, source):
         if os.path.islink(target) and os.readlink(target) == source:
             return
 
-        response = raw_input("Overwrite file %s? [Y/n] " % target)
+        response = input("Overwrite file %s? [Y/n] " % target)
         if not response or response.lower().strip() == "y":
             if os.path.isfile(target) or os.path.islink(target):
                 os.remove(target)
             else:
                 shutil.rmtree(target)
         else:
-            print "Skipping %s..." % target
+            print(f'Skipping {target}...')
             return
 
     # Ensure that the directory to which the symlink will be written exists.
@@ -53,7 +53,7 @@ def create_symlink(target, source):
 
     # Finally, create the actual symlink.
     os.symlink(source, target)
-    print "  Done."
+    print('  Done.')
 
 
 def main(directories, list_symlinks=False):
@@ -76,7 +76,7 @@ def main(directories, list_symlinks=False):
             target_path = os.path.join(HOME_DIR, *filename_parts)
 
             if list_symlinks:
-                print target_path
+                print(target_path)
             else:
                 create_symlink(target_path, os.path.join(dotfile_dir, filename))
 

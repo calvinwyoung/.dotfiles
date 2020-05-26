@@ -9,25 +9,21 @@ URLS=(
     "https://pqrs.org/osx/karabiner/seil.html.en"
     "https://github.com/Hammerspoon/hammerspoon"
     "http://coderage-software.com/zooom/download/download.html"
-    "https://bahoom.com/hyperswitch"
 
     # iTerm2
     "http://www.iterm2.com/#/section/home"
 
-    # SSHFS
-    "http://osxfuse.github.io/"
-
     # MacPass
     "https://macpassapp.org/"
-
-    # iStatMenus
-    "http://bjango.com/mac/istatmenus/"
 
     # Chrome
     "https://www.google.com/intl/en/chrome/browser/"
 
     # Google Drive
     "https://tools.google.com/dlpage/drive/?hl=en"
+
+    # Dropbox
+    "https://www.dropbox.com/downloading"
 )
 
 for url in "${URLS[@]}"

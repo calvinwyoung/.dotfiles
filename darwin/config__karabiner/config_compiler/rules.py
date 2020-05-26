@@ -10,10 +10,6 @@ non_apple_modifiers_rule = {
                 {
                     'vendor_id': 1452,
                     'description': 'Matches Apple keyboards'
-                },
-                {
-                    'vendor_id': 1133,
-                    'description': 'Matches Logitech K810 keyboard'
                 }
             ]
         }
@@ -36,10 +32,6 @@ apple_modifiers_rule = {
                 {
                     'vendor_id': 1452,
                     'description': 'Matches Apple keyboards'
-                },
-                {
-                    'vendor_id': 1133,
-                    'description': 'Matches Logitech K810 keyboard'
                 }
             ]
         }
@@ -580,18 +572,52 @@ vscode_rule = {
             ('n', 'option'),
             [('down_arrow') for i in range(5)]
         ),
+        # We disabled `option_based_window_switching` for VSCode -- need to add
+        # some custom options back in.
+        (
+            ('tab', 'option'),
+            ('tab', 'left_command'),
+        ),
+        # Bind Option+` -> Control+` for switching windows.
+        (
+            ('grave_accent_and_tilde', 'option'),
+            ('grave_accent_and_tilde', 'left_control'),
+        )
+    ]
+}
+
+option_based_window_switching = {
+    'description': 'Option + Tab / Backtick -> switch windows / apps',
+    # In VSCode, we want to be be able to separately bind Option + Grave
+    'conditions': [
+        {
+            'type': 'frontmost_application_unless',
+            'bundle_identifiers': [
+                'com.microsoft.VSCode',
+            ]
+        }
+    ],
+    'manipulators': [
+        (
+            ('tab', 'option'),
+            ('tab', 'left_command'),
+        ),
+        (
+            ('grave_accent_and_tilde', 'option'),
+            ('grave_accent_and_tilde', 'left_command'),
+        )
     ]
 }
 
 application_mappings = {
     'grave_accent_and_tilde': 'Finder.app',
     'return_or_enter': 'iTerm.app',
-    'e': 'Emacs.app',
+    'e': 'Visual Studio Code.app',
+    'c': 'Emacs.app',
     'w': 'Google Chrome.app',
     's': 'MacPass.app',
     'h': 'Messages.app',
     'o': 'Notes.app',
-    'c': 'Visual Studio Code.app',
 }
 application_launchers = {
     'description': 'Application launchers',
@@ -603,20 +629,6 @@ application_launchers = {
             }
         )
         for key_code, app_name in application_mappings.items()
-    ]
-}
-
-option_based_window_switching = {
-    'description': 'Option + Tab / Backtick -> switch windows / apps',
-    'manipulators': [
-        (
-            ('tab', 'option'),
-            ('tab', 'left_command'),
-        ),
-        (
-            ('grave_accent_and_tilde', 'option'),
-            ('grave_accent_and_tilde', 'left_command'),
-        )
     ]
 }
 
