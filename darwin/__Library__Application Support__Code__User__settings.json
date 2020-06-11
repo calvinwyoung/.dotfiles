@@ -1,51 +1,4 @@
 {
-<<<<<<< HEAD
-    // No need to confirm deleting files.
-    "explorer.confirmDelete": false,
-
-    // Never show the minimap since it's not helpful.
-    "editor.minimap.enabled": false,
-
-    // Hide the glyph margin, which is where we can set debugging breakpoints. We don't
-    // actually use a debugger in VSCode, so this just takes up unnecessary space.
-    "editor.glyphMargin": false,
-
-    // Hide the code folding gutter to the right of the line numbers. We never use code
-    // folding, so this gutter just takes up unnecessary space.
-    "editor.folding": true,
-
-    // Use ctrl + cmd to enable multi-cursor mode.
-    "editor.multiCursorModifier": "ctrlCmd",
-
-    // Auto-enable "find in selection" when multiple lines of text are selected.
-    "editor.find.autoFindInSelection": "multiline",
-
-    // When opening files from quick-open, always open in a new tab.
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-
-    // Don't auto-expand the file being edited in the sidebar. This lets us
-    // avoid auto-opening big folders (e.g., node_modules) unnecessarily.
-    "explorer.autoReveal": false,
-
-    // Always open folders in new windows, instead of the same one.
-    "window.openFoldersInNewWindow": "on",
-
-    "gitlens.advanced.messages": {
-        "suppressGitVersionWarning": true
-    },
-
-    // Update JS / Typescript imports when files get moved
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "window.zoomLevel": 0,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "workbench.statusBar.visible": true,
-    "workbench.activityBar.visible": true,
-    "editor.renderControlCharacters": true,
-}
-=======
   // Set editor ruler at 90 characters.
   "editor.rulers": [90],
 
@@ -97,4 +50,3 @@
   "workbench.activityBar.visible": true,
   "editor.renderControlCharacters": true
 }
->>>>>>> cef2bfcf5257e50bdfc34a03b68747c658ea900a
