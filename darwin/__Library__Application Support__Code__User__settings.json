@@ -1,46 +1,52 @@
 {
-    // No need to confirm deleting files.
-    "explorer.confirmDelete": false,
+  // Set editor ruler at 90 characters.
+  "editor.rulers": [90],
 
-    // Never show the minimap since it's not helpful.
-    "editor.minimap.enabled": false,
+  // Always format on save.
+  "editor.formatOnSave": true,
 
-    // Hide the glyph margin, which is where we can set debugging breakpoints. We don't
-    // actually use a debugger in VSCode, so this just takes up unnecessary space.
-    "editor.glyphMargin": false,
+  // No need to confirm deleting files.
+  "explorer.confirmDelete": false,
 
-    // Hide the code folding gutter to the right of the line numbers. We never use code
-    // folding, so this gutter just takes up unnecessary space.
-    "editor.folding": true,
+  // Never show the minimap since it's not helpful.
+  "editor.minimap.enabled": false,
 
-    // Use ctrl + cmd to enable multi-cursor mode.
-    "editor.multiCursorModifier": "ctrlCmd",
+  // Hide the glyph margin, which is where we can set debugging breakpoints. We don't
+  // actually use a debugger in VSCode, so this just takes up unnecessary space.
+  "editor.glyphMargin": false,
 
-    // Auto-enable "find in selection" when multiple lines of text are selected.
-    "editor.find.autoFindInSelection": "multiline",
+  // Hide the code folding gutter to the right of the line numbers. We never use code
+  // folding, so this gutter just takes up unnecessary space.
+  "editor.folding": true,
 
-    // When opening files from quick-open, always open in a new tab.
-    "workbench.editor.enablePreviewFromQuickOpen": false,
+  // Use ctrl + cmd to enable multi-cursor mode.
+  "editor.multiCursorModifier": "ctrlCmd",
 
-    // Don't auto-expand the file being edited in the sidebar. This lets us
-    // avoid auto-opening big folders (e.g., node_modules) unnecessarily.
-    "explorer.autoReveal": false,
+  // Auto-enable "find in selection" when multiple lines of text are selected.
+  "editor.find.autoFindInSelection": "multiline",
 
-    // Always open folders in new windows, instead of the same one.
-    "window.openFoldersInNewWindow": "on",
+  // When opening files from quick-open, always open in a new tab.
+  "workbench.editor.enablePreviewFromQuickOpen": false,
 
-    "gitlens.advanced.messages": {
-        "suppressGitVersionWarning": true
-    },
+  // Don't auto-expand the file being edited in the sidebar. This lets us
+  // avoid auto-opening big folders (e.g., node_modules) unnecessarily.
+  "explorer.autoReveal": false,
 
-    // Update JS / Typescript imports when files get moved
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "window.zoomLevel": 0,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "workbench.statusBar.visible": true,
-    "workbench.activityBar.visible": true,
-    "editor.renderControlCharacters": true,
+  // Always open folders in new windows, instead of the same one.
+  "window.openFoldersInNewWindow": "on",
+
+  "gitlens.advanced.messages": {
+    "suppressGitVersionWarning": true
+  },
+
+  // Update JS / Typescript imports when files get moved
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 0,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  "editor.renderControlCharacters": true
 }
