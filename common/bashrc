@@ -36,32 +36,23 @@ if [ `uname` == "Darwin" ]; then
 fi
 
 # Enable bash completion
-if [ `uname` == "Darwin" ]; then
-    [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-else
-    [ -f /etc/bash_completion ] && source /etc/bash_completion
-fi
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
 # Set up Go.
 export GOPATH=$HOME/Code/go
 export PATH="$PATH:$GOPATH/bin"
 
 # Set up pyenv.
-export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.pyenv"`
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-# For virtualenv, which gets installed in different places depending on whether
-# we're on Linux or OSX.
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-if [ -f /usr/bin/virtualenvwrapper.sh ]; then
-    source /usr/bin/virtualenvwrapper.sh
-elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
+# Set up NVM.
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # Enable direnv.
 eval "$(direnv hook bash)"

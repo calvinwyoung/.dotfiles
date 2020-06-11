@@ -133,13 +133,20 @@ pause_to_eject_rule = {
 mouse_bindings_rule = {
     'description': 'Mouse bindings: Back, Forward, Control + Click',
     'manipulators': [
-        # Remap the mouse "Back" button. Note that we need to define the "from"
-        # clause in its raw form to use the `pointing_button` directive.
+        # Remap the mouse "Back" and "Forward" buttons. Note that we need to
+        # define the "from" clause in its raw form to use the `pointing_button`
+        # directive.
         (
             {
                 'pointing_button': 'button4'
             },
             ('open_bracket', 'left_command')
+        ),
+        (
+            {
+                'pointing_button': 'button5'
+            },
+            ('close_bracket', 'left_command')
         ),
 
         # Control + "Back" button -> Forward.
