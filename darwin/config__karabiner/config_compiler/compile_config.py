@@ -15,7 +15,6 @@ rule_defs = [
     rules.page_up_down_home_end_rule,
     rules.pc_home_end_rule,
     rules.switch_tabs_rule,
-    rules.keepassx_rule,
     rules.macpass_rule,
     rules.emacs_rule,
     rules.vscode_rule,

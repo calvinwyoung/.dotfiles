@@ -22,9 +22,6 @@ stty -ixon
 # Environment variables
 # ------------------------
 
-# Integrate QT applications with GTK theme
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-
 # Set default text editor
 export EDITOR="vim"
 
@@ -45,9 +42,6 @@ else
     [ -f /etc/bash_completion ] && source /etc/bash_completion
 fi
 
-# Enable direnv.
-eval "$(direnv hook bash)"
-
 # Set up Go.
 export GOPATH=$HOME/Code/go
 export PATH="$PATH:$GOPATH/bin"
@@ -60,9 +54,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # For virtualenv, which gets installed in different places depending on whether
-# we're on Linux or OSX. Also enable autoenv for activating virtualenvs
-# automagically. Note that for some reason autoenv needs to come *after* the RVM
-# commands to work properly.
+# we're on Linux or OSX.
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 if [ -f /usr/bin/virtualenvwrapper.sh ]; then
@@ -70,15 +62,9 @@ if [ -f /usr/bin/virtualenvwrapper.sh ]; then
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
-source $(brew --prefix autoenv)/activate.sh
 
-# Set up Java.
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-# For OSX / Homebrew, enable Postgres 9.5.
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/postgresql@9.5/lib"
-export CPPFLAGS="-I/usr/local/opt/postgresql@9.5/include"
+# Enable direnv.
+eval "$(direnv hook bash)"
 
 # ------------------------
 # Prompt

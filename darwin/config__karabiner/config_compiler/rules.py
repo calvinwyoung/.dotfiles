@@ -324,39 +324,6 @@ switch_tabs_rule = {
     ]
 }
 
-keepassx_rule = {
-    'description': 'KeePassX: Copy username and password',
-    'conditions': [
-        {
-            'type': 'frontmost_application_if',
-            'bundle_identifiers': [
-                '\\.keepassx$'
-            ]
-        }
-    ],
-    'manipulators': [
-        (
-            ('c', ['control', 'option']),
-            [
-                ('c', 'left_command'),
-                # HACK: Simulates a 'sleep' before we execute the next key. We
-                # need this because KeePassX can't receive keystrokes fast
-                # enough.
-                *[('escape') for i in range(20)],
-                ('b', 'left_command')
-            ]
-        ),
-        (
-            ('b', 'control'),
-            ('b', 'left_command')
-        ),
-        (
-            ('u', 'control'),
-            ('u', 'left_command')
-        )
-    ]
-}
-
 macpass_rule = {
     'description': 'MacPass: Copy username and password',
     'conditions': [
