@@ -21,13 +21,12 @@ rule_defs = [
     rules.application_launchers,
     rules.option_based_window_switching,
     rules.finder_remappings,
-    rules.zooom2_remappings,
     rules.hammerspoon_remappings,
 ]
 
 config = {
     'title': 'Custom configuration',
-    'rules': [helpers.build_rule(rule) for rule in rule_defs]
+    'rules': [helpers.build_rule(rule) for rule in rule_defs],
 }
 
 print(json.dumps(config, indent=2))

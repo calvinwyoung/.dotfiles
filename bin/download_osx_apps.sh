@@ -19,6 +19,9 @@ URLS=(
 
     # Dropbox
     "https://www.dropbox.com/downloading"
+
+    # Easy Move Resize
+    "https://github.com/dmarcotte/easy-move-resize"
 )
 
 for url in "${URLS[@]}"

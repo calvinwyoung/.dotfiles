@@ -639,44 +639,6 @@ finder_remappings = {
     ]
 }
 
-# Emulate Linux-style "Hyper + Click" for moving/resizing. To be used in
-# combination with Zooom2. Note that we use Fn as the movement modifier key for
-# Zooom2 because it's the only one that doesn't come with any default
-# functionality when combined with left-click. We need to add the following
-# settings to Zooom2:
-#
-#   - Movement shortcut: Fn
-#   - Resize shortcut: Fn + Shift
-zooom2_remappings = {
-    'description': 'Zooom2 support for Hyper + Click to move / resize windows with Zooom/2.',
-    'manipulators': [
-        (
-            {
-                'pointing_button': 'button1',
-                'modifiers': {
-                    'mandatory': HYPER
-                }
-            },
-            {
-                'pointing_button': 'button1',
-                'modifiers': ['fn']
-            }
-        ),
-        (
-            {
-                'pointing_button': 'button2',
-                'modifiers': {
-                    'mandatory': HYPER
-                }
-            },
-            {
-                'pointing_button': 'button2',
-                'modifiers': ['fn', 'left_shift']
-            }
-        )
-    ]
-}
-
 # Map Hyper + Comma/Period to Left/Right Brackets.  By default the Hyper +
 # Comma/Period keyboard shortcuts should move focus to different screens (a la
 # AwesomeWM, DWM, etc.). Additionally, we want Shift + Hyper + Comma/Period to

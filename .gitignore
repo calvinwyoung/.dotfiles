@@ -2,6 +2,7 @@ ncmpcpp/error.log
 .DS_Store
 .netrwhist
 .*pyc
+.direnv/
 .mypy_cache/
 __pycache__/
 
@@ -15,8 +16,8 @@ common/emacs.d/elpa
 
 # Ignore emacs cache files.
 common/emacs.d/projectile*
-common/emacs.d/.mc-lists.el
-common/emacs.d/network-security.data
-common/emacs.d/auto-save-list/
+common/emacs.d/.mclists.el
+common/emacs.d/networksecurity.data
+common/emacs.d/autosavelist/
 common/emacs.d/abbrev_defs
 common/emacs.d/tramp
