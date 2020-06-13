@@ -15,15 +15,15 @@ shopt -s histappend
 # Disable Ctrl+S to suspend terminal
 stty -ixon
 
-# Enable iTerm2 integration if appropriate
-[ -f "$HOME/.iterm2_shell_integration.bash" ] && source "$HOME/.iterm2_shell_integration.bash"
-
 # ------------------------
 # Environment variables
 # ------------------------
 
 # Set default text editor
 export EDITOR="vim"
+
+# Silence OSX message about making ZSH the default shell.
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Set PATH to include user's bin dir if it exists
 if [ -d "$HOME/.bin" ]; then

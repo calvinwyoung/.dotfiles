@@ -1,4 +1,5 @@
 [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 [[ -f $HOME/.profile ]] && . $HOME/.profile
 
+# Auto-included by iTerm2 for shell integration.
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
