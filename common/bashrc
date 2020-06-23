@@ -57,6 +57,10 @@ export NVM_DIR="$HOME/.nvm"
 # Enable direnv.
 eval "$(direnv hook bash)"
 
+# Need this in order to install anything that requires zlib on Catalina.
+# Source: https://akrabat.com/installing-pillow-on-macos-10-15-calatalina/
+export CPATH=`xcrun --show-sdk-path`/usr/include
+
 # ------------------------
 # Prompt
 # ------------------------

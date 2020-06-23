@@ -48,5 +48,6 @@
   },
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "editor.renderControlCharacters": true
+  "editor.renderControlCharacters": true,
+  "editor.codeActionsOnSave": {}
 }

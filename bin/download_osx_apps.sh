@@ -20,8 +20,14 @@ URLS=(
     # Dropbox
     "https://www.dropbox.com/downloading"
 
+    # Secure Pipes
+    "https://www.opoet.com/pyro/index.php"
+
     # Easy Move Resize
     "https://github.com/dmarcotte/easy-move-resize"
+
+    # Captin
+    "http://captin.mystrikingly.com/"
 )
 
 for url in "${URLS[@]}"

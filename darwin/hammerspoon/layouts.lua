@@ -43,10 +43,10 @@ local function applySingleMonitorLayout()
             nil
         },
         {
-            "Emacs",
+            "Code",
             nil,
             allScreens[1],
-            {hs.geometry.rect(0, 0, 1/2, 1), hs.geometry.rect(1/2, 0, 1/2, 1)},
+            hs.geometry.rect(0, 0, 1, 1),
             nil,
             nil
         },
@@ -101,14 +101,6 @@ local function applyUltrawideSingleMonitorLayout()
             nil,
             allScreens[1],
             hs.geometry.rect(0, 1/2, 1/3, 1/2),
-            nil,
-            nil
-        },
-        {
-            "Emacs",
-            nil,
-            allScreens[1],
-            {hs.geometry.rect(0, 0, 1/3, 1), hs.geometry.rect(1/3, 0, 1/3, 1)},
             nil,
             nil
         },
@@ -168,10 +160,10 @@ local function applyDualMonitorLayout()
             nil
         },
         {
-            "Emacs",
+            "Code",
             nil,
             allScreens[2],
-            {hs.geometry.rect(0, 0, 1/3, 1), hs.geometry.rect(1/3, 0, 1/3, 1)},
+            hs.geometry.rect(0, 0, 2/3, 1),
             nil,
             nil
         },
@@ -235,10 +227,10 @@ local function applyLaptopWithMonitorLayout()
             nil
         },
         {
-            "Emacs",
+            "Code",
             nil,
             monitorScreen,
-            {hs.geometry.rect(0, 0, 1/3, 1), hs.geometry.rect(1/3, 0, 1/3, 1)},
+            {hs.geometry.rect(0, 0, 2/3, 1)},
             nil,
             nil
         },
@@ -253,16 +245,88 @@ local function applyLaptopWithMonitorLayout()
     })
 end
 
+local function applyLaptopWithUltrawideMonitorLayout()
+    local allScreens = hs.screen.allScreens()
+    if #allScreens ~= 2 then
+        return
+    end
+
+    local laptopScreen = util.find(
+        allScreens,
+        function(s) return s:name() == "Color LCD" end)
+
+    local monitorScreen = util.find(
+        allScreens,
+        function(s) return s:name() ~= "Color LCD" end)
+
+    if not laptopScreen then
+        return
+    end
+
+    -- Set the proper focus direction for each screen.
+    focus.setWindowFocusDirection(allScreens[1]:id(), -1)
+    focus.setWindowFocusDirection(allScreens[2]:id(), 1)
+
+    -- Move windows to the correct places.
+    patches.layout_apply({
+        {
+            "Messages",
+            nil,
+            laptopScreen,
+            hs.geometry.rect(0, 0, 1/2, 1/2),
+            nil,
+            nil
+        },
+        {
+            "Notes",
+            nil,
+            laptopScreen,
+            hs.geometry.rect(0, 1/2, 1/2, 1/2),
+            nil,
+            nil
+        },
+        {
+            "iTerm2",
+            nil,
+            laptopScreen,
+            {hs.geometry.rect(1/2, 0, 1/2, 1/2), hs.geometry.rect(1/2, 1/2, 1/2, 1/2)},
+            nil,
+            nil
+        },
+        {
+            "Google Chrome",
+            nil,
+            monitorScreen,
+            hs.geometry.rect(0, 0, 1/2, 1),
+            nil,
+            nil
+        },
+        {
+            "Code",
+            nil,
+            monitorScreen,
+            {hs.geometry.rect(1/2, 0, 1/2, 1)},
+            nil,
+            nil
+        },
+    })
+end
+
 function layouts.applyLayoutForScreens()
     local allScreens = hs.screen.allScreens()
     local laptopScreen = util.find(
         allScreens,
         function(s) return s:name() == "Color LCD" end)
+    local monitorScreen = util.find(
+        allScreens,
+        function(s) return s:name() ~= "Color LCD" end)
 
-    if #allScreens == 1 and allScreens[1]:frame().w < 3000 then
-        applySingleMonitorLayout()
-    elseif #allScreens == 1 then
+    if #allScreens == 1 and allScreens[1]:frame().w > 3000 then
         applyUltrawideSingleMonitorLayout()
+    elseif #allScreens == 1 then
+        applySingleMonitorLayout()
+    elseif #allScreens == 2 and laptopScreen and monitorScreen and monitorScreen:frame().w > 3000 then
+        applyLaptopWithUltrawideMonitorLayout()
     elseif #allScreens == 2 and laptopScreen then
         applyLaptopWithMonitorLayout()
     else

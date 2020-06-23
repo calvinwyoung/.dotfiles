@@ -16,3 +16,5 @@
     pom = pull origin master
 [push]
     default = current
+[pull]
+    rebase = true
