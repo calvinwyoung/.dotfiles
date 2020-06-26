@@ -28,6 +28,9 @@ URLS=(
 
     # Captin
     "http://captin.mystrikingly.com/"
+
+    # VS Code
+    "https://code.visualstudio.com/download"
 )
 
 for url in "${URLS[@]}"

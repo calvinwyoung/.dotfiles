@@ -10,3 +10,5 @@ brew install findutils
 brew install grep
 brew install rename
 brew install unrar
+brew install direnv
+brew install pyenv

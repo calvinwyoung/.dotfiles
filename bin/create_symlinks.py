@@ -12,7 +12,6 @@ partition. Therefore, a file named `parent__child` will be installed to
 import argparse
 import os
 import shutil
-import subprocess
 import sys
 
 

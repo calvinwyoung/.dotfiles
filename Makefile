@@ -2,7 +2,6 @@
 
 common:
 	bin/create_symlinks.py common/
-	git submodule update --init --recursive
 
 linux: common
 	bin/create_symlinks.py linux/
@@ -15,6 +14,9 @@ darwin: common
 
 # Enable our login_init hook.
 	launchctl load ~/Library/LaunchAgents/login_init.plist
+
+# Update karabiner configs
+	cd darwin/config__karabiner/ && make
 
 clean:
 	bin/create_symlinks.py -l common/  | tr "\n" "\0" | xargs -0 rm -f
