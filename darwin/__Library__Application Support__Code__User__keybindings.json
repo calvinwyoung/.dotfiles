@@ -149,6 +149,11 @@
     "key": "ctrl+x ;",
     "command": "vscode-editing-helpers.duplicateLineAndComment"
   },
+  {
+    "key": "shift+cmd+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
+  },
 
   // Editing
   {
@@ -269,14 +274,6 @@
     "when": "textInputFocus"
   },
   {
-    "key": "ctrl+alt+k",
-    "command": "workbench.action.focusLeftGroup"
-  },
-  {
-    "key": "ctrl+alt+j",
-    "command": "workbench.action.focusRightGroup"
-  },
-  {
     "key": "ctrl+alt+n",
     "command": "editorScroll",
     "args": {
@@ -373,6 +370,10 @@
     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
   },
   {
+    "key": "ctrl+x shift+i",
+    "command": "editor.action.goToTypeDefinition"
+  },
+  {
     "key": "ctrl+x `",
     "command": "editor.action.marker.nextInFiles",
     "when": "editorFocus && !editorReadonly"
@@ -400,5 +401,15 @@
     "key": "ctrl+shift+5",
     "command": "editor.action.jumpToBracket",
     "when": "editorTextFocus"
-  }
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "search.action.focusNextSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
 ]

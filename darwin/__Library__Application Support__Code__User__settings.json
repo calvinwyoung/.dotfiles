@@ -36,7 +36,8 @@
   "window.openFoldersInNewWindow": "on",
 
   "gitlens.advanced.messages": {
-    "suppressGitVersionWarning": true
+    "suppressGitVersionWarning": true,
+    "suppressLineUncommittedWarning": true
   },
 
   // Update JS / Typescript imports when files get moved
@@ -49,5 +50,9 @@
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
   "editor.renderControlCharacters": true,
-  "editor.codeActionsOnSave": {}
+  "editor.codeActionsOnSave": {},
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "diffEditor.renderSideBySide": false
 }
