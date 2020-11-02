@@ -31,10 +31,14 @@ apple_modifiers_rule = {
             'identifiers': [
                 {
                     'vendor_id': 1452,
-                    'description': 'Matches Apple keyboards'
+                    'description': 'Matches Apple internal keyboards'
+                },
+                {
+                    'vendor_id': 76,
+                    'description': 'Matches Apple Magic Keyboards'
                 }
             ]
-        }
+        },
     ],
     'manipulators': [
         (
