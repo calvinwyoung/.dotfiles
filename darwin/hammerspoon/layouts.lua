@@ -214,7 +214,7 @@ local function applyLaptopWithMonitorLayout()
             "Messages",
             nil,
             laptopScreen,
-            hs.geometry.rect(0, 0, 1/3, 1/2),
+            hs.geometry.rect(0, 0, 1/2, 1/2),
             nil,
             nil
         },
@@ -222,7 +222,7 @@ local function applyLaptopWithMonitorLayout()
             "Notes",
             nil,
             laptopScreen,
-            hs.geometry.rect(0, 1/2, 1/3, 1/2),
+            hs.geometry.rect(0, 1/2, 1/2, 1/2),
             nil,
             nil
         },
@@ -230,15 +230,15 @@ local function applyLaptopWithMonitorLayout()
             "Code",
             nil,
             monitorScreen,
-            {hs.geometry.rect(0, 0, 2/3, 1)},
+            {hs.geometry.rect(0, 0, 1, 1)},
             nil,
             nil
         },
         {
             "iTerm2",
             nil,
-            monitorScreen,
-            {hs.geometry.rect(2/3, 0, 1/3, 1/2), hs.geometry.rect(2/3, 1/2, 1/3, 1/2)},
+            laptopScreen,
+            {hs.geometry.rect(1/2, 0, 1/2, 1/2), hs.geometry.rect(1/2, 1/2, 1/2, 1/2)},
             nil,
             nil
         }
