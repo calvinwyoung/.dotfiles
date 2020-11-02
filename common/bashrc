@@ -32,7 +32,7 @@ fi
 
 # Add Homebrew packages to PATH.
 if [ `uname` == "Darwin" ]; then
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/libpq/bin:/usr/local/sbin:$PATH"
 fi
 
 # Enable bash completion
