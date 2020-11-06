@@ -10,6 +10,10 @@ non_apple_modifiers_rule = {
                 {
                     'vendor_id': 1452,
                     'description': 'Matches Apple keyboards'
+                },
+                {
+                    'vendor_id': 76,
+                    'description': 'Matches Apple Magic Keyboards'
                 }
             ]
         }

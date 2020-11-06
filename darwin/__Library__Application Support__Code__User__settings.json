@@ -20,7 +20,7 @@
   "editor.folding": true,
 
   // Use ctrl + cmd to enable multi-cursor mode.
-  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.multiCursorModifier": "alt",
 
   // Auto-enable "find in selection" when multiple lines of text are selected.
   "editor.find.autoFindInSelection": "multiline",
