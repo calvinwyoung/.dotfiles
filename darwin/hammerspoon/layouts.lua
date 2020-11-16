@@ -35,7 +35,7 @@ local function applySingleMonitorLayout()
             nil
         },
         {
-            "Notes",
+            "Slack",
             nil,
             allScreens[1],
             hs.geometry.rect(0, 1/2, 1/3, 1/2),
@@ -97,7 +97,7 @@ local function applyUltrawideSingleMonitorLayout()
             nil
         },
         {
-            "Notes",
+            "Slack",
             nil,
             allScreens[1],
             hs.geometry.rect(0, 1/2, 1/3, 1/2),
@@ -152,7 +152,7 @@ local function applyDualMonitorLayout()
             nil
         },
         {
-            "Notes",
+            "Slack",
             nil,
             allScreens[1],
             hs.geometry.rect(0, 1/2, 1/3, 1/2),
@@ -219,7 +219,7 @@ local function applyLaptopWithMonitorLayout()
             nil
         },
         {
-            "Notes",
+            "Slack",
             nil,
             laptopScreen,
             hs.geometry.rect(0, 1/2, 1/2, 1/2),
@@ -278,7 +278,7 @@ local function applyLaptopWithUltrawideMonitorLayout()
             nil
         },
         {
-            "Notes",
+            "Slack",
             nil,
             laptopScreen,
             hs.geometry.rect(0, 1/2, 1/2, 1/2),

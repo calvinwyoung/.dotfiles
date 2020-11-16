@@ -597,7 +597,8 @@ application_mappings = {
     'e': 'Visual Studio Code.app',
     'c': 'Emacs.app',
     'w': 'Google Chrome.app',
-    's': 'MacPass.app',
+    'a': 'MacPass.app',
+    's': 'Slack.app',
     'h': 'Messages.app',
     'o': 'Notes.app',
 }
