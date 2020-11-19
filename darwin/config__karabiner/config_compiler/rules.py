@@ -9,11 +9,16 @@ non_apple_modifiers_rule = {
             'identifiers': [
                 {
                     'vendor_id': 1452,
-                    'description': 'Matches Apple keyboards'
+                    'description': 'Matches Apple internal keyboard'
                 },
                 {
                     'vendor_id': 76,
-                    'description': 'Matches Apple Magic Keyboards'
+                    'description': 'Matches Apple Magic Keyboard'
+                },
+                {
+                    'vendor_id': 1133,
+                    'product_id': 45901,
+                    'description': 'Matches Logitech keyboard with Apple modifier keys'
                 }
             ]
         }
@@ -35,11 +40,16 @@ apple_modifiers_rule = {
             'identifiers': [
                 {
                     'vendor_id': 1452,
-                    'description': 'Matches Apple internal keyboards'
+                    'description': 'Matches Apple internal keyboard'
                 },
                 {
                     'vendor_id': 76,
-                    'description': 'Matches Apple Magic Keyboards'
+                    'description': 'Matches Apple Magic Keyboard'
+                },
+                {
+                    'vendor_id': 1133,
+                    'product_id': 45901,
+                    'description': 'Matches Logitech keyboard with Apple modifier keys'
                 }
             ]
         },
