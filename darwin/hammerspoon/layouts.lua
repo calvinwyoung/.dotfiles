@@ -7,6 +7,9 @@ local focus = require "focus"
 local patches = require "patches"
 local util = require "util"
 
+-- Define constant for the name of the laptop screen.
+local LAPTOP_SCREEN_NAME = "Built-in Retina Display"
+
 local function applySingleMonitorLayout()
     local allScreens = hs.screen.allScreens()
     if #allScreens ~= 1 then
@@ -186,11 +189,11 @@ local function applyLaptopWithMonitorLayout()
 
     local laptopScreen = util.find(
         allScreens,
-        function(s) return s:name() == "Color LCD" end)
+        function(s) return s:name() == LAPTOP_SCREEN_NAME end)
 
     local monitorScreen = util.find(
         allScreens,
-        function(s) return s:name() ~= "Color LCD" end)
+        function(s) return s:name() ~= LAPTOP_SCREEN_NAME end)
 
     if not laptopScreen then
         return
@@ -253,11 +256,11 @@ local function applyLaptopWithUltrawideMonitorLayout()
 
     local laptopScreen = util.find(
         allScreens,
-        function(s) return s:name() == "Color LCD" end)
+        function(s) return s:name() == LAPTOP_SCREEN_NAME end)
 
     local monitorScreen = util.find(
         allScreens,
-        function(s) return s:name() ~= "Color LCD" end)
+        function(s) return s:name() ~= LAPTOP_SCREEN_NAME end)
 
     if not laptopScreen then
         return
@@ -316,10 +319,10 @@ function layouts.applyLayoutForScreens()
     local allScreens = hs.screen.allScreens()
     local laptopScreen = util.find(
         allScreens,
-        function(s) return s:name() == "Color LCD" end)
+        function(s) return s:name() == LAPTOP_SCREEN_NAME end)
     local monitorScreen = util.find(
         allScreens,
-        function(s) return s:name() ~= "Color LCD" end)
+        function(s) return s:name() ~= LAPTOP_SCREEN_NAME end)
 
     if #allScreens == 1 and allScreens[1]:frame().w > 3000 then
         applyUltrawideSingleMonitorLayout()
